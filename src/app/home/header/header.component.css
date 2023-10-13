@@ -1,0 +1,21 @@
+:host ::ng-deep p-menubarsub {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bolder;
+}
+.sticky {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  .p-menubar-root-list, .p-menubar-button {
+    position: absolute;
+    right: 0;
+    font-size:2em;
+
+  }
+
+  

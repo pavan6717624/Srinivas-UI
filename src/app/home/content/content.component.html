@@ -1,0 +1,43 @@
+<div class="grid justify-content-between" style="margin:2px">
+  
+
+<ng-container *ngFor="let number of [1,2,3,4]">
+
+    <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'5px'}">
+        <ng-template pTemplate="header">
+        
+            <img src="https://picsum.photos/300/300?random=123*{{number}}" alt="Image" style=" overflow: hidden;
+            width: 300px;
+            height: 300px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);">
+            
+        </ng-template>
+    </p-card>
+</ng-container>
+</div>
+
+
+
+<!-- <div class="grid" >
+    <ng-container *ngFor="let number of [1,2,3,4]">
+    <div class="col-12 lg:col-3"  >
+        <div class="p-2 h-full" >
+            <div class="shadow-2 p-2 h-full flex flex-column surface-card" style="border-radius: 8px">
+                
+                <div >
+                    <img src="https://picsum.photos/300/300?random=123" alt="Image" style=" overflow: hidden;
+                    width: 300px;
+                    height: 300px;
+                    border-radius: 8px;
+                    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);padding:0">
+                </div>
+                <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
+                <div class="text-600 p-1">Plan description</div>
+                
+            </div>
+        </div>
+    </div>
+    </ng-container>
+
+       </div> -->
