@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/api/menuitem';
-
+import { HomeService } from '../home.service';
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -31,24 +31,35 @@ export class ContentComponent implements OnInit {
       }
   ];
 
-  ngOnInit() {
-      this.items = [
-          {
-              label: 'Finder',
-              icon: 'https://primefaces.org/cdn/primeng/images/dock/finder.svg'
-          },
-          {
-              label: 'App Store',
-              icon: 'https://primefaces.org/cdn/primeng/images/dock/appstore.svg'
-          },
-          {
-              label: 'Photos',
-              icon: 'https://primefaces.org/cdn/primeng/images/dock/photos.svg'
-          },
-          {
-              label: 'Trash',
-              icon: 'https://primefaces.org/cdn/primeng/images/dock/trash.png'
-          }
-      ];
+  constructor(private service:HomeService) { }
+
+  images: string[]=[];
+
+  loading: boolean = false;
+
+  ngOnInit(): void {
+
+    this.loading=true;
+    this.service.getImages().subscribe(
+      (res:any)=> {this.images=res; console.log(this.images);this.loading=false;},
+      (err:any)=> { console.log(err); this.loading=false;}
+
+    );
+  }
+
+  downloadImage(image:any)
+  {
+    var formData=new FormData();
+    formData.set("image",image);
+    this.loading=true;
+    this.service.downloadImage(formData).subscribe(
+      (res:any)=> { var a = document.createElement("a"); //Create <a>
+      a.href = res.img; //Image Base64 Goes here
+      a.download = "coupon.jpg"; //File name Here
+      a.click(); //Downloaded file},
+      a.remove();this.loading=false;},
+      (err:any)=> { console.log(err); this.loading=false;}
+
+    );
   }
 }

@@ -1,23 +1,36 @@
-<div class="grid justify-content-between" style="margin:2px">
-  
+<div class="grid justify-content-center" style="margin:2px;">
 
-<ng-container *ngFor="let number of [1,2,3,4]">
 
-    <p-card header="Advanced Card" subheader="Card Subheader" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'5px'}">
-        <ng-template pTemplate="header">
-        
-            <img src="https://picsum.photos/300/300?random=123*{{number}}" alt="Image" style=" overflow: hidden;
+    <ng-container *ngFor="let image of images">
+
+        <p-card [style]="{ width: '310px', height:'400px', padding:'5px',margin:'5px'}">
+            <ng-template pTemplate="header">
+
+                <img [src]="'data:image/jpeg;base64,'+image" alt="Image" style=" overflow: hidden;
             width: 300px;
             height: 300px;
             border-radius: 8px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);">
-            
-        </ng-template>
-    </p-card>
-</ng-container>
+            <div class="grid justify-content-between" style="padding:5px">
+                <div>
+                    <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
+                    <div class="text-600 p-1">Description</div>
+                </div>
+                <div>
+                    <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i>
+                </div>
+            </div>
+
+            </ng-template>
+
+
+        </p-card>
+    </ng-container>
 </div>
 
-
+<p-blockUI [blocked]="loading">
+    <i class="pi pi-spin pi-spinner" style="font-size: 3rem; color:#B6FFFA"></i>
+</p-blockUI>
 
 <!-- <div class="grid" >
     <ng-container *ngFor="let number of [1,2,3,4]">
