@@ -3,7 +3,7 @@
 
     <ng-container *ngFor="let image of images">
 
-        <p-card [style]="{ width: '310px', height:'400px', padding:'5px',margin:'5px'}">
+        <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}">
             <ng-template pTemplate="header">
 
                 <img [src]="'data:image/jpeg;base64,'+image" alt="Image" style=" overflow: hidden;
