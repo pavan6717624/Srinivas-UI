@@ -11,15 +11,23 @@
             height: 300px;
             border-radius: 8px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);">
-            <div class="grid justify-content-between" style="padding:5px">
-                <div>
-                    <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
-                    <div class="text-600 p-1">Description</div>
+                <div class="grid justify-content-between"
+                    style="padding-left:15px;padding-right:15px;padding-top:10px;align-items: center;">
+                    <div>
+                        <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
+                        <div class="text-600 p-1 mb-2">Description</div>
+                    </div>
+                    <div class="grid justify-content-between">
+                        <div style="padding-right:3px">
+                            <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
+                            <button pButton pRipple type="button" icon="pi pi-download"
+                                class="p-button-rounded p-button-warning" (click)="downloadImage(image)"></button>
+                        </div>
+                        <div> <button pButton pRipple type="button" icon="pi pi-share-alt"
+                                class="p-button-rounded p-button-help"></button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i>
-                </div>
-            </div>
 
             </ng-template>
 
@@ -31,26 +39,3 @@
 <p-blockUI [blocked]="loading">
     <i class="pi pi-spin pi-spinner" style="font-size: 3rem; color:#B6FFFA"></i>
 </p-blockUI>
-
-<!-- <div class="grid" >
-    <ng-container *ngFor="let number of [1,2,3,4]">
-    <div class="col-12 lg:col-3"  >
-        <div class="p-2 h-full" >
-            <div class="shadow-2 p-2 h-full flex flex-column surface-card" style="border-radius: 8px">
-                
-                <div >
-                    <img src="https://picsum.photos/300/300?random=123" alt="Image" style=" overflow: hidden;
-                    width: 300px;
-                    height: 300px;
-                    border-radius: 8px;
-                    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);padding:0">
-                </div>
-                <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
-                <div class="text-600 p-1">Plan description</div>
-                
-            </div>
-        </div>
-    </div>
-    </ng-container>
-
-       </div> -->

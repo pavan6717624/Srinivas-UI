@@ -75,7 +75,7 @@ this.loading=false;
 
       if(res)
       this.router.navigate(['success']);
-      this.loading=false;
+      
 
      },
      (err)=> { console.log(err+" Error"); this.loading=false;}
