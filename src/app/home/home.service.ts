@@ -6,17 +6,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeService {
   downloadImage(formData:FormData) {
-    return this.http.post('http://localhost:8081/Heidigi/downloadImage',formData);
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/downloadImage',formData);
   }
 
   constructor(private http: HttpClient) { }
   getImages()
   {
-    return this.http.get('http://localhost:8081/Heidigi/getImages');
+    return this.http.get('https://takeoff-pavan.herokuapp.com/Heidigi/getImages');
   }
 
   getProfile()
   {
-    return this.http.get('http://localhost:8081/Heidigi/getProfile');
+    return this.http.get('https://takeoff-pavan.herokuapp.com/Heidigi/getProfile');
   }
 }

@@ -10,11 +10,11 @@ export class ServiceService {
 
   login(login: Login)
   {
-    return this.http.post('http://localhost:8081/Heidigi/login',login);
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/login',login);
   }
 
   signUp(signup: Signup)
   {
-    return this.http.post('http://localhost:8081/Heidigi/signup',signup);
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/signup',signup);
   }
 }
