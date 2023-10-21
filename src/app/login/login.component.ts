@@ -50,7 +50,6 @@ export class LoginComponent implements OnInit {
    this.service.login(login).subscribe(
      (res)=> {
       this.router.navigate(['home']);
-this.loading=false;
      } ,
      (err)=> {
        console.log(err+" Error");

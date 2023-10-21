@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { SharedModule } from '../share/share.module';
 import { ContentComponent } from './content/content.component';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { ContentComponent } from './content/content.component';
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    ContentComponent
+    ContentComponent,
+    ProfileComponent
   ],
   imports: [
     CommonModule,

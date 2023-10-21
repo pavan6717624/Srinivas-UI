@@ -33,10 +33,14 @@ import {FieldsetModule} from 'primeng/fieldset';
 import { InputNumberModule } from 'primeng/inputnumber';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { RippleModule } from 'primeng/ripple';
+import {FileUploadModule} from 'primeng/fileupload';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 const SHARED_MODULES = [
+  ConfirmDialogModule,
   RippleModule,
   BlockUIModule,
+  FileUploadModule,
   BadgeModule,
   AvatarGroupModule,
   MessageModule,

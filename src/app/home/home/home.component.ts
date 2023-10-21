@@ -9,7 +9,12 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  heightd: number=window.innerHeight-90;
+
   ngOnInit(): void {
+
+    console.log(this.heightd);
+
   }
 
 }
