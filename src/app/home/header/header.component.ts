@@ -15,10 +15,14 @@ export class HeaderComponent implements OnInit {
   { label: 'Home', icon: 'pi pi-home', routerLink: '/home' },
   {
     label: 'Edit Logo', icon: 'pi pi-image', command: () => {
-      this.editLogo();
+      this.editLogoVisible = true;
     }
   },
-  { label: 'Edit Address', icon: 'pi pi-map-marker', routerLink: 'address' },
+  {
+    label: 'Edit Address', icon: 'pi pi-map-marker', command: () => {
+      this.editAddressVisible = true;
+    }
+  },
   { label: 'Contact Us', icon: 'pi pi-phone', routerLink: 'contact' },
   { label: 'Logout', icon: 'pi pi-power-off', routerLink: '/login' }];
   isMobile = false;
@@ -29,6 +33,7 @@ export class HeaderComponent implements OnInit {
   address: string = '';
   mobile: string = '';
   logo: string = '';
+  loading: boolean = false;
 
   toHome() {
     this.route.navigate(['home']);
@@ -47,30 +52,54 @@ export class HeaderComponent implements OnInit {
 
     );
   }
-  
-  editLogoVisible=false;
 
-  editLogo()
-  {
-    this.editLogoVisible=true;
-  }
+
+
+  editLogoVisible = false;
+
+
 
   uploadedFiles: any[] = [];
-  
-  uploadSuccess: boolean=false;
 
+  uploadSuccess: boolean = false;
 
+  editAddressVisible: boolean = false;
+
+  successString="";
+
+  editAddress()
+  {
+    this.loading=true;
+    var formData = new FormData();
+
+    formData.set("address",this.address);
+    this.hService.editAddress(formData).subscribe(
+
+      (res: any) => {
+        this.loading=false;
+        this.address = res.address;
+        this.uploadSuccess = true;
+        this.successString = "Address Edit Successful";
+        this.editAddressVisible=false;
+      },
+      (err: any) =>{this.loading=false; console.log(err)}
+
+    );
+  }
 
   onUpload(event: any) {
-   // console.log({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    // console.log({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
+    this.uploadedFiles = [];
+    for (let file of event.files) {
+      this.uploadedFiles.push(file);
+    }
 
-   this.uploadedFiles= [];
-   for(let file of event.files) {
-    this.uploadedFiles.push(file);
-}
+    this.successString = "Logo Upload Successful"
 
-this.uploadSuccess=true;
+    this.uploadSuccess = true;
+    this.getProfile();
+    this.editLogoVisible = false;
 
-}
+  }
 
 }
