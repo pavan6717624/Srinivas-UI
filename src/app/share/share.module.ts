@@ -35,7 +35,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { RippleModule } from 'primeng/ripple';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
-
+import { TieredMenuModule } from 'primeng/tieredmenu';
 const SHARED_MODULES = [
   ConfirmDialogModule,
   RippleModule,
@@ -44,6 +44,7 @@ const SHARED_MODULES = [
   BadgeModule,
   AvatarGroupModule,
   MessageModule,
+  TieredMenuModule,
   MessagesModule,
   AvatarModule,
   DockModule,

@@ -38,7 +38,7 @@ export class ContentComponent implements OnInit {
   loading: boolean = false;
 
   ngOnInit(): void {
-
+    
     this.loading=true;
     this.service.getImages().subscribe(
       (res:any)=> {this.images=res; console.log(this.images);this.loading=false;},
@@ -56,7 +56,8 @@ export class ContentComponent implements OnInit {
       (res:any)=> { var a = document.createElement("a"); //Create <a>
       console.log(res);
       a.href = res.img; //Image Base64 Goes here
-      a.download = "coupon.jpg"; //File name Here
+     console.log(Math.random()+" "+Math.random());
+      a.download = "HeidigiImage_"+new Date().getTime()+".jpg"; //File name Here
       a.click(); //Downloaded file},
       a.remove();this.loading=false;},
       (err:any)=> { console.log(err); this.loading=false;}

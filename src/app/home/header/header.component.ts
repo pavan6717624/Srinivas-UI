@@ -12,9 +12,9 @@ export class HeaderComponent implements OnInit {
 
   constructor(private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) { }
   menuItems = [{ label: 'Hi User!' },
-  { label: 'Images', icon: 'pi pi-images', routerLink: '/home' },
+  // { label: 'Images', icon: 'pi pi-images', routerLink: '/home' },
   {
-    label: 'Edit Logo', icon: 'pi pi-image', command: () => {
+    label: 'Upload Logo', icon: 'pi pi-image', command: () => {
       this.editLogoVisible = true;
     }
   },
@@ -28,12 +28,12 @@ export class HeaderComponent implements OnInit {
       this.editAddressVisible = true;
     }
   },
-  {
-    label: 'Videos', icon: 'pi pi-youtube', command: () => {
-      this.uploadVideoVisible = true;
-    }
-  },
-  { label: 'Contact Us', icon: 'pi pi-phone', routerLink: 'contact' },
+  // {
+  //   label: 'Upload Videos', icon: 'pi pi-youtube', command: () => {
+  //     this.uploadVideoVisible = true;
+  //   }
+  // },
+  // { label: 'Contact Us', icon: 'pi pi-phone', routerLink: 'contact' },
   { label: 'Logout', icon: 'pi pi-power-off', routerLink: '/login' }];
   isMobile = false;
   ngOnInit(): void {
@@ -110,6 +110,7 @@ export class HeaderComponent implements OnInit {
     this.uploadSuccess = true;
     this.getProfile();
     this.editLogoVisible = false;
+    this.uploadImageVisible=false;
 
   }
 
