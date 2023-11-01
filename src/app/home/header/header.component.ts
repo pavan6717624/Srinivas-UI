@@ -12,15 +12,25 @@ export class HeaderComponent implements OnInit {
 
   constructor(private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) { }
   menuItems = [{ label: 'Hi User!' },
-  { label: 'Home', icon: 'pi pi-home', routerLink: '/home' },
+  { label: 'Images', icon: 'pi pi-images', routerLink: '/home' },
   {
     label: 'Edit Logo', icon: 'pi pi-image', command: () => {
       this.editLogoVisible = true;
     }
   },
   {
+    label: 'Upload Image', icon: 'pi pi-image', command: () => {
+      this.uploadImageVisible = true;
+    }
+  },
+  {
     label: 'Edit Address', icon: 'pi pi-map-marker', command: () => {
       this.editAddressVisible = true;
+    }
+  },
+  {
+    label: 'Videos', icon: 'pi pi-youtube', command: () => {
+      this.uploadVideoVisible = true;
     }
   },
   { label: 'Contact Us', icon: 'pi pi-phone', routerLink: 'contact' },
@@ -56,7 +66,8 @@ export class HeaderComponent implements OnInit {
 
 
   editLogoVisible = false;
-
+  uploadVideoVisible = false;
+  uploadImageVisible = false;
 
 
   uploadedFiles: any[] = [];
@@ -94,7 +105,7 @@ export class HeaderComponent implements OnInit {
       this.uploadedFiles.push(file);
     }
 
-    this.successString = "Logo Upload Successful"
+    this.successString = "Upload Successful"
 
     this.uploadSuccess = true;
     this.getProfile();

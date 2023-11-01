@@ -33,7 +33,7 @@ export class ContentComponent implements OnInit {
 
   constructor(private service:HomeService) { }
 
-  images: string[]=[];
+  images: any;
 
   loading: boolean = false;
 
@@ -54,6 +54,7 @@ export class ContentComponent implements OnInit {
     this.loading=true;
     this.service.downloadImage(formData).subscribe(
       (res:any)=> { var a = document.createElement("a"); //Create <a>
+      console.log(res);
       a.href = res.img; //Image Base64 Goes here
       a.download = "coupon.jpg"; //File name Here
       a.click(); //Downloaded file},

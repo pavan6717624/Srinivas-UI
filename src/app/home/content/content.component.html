@@ -6,7 +6,7 @@
         <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}">
             <ng-template pTemplate="header">
 
-                <img [src]="'data:image/jpeg;base64,'+image" alt="Image" style=" overflow: hidden;
+                <img [src]="image.src" alt="Image" style=" overflow: hidden;
             width: 300px;
             height: 300px;
             border-radius: 8px;
@@ -21,7 +21,7 @@
                         <div style="padding-right:3px">
                             <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
                             <button pButton pRipple type="button" icon="pi pi-download"
-                                class="p-button-rounded p-button-warning" (click)="downloadImage(image)"></button>
+                                class="p-button-rounded p-button-warning" (click)="downloadImage(image.publicId)"></button>
                         </div>
                         <div> <button pButton pRipple type="button" icon="pi pi-share-alt"
                                 class="p-button-rounded p-button-help"></button>

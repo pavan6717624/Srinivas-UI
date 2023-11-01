@@ -30,8 +30,8 @@
 
 <p-dialog [modal]="true" header="Edit Logo" [(visible)]="editLogoVisible">
     <label for="logo" class="block text-900 font-medium mb-2">Upload Logo</label>
-    <p-fileUpload name="file" url="https://takeoff-pavan.herokuapp.com/Heidigi/uploadLogo" (onUpload)="onUpload($event)"
-        accept="image/*" [maxFileSize]="1000000">
+    <p-fileUpload name="file" url="http://localhost:8081/Heidigi/uploadLogo" (onUpload)="onUpload($event)"
+        accept="image/*" [maxFileSize]="2000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
                 <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -40,6 +40,21 @@
     </p-fileUpload>
 
 
+
+
+</p-dialog>
+
+
+<p-dialog [modal]="true" header="Upload Image" [(visible)]="uploadImageVisible">
+    <label for="logo" class="block text-900 font-medium mb-2">Upload Logo</label>
+    <p-fileUpload name="file" url="http://localhost:8081/Heidigi/uploadImage" (onUpload)="onUpload($event)"
+        accept="image/*" [maxFileSize]="5000000">
+        <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+        </ng-template>
+    </p-fileUpload>
 </p-dialog>
 
 <p-dialog [modal]="true" header="Edit Address" [(visible)]="editAddressVisible">
