@@ -98,6 +98,8 @@ export class HeaderComponent implements OnInit {
     );
   }
 
+  window: any = window;
+
   onUpload(event: any) {
     // console.log({ severity: 'info', summary: 'Success', detail: 'File Uploaded with Basic Mode' });
     this.uploadedFiles = [];
@@ -111,6 +113,7 @@ export class HeaderComponent implements OnInit {
     this.getProfile();
     this.editLogoVisible = false;
     this.uploadImageVisible=false;
+    
 
   }
 

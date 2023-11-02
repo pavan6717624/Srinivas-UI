@@ -81,7 +81,7 @@
         <img src="assets/images/success.jpg" alt="Image" height="200">
     </p>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-home" label="Home" (click)="uploadSuccess=false;" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-home" label="Home" (click)="uploadSuccess=false;window.location.reload();" styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
 
