@@ -5,8 +5,8 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HomeService {
-  editAddress(formData: FormData) {
-    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/editAddress',formData);
+  editContent(formData: FormData) {
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/editContent',formData);
   }
   downloadImage(formData:FormData) {
     return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/downloadImage',formData);

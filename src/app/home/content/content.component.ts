@@ -12,6 +12,9 @@ export class ContentComponent implements OnInit {
 
   position: string = 'top';
 
+  imageId: number = -1;
+
+
   positionOptions = [
       {
           label: 'Bottom',
@@ -37,6 +40,22 @@ export class ContentComponent implements OnInit {
 
   loading: boolean = false;
 
+  getIcon(i: number): string
+  {
+   if(this.downloading && this.imageId==i) 
+   return 'pi pi-spin pi-spinner';
+   else
+   return 'pi pi-download';
+  }
+
+  getDisableStatus(i:number): Boolean
+  {
+    if(this.downloading && this.imageId==i) 
+    return true;
+    else
+    return false;
+  }
+
   ngOnInit(): void {
     
     this.loading=true;
@@ -46,12 +65,14 @@ export class ContentComponent implements OnInit {
 
     );
   }
-
-  downloadImage(image:any)
+ downloading: boolean=false;
+  downloadImage(i: number, image:any)
   {
     var formData=new FormData();
     formData.set("image",image);
-    this.loading=true;
+    this.downloading=true;
+    this.imageId=i;
+    
     this.service.downloadImage(formData).subscribe(
       (res:any)=> { var a = document.createElement("a"); //Create <a>
       console.log(res);
@@ -59,8 +80,8 @@ export class ContentComponent implements OnInit {
      console.log(Math.random()+" "+Math.random());
       a.download = "HeidigiImage_"+new Date().getTime()+".jpg"; //File name Here
       a.click(); //Downloaded file},
-      a.remove();this.loading=false;},
-      (err:any)=> { console.log(err); this.loading=false;}
+      a.remove();this.downloading=false; this.imageId=-1;},
+      (err:any)=> { console.log(err); this.downloading=false;this.imageId=-1;}
 
     );
   }

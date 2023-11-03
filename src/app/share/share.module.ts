@@ -36,7 +36,11 @@ import { RippleModule } from 'primeng/ripple';
 import {FileUploadModule} from 'primeng/fileupload';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import { SidebarModule } from 'primeng/sidebar';
 const SHARED_MODULES = [
+  SidebarModule,
+  PanelMenuModule,
   ConfirmDialogModule,
   RippleModule,
   BlockUIModule,
