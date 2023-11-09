@@ -8,6 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 import { SharedModule } from '../share/share.module';
 import { ContentComponent } from './content/content.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FacebookComponent } from './facebook/facebook.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ProfileComponent } from './profile/profile.component';
     HeaderComponent,
     FooterComponent,
     ContentComponent,
-    ProfileComponent
+    ProfileComponent,
+    FacebookComponent
   ],
   imports: [
     CommonModule,

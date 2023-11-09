@@ -12,6 +12,10 @@ export class HomeService {
     return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/downloadImage',formData);
   }
 
+  postToFacebook(formData:FormData) {
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/postToFacebook',formData);
+  }
+
   constructor(private http: HttpClient) { }
   getImages()
   {

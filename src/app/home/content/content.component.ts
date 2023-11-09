@@ -85,4 +85,17 @@ export class ContentComponent implements OnInit {
 
     );
   }
+  postToFacebook(image:any)
+  {
+    var formData=new FormData();
+    formData.set("image",image);
+    this.loading=true;
+    //this.imageId=i;
+    
+    this.service.postToFacebook(formData).subscribe(
+      (res:any)=> { console.log(res);this.loading=false;},
+      (err:any)=> { console.log(err); this.loading=false;}
+
+    );
+  }
 }
