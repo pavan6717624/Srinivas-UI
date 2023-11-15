@@ -8,12 +8,21 @@ export class HomeService {
   editContent(formData: FormData) {
     return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/editContent',formData);
   }
+
+  changeTemplate(formData: FormData) {
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/changeTemplate',formData);
+  }
+
   downloadImage(formData:FormData) {
     return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/downloadImage',formData);
   }
 
   postToFacebook(formData:FormData) {
     return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/postToFacebook',formData);
+  }
+
+  getTemplate(formData:FormData) {
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/getTemplate',formData);
   }
 
   constructor(private http: HttpClient) { }

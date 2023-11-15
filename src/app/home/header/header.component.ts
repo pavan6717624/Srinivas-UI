@@ -10,6 +10,8 @@ import { HomeService } from '../home.service';
 })
 export class HeaderComponent implements OnInit {
 
+  
+
   constructor(private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) { }
   menuItems = [{ label: 'Hi User!' },
 
@@ -56,6 +58,12 @@ export class HeaderComponent implements OnInit {
       this.editContentVisible = true;
     }
   },
+  {
+    label: 'Edit Template', icon: 'pi pi-book', command: () => {
+      this.sidebarVisible=false;
+      this.editTemplateVisible = true;
+    }
+  },
   // {
   //   label: 'Upload Videos', icon: 'pi pi-youtube', command: () => {
   //     this.uploadVideoVisible = true;
@@ -68,6 +76,7 @@ export class HeaderComponent implements OnInit {
 
     this.isMobile = this.deviceService.isMobile();
     this.getProfile();
+    this.getTemplate();
     
   }
 
@@ -96,6 +105,38 @@ export class HeaderComponent implements OnInit {
     this.route.navigate(['home']);
   }
 
+  paymentOptions: any[] = [
+    { name: 'T1', value: 'Template 1' },
+    { name: 'T2', value: 'Template 2' },
+    { name: 'T3', value: 'Template 3' }
+];
+
+templateChange()
+{
+  this.templateImage='';
+  this.getTemplate();
+}
+changeTemplate()
+{
+  this.loading=true;
+  var formData = new FormData();
+
+  
+  formData.set("template",this.template);
+  this.hService.changeTemplate(formData).subscribe(
+
+    (res: any) => {
+      this.loading=false;
+      this.uploadSuccess = true;
+      this.successString = "Template change Successful";
+      this.editTemplateVisible=false;
+      
+    },
+    (err: any) =>{this.loading=false; console.log(err)}
+
+  );
+}
+
   getProfile() {
     this.hService.getProfile().subscribe(
 
@@ -111,12 +152,29 @@ export class HeaderComponent implements OnInit {
         this.address=res.address;
         this.website=res.website;
         this.menuItems[0].label = "Hi " + this.mobile + "!";
+        this.template=res.template;
+        console.log(res);
       },
       (err: any) => console.log(err)
 
     );
   }
+templateImage: string = '';
+template: string = '';
+  getTemplate() {
+    var formData=new FormData();
+    formData.set("template",this.template);
+    this.hService.getTemplate(formData).subscribe(
 
+      (res: any) => {
+        
+        this.templateImage=res.img;
+       
+      },
+      (err: any) => console.log(err)
+
+    );
+  }
 
 
   editLogoVisible = false;
@@ -130,7 +188,7 @@ export class HeaderComponent implements OnInit {
   uploadSuccess: boolean = false;
 
   editContentVisible: boolean = false;
-
+  editTemplateVisible: boolean =false;
   successString="";
 
   // editAddress()

@@ -38,7 +38,14 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { PanelMenuModule } from 'primeng/panelmenu';
 import { SidebarModule } from 'primeng/sidebar';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { SelectButtonModule } from 'primeng/selectbutton';
+
 const SHARED_MODULES = [
+  SelectButtonModule,
+  RadioButtonModule,
+  TabMenuModule,
   SidebarModule,
   PanelMenuModule,
   ConfirmDialogModule,
