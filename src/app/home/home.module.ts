@@ -9,6 +9,7 @@ import { SharedModule } from '../share/share.module';
 import { ContentComponent } from './content/content.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FacebookComponent } from './facebook/facebook.component';
+import { VideosComponent } from './videos/videos.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FacebookComponent } from './facebook/facebook.component';
     FooterComponent,
     ContentComponent,
     ProfileComponent,
-    FacebookComponent
+    FacebookComponent,
+    VideosComponent
   ],
   imports: [
     CommonModule,

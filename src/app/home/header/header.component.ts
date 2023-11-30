@@ -44,20 +44,34 @@ export class HeaderComponent implements OnInit {
               this.sidebarVisible=false;
               this.uploadPhotoVisible = true;
             },
+            
            
         },
+
+        {
+          label: 'Video',
+          icon: 'pi pi-video',
+          command: () => {
+            this.sidebarVisible=false;
+            this.uploadVideoVisible = true;
+          },
+          
+         
+      },
        
     ]
 },
-  // { label: 'Images', icon: 'pi pi-images', routerLink: '/home' },
+  { label: 'Images', icon: 'pi pi-images', routerLink: 'images' },
+  { label: 'Videos', icon: 'pi pi-youtube', routerLink: 'videos' },
  
- 
+
   {
     label: 'Edit Content', icon: 'pi pi-map-marker', command: () => {
       this.sidebarVisible=false;
       this.editContentVisible = true;
     }
   },
+ 
   {
     label: 'Edit Template', icon: 'pi pi-book', command: () => {
       this.sidebarVisible=false;
@@ -85,6 +99,7 @@ export class HeaderComponent implements OnInit {
     
   }
   sidebarVisible: boolean=false;
+  uploadVideoVisible: boolean=false;
   address: string = '';
   mobile: string = '';
   logo: string = '';
@@ -178,7 +193,7 @@ template: string = '';
 
 
   editLogoVisible = false;
-  uploadVideoVisible = false;
+  
   uploadImageVisible = false;
   uploadPhotoVisible = false;
 

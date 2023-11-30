@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from './share/share.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { SuccessComponent } from './success/success.component';
+
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -22,7 +22,7 @@ import { MessageService } from 'primeng/api';
   declarations: [
     AppComponent,
     LoginComponent,
-    SuccessComponent,
+
   ],
   imports: [
     BrowserModule,

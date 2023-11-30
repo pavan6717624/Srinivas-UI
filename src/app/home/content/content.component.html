@@ -1,41 +1,83 @@
 <div class="grid justify-content-center" style="margin:2px;height:100%">
 
 
-    <ng-container *ngFor="let image of images; index as i">
+  <ng-container *ngFor="let image of images; index as i">
 
-        <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}">
-            <ng-template pTemplate="header">
+    <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}">
+      <ng-template pTemplate="header">
 
-                <img [src]="image.src" alt="Image" style=" overflow: hidden;
+        <img [src]="image.src" alt="Image" style=" overflow: hidden;
             width: 300px;
             height: 300px;
             border-radius: 8px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);">
-                <div class="grid justify-content-between"
-                    style="padding-left:15px;padding-right:15px;padding-top:10px;align-items: center;">
-                    <div>
-                        <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
-                        <div class="text-600 p-1 mb-2">Description</div>
-                    </div>
-                    <div class="grid justify-content-between">
-                        <div style="padding-right:3px">
-                            <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
-                            <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
-                                class="p-button-rounded p-button-warning" (click)="downloadImage(i,image.publicId)"></button>
-                        </div>
-                        <div> <button pButton pRipple type="button" icon="pi pi-share-alt"
-                                class="p-button-rounded p-button-help" (click)="postToFacebook(image.publicId)"></button>
-                        </div>
-                    </div>
-                </div>
+        <div class="grid justify-content-between"
+          style="padding-left:15px;padding-right:15px;padding-top:10px;align-items: center;">
+          <div>
+            <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
+            <div class="text-600 p-1 mb-2">Description</div>
+          </div>
+          <div class="grid justify-content-between">
+            <div style="padding-right:3px">
+              <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
+              <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
+                class="p-button-rounded p-button-warning" (click)="downloadImage(i,image.publicId)"></button>
+            </div>
+            <div> <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-help"
+                (click)="postToFacebook(image.publicId)"></button>
+            </div>
+          </div>
+        </div>
 
-            </ng-template>
+      </ng-template>
 
 
-        </p-card>
-    </ng-container>
-</div>
+    </p-card>
+  </ng-container>
 
-<p-blockUI [blocked]="loading">
+
+
+ 
+
+   
+
+
+
+
+
+  <!--    <video style='height:300px; width:300px' controls poster="image" preload="metadata" autoplay="false">
+            <source src="http://res.cloudinary.com/hwlyozehf/video/upload/v1701254169/oxfyht4wncjyjz5solef.mp4#t=0.1" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video style='height:300px; width:300px' controls poster="image" preload="metadata" autoplay="false">
+            <source src="http://res.cloudinary.com/hwlyozehf/video/upload/v1701254169/oxfyht4wncjyjz5solef.mp4#t=0.1" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video style='height:300px; width:300px' controls poster="image" preload="metadata" autoplay="false">
+            <source src="http://res.cloudinary.com/hwlyozehf/video/upload/v1701254169/oxfyht4wncjyjz5solef.mp4#t=0.1" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video style='height:300px; width:300px' controls poster="image" preload="metadata" autoplay="false">
+            <source src="http://res.cloudinary.com/hwlyozehf/video/upload/v1701254169/oxfyht4wncjyjz5solef.mp4#t=0.1" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video style='height:300px; width:300px' controls poster="image" preload="metadata" autoplay="false">
+            <source src="http://res.cloudinary.com/hwlyozehf/video/upload/v1701254169/oxfyht4wncjyjz5solef.mp4#t=0.1" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video style='height:300px; width:300px' controls poster="image" preload="metadata" autoplay="false">
+            <source src="http://res.cloudinary.com/hwlyozehf/video/upload/v1701254169/oxfyht4wncjyjz5solef.mp4#t=0.1" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          <video style='height:300px; width:300px' controls poster="image" preload="metadata" autoplay="false">
+            <source src="http://res.cloudinary.com/hwlyozehf/video/upload/v1701254169/oxfyht4wncjyjz5solef.mp4#t=0.1" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+          </div>
+          
+
+</div> -->
+
+  <p-blockUI [blocked]="loading">
     <i class="pi pi-spin pi-spinner" style="font-size: 3rem; color:#B6FFFA"></i>
-</p-blockUI>
+  </p-blockUI>

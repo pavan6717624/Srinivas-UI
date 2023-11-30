@@ -31,6 +31,11 @@ export class HomeService {
     return this.http.get('https://takeoff-pavan.herokuapp.com/Heidigi/getImages');
   }
 
+  getVideos()
+  {
+    return this.http.get('https://takeoff-pavan.herokuapp.com/Heidigi/getVideos');
+  }
+
   getProfile()
   {
     return this.http.get('https://takeoff-pavan.herokuapp.com/Heidigi/getProfile');

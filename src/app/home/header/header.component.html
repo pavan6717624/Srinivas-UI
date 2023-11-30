@@ -126,6 +126,20 @@
     </p-fileUpload>
 </p-dialog>
 
+
+
+<p-dialog [modal]="true" header="Upload Video" [(visible)]="uploadVideoVisible">
+    <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Image</label> -->
+    <p-fileUpload name="file" url="https://takeoff-pavan.herokuapp.com/Heidigi/uploadVideo" (onUpload)="onUpload($event)"
+        accept=".mp4" [maxFileSize]="20000000">
+        <ng-template pTemplate="content">
+            <ul *ngIf="uploadedFiles.length">
+                <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+            </ul>
+        </ng-template>
+    </p-fileUpload>
+</p-dialog>
+
 <!-- <p-dialog [modal]="true" header="Edit Address" [(visible)]="editAddressVisible">
 
     <div>
