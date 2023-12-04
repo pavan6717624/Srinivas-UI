@@ -6,7 +6,7 @@
     <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}">
       <ng-template pTemplate="header">
 
-        <img [src]="image.src" alt="Image" style=" overflow: hidden;
+        <img src="https://takeoff-pavan.herokuapp.com/Heidigi/image/{{image}}" alt="Image" style=" overflow: hidden;
             width: 300px;
             height: 300px;
             border-radius: 8px;
@@ -21,10 +21,10 @@
             <div style="padding-right:3px">
               <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
               <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
-                class="p-button-rounded p-button-warning" (click)="downloadImage(i,image.publicId)"></button>
+                class="p-button-rounded p-button-warning" (click)="downloadImage(i,image)"></button>
             </div>
             <div> <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-help"
-                (click)="postToFacebook(image.publicId)"></button>
+                (click)="postToFacebook(image)"></button>
             </div>
           </div>
         </div>
