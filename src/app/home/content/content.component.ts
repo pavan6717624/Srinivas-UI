@@ -92,7 +92,7 @@ export class ContentComponent implements OnInit {
     this.loading=true;
     //this.imageId=i;
     
-    this.service.postToFacebook(formData).subscribe(
+    this.service.postToFacebookImage(formData).subscribe(
       (res:any)=> { console.log(res);this.loading=false;},
       (err:any)=> { console.log(err); this.loading=false;}
 

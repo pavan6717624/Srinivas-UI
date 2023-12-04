@@ -17,10 +17,15 @@ export class HomeService {
     return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/downloadImage',formData);
   }
 
-  postToFacebook(formData:FormData) {
-    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/postToFacebook',formData);
+  postToFacebookImage(formData:FormData) {
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/postToFacebookImage',formData);
   }
 
+  postToFacebookVideo(formData:FormData) {
+    return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/postToFacebookVideo',formData);
+  }
+
+  
   getTemplate(formData:FormData) {
     return this.http.post('https://takeoff-pavan.herokuapp.com/Heidigi/getTemplate',formData);
   }

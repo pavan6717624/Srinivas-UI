@@ -1,13 +1,32 @@
-<div class="grid justify-content-center"
-          style="padding-left:15px;padding-right:15px;padding-top:10px;align-items: center;">
-   
-<ng-container *ngFor="let video of videos">
-    <div>
-<video style='height:300px; width:300px; padding:10px' controls poster="image" preload="metadata">
-    <source src="https://takeoff-pavan.herokuapp.com/Heidigi/video/{{video}}#t=0.1" type="video/mp4" />
-    Your browser does not support the video tag.
-  </video>
-</div>
-</ng-container>
+<div class="grid justify-content-center" style="padding-top:10px; margin:2px;height:100%">
+
+  <ng-container *ngFor="let video of videos">
+    <div class="surface-card shadow-2 p-3 border-round" style="height:400px;width:330px;margin:5px;padding:0px;">
+
+      <video style='height:300px; width:300px;padding:0px' controls poster="image" preload="metadata">
+        <source src="https://takeoff-pavan.herokuapp.com/Heidigi/video/{{video}}#t=0.1" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+
+      <div class="grid justify-content-between"
+        style="padding-left:15px;padding-right:15px;padding-top:10px;align-items: center;">
+        <div>
+          <div class="text-900 p-1 font-medium text-xl mb-2">Basic</div>
+          <div class="text-600 p-1 mb-2">Description</div>
+        </div>
+        <div class="grid justify-content-between">
+          <div style="padding-right:3px">
+            <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
+            <button pButton pRipple type="button" 
+              class="p-button-rounded p-button-warning"  icon="pi pi-download"></button>
+          </div>
+          <div> <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-help"
+            (click)="postToFacebook(video)"></button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </ng-container>
 
 </div>

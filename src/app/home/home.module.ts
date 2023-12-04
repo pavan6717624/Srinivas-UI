@@ -10,6 +10,8 @@ import { ContentComponent } from './content/content.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FacebookComponent } from './facebook/facebook.component';
 import { VideosComponent } from './videos/videos.component';
+import { DesignerComponent } from './designer/designer.component';
+import { StartComponent } from './start/start.component';
 
 
 @NgModule({
@@ -20,7 +22,9 @@ import { VideosComponent } from './videos/videos.component';
     ContentComponent,
     ProfileComponent,
     FacebookComponent,
-    VideosComponent
+    VideosComponent,
+    DesignerComponent,
+    StartComponent
   ],
   imports: [
     CommonModule,

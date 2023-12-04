@@ -25,4 +25,18 @@ export class VideosComponent implements OnInit {
     );
   }
 
+  postToFacebook(video:any)
+  {
+    var formData=new FormData();
+    formData.set("video",video);
+    //this.loading=true;
+    //this.imageId=i;
+    
+    this.service.postToFacebookImage(formData).subscribe(
+      (res:any)=> { console.log(res);},
+      (err:any)=> { console.log(err); }
+
+    );
+  }
+
 }
