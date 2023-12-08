@@ -6,7 +6,7 @@
 
     <div>
         <label for="logo" class="block text-900 font-medium mb-2">Upload Logo</label>
-        <p-fileUpload name="file" url="https://takeoff-pavan.herokuapp.com/Heidigi/uploadLogo" (onUpload)="onUpload($event)"
+        <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com//Heidigi/uploadLogo" (onUpload)="onUpload($event)"
              accept="image/*" [maxFileSize]="1000000">
             <ng-template pTemplate="content">
                 <ul *ngIf="uploadedFiles.length">
