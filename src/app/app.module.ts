@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { SharedModule } from './share/share.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { InterceptorService } from './interceptor.service';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -40,7 +40,11 @@ import { MessageService } from 'primeng/api';
 
 
   ],
-  providers: [MessageService],
+  providers: [MessageService,{
+    provide: HTTP_INTERCEPTORS, 
+    useClass: InterceptorService, 
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

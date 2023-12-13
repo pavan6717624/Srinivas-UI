@@ -6,6 +6,14 @@ export class Login {
   mobile: string = '';
   password: string = '';
 }
+export class LoginStatus {
+  userId: string = "";
+  userType: string = "";
+  loginStatus: boolean = false;
+  loginId: string = "";
+  jwt: string = '';
+   subscriptionType: string = '';
+}
 export class Signup {
   mobile: string = '';
   password: string = '';
@@ -34,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   loading: boolean = false;
-
+  loginStatus: LoginStatus = new LoginStatus();
   loginOrSingup() {
 
     if (this.isLogin) {
@@ -46,13 +54,30 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.service.login(login).subscribe(
         (res: any) => {
-          if (res)
-            this.router.navigate(['home']);
-          else {
-            this.loading = false;
-            console.log("login faield");
-            this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
-          }
+          // if (res)
+          //   this.router.navigate(['home']);
+          // else {
+          //   this.loading = false;
+          //   console.log("login faield");
+          //   this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
+          // }
+
+
+        this.loginStatus = res; 
+        console.log(res);
+        if (this.loginStatus.loginStatus) {
+       
+        let tokenStr= 'Bearer '+this.loginStatus.jwt;
+        localStorage.setItem('token', tokenStr);
+
+        this.router.navigate(['home'],  { state: {loginStatus: res }}); 
+        }
+        else {
+          this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
+          this.password = "";
+          this.loading = false;
+        }
+
         },
         (err) => {
           console.log(err + " Error");
