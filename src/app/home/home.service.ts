@@ -45,4 +45,10 @@ export class HomeService {
   {
     return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getProfile');
   }
+  
+  getSrc(formData: FormData)
+  {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/getSrc',formData);
+  }
+
 }
