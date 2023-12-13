@@ -6,43 +6,43 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeService {
   editContent(formData: FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/editContent',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/editContent',formData);
   }
 
   changeTemplate(formData: FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/changeTemplate',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/changeTemplate',formData);
   }
 
   downloadImage(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/downloadImage',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadImage',formData);
   }
 
   postToFacebookImage(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/postToFacebookImage',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookImage',formData);
   }
 
   postToFacebookVideo(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/postToFacebookVideo',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookVideo',formData);
   }
 
   
   getTemplate(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/getTemplate',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/getTemplate',formData);
   }
 
   constructor(private http: HttpClient) { }
   getImages()
   {
-    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/getImages');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getImages');
   }
 
   getVideos()
   {
-    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/getVideos');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getVideos');
   }
 
   getProfile()
   {
-    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/getProfile');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getProfile');
   }
 }

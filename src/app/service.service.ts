@@ -10,11 +10,11 @@ export class ServiceService {
 
   login(login: Login)
   {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/login',login);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/login',login);
   }
 
   signUp(signup: Signup)
   {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/Heidigi/signup',signup);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/signup',signup);
   }
 }
