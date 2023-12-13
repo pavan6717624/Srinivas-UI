@@ -16,14 +16,14 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { MessageService } from 'primeng/api';
-import { SecurePipe } from './secure.pipe';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    SecurePipe,
+
 
   ],
   imports: [
@@ -46,7 +46,7 @@ import { SecurePipe } from './secure.pipe';
     provide: HTTP_INTERCEPTORS, 
     useClass: InterceptorService, 
     multi: true
-  },SecurePipe],
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

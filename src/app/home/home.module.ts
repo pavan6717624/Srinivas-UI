@@ -12,7 +12,6 @@ import { FacebookComponent } from './facebook/facebook.component';
 import { VideosComponent } from './videos/videos.component';
 import { DesignerComponent } from './designer/designer.component';
 import { StartComponent } from './start/start.component';
-import { SecurePipe } from '../secure.pipe';
 
 
 @NgModule({
@@ -26,7 +25,7 @@ import { SecurePipe } from '../secure.pipe';
     VideosComponent,
     DesignerComponent,
     StartComponent,
-    SecurePipe
+
   ],
   imports: [
     CommonModule,
