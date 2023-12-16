@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ServiceService } from 'src/app/service.service';
+import { AuthService } from 'src/app/shared/auth.service';
 
 @Component({
   selector: 'app-start',
@@ -8,14 +10,20 @@ import { Router } from '@angular/router';
 })
 export class StartComponent implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private service: ServiceService, private route: Router, private authSerivce: AuthService) {
+    this.role=this.authSerivce.getRole();
+  }
+  
+  role: string = '';
 
   ngOnInit(): void {
+
   }
+
 
   alert(str:any)
   {
-    this.router.navigate(['home/'+str]);
+    this.route.navigate(['home/'+str]);
   }
 
 }

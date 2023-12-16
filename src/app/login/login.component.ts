@@ -19,6 +19,7 @@ export class Signup {
   password: string = '';
   name: string = '';
   email: string = '';
+  role: string = '';
 }
 
 @Component({
@@ -34,11 +35,41 @@ export class LoginComponent implements OnInit {
   mobile: number | undefined;
   password: string = '';
   isLogin: boolean = true;
+  ctype:string='Business';
 
+  getLoginDetails()
+   {
+    
+     
+    this.loading = true;
+     this.service.getLoginDetails().subscribe(
+       (res:any) => {
+        this.loading=false;
+         this.loginStatus=res;
+         console.log(this.loginStatus);
 
+         if(this.loginStatus.userType==='Customer')
+         {
+          this.router.navigate(['home/start'],  { state: {loginStatus: res }}); 
+         }
+         else if(this.loginStatus.userType==='Designer')
+         {
+          this.router.navigate(['home/designer'],  { state: {loginStatus: res }}); 
+          
+         }
+ 
+         
+       },
+       (err:any) => { this.loading=false; 
+      
+       }
+     );
+   }
 
 
   ngOnInit(): void {
+    console.log("liogin");
+    this.getLoginDetails();
   }
 
   loading: boolean = false;
@@ -70,7 +101,9 @@ export class LoginComponent implements OnInit {
         let tokenStr= 'Bearer '+this.loginStatus.jwt;
         localStorage.setItem('token', tokenStr);
 
-        this.router.navigate(['home'],  { state: {loginStatus: res }}); 
+        
+         this.router.navigate(['home'],  { state: {loginStatus: res }}); 
+      
         }
         else {
           this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
@@ -92,6 +125,7 @@ export class LoginComponent implements OnInit {
       signup.email = this.email;
       signup.mobile = this.mobile + "";
       signup.password = this.password;
+      signup.role=this.ctype;
 
       console.log(signup);
 

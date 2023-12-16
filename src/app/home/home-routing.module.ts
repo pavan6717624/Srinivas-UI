@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthguardGuard } from '../shared/authguard.guard';
 import { ContentComponent } from './content/content.component';
+
 import { DesignerComponent } from './designer/designer.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
@@ -14,10 +16,13 @@ const routes: Routes = [
 
 
   children: [
-    { path: '', component: StartComponent },
-    { path: 'images', component: ContentComponent },
-    { path: 'videos', component: VideosComponent },
-    { path: 'designer', component: DesignerComponent },
+
+    { path: '', component: StartComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
+    { path: 'start', component: StartComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
+    
+    { path: 'images', component: ContentComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
+    { path: 'videos', component: VideosComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
+    { path: 'designer', component: DesignerComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
   ]
 
 

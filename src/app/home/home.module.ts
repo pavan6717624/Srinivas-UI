@@ -14,6 +14,7 @@ import { DesignerComponent } from './designer/designer.component';
 import { StartComponent } from './start/start.component';
 
 
+
 @NgModule({
   declarations: [
     HomeComponent,
@@ -25,6 +26,7 @@ import { StartComponent } from './start/start.component';
     VideosComponent,
     DesignerComponent,
     StartComponent,
+
 
   ],
   imports: [

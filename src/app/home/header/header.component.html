@@ -11,7 +11,7 @@
     <div>
         <img (click)='toHome()' style='cursor:pointer' src="assets/images/logo.png" height="40" class="mr-2">
     </div>
-    <div #myDiv class="grid"
+    <div #myDiv class="grid" *ngIf="role==='Customer'"
         style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:5px; padding:0px; cursor: pointer; text-align: center;align-items: center;"
         (click)="sidebarVisible=true;">
         <div style="padding:0px">
@@ -19,6 +19,20 @@
         </div>
         <div style="padding:0px">
             &nbsp;<i class="pi pi-chevron-down"
+                style="color: slateblue; text-align: center;align-items: center;">&nbsp;</i>
+        </div>
+
+
+
+
+
+    </div>
+
+    <div class="grid" *ngIf="role==='Designer'"
+        style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:5px; padding:0px; cursor: pointer; text-align: center;align-items: center;"
+        (click)="sidebarVisible=true;">
+        <div style="padding:0px">
+            &nbsp;<i class="pi pi-bars"
                 style="color: slateblue; text-align: center;align-items: center;">&nbsp;</i>
         </div>
 
@@ -86,8 +100,8 @@
 
 <p-dialog [modal]="true" header="Upload Logo" [(visible)]="editLogoVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Logo</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadLogo" (onUpload)="onUpload($event)"
-        accept="image/*" [maxFileSize]="5000000">
+    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadLogo" (onUpload)="onUpload($event)" accept="image/*"
+        [maxFileSize]="5000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
                 <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -103,8 +117,8 @@
 
 <p-dialog [modal]="true" header="Upload Image" [(visible)]="uploadImageVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Image</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadImage" (onUpload)="onUpload($event)"
-        accept="image/*" [maxFileSize]="5000000">
+    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadImage" (onUpload)="onUpload($event)" accept="image/*"
+        [maxFileSize]="5000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
                 <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -116,8 +130,8 @@
 
 <p-dialog [modal]="true" header="Upload Photo" [(visible)]="uploadPhotoVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Image</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadPhoto" (onUpload)="onUpload($event)"
-        accept="image/*" [maxFileSize]="5000000">
+    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadPhoto" (onUpload)="onUpload($event)" accept="image/*"
+        [maxFileSize]="5000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
                 <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -130,8 +144,8 @@
 
 <p-dialog [modal]="true" header="Upload Video" [(visible)]="uploadVideoVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Image</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadVideo" (onUpload)="onUpload($event)"
-        accept=".mp4" [maxFileSize]="20000000">
+    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadVideo" (onUpload)="onUpload($event)" accept=".mp4"
+        [maxFileSize]="20000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
                 <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>

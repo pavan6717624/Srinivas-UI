@@ -41,6 +41,26 @@
                 <label for="cpassword" class="block text-900 font-medium mb-2">Confirm Password</label>
                 <input id="cpassword" type="password" placeholder="Confirm Password" pInputText class="w-full mb-3">
             </ng-container>
+
+            <ng-container *ngIf="!isLogin">
+            
+                <div class="flex flex-wrap gap-3">
+                   Role
+                    <div class="flex align-items-center">
+                        <p-radioButton name="ctype" value="Business" [(ngModel)]="ctype" inputId="Business"></p-radioButton>
+                        <label for="Business" class="ml-2">Business</label>
+                    </div>
+                    
+                    <div class="flex align-items-center">
+                        <p-radioButton name="ctype" value="Designer" [(ngModel)]="ctype" inputId="Designer"></p-radioButton>
+                        <label for="Designer" class="ml-2">Designer</label>
+                    </div>
+                    
+         
+                   
+                </div>
+
+            </ng-container>
            
                 <div class="flex align-items-center justify-content-between mb-6">
                     <ng-container *ngIf="isLogin">
