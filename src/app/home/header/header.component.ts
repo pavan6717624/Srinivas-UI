@@ -14,11 +14,13 @@ export class HeaderComponent implements OnInit {
 
   userName='';
   role='';
+  roleName='';
 
   constructor(private authSerivce: AuthService, private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) {
 
     this.userName=this.authSerivce.getUserName();
     this.role=this.authSerivce.getRole();
+   this.roleName=this.role==='Customer'?'Business':'Designer';
 
    }
   menuItems = [{ label: 'Hi User!' },

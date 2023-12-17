@@ -1,9 +1,13 @@
+<!-- <div style="position:absolute; bottom:10%; right:3%">
 
+  <button pButton pRipple type="button" icon="pi pi-upload" (click)="uploadImageVisible=true"
+    class="p-button-rounded"></button>
+</div> -->
 
-<div style="position:absolute; bottom:10%; right:3%">
-  <!-- <p-button icon="pi pi-upload" [rounded]="true"></p-button> -->
-  <button pButton pRipple type="button" icon="pi pi-upload" (click) = "uploadImageVisible=true" class="p-button-rounded"></button>
-</div>
+<!-- <div style="position:absolute; bottom:400px; right:90px">
+
+  <p-speedDial [model]="tooltipItems" showIcon="pi pi-ellipsis-v" style='height:10px' direction="up"></p-speedDial>
+</div> -->
 
 <div class="grid justify-content-center" style="margin:2px;height:100%">
 
@@ -55,28 +59,58 @@
   <p-messages></p-messages>
 
   <label for="name" class="block text-900 font-medium mb-2">Category</label>
-                <input id="name" type="text" placeholder="Category" [(ngModel)]="category"  pInputText class="w-full mb-3">
+  <input id="name" type="text" placeholder="Category" [(ngModel)]="category" pInputText class="w-full mb-3">
 
-                <label for="name" class="block text-900 font-medium mb-2">SubCategory</label>
-                <input id="name" type="text" placeholder="SubCategory" [(ngModel)]="subcategory"  pInputText class="w-full mb-3">
+  <label for="name" class="block text-900 font-medium mb-2">SubCategory</label>
+  <input id="name" type="text" placeholder="SubCategory" [(ngModel)]="subcategory" pInputText class="w-full mb-3">
 
-  <p-fileUpload name="file" [customUpload] = "true" (uploadHandler)="handleUpload($event)" accept="image/*" [maxFileSize]="5000000">
-      <ng-template pTemplate="content">
-          <ul *ngIf="uploadedFiles.length">
-              <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
-          </ul>
-      </ng-template>
+  <p-fileUpload name="file" [customUpload]="true" [files]="uploadedFiles" (uploadHandler)="handleUpload($event)" accept="image/*"
+    [maxFileSize]="5000000">
+    <ng-template pTemplate="content">
+      <ul *ngIf="uploadedFiles.length">
+        <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+      </ul>
+    </ng-template>
   </p-fileUpload>
 </p-dialog>
 
 
 <p-dialog [modal]="true" [closable]="false" [header]="successString" [(visible)]="uploadSuccess">
   <p>
-      <img src="assets/images/success.jpg" alt="Image" height="200">
+    <img src="assets/images/success.jpg" alt="Image" height="200">
   </p>
   <ng-template pTemplate="footer">
-      <p-button icon="pi pi-check" label="Done" (click)="uploadDone()"
-          styleClass="p-button-text"></p-button>
+    <p-button icon="pi pi-check" label="Done" (click)="uploadDone()" styleClass="p-button-text"></p-button>
   </ng-template>
 </p-dialog>
 
+<div class="icon-bar">
+
+  <div style="padding:0px;padding-bottom:3px">
+    <button pButton pRipple type="button" icon="pi pi-upload" (click)="uploadImageVisible=true; category=''; subcategory='';uploadedFiles=[];"
+      ></button>
+  </div>
+ 
+
+  <div style="padding:0px;padding-bottom:3px">
+    <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-secondary" (click)="refresh()"
+      ></button>
+  </div>
+
+  <div style="padding:0px;padding-bottom:3px">
+    <button pButton pRipple type="button" icon="pi pi-filter" class="p-button-warning" (click)="uploadImageVisible=true"
+      ></button>
+  </div>
+  
+
+
+  <div style="padding:0px;padding-bottom:3px">
+    <button pButton pRipple type="button" icon="pi pi-search" class="p-button-success" (click)="uploadImageVisible=true"
+      ></button>
+  </div>
+  
+
+
+</div>
+
+<!-- <p-scrollTop></p-scrollTop> -->

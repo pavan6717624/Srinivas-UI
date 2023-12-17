@@ -20,18 +20,6 @@ export class ContentComponent implements OnInit {
   subcategory: string = '';
   category: string = '';
 
-  checkCategory($event: any) {
-    console.log("in check");
-    if (!this.category || this.category === '' || this.category.trim().length == 0 ||
-      !this.subcategory || this.subcategory === '' || this.subcategory.trim().length == 0) {
-      console.log("in check");
-      this.messageService.add({ severity: 'error', summary: 'Provide Category', detail: '' });
-      throw new $event.error;
-    }
-
-    return true;
-
-  }
   positionOptions = [
     {
       label: 'Bottom',
@@ -92,7 +80,7 @@ export class ContentComponent implements OnInit {
 
         icon: 'pi pi-refresh',
         command: () => {
-          this.messageService.add({ severity: 'success', summary: 'Update', detail: 'Data Updated' });
+         this.ngOnInit();
         }
       },
       {
@@ -104,17 +92,33 @@ export class ContentComponent implements OnInit {
       },
       {
 
-        icon: 'pi pi-upload'
+        icon: 'pi pi-upload',
+        command: () => {
+          this.uploadImageVisible=true
+        }
       },
-      {
-
-        icon: 'pi pi-external-link',
-        url: 'http://angular.io'
-      }
+      
     ];
 
     this.getImages();
     
+  }
+
+  scrollToTop() {
+
+    (function smoothscroll() {
+
+        var currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+
+        if (currentScroll > 0) {
+
+            window.requestAnimationFrame(smoothscroll);
+
+            window.scrollTo(0, currentScroll - (currentScroll / 8));
+
+        }
+
+    })();
   }
 
 getImages()
@@ -130,7 +134,7 @@ getImages()
   downloading: boolean = false;
   downloadImage(i: number, image: any) {
     var formData = new FormData();
-    formData.set("image", image);
+    formData.set("image", image.publicId);
     this.downloading = true;
     this.imageId = i;
 
@@ -219,8 +223,16 @@ getImages()
         this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: '' });
       }
 
+      event.files=[];
+      this.uploadedFiles=[];
+
     },
       (err: any) => { this.loading = false; this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: '' }); });
+  }
+
+  refresh()
+  {
+    this.ngOnInit();
   }
 
 }
