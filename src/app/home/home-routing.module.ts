@@ -19,6 +19,7 @@ const routes: Routes = [
 
     { path: '', component: StartComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
     { path: 'start', component: StartComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
+    { path: 'profile', component: ProfileComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
     
     { path: 'images', component: ContentComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
     { path: 'videos', component: VideosComponent, canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },

@@ -38,7 +38,15 @@ export class ContentComponent implements OnInit {
       value: 'right'
     }
   ];
+  line1: string = '';
+  line2: string = '';
 
+  line3: string = '';
+
+  line4: string = '';
+
+  email: string = '';
+  website: string = '';
 
   constructor(private messageService: MessageService, private service: HomeService, private route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();

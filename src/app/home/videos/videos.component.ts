@@ -15,12 +15,13 @@ export class VideosComponent implements OnInit {
   }
 
   videos: string[]= [];
-
+loading=false;
   getVideos()
   {
+    this.loading=true;
     this.service.getVideos().subscribe(
-      (res:any)=> {this.videos=res; console.log(this.videos);},
-      (err:any)=> { console.log(err);}
+      (res:any)=> {this.videos=res; this.loading=false;console.log(this.videos);},
+      (err:any)=> { console.log(err); this.loading=false;}
 
     );
   }

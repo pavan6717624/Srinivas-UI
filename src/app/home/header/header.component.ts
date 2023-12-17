@@ -12,82 +12,94 @@ import { HomeService } from '../home.service';
 })
 export class HeaderComponent implements OnInit {
 
-  userName='';
-  role='';
-  roleName='';
-
+  userName = '';
+  role = '';
+  roleName = '';
+  width: number = window.innerWidth;
   constructor(private authSerivce: AuthService, private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) {
 
-    this.userName=this.authSerivce.getUserName();
-    this.role=this.authSerivce.getRole();
-   this.roleName=this.role==='Customer'?'Business':'Designer';
+    this.userName = this.authSerivce.getUserName();
+    this.role = this.authSerivce.getRole();
+    this.roleName = this.role === 'Customer' ? 'Business' : 'Designer';
 
-   }
+  }
   menuItems = [{ label: 'Hi User!' },
 
 
 
+  // {
+  //   label: 'Upload',
+  //   icon: 'pi pi-upload',
+  //   items: [
+  //     {
+  //       label: 'Logo',
+  //       icon: 'pi pi-id-card',
+  //       command: () => {
+  //         this.sidebarVisible = false;
+  //         this.editLogoVisible = true;
+  //       }
+  //     },
+  //     {
+  //       label: 'Image',
+  //       icon: 'pi pi-image',
+  //       command: () => {
+  //         this.sidebarVisible = false;
+  //         this.uploadImageVisible = true;
+  //       }
+  //     },
+  //     {
+  //       label: 'Photo',
+  //       icon: 'pi pi-user',
+  //       command: () => {
+  //         this.sidebarVisible = false;
+  //         this.uploadPhotoVisible = true;
+  //       },
+
+
+  //     },
+
+  //     {
+  //       label: 'Video',
+  //       icon: 'pi pi-video',
+  //       command: () => {
+  //         this.sidebarVisible = false;
+  //         this.uploadVideoVisible = true;
+  //       },
+
+
+  //     },
+
+  //   ]
+  // },
   {
-    label: 'Upload',
-    icon: 'pi pi-upload',
-    items: [
-      {
-        label: 'Logo',
-        icon: 'pi pi-id-card',
-        command: () => {
-          this.sidebarVisible = false;
-          this.editLogoVisible = true;
-        }
-      },
-      {
-        label: 'Image',
-        icon: 'pi pi-image',
-        command: () => {
-          this.sidebarVisible = false;
-          this.uploadImageVisible = true;
-        }
-      },
-      {
-        label: 'Photo',
-        icon: 'pi pi-user',
-        command: () => {
-          this.sidebarVisible = false;
-          this.uploadPhotoVisible = true;
-        },
-
-
-      },
-
-      {
-        label: 'Video',
-        icon: 'pi pi-video',
-        command: () => {
-          this.sidebarVisible = false;
-          this.uploadVideoVisible = true;
-        },
-
-
-      },
-
-    ]
-  },
-  { label: 'Images', icon: 'pi pi-images', routerLink: 'images' },
-  { label: 'Videos', icon: 'pi pi-youtube', routerLink: 'videos' },
-
-
-  {
-    label: 'Edit Content', icon: 'pi pi-map-marker', command: () => {
+    label: 'Profile', icon: 'pi pi-user', command: () => {
       this.sidebarVisible = false;
-      this.editContentVisible = true;
+      this.route.navigate(['home/profile']);
     }
   },
+  { label: 'Images', icon: 'pi pi-images', command: () => {
+    this.sidebarVisible = false;
+    this.route.navigate(['home/images']);
+  } },
+  { label: 'Videos', icon: 'pi pi-youtube', command: () => {
+    this.sidebarVisible = false;
+    this.route.navigate(['home/videos']);
+  } },
 
-  {
-    label: 'Edit Template', icon: 'pi pi-book', command: () => {
-      this.sidebarVisible = false;
-      this.editTemplateVisible = true;
-    }
-  },
+
+  // {
+  //   label: 'Edit Content', icon: 'pi pi-map-marker', command: () => {
+  //     this.sidebarVisible = false;
+  //     this.editContentVisible = true;
+  //   }
+  // },
+
+  // {
+  //   label: 'Edit Template', icon: 'pi pi-book', command: () => {
+  //     this.sidebarVisible = false;
+  //     this.editTemplateVisible = true;
+  //   }
+  // },
 
   {
     label: 'Logout', icon: 'pi pi-power-off', command: () => {
@@ -100,7 +112,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
 
     this.isMobile = this.deviceService.isMobile();
-  
+
 
     this.getProfile();
     this.getTemplate();
@@ -167,7 +179,7 @@ export class HeaderComponent implements OnInit {
 
       (res: any) => {
         this.address = res.address;
-        this.logo = res.image;
+        this.logo = res.logo;
         this.mobile = res.mobile;
         this.line1 = res.line1;
         this.line2 = res.line2;

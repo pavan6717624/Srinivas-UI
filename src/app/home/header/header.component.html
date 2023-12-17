@@ -1,7 +1,7 @@
 <div class="sticky flex justify-content-between" style="padding-left:5px; padding-top:5px; background-color: white;">
 
     <div>
-        <img (click)='toHome()' style='cursor:pointer' src="assets/images/logo.png" height="40" class="mr-2">
+        <img (click)='toHome()' style='cursor:pointer' src="assets/images/logo.png" [height]="width<=350?30:40" class="mr-2">
     </div>
 
     
@@ -11,7 +11,8 @@
         <div style="align-items:center; text-align:right;padding:0px;padding-right:10px;border-right: 1px solid;">Hi {{userName}}, <br/> {{roleName}}</div>
 
         <div style="padding:0px;padding-left:10px">
-            <img style='cursor:pointer' [src]="logo" height="40">
+            <img style='cursor:pointer' *ngIf='logo' src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{logo}}" height="40">
+            <span><i class="pi pi-spin pi-spinner"  *ngIf='!logo' style="font-size: 1rem"></i></span>
         </div>
         <div style="padding:0px">
             &nbsp;<i class="pi pi-chevron-down"
