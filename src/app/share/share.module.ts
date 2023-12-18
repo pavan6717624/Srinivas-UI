@@ -42,7 +42,9 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ScrollTopModule } from 'primeng/scrolltop';
+import { ScrollPanelModule } from 'primeng/scrollpanel';
 const SHARED_MODULES = [
+  ScrollPanelModule,
   ScrollTopModule,
   SelectButtonModule,
   RadioButtonModule,

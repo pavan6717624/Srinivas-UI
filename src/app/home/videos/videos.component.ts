@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MessageService } from 'primeng/api';
 import { HomeService } from '../home.service';
 
 @Component({
@@ -8,7 +9,7 @@ import { HomeService } from '../home.service';
 })
 export class VideosComponent implements OnInit {
 
-  constructor(private service:HomeService) { }
+  constructor(private messageService: MessageService,private service:HomeService) { }
 
   ngOnInit(): void {
     this.getVideos();
@@ -27,15 +28,15 @@ loading=false;
   }
 
   postToFacebook(video:any)
-  {
+  {this.loading=true;
     var formData=new FormData();
     formData.set("video",video);
     //this.loading=true;
     //this.imageId=i;
     
-    this.service.postToFacebookImage(formData).subscribe(
-      (res:any)=> { console.log(res);},
-      (err:any)=> { console.log(err); }
+    this.service.postToFacebookVideo(formData).subscribe(
+      (res:any)=> { console.log(res);this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' });this.loading=false;},
+      (err:any)=> { console.log(err); this.loading=false;}
 
     );
   }

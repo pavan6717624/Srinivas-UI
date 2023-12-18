@@ -101,7 +101,7 @@ loading=false;
         this.template = res.template;
         console.log(res);
       },
-      (err: any) => console.log(err)
+      (err: any) => {console.log(err); this.loading=false}
 
     );
   }

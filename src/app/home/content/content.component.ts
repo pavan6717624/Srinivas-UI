@@ -162,12 +162,12 @@ getImages()
   }
   postToFacebook(image: any) {
     var formData = new FormData();
-    formData.set("image", image);
+    formData.set("image", image.publicId);
     this.loading = true;
     //this.imageId=i;
 
     this.service.postToFacebookImage(formData).subscribe(
-      (res: any) => { console.log(res); this.loading = false; },
+      (res: any) => { console.log(res); this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
       (err: any) => { console.log(err); this.loading = false; }
 
     );

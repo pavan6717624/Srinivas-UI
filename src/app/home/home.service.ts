@@ -30,6 +30,10 @@ export class HomeService {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/getTemplate',formData);
   }
 
+  checkProfile() {
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/checkProfile');
+  }
+
   constructor(private http: HttpClient) { }
   getImages()
   {

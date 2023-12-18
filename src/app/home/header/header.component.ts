@@ -23,90 +23,39 @@ export class HeaderComponent implements OnInit {
     this.roleName = this.role === 'Customer' ? 'Business' : 'Designer';
 
   }
-  menuItems = [{ label: 'Hi User!' },
+  menuItems = [
 
+    {
+      label: 'Home', icon: 'pi pi-home', command: () => {
+        this.sidebarVisible = false;
+        this.route.navigate(['home']);
+      }
+    },
 
-
-  // {
-  //   label: 'Upload',
-  //   icon: 'pi pi-upload',
-  //   items: [
-  //     {
-  //       label: 'Logo',
-  //       icon: 'pi pi-id-card',
-  //       command: () => {
-  //         this.sidebarVisible = false;
-  //         this.editLogoVisible = true;
-  //       }
-  //     },
-  //     {
-  //       label: 'Image',
-  //       icon: 'pi pi-image',
-  //       command: () => {
-  //         this.sidebarVisible = false;
-  //         this.uploadImageVisible = true;
-  //       }
-  //     },
-  //     {
-  //       label: 'Photo',
-  //       icon: 'pi pi-user',
-  //       command: () => {
-  //         this.sidebarVisible = false;
-  //         this.uploadPhotoVisible = true;
-  //       },
-
-
-  //     },
-
-  //     {
-  //       label: 'Video',
-  //       icon: 'pi pi-video',
-  //       command: () => {
-  //         this.sidebarVisible = false;
-  //         this.uploadVideoVisible = true;
-  //       },
-
-
-  //     },
-
-  //   ]
-  // },
-  {
-    label: 'Profile', icon: 'pi pi-user', command: () => {
-      this.sidebarVisible = false;
-      this.route.navigate(['home/profile']);
-    }
-  },
-  { label: 'Images', icon: 'pi pi-images', command: () => {
-    this.sidebarVisible = false;
-    this.route.navigate(['home/images']);
-  } },
-  { label: 'Videos', icon: 'pi pi-youtube', command: () => {
-    this.sidebarVisible = false;
-    this.route.navigate(['home/videos']);
-  } },
-
-
-  // {
-  //   label: 'Edit Content', icon: 'pi pi-map-marker', command: () => {
-  //     this.sidebarVisible = false;
-  //     this.editContentVisible = true;
-  //   }
-  // },
-
-  // {
-  //   label: 'Edit Template', icon: 'pi pi-book', command: () => {
-  //     this.sidebarVisible = false;
-  //     this.editTemplateVisible = true;
-  //   }
-  // },
-
-  {
-    label: 'Logout', icon: 'pi pi-power-off', command: () => {
-      localStorage.removeItem('token');
-      this.route.navigate(['login']);
-    }
-  }];
+    {
+      label: 'Images', icon: 'pi pi-images', command: () => {
+        this.sidebarVisible = false;
+        this.route.navigate(['home/images']);
+      }
+    },
+    {
+      label: 'Videos', icon: 'pi pi-youtube', command: () => {
+        this.sidebarVisible = false;
+        this.route.navigate(['home/videos']);
+      }
+    },
+    {
+      label: 'Profile', icon: 'pi pi-user', command: () => {
+        this.sidebarVisible = false;
+        this.route.navigate(['home/profile']);
+      }
+    },
+    {
+      label: 'Logout', icon: 'pi pi-power-off', command: () => {
+        localStorage.removeItem('token');
+        this.route.navigate(['login']);
+      }
+    }];
   isMobile = false;
   loginStatus: LoginStatus = new LoginStatus();
   ngOnInit(): void {
@@ -188,7 +137,7 @@ export class HeaderComponent implements OnInit {
         this.email = res.email;
         this.address = res.address;
         this.website = res.website;
-        this.menuItems[0].label = "Hi " + this.mobile + "!";
+        // this.menuItems[0].label = "Hi " + this.mobile + "!";
         this.template = res.template;
         console.log(res);
       },

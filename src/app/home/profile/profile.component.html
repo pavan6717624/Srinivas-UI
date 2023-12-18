@@ -1,6 +1,10 @@
+
+
 <div style='margin:auto; padding: 0;display: flex;justify-content: center;align-items: center; width:100%; height:100%'>
 
-    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6" style="text-align:center">
+   
+
+    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4" style="text-align:center">
         <span class="text-900 text-xl mb-3 font-medium" style="text-align:center"> <b>Profile </b></span>
         <p-tabView>
             <p-tabPanel header="Logo">
@@ -49,43 +53,60 @@
 
 
             </p-tabPanel>
-            <p-tabPanel header="Other Details">
-
-                <div style="padding-bottom:3px">
-                    Line 1 &nbsp;&nbsp;&nbsp;&nbsp;
+            <p-tabPanel header="Other Details" >
+                <div [style]="{ width: '100%', height: '310px','overflow': 'auto', 'padding':'0','padding-right':'5px'  }" >
+                <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
+                    <div style="padding-right:3px;">                    Line 1 
+                    </div>
+                    <div>
                     <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line1">
+                    </div>
                 </div>
-                <div style="padding-bottom:3px">
-                    Line 2 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line2">
+                <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
+                    <div style="padding-right:3px;">                      Line 2 
+                    </div>
+                    <div>
+                    <input type="text" placeholder="Line 2" class="p-inputtext-sm" pInputText [(ngModel)]="line2">
+                    </div>
                 </div>
-                <div style="padding-bottom:3px">
-                    Line 3 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line3">
+                <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
+                    <div style="padding-right:3px;">                       Line 3 
+                    </div>
+                    <div>
+                    <input type="text" placeholder="Line 3" class="p-inputtext-sm" pInputText [(ngModel)]="line3">
+                    </div>
                 </div>
-                <div style="padding-bottom:3px">
-                    Line 4 &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line4">
+                <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
+                    <div style="padding-right:3px;">                       Line 4 
+                    </div>
+                    <div>
+                    <input type="text" placeholder="Line 4" class="p-inputtext-sm" pInputText [(ngModel)]="line4">
+                    </div>
                 </div>
-                <div style="padding-bottom:3px">
-                    Email &nbsp;&nbsp;&nbsp;&nbsp;
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="email">
-                </div>
-                <div style="padding-bottom:3px">
-                    Website
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="website">
-                </div>
-                <div style="padding-bottom:3px">
-                    Address
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="address">
-                </div>
-                <!-- <div>
-                    Line 1
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line1">
-                </div> -->
 
+                <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
+                    <div style="padding-right:3px;">                       Email
+                    </div>
+                    <div>
+                    <input type="text" placeholder="Email" class="p-inputtext-sm" pInputText [(ngModel)]="email">
+                    </div>
+                </div>
 
-
+                <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
+                    <div style="padding-right:3px;">                        Website
+                    </div>
+                    <div>
+                    <input type="text" placeholder="Website" class="p-inputtext-sm" pInputText [(ngModel)]="website">
+                    </div>
+                </div>
+                <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
+                    <div style="padding-right:3px;">                        Address
+                    </div>
+                    <div>
+                    <input type="text" placeholder="Address" class="p-inputtext-sm" pInputText [(ngModel)]="address">
+                    </div>
+                </div>
+                
 
                 <div>&nbsp;</div>
 
@@ -94,7 +115,7 @@
                     <button pButton pRipple label="Submit" (click)="editContent()"  icon="pi pi-user" class="w-full"></button>
 
                 </div>
-
+</div>
             </p-tabPanel>
         </p-tabView>
     </div>
