@@ -47,8 +47,8 @@ export class ContentComponent implements OnInit {
 
   email: string = '';
   website: string = '';
-
-  constructor(private messageService: MessageService, private service: HomeService, private route: Router, private authSerivce: AuthService) {
+  uploadTemplateVisible=false;
+  constructor(public messageService: MessageService, private service: HomeService, private route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
   }
 
