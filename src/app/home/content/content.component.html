@@ -22,8 +22,12 @@
           <div class="grid justify-content-between" *ngIf="role==='Customer'">
             <div style="padding-right:3px">
               <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
+              <!-- <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
+                class="p-button-rounded p-button-warning" (click)="uploadTemplateVisible=true;messageService.clear();downloadImage(i,image)"></button> -->
+
               <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
-                class="p-button-rounded p-button-warning" (click)="messageService.clear();downloadImage(i,image)"></button>
+                class="p-button-rounded p-button-warning" (click)="showTemplate(i,image.publicId)"></button>
+
             </div>
             <div> <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-help"
                 (click)="postToFacebook(image)"></button>
@@ -44,19 +48,50 @@
 </p-blockUI>
 
 
-<p-dialog [modal]="true" header="Upload Image" [(visible)]="uploadTemplateVisible">
+<p-dialog [modal]="true" header="Select Template" [(visible)]="uploadTemplateVisible">
 
   <p-tabView>
     <p-tabPanel header="Template 1">
+
+      <img *ngIf="templates[0]" [src]="templates[0]" alt="Image" style=" overflow: hidden;
+     width: 300px;
+     height: 300px;
+     border-radius: 8px;
+     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
+     
+      <div class="flex justify-content-center">
+        <div>
+          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning" (click)="route.navigate(['home/profile'])"></button>
+        </div>
+        <div>&nbsp;</div>
+        <div>
+
+          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help" (click)="imageDownload(0)"></button>
        
-      Template 1
+        </div>
+      </div>
     </p-tabPanel>
 
     <p-tabPanel header="Template 2">
-       
-      Template 1
+
+      <img *ngIf="templates[1]" [src]="templates[1]" alt="Image" style=" overflow: hidden;
+      width: 300px;
+      height: 300px;
+      border-radius: 8px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
+     
+      <div class="flex justify-content-center">
+        <div>
+          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning" (click)="route.navigate(['home/profile'])"></button>
+
+        </div>
+        <div>&nbsp;</div>
+        <div>
+          *<button pButton pRipple type="button" icon="pi pi-download6" class="p-button-rounded p-button-help" (click)="imageDownload(1)"></button>
+        </div>
+      </div>
     </p-tabPanel>
-    </p-tabView>
+  </p-tabView>
 
 
 </p-dialog>
@@ -73,8 +108,8 @@
   <label for="name" class="block text-900 font-medium mb-2">SubCategory</label>
   <input id="name" type="text" placeholder="SubCategory" [(ngModel)]="subcategory" pInputText class="w-full mb-3">
 
-  <p-fileUpload name="file" [customUpload]="true" [files]="uploadedFiles" (uploadHandler)="handleUpload($event)" accept="image/*"
-    [maxFileSize]="5000000">
+  <p-fileUpload name="file" [customUpload]="true" [files]="uploadedFiles" (uploadHandler)="handleUpload($event)"
+    accept="image/*" [maxFileSize]="5000000">
     <ng-template pTemplate="content">
       <ul *ngIf="uploadedFiles.length">
         <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
@@ -96,32 +131,29 @@
 <div class="icon-bar">
 
   <div style="padding:0px;padding-bottom:3px">
-    <button pButton pRipple type="button" icon="pi pi-upload" (click)="uploadImageVisible=true; category=''; subcategory='';uploadedFiles=[];"
-      ></button>
+    <button pButton pRipple type="button" icon="pi pi-upload"
+      (click)="uploadImageVisible=true; category=''; subcategory='';uploadedFiles=[];"></button>
   </div>
- 
-
-  <div style="padding:0px;padding-bottom:3px">
-    <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-secondary" (click)="refresh()"
-      ></button>
-  </div>
-
-  <div style="padding:0px;padding-bottom:3px">
-    <button pButton pRipple type="button" icon="pi pi-filter" class="p-button-warning" (click)="uploadImageVisible=true"
-      ></button>
-  </div>
-  
 
 
   <div style="padding:0px;padding-bottom:3px">
-    <button pButton pRipple type="button" icon="pi pi-search" class="p-button-success" (click)="uploadImageVisible=true"
-      ></button>
+    <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-secondary" (click)="refresh()"></button>
   </div>
-  
+
+  <div style="padding:0px;padding-bottom:3px">
+    <button pButton pRipple type="button" icon="pi pi-filter" class="p-button-warning"
+      (click)="inProgress()"></button>
+  </div>
+
+
+
+  <div style="padding:0px;padding-bottom:3px">
+    <button pButton pRipple type="button" icon="pi pi-search" class="p-button-success"
+      (click)="inProgress()"></button>
+  </div>
+
 
 
 </div>
 
 <!-- <p-scrollTop></p-scrollTop> -->
-
-

@@ -5,6 +5,9 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HomeService {
+  showTemplate(formData: FormData) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/showTemplate',formData);
+  }
   editContent(formData: FormData) {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/editContent',formData);
   }

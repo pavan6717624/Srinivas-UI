@@ -48,7 +48,7 @@ export class ContentComponent implements OnInit {
   email: string = '';
   website: string = '';
   uploadTemplateVisible=false;
-  constructor(public messageService: MessageService, private service: HomeService, private route: Router, private authSerivce: AuthService) {
+  constructor(public messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
   }
 
@@ -59,6 +59,12 @@ export class ContentComponent implements OnInit {
   images: any;
 
   loading: boolean = false;
+
+  inProgress()
+
+{
+  alert("inProgress");
+}
 
   getIcon(i: number): string {
     if (this.downloading && this.imageId == i)
@@ -140,6 +146,19 @@ getImages()
 }
 
   downloading: boolean = false;
+
+ imageDownload(i: number)
+  {
+    var a = document.createElement("a"); //Create <a>
+      a.href = this.templates[i]; //Image Base64 Goes here
+    console.log(Math.random() + " " + Math.random());
+    a.download = "HeidigiImage_" + new Date().getTime() + ".jpg"; //File name Here
+    a.click(); //Downloaded file},
+    a.remove(); this.downloading = false;
+  }
+  
+
+
   downloadImage(i: number, image: any) {
     var formData = new FormData();
     formData.set("image", image.publicId);
@@ -241,6 +260,31 @@ getImages()
   refresh()
   {
     this.ngOnInit();
+  }
+
+  templates:any[]=[];
+
+  showTemplate(i:number,publicId: string)
+  {
+    this.downloading = true;
+    this.imageId = i;
+  
+    var formData=new FormData();
+    formData.set("image",publicId);
+   
+    this.service.showTemplate(formData).subscribe(
+  
+      (res: any) => {
+        this.uploadTemplateVisible=true;
+        this.downloading = false;
+       this.templates[0]=JSON.parse(res[0]).img;
+       this.templates[1]=JSON.parse(res[1]).img;
+
+       console.log(this.templates);
+      },
+      (err: any) => {  console.log(err) }
+  
+    );
   }
 
 }
