@@ -189,7 +189,7 @@ getImages()
     // alert("asadsfasdf");
         var formData = new FormData();
     formData.set("image", image);
-    formData.set("template", "Template "+(i+1));
+    formData.set("template", "Template "+i);
     this.loading = true;
     //this.imageId=i;
 
