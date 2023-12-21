@@ -70,7 +70,7 @@ export class ContentComponent implements OnInit {
     if (this.downloading && this.imageId == i)
       return 'pi pi-spin pi-spinner';
     else
-      return 'pi pi-download';
+      return 'pi pi-share-alt';
   }
 
   getDisableStatus(i: number): Boolean {
@@ -156,6 +156,11 @@ getImages()
     a.click(); //Downloaded file},
     a.remove(); this.downloading = false;
   }
+
+  imageShare(i:number)
+  {
+
+  }
   
 
 
@@ -179,14 +184,17 @@ getImages()
 
     );
   }
-  postToFacebook(image: any) {
-    var formData = new FormData();
-    formData.set("image", image.publicId);
+  postToFacebook(image: any,i:number) {
+
+    // alert("asadsfasdf");
+        var formData = new FormData();
+    formData.set("image", image);
+    formData.set("template", "Template "+(i+1));
     this.loading = true;
     //this.imageId=i;
 
     this.service.postToFacebookImage(formData).subscribe(
-      (res: any) => { console.log(res); this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
+      (res: any) => { console.log(res);this.uploadTemplateVisible = false; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
       (err: any) => { console.log(err); this.loading = false; }
 
     );
@@ -279,6 +287,7 @@ getImages()
         this.downloading = false;
        this.templates[0]=JSON.parse(res[0]).img;
        this.templates[1]=JSON.parse(res[1]).img;
+       this.templates[2]=JSON.parse(res[2]).img;
 
        console.log(this.templates);
       },

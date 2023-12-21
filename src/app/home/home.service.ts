@@ -48,6 +48,10 @@ export class HomeService {
     return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getVideos');
   }
 
+  downloadVideo(formData:FormData) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadVideo',formData,{responseType: 'blob'});
+  }
+
   getProfile()
   {
     return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getProfile');
