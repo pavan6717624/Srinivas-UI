@@ -67,4 +67,9 @@ export class HomeService {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/uploadImage', formData);
 }
 
+sendVideo(formData: FormData) {
+  // http is HttpClient. You can override it and add required authentication headers, etc.
+  return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/uploadVideo', formData);
+}
+
 }

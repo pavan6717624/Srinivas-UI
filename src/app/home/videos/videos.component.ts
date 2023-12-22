@@ -15,7 +15,7 @@ export class VideosComponent implements OnInit {
     this.getVideos();
   }
 
-  videos: string[] = [];
+  videos: any;
   loading = false;
   getVideos() {
     this.loading = true;
@@ -60,5 +60,66 @@ export class VideosComponent implements OnInit {
 
     );
   }
+
+  uploadDone() {
+    this.uploadSuccess = false;
+   
+  }
+
+  handleUpload(event: any) {
+    let formData = new FormData();
+
+    if (!this.category || this.category === '' || this.category.trim().length == 0 ||
+      !this.subcategory || this.subcategory === '' || this.subcategory.trim().length == 0) {
+     
+      this.messageService.add({ severity: 'error', summary: 'Provide Category & Sub Category', detail: '' });
+      return;
+    }
+
+    for (let file of event.files) {
+      formData.append('file', file, file.name);
+      formData.set('category', this.category);
+      formData.set('subCategory', this.subcategory);
+    }
+    this.loading = true;
+    this.service.sendVideo(formData).subscribe((result: any) => {
+
+      if (result.result === 'success') {
+        this.uploadVideoVisible = false;
+        this.successString = "Upload Successful";
+        this.loading = false;
+        this.uploadSuccess = true;
+        this.getVideos();
+      }
+      else {
+        this.loading = false;
+        this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: '' });
+      }
+
+      event.files=[];
+      this.uploadedFiles=[];
+
+    },
+      (err: any) => { this.loading = false; this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: '' }); });
+  }
+
+  refresh()
+  {
+    this.ngOnInit();
+  }
+
+  subcategory: string = '';
+  category: string = '';
+
+  inProgress()
+
+{
+  alert("inProgress");
+}
+
+uploadVideoVisible = false;
+  uploadedFiles: any[] = [];
+  successString = "";
+  uploadSuccess = false;
 
 }
