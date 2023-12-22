@@ -8,6 +8,10 @@ export class HomeService {
   showTemplate(formData: FormData) {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/showTemplate',formData);
   }
+
+  showTemplateVideo(formData: FormData) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/showTemplateVideo',formData);
+  }
   editContent(formData: FormData) {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/editContent',formData);
   }
@@ -49,7 +53,7 @@ export class HomeService {
   }
 
   downloadVideo(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadVideo',formData,{responseType: 'blob'});
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadVideo',formData);
   }
 
   getProfile()

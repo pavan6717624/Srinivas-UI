@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { MessageService } from 'primeng/api';
 import { HomeService } from '../home.service';
 
@@ -9,7 +11,7 @@ import { HomeService } from '../home.service';
 })
 export class VideosComponent implements OnInit {
 
-  constructor(private messageService: MessageService, private service: HomeService) { }
+  constructor(private messageService: MessageService, private service: HomeService,public route:Router) { }
 
   ngOnInit(): void {
     this.getVideos();
@@ -26,6 +28,16 @@ export class VideosComponent implements OnInit {
     );
   }
 
+  imageDownload(i: number)
+  {
+    var a = document.createElement("a"); //Create <a>
+      a.href = this.templates[i]; //Image Base64 Goes here
+    console.log(Math.random() + " " + Math.random());
+    a.download = "HeidigiImage_" + new Date().getTime() + ".jpg"; //File name Here
+    a.click(); //Downloaded file},
+    a.remove(); this.downloading = false;
+  }
+
   downloadVideo(video: string) {
     this.loading = true;
     var formData = new FormData();
@@ -33,12 +45,19 @@ export class VideosComponent implements OnInit {
     this.service.downloadVideo(formData).subscribe(
       (res: any) => {
 
-        const link = document.createElement('a');
-        link.href = window.URL.createObjectURL(new Blob([res], { type: 'mp4' }));
-        link.download = 'demo.mp4';
-        link.click();
-        link.remove();
+        // const link = document.createElement('a');
+        // link.href = window.URL.createObjectURL(new Blob([res], { type: 'mp4' }));
+        // link.download = 'demo.mp4';
+        // link.click();
+        // link.remove();
 
+        var a = document.createElement("a"); //Create <a>
+        console.log(res);
+        a.href = res.video; //Image Base64 Goes here
+        console.log(Math.random() + " " + Math.random());
+        a.download = "HeidigiVideo_" + new Date().getTime() + ".mp4"; //File name Here
+        a.click(); //Downloaded file},
+        a.remove(); this.downloading = false; 
 
         this.loading = false;
       },
@@ -47,7 +66,7 @@ export class VideosComponent implements OnInit {
     );
   }
 
-  postToFacebook(video: any) {
+  postToFacebook(video: any,i:number) {
     this.loading = true;
     var formData = new FormData();
     formData.set("video", video);
@@ -121,5 +140,37 @@ uploadVideoVisible = false;
   uploadedFiles: any[] = [];
   successString = "";
   uploadSuccess = false;
+  uploadTemplateVisible=false;
+
+
+  templates:any[]=[];
+
+  downloading=false;
+
+  videoId = -1;
+
+  showTemplate(i:number,publicId: string)
+  {
+    this.downloading = true;
+    this.videoId = i;
+  
+    var formData=new FormData();
+    formData.set("video",publicId);
+   
+    this.service.showTemplateVideo(formData).subscribe(
+  
+      (res: any) => {
+        this.uploadTemplateVisible=true;
+        this.downloading = false;
+       this.templates[0]=JSON.parse(res[0]).img;
+       this.templates[1]=JSON.parse(res[1]).img;
+       this.templates[2]=JSON.parse(res[2]).img;
+
+       console.log(this.templates);
+      },
+      (err: any) => {  console.log(err) }
+  
+    );
+  }
 
 }
