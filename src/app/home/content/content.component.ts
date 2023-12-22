@@ -175,7 +175,7 @@ getImages()
         var a = document.createElement("a"); //Create <a>
         console.log(res);
         a.href = res.img; //Image Base64 Goes here
-        console.log(Math.random() + " " + Math.random());
+        // console.log(Math.random() + " " + Math.random());
         a.download = "HeidigiImage_" + new Date().getTime() + ".jpg"; //File name Here
         a.click(); //Downloaded file},
         a.remove(); this.downloading = false; this.imageId = -1;

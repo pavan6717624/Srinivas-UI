@@ -19,11 +19,11 @@
           <div style="padding-right:3px">
             <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
             <button pButton pRipple type="button" 
-              class="p-button-rounded p-button-warning"  (click)="downloadVideo(video.publicId)" icon="pi pi-download"></button>
+              class="p-button-rounded p-button-warning"  (click)="downloadVideo(video)" icon="pi pi-share-alt"></button>
           </div>
-          <div> <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-help"
+          <!-- <div> <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-help"
             (click)="postToFacebook(video.publicId,1)"></button>
-          </div>
+          </div> -->
         </div>
       </div>
 
@@ -33,7 +33,7 @@
 </div>
 
 
-<p-blockUI [blocked]="loading">
+<p-blockUI [blocked]="loading || downloading[0] ||  downloading[1]">
   <i class="pi pi-spin pi-spinner" style="font-size: 3rem; color:#B6FFFA"></i>
 </p-blockUI>
 
@@ -104,11 +104,10 @@
   <p-tabView>
     <p-tabPanel header="Template 1">
 
-      <img *ngIf="templates[1]" [src]="templates[1]" alt="Image" style=" overflow: hidden;
-     width: 300px;
-     height: 300px;
-     border-radius: 8px;
-     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
+      <video *ngIf="urls[0]" style='height:300px; width:300px;padding:0px;margin-left:-10px' controls poster="image" preload="metadata">
+        <source [src]="urls[0]" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
      
       <div class="flex justify-content-center">
         <div>
@@ -117,14 +116,14 @@
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help" (click)="imageDownload(1)"></button>
+          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help" (click)="videoDownload(0)"></button>
        
         </div>
 
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(templates[0],1)"></button>
+          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(1)"></button>
        
         </div>
 
@@ -133,11 +132,10 @@
 
     <p-tabPanel header="Template 2">
 
-      <img *ngIf="templates[2]" [src]="templates[2]" alt="Image" style=" overflow: hidden;
-      width: 300px;
-      height: 300px;
-      border-radius: 8px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
+      <video *ngIf="urls[1]" style='height:300px; width:300px;padding:0px;margin-left:-10px' controls poster="image" preload="metadata">
+        <source [src]="urls[1]" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
      
       <div class="flex justify-content-center">
         <div>
@@ -146,12 +144,12 @@
         </div>
         <div>&nbsp;</div>
         <div>
-          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help" (click)="imageDownload(2)"></button>
+          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help" (click)="videoDownload(1)"></button>
         </div>
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(templates[0],2)"></button>
+          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(2)"></button>
        
         </div>
 
@@ -161,10 +159,3 @@
 
 
 </p-dialog>
-
-
-
-<video *ngIf='checking' style='height:300px; width:300px;padding:0px;margin-left:-10px' controls poster="image" preload="metadata">
-  <source [src]="checking" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
