@@ -161,3 +161,10 @@
 
 
 </p-dialog>
+
+
+
+<video *ngIf='checking' style='height:300px; width:300px;padding:0px;margin-left:-10px' controls poster="image" preload="metadata">
+  <source [src]="checking" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>

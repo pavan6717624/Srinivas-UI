@@ -53,7 +53,7 @@ export class HomeService {
   }
 
   downloadVideo(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadVideo',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadVideo',formData,{responseType: 'blob'});
   }
 
   getProfile()

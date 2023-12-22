@@ -37,7 +37,7 @@ export class VideosComponent implements OnInit {
     a.click(); //Downloaded file},
     a.remove(); this.downloading = false;
   }
-
+checking:any;
   downloadVideo(video: string) {
     this.loading = true;
     var formData = new FormData();
@@ -45,20 +45,13 @@ export class VideosComponent implements OnInit {
     this.service.downloadVideo(formData).subscribe(
       (res: any) => {
 
-        // const link = document.createElement('a');
-        // link.href = window.URL.createObjectURL(new Blob([res], { type: 'mp4' }));
-        // link.download = 'demo.mp4';
-        // link.click();
-        // link.remove();
-
-        var a = document.createElement("a"); //Create <a>
-        console.log(res);
-        a.href = res.video; //Image Base64 Goes here
-        console.log(Math.random() + " " + Math.random());
-        a.download = "HeidigiVideo_" + new Date().getTime() + ".mp4"; //File name Here
-        a.click(); //Downloaded file},
-        a.remove(); this.downloading = false; 
-
+        const link = document.createElement('a');
+        link.href = window.URL.createObjectURL(new Blob([res], { type: 'mp4' }));
+        this.checking=link.href;
+        console.log(this.checking);
+        link.download = 'demo.mp4';
+        link.click();
+        link.remove();
         this.loading = false;
       },
       (err: any) => { console.log(err); this.loading = false; }
