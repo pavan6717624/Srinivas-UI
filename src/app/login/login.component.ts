@@ -132,13 +132,19 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.service.signUp(signup).subscribe(
         (res: any) => {
-          if (res)
+          if (res && res.loginStatus)
             this.router.navigate(['success']);
+            else if(res && !res.loginStatus)
+            {
+              this.loading = false;
+              console.log("SignUp faield");
+              this.messageService.add({ severity: 'error', summary: res.message, detail: '' });
+            }
             else
             {
               this.loading = false;
               console.log("SignUp faield");
-              this.messageService.add({ severity: 'error', summary: 'SignUp Failed', detail: '' });
+              this.messageService.add({ severity: 'error', summary: "SignUp faield", detail: '' });
             }
         },
         (err) => { console.log(err + " Error"); this.loading = false; }
