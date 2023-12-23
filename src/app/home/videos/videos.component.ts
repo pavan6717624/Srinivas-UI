@@ -3,6 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 
 import { MessageService } from 'primeng/api';
+import { AuthService } from 'src/app/shared/auth.service';
 import { HomeService } from '../home.service';
 
 @Component({
@@ -12,7 +13,11 @@ import { HomeService } from '../home.service';
 })
 export class VideosComponent implements OnInit {
 
-  constructor(private sanitizer: DomSanitizer, private messageService: MessageService, private service: HomeService, public route: Router) { }
+  constructor(private sanitizer: DomSanitizer, private authSerivce: AuthService, private messageService: MessageService, private service: HomeService, public route: Router) {
+    this.role = this.authSerivce.getRole();
+  }
+
+  role: string = '';
 
   ngOnInit(): void {
     this.getVideos();
@@ -85,13 +90,6 @@ downloading:any = [];
     );
   }
 
-  download(res: any) {
-    const link = document.createElement('a');
-    link.href = res;
-    link.download = "HeidigiImage_" + new Date().getTime() + ".mp4"; //File name Here
-    link.click();
-    link.remove();
-  }
 
   postToFacebook(i: number) {
     this.loading = true;

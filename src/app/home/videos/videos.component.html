@@ -15,7 +15,7 @@
           <div class="text-900 p-1 font-medium text-xl mb-2">{{video.category}}</div>
           <div class="text-600 p-1 mb-2">{{video.subCategory}}</div>
         </div>
-        <div class="grid justify-content-between">
+        <div class="grid justify-content-between" *ngIf="role==='Customer'">
           <div style="padding-right:3px">
             <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
             <button pButton pRipple type="button" 
