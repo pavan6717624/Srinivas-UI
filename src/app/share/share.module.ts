@@ -43,7 +43,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
+import { SkeletonModule } from 'primeng/skeleton';
 const SHARED_MODULES = [
+  SkeletonModule,
   ScrollPanelModule,
   ScrollTopModule,
   SelectButtonModule,

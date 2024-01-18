@@ -17,6 +17,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { MessageService } from 'primeng/api';
 import { SuccessComponent } from './success/success.component';
+import { FacebookintegrationComponent } from './facebookintegration/facebookintegration.component';
 
 
 
@@ -26,6 +27,7 @@ import { SuccessComponent } from './success/success.component';
     AppComponent,
     LoginComponent,
     SuccessComponent,
+    FacebookintegrationComponent,
 
   ],
   imports: [

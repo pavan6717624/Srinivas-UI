@@ -10,6 +10,7 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
   {path: 'success', component: SuccessComponent},
+  {path: 'facebookIntegration', component: SuccessComponent},
 
 
 ];

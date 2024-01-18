@@ -5,10 +5,12 @@
 
   <ng-container *ngFor="let image of images; index as i">
 
-    <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}">
+    <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}"
+      (click)="showTemplate(i,image.publicId)">
       <ng-template pTemplate="header">
 
-        <img onContextMenu="return false;" src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{image.publicId}}" alt="Image" style=" overflow: hidden;
+        <img onContextMenu="return false;" src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{image.publicId}}"
+          alt="Image" style=" overflow: hidden;
             width: 300px;
             height: 300px;
             border-radius: 8px;
@@ -21,14 +23,13 @@
           </div>
           <div class="grid justify-content-between" *ngIf="role==='Customer'">
             <div style="padding-right:3px">
-              <!-- <i class="pi pi-download" style="font-size: 2rem" (click)="downloadImage(image)"></i> -->
-              <!-- <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
-                class="p-button-rounded p-button-warning" (click)="uploadTemplateVisible=true;messageService.clear();downloadImage(i,image)"></button> -->
-
-              <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
-                class="p-button-rounded p-button-warning" (click)="showTemplate(i,image.publicId)"></button>
-
+             <span title="PreView">
+                <button pButton pRipple type="button" [icon]="getIcon(i)" [disabled]="getDisableStatus(i)"
+                  class="p-button-rounded p-button-help" (click)="showTemplate(i,image.publicId)"></button>
+                  <!-- <br/><span class="text-600 p-1 mb-2"> Preview </span> -->
+              </span>
             </div>
+            
             <!-- <div> <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-help"
                 (click)="postToFacebook(image)"></button>
             </div> -->
@@ -48,6 +49,27 @@
 </p-blockUI>
 
 
+<p-dialog [modal]="true" header="Getting Templates..." [(visible)]="showSkeleton">
+  <div class="grid justify-content-between">
+    <div>
+      <p-skeleton styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="10rem" height="4rem"></p-skeleton>
+    </div>
+    <div> &nbsp;</div>
+    <div>
+      <p-skeleton styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="10rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="5rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton height="2rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="10rem" height="4rem"></p-skeleton>
+    </div>
+  </div>
+</p-dialog>
+
+
 <p-dialog [modal]="true" header="Select Template" [(visible)]="uploadTemplateVisible">
 
   <p-tabView>
@@ -58,23 +80,26 @@
      height: 300px;
      border-radius: 8px;
      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
-     
+
       <div class="flex justify-content-center">
         <div>
-          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning" (click)="route.navigate(['home/profile'])"></button>
+          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning"
+            (click)="route.navigate(['home/profile'])"></button>
         </div>
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help" (click)="imageDownload(1)"></button>
-       
+          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help"
+            (click)="imageDownload(1)"></button>
+
         </div>
 
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(templates[0],1)"></button>
-       
+          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info"
+            (click)="postToFacebook(templates[0],1)"></button>
+
         </div>
 
       </div>
@@ -87,21 +112,24 @@
       height: 300px;
       border-radius: 8px;
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
-     
+
       <div class="flex justify-content-center">
         <div>
-          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning" (click)="route.navigate(['home/profile'])"></button>
+          <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning"
+            (click)="route.navigate(['home/profile'])"></button>
 
         </div>
         <div>&nbsp;</div>
         <div>
-          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help" (click)="imageDownload(2)"></button>
+          <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help"
+            (click)="imageDownload(2)"></button>
         </div>
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(templates[0],2)"></button>
-       
+          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info"
+            (click)="postToFacebook(templates[0],2)"></button>
+
         </div>
 
       </div>
@@ -156,15 +184,13 @@
   </div>
 
   <div style="padding:0px;padding-bottom:3px">
-    <button pButton pRipple type="button" icon="pi pi-filter" class="p-button-warning"
-      (click)="inProgress()"></button>
+    <button pButton pRipple type="button" icon="pi pi-filter" class="p-button-warning" (click)="inProgress()"></button>
   </div>
 
 
 
   <div style="padding:0px;padding-bottom:3px">
-    <button pButton pRipple type="button" icon="pi pi-search" class="p-button-success"
-      (click)="inProgress()"></button>
+    <button pButton pRipple type="button" icon="pi pi-search" class="p-button-success" (click)="inProgress()"></button>
   </div>
 
 
