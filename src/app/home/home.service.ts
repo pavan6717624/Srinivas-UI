@@ -41,6 +41,14 @@ export class HomeService {
     return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/checkProfile');
   }
 
+  checkFacebookToken() {
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/facebookToken');
+  }
+
+  saveFacebookToken(formData:FormData) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/saveFacebookToken',formData);
+  }
+
   constructor(private http: HttpClient) { }
   getImages()
   {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MenuItem } from 'primeng/api/menuitem';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/shared/auth.service';
 import { HomeService } from '../home.service';
 @Component({
@@ -48,7 +48,7 @@ export class ContentComponent implements OnInit {
   email: string = '';
   website: string = '';
   uploadTemplateVisible = false;
-  constructor(public messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
+  constructor(private confirmationService: ConfirmationService, public messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
   }
 
@@ -78,7 +78,12 @@ export class ContentComponent implements OnInit {
       return false;
   }
 
+  facebookToken = false;
+
+
   ngOnInit(): void {
+
+    this.checkFacebookToken();
 
     this.tooltipItems = [
       {
@@ -136,7 +141,34 @@ export class ContentComponent implements OnInit {
   getImages() {
     this.loading = true;
     this.service.getImages().subscribe(
-      (res: any) => { this.images = res; console.log(this.images); this.loading = false; },
+      (res: any) => {
+        this.images = res; console.log(this.images); this.loading = false;
+
+
+        this.confirmationService.confirm({
+
+          message: 'Do want to Post the Last Accessed Image?',
+          header: 'Post',
+          icon: 'pi pi-tags',
+          acceptIcon: "none",
+          rejectIcon: "none",
+          rejectButtonStyleClass: "p-button-text",
+          accept: () => {
+            var image = localStorage.getItem("goto");
+            console.log("image " + image);
+            if (image != null) {
+              this.scroll(image);
+              this.showTemplate(-1, image);
+              localStorage.removeItem("goto");
+            }
+          },
+          reject: () => {
+            localStorage.removeItem("goto");
+          }
+        });
+
+
+      },
       (err: any) => { console.log(err); this.loading = false; }
 
     );
@@ -179,24 +211,61 @@ export class ContentComponent implements OnInit {
 
     );
   }
-  postToFacebook(image: any, i: number) {
 
-    // alert("asadsfasdf");
-    var formData = new FormData();
-    formData.set("image", image);
-    formData.set("template", "Template " + i);
-    this.loading = true;
-    //this.imageId=i;
 
-    this.service.postToFacebookImage(formData).subscribe(
-      (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
-      (err: any) => { console.log(err); this.loading = false; }
+  checkFacebookToken() {
+    this.service.checkFacebookToken().subscribe(
+      (res: any) => { this.facebookToken = res; console.log("chekcing facebook token :: " + res); },
+      (err: any) => { console.log("chekcing facebook token :: " + err); }
 
     );
-
-
   }
 
+  postToFacebook(image: any, i: number, event: Event) {
+
+    if (this.facebookToken) {
+      var formData = new FormData();
+      formData.set("image", image);
+      formData.set("template", "Template " + i);
+      this.loading = true;
+      //this.imageId=i;
+
+      this.service.postToFacebookImage(formData).subscribe(
+        (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
+        (err: any) => { console.log(err); this.loading = false; }
+
+      );
+    }
+    else {
+      console.log("reached here");
+      this.confirmationService.confirm({
+        target: event.target as EventTarget,
+        message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
+        header: 'Integration',
+        icon: 'pi pi-tags',
+        acceptIcon: "none",
+        rejectIcon: "none",
+        rejectButtonStyleClass: "p-button-text",
+        accept: () => {
+          this.loading = true;
+          localStorage.setItem("goto", image);
+          // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+          window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
+
+        },
+        reject: () => {
+        }
+      });
+      console.log("reached here too");
+    }
+
+  }
+  scroll(el: string) {
+
+    console.log(document.getElementById(el));
+
+    document.getElementById(el)?.scrollIntoView();
+  }
 
   uploadImageVisible = false;
   uploadedFiles: any[] = [];
@@ -265,11 +334,11 @@ export class ContentComponent implements OnInit {
   }
 
   templates: any[] = [];
-  showSkeleton=false;
+  showSkeleton = false;
 
   showTemplate(i: number, publicId: string) {
     if (this.role === 'Customer') {
-      this.showSkeleton=true;
+      this.showSkeleton = true;
       this.downloading = true;
       this.imageId = i;
 
@@ -279,7 +348,7 @@ export class ContentComponent implements OnInit {
       this.service.showTemplate(formData).subscribe(
 
         (res: any) => {
-          this.showSkeleton=false;
+          this.showSkeleton = false;
           this.uploadTemplateVisible = true;
           this.downloading = false;
           this.templates[0] = JSON.parse(res[0]).img;

@@ -4,8 +4,7 @@
 
 
   <ng-container *ngFor="let image of images; index as i">
-
-    <p-card class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}"
+    <p-card id='{{image.publicId}}' class="card" [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}"
       (click)="showTemplate(i,image.publicId)">
       <ng-template pTemplate="header">
 
@@ -98,7 +97,7 @@
         <div>
 
           <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info"
-            (click)="postToFacebook(templates[0],1)"></button>
+            (click)="postToFacebook(templates[0],1,$event)"></button>
 
         </div>
 
@@ -128,7 +127,7 @@
         <div>
 
           <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info"
-            (click)="postToFacebook(templates[0],2)"></button>
+            (click)="postToFacebook(templates[0],2,$event)"></button>
 
         </div>
 
@@ -139,7 +138,7 @@
 
 </p-dialog>
 
-
+<p-confirmDialog></p-confirmDialog>
 
 <p-dialog [modal]="true" header="Upload Image" [(visible)]="uploadImageVisible">
 

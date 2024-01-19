@@ -18,7 +18,7 @@ import { environment } from '../environments/environment';
 import { MessageService } from 'primeng/api';
 import { SuccessComponent } from './success/success.component';
 import { FacebookintegrationComponent } from './facebookintegration/facebookintegration.component';
-
+import { ConfirmationService } from 'primeng/api';
 
 
 
@@ -46,7 +46,7 @@ import { FacebookintegrationComponent } from './facebookintegration/facebookinte
 
 
   ],
-  providers: [MessageService,{
+  providers: [MessageService,ConfirmationService,{
     provide: HTTP_INTERCEPTORS, 
     useClass: InterceptorService, 
     multi: true
