@@ -28,7 +28,7 @@ export class FacebookintegrationComponent implements OnInit {
         
        if(res)
        {
-         window.location.replace("http://localhost:4200/home/images")
+         window.location.replace("https://client.heidigi.com/home/images")
        }
       },
       (err: any) => { console.log(err) }
