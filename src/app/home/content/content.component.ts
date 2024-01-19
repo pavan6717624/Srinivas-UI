@@ -143,8 +143,11 @@ export class ContentComponent implements OnInit {
     this.service.getImages().subscribe(
       (res: any) => {
         this.images = res; console.log(this.images); this.loading = false;
+        var image = localStorage.getItem("goto");
+        console.log("image " + image);
 
-
+        if(image!=null)
+        {
         this.confirmationService.confirm({
 
           message: 'Do want to Post the Last Accessed Image?',
@@ -154,8 +157,7 @@ export class ContentComponent implements OnInit {
           rejectIcon: "none",
           rejectButtonStyleClass: "p-button-text",
           accept: () => {
-            var image = localStorage.getItem("goto");
-            console.log("image " + image);
+           
             if (image != null) {
               this.scroll(image);
               this.showTemplate(-1, image);
@@ -166,6 +168,7 @@ export class ContentComponent implements OnInit {
             localStorage.removeItem("goto");
           }
         });
+      }
 
 
       },
