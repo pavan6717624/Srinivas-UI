@@ -106,11 +106,14 @@
 
     <p-tabPanel header="Template 2">
 
-      <img *ngIf="templates[2]" [src]="templates[2]" alt="Image" style=" overflow: hidden;
-      width: 300px;
-      height: 300px;
-      border-radius: 8px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
+      <p-image *ngIf="templates[2]" [src]="templates[2]" alt="Image" width='300px' height=300px [style]="{'overflow': 'hidden',
+      'width': '300px',
+      'height': '300px',
+      'border-radius': '8px',
+      'box-shadow': '0px 0px 5px rgba(0, 0, 0, 0.2)'}"  [preview]="true"></p-image>
+
+
+<!-- <p-image src="assets/showcase/images/galleria/galleria11.jpg" alt="Image" width="250" [preview]="true"></p-image> -->
 
       <div class="flex justify-content-center">
         <div>

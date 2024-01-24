@@ -12,7 +12,7 @@ export class LoginStatus {
   loginStatus: boolean = false;
   loginId: string = "";
   jwt: string = '';
-   subscriptionType: string = '';
+  subscriptionType: string = '';
 }
 export class Signup {
   mobile: string = '';
@@ -35,36 +35,34 @@ export class LoginComponent implements OnInit {
   mobile: number | undefined;
   password: string = '';
   isLogin: boolean = true;
-  ctype:string='Business';
+  ctype: string = 'Business';
 
-  getLoginDetails()
-   {
-    
-     
+  getLoginDetails() {
+
+
     this.loading = true;
-     this.service.getLoginDetails().subscribe(
-       (res:any) => {
-        this.loading=false;
-         this.loginStatus=res;
-         console.log(this.loginStatus);
+    this.service.getLoginDetails().subscribe(
+      (res: any) => {
+        this.loading = false;
+        this.loginStatus = res;
+        console.log(this.loginStatus);
 
-         if(this.loginStatus.userType==='Customer')
-         {
-          this.router.navigate(['home/start'],  { state: {loginStatus: res }}); 
-         }
-         else if(this.loginStatus.userType==='Designer')
-         {
-          this.router.navigate(['home/designer'],  { state: {loginStatus: res }}); 
-          
-         }
- 
-         
-       },
-       (err:any) => { this.loading=false; 
-      
-       }
-     );
-   }
+        if (this.loginStatus.userType === 'Customer') {
+          this.router.navigate(['home/start'], { state: { loginStatus: res } });
+        }
+        else if (this.loginStatus.userType === 'Designer') {
+          this.router.navigate(['home/designer'], { state: { loginStatus: res } });
+
+        }
+
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
+  }
 
 
   ngOnInit(): void {
@@ -73,7 +71,22 @@ export class LoginComponent implements OnInit {
   }
 
   loading: boolean = false;
+  type: string = 'password';
+  icon: string = 'pi pi-eye-slash'
   loginStatus: LoginStatus = new LoginStatus();
+
+  changeType() {
+    console.log(this.type);
+    if (this.type == 'password') {
+      this.type = 'text';
+      this.icon = 'pi pi-eye';
+    }
+    else {
+      this.type = 'password';
+      this.icon = 'pi pi-eye-slash';
+    }
+    console.log(this.type);
+  }
   loginOrSingup() {
 
     if (this.isLogin) {
@@ -94,22 +107,22 @@ export class LoginComponent implements OnInit {
           // }
 
 
-        this.loginStatus = res; 
-        console.log(res);
-        if (this.loginStatus.loginStatus) {
-       
-        let tokenStr= 'Bearer '+this.loginStatus.jwt;
-        localStorage.setItem('token', tokenStr);
+          this.loginStatus = res;
+          console.log(res);
+          if (this.loginStatus.loginStatus) {
 
-        
-         this.router.navigate(['home'],  { state: {loginStatus: res }}); 
-      
-        }
-        else {
-          this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
-          this.password = "";
-          this.loading = false;
-        }
+            let tokenStr = 'Bearer ' + this.loginStatus.jwt;
+            localStorage.setItem('token', tokenStr);
+
+
+            this.router.navigate(['home'], { state: { loginStatus: res } });
+
+          }
+          else {
+            this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
+            this.password = "";
+            this.loading = false;
+          }
 
         },
         (err) => {
@@ -125,7 +138,7 @@ export class LoginComponent implements OnInit {
       signup.email = this.email;
       signup.mobile = this.mobile + "";
       signup.password = this.password;
-      signup.role=this.ctype;
+      signup.role = this.ctype;
 
       console.log(signup);
 
@@ -134,18 +147,16 @@ export class LoginComponent implements OnInit {
         (res: any) => {
           if (res && res.loginStatus)
             this.router.navigate(['success']);
-            else if(res && !res.loginStatus)
-            {
-              this.loading = false;
-              console.log("SignUp faield");
-              this.messageService.add({ severity: 'error', summary: res.message, detail: '' });
-            }
-            else
-            {
-              this.loading = false;
-              console.log("SignUp faield");
-              this.messageService.add({ severity: 'error', summary: "SignUp faield", detail: '' });
-            }
+          else if (res && !res.loginStatus) {
+            this.loading = false;
+            console.log("SignUp faield");
+            this.messageService.add({ severity: 'error', summary: res.message, detail: '' });
+          }
+          else {
+            this.loading = false;
+            console.log("SignUp faield");
+            this.messageService.add({ severity: 'error', summary: "SignUp faield", detail: '' });
+          }
         },
         (err) => { console.log(err + " Error"); this.loading = false; }
       );

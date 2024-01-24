@@ -4,7 +4,7 @@
   <ng-container *ngFor="let video of videos">
     <div class="surface-card shadow-2 p-3" style="height:400px;width:310px;margin:5px;padding:0px;align-items:center">
 
-      <video style='height:300px; width:300px;padding:0px;margin-left:-10px' controls poster="image" preload="metadata">
+      <video style='height:300px; width:300px;padding:0px;margin-left:-10px' controls controlsList="nodownload" poster="image" preload="metadata">
         <source src="https://heidigi-app-38b2318c83b0.herokuapp.com/video/{{video.publicId}}#t=0.1" type="video/mp4" />
         Your browser does not support the video tag.
       </video>

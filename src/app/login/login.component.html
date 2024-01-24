@@ -3,15 +3,16 @@
 
 <div style='margin:auto; padding: 0;display: flex;justify-content: center;align-items: center; width:100%; height:100%'>
     <div class="surface-card p-4 shadow-2 border-round w-full lg:w-6">
-       
-            <p-messages></p-messages>
-        
+
+        <p-messages></p-messages>
+
         <div class="text-center mb-5">
             <img src="assets/images/logo.png" alt="Image" height="50" class="mb-3">
             <div class="text-900 text-3xl font-medium mb-3">Welcome !!</div>
             <ng-container *ngIf="isLogin">
                 <span class="text-600 font-medium line-height-3">Don't have an account?</span>
-                <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" (click)="isLogin=false;">Signup Now!</a>
+                <a class="font-medium no-underline ml-2 text-blue-500 cursor-pointer" (click)="isLogin=false;">Signup
+                    Now!</a>
             </ng-container>
 
             <ng-container *ngIf="!isLogin">
@@ -25,52 +26,102 @@
         <div>
             <ng-container *ngIf="!isLogin">
                 <label for="name" class="block text-900 font-medium mb-2">Name</label>
-                <input id="name" type="text" placeholder="Name" [(ngModel)]="name"  pInputText class="w-full mb-3">
+               
 
-                <label for="email" class="block text-900 font-medium mb-2">Email</label>    
-                <input id="email" type="text" placeholder="Email" [(ngModel)]="email"  pInputText class="w-full mb-3">
+                <div class="col-12">
+                    <div class="p-inputgroup">
+    
+                        <input id="name" type="text" placeholder="Name" [(ngModel)]="name" pInputText>
+
+                        <span class="p-inputgroup-addon"><i class="pi pi-user"></i></span>
+                    </div>
+                </div>
+
+
+
+                <label for="email" class="block text-900 font-medium mb-2">Email</label>
+               
+           
+                <div class="col-12">
+                    <div class="p-inputgroup">
+    
+                        <input id="email" type="text" placeholder="Email" [(ngModel)]="email" pInputText>
+           
+                        <span class="p-inputgroup-addon"><i class="pi pi-send"></i></span>
+                    </div>
+                </div>
+           
             </ng-container>
             <label for="mobile" class="block text-900 font-medium mb-2">Mobile</label>
 
-           
-            <!-- <input id="mobile" placeholder="Mobile" pKeyFilter="int" [(ngModel)]="mobile" pInputText class="w-full mb-3"> -->
-            <p-inputNumber inputId="integeronly" [useGrouping]="false" id="mobile" placeholder="Mobile" [(ngModel)]="mobile" class="w-full mb-3"></p-inputNumber>
-            
+            <div class="col-12">
+                <div class="p-inputgroup">
+
+                    <p-inputNumber inputId="integeronly" [useGrouping]="false" id="mobile" placeholder="Mobile"
+                        [(ngModel)]="mobile"></p-inputNumber>
+                    <span class="p-inputgroup-addon"><i class="pi pi-phone"></i></span>
+                </div>
+            </div>
+
+
+
+
             <label for="password" class="block text-900 font-medium mb-2">Password</label>
-            <input id="password" type="password" placeholder="Password" [(ngModel)]="password" pInputText class="w-full mb-3">
+            <div class="col-12">
+                <div class="p-inputgroup">
+
+                    <input id="password" [type]="type" placeholder="Password" [(ngModel)]="password" pInputText>
+
+                    <span class="p-inputgroup-addon" (click)="changeType()" style="cursor:pointer"><i [class]="icon"></i></span>
+                </div>
+            </div>
+            <!-- <input id="password" type="password" placeholder="Password" [(ngModel)]="password" pInputText class="w-full mb-3"> -->
             <ng-container *ngIf="!isLogin">
                 <label for="cpassword" class="block text-900 font-medium mb-2">Confirm Password</label>
-                <input id="cpassword" type="password" placeholder="Confirm Password" pInputText class="w-full mb-3">
+                
+            
+                <div class="col-12">
+                    <div class="p-inputgroup">
+    
+                        <input id="cpassword" [type]="type" placeholder="Confirm Password" pInputText>
+            
+                        <span class="p-inputgroup-addon" (click)="changeType()" style="cursor:pointer"><i [class]="icon"></i></span>
+                    </div>
+                </div>
+            
             </ng-container>
 
             <ng-container *ngIf="!isLogin">
-            
+
                 <div class="flex flex-wrap gap-3">
-                   Role
+                    Role
                     <div class="flex align-items-center">
-                        <p-radioButton name="ctype" value="Business" [(ngModel)]="ctype" inputId="Business"></p-radioButton>
+                        <p-radioButton name="ctype" value="Business" [(ngModel)]="ctype" inputId="Business">
+                        </p-radioButton>
                         <label for="Business" class="ml-2">Business</label>
                     </div>
-                    
+
                     <div class="flex align-items-center">
-                        <p-radioButton name="ctype" value="Designer" [(ngModel)]="ctype" inputId="Designer"></p-radioButton>
+                        <p-radioButton name="ctype" value="Designer" [(ngModel)]="ctype" inputId="Designer">
+                        </p-radioButton>
                         <label for="Designer" class="ml-2">Designer</label>
                     </div>
-                    
-         
-                   
+
+
+
                 </div>
 
             </ng-container>
-           
-                <div class="flex align-items-center justify-content-between mb-6">
-                    <ng-container *ngIf="isLogin">
+
+            <div class="flex align-items-center justify-content-between mb-6">
+                <ng-container *ngIf="isLogin">
                     <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot
                         password?</a>
-                    </ng-container>
-                </div>
-         
-            <button pButton pRipple [label]="isLogin?'Sign In':'Signup'" (click)='loginOrSingup()' icon="pi pi-user" class="w-full"></button>
+                </ng-container>
+            </div>
+
+            <button pButton pRipple [label]="isLogin?'Sign In':'Signup'" (click)='loginOrSingup()' icon="pi pi-user"
+                class="w-full"></button>
         </div>
     </div>
 </div>
