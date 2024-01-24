@@ -48,7 +48,7 @@
 </p-blockUI>
 
 
-<p-dialog [modal]="true" header="Getting Templates..." [(visible)]="showSkeleton">
+<p-dialog [modal]="true" [closable]="false" header="Getting Templates..." [(visible)]="showSkeleton">
   <div class="grid justify-content-between">
     <div>
       <p-skeleton styleClass="mb-2"></p-skeleton>

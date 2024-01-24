@@ -150,7 +150,7 @@ export class ContentComponent implements OnInit {
         {
         this.confirmationService.confirm({
 
-          message: 'Do want to Post the Last Accessed Image?',
+          message: 'Facebook Integration is Done. Do want to Post the Last Accessed Image?',
           header: 'Post',
           icon: 'pi pi-tags',
           acceptIcon: "none",
