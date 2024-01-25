@@ -45,9 +45,7 @@ export class ProfileComponent implements OnInit {
 
   onUploadPhoto(event: any) {
     this.loading=false;
-    this.uploadSuccess = true;
-    this.successString='Upload Successful';
-    this.getProfile();
+    window.location.reload();
    }
 loading=false;
 

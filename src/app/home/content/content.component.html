@@ -150,13 +150,18 @@
   <label for="name" class="block text-900 font-medium mb-2">SubCategory</label>
   <input id="name" type="text" placeholder="SubCategory" [(ngModel)]="subcategory" pInputText class="w-full mb-3">
 
-  <p-fileUpload name="file" [customUpload]="true" [files]="uploadedFiles" (uploadHandler)="handleUpload($event)"
-    accept="image/*" [maxFileSize]="5000000">
+  <p-fileUpload name="file"  #uploader [customUpload]="true" [files]="uploadedFiles" (uploadHandler)="handleUpload($event)"
+    accept="image/*" [maxFileSize]="5000000" [showUploadButton]="false">
     <ng-template pTemplate="content">
       <ul *ngIf="uploadedFiles.length">
         <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
       </ul>
     </ng-template>
+
+    <ng-template pTemplate="content" let-files>
+      <div *ngIf="files.length>=1" style="text-align:center;align-items:center"> <p-button label="Upload" icon="pi pi-upload" (click)="uploader.upload()"> </p-button> </div>
+    </ng-template>
+
   </p-fileUpload>
 </p-dialog>
 

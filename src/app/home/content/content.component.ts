@@ -295,6 +295,12 @@ export class ContentComponent implements OnInit {
 
   }
 
+
+  checkUpload()
+  {
+    return false;
+  }
+
   handleUpload(event: any) {
     let formData = new FormData();
 

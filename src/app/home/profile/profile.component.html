@@ -18,13 +18,16 @@
                     <span><i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
                     </span>
                 </div>
-                <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadLogo"
-                  (onBeforeUpload)="onBeforeUpload($event)"  (onUpload)="onUpload($event)" accept="image/*" [maxFileSize]="20000000">
+                <p-fileUpload #uploader name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadLogo"
+                  (onBeforeUpload)="onBeforeUpload($event)" [showUploadButton]="false" (onUpload)="onUpload($event)" accept="image/*" [maxFileSize]="20000000">
                     <ng-template pTemplate="content">
                         <ul *ngIf="uploadedFiles.length">
                             <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
                         </ul>
                     </ng-template>
+                    <ng-template pTemplate="content" let-files>
+                        <div *ngIf="files.length>=1" style="text-align:center;align-items:center"> <p-button label="Upload" icon="pi pi-upload" (click)="uploader.upload()"> </p-button> </div>
+                      </ng-template>
                 </p-fileUpload>
 
 
@@ -41,13 +44,16 @@
                     <span><i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
                     </span>
                 </div>
-                <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadPhoto"
-                (onBeforeUpload)="onBeforeUpload($event)"   (onUpload)="onUploadPhoto($event)" accept="image/*" [maxFileSize]="20000000">
+                <p-fileUpload name="file" #uploader1 url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadPhoto"
+                (onBeforeUpload)="onBeforeUpload($event)" [showUploadButton]="false"  (onUpload)="onUploadPhoto($event)" accept="image/*" [maxFileSize]="20000000">
                     <ng-template pTemplate="content">
                         <ul *ngIf="uploadedFiles.length">
                             <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
                         </ul>
                     </ng-template>
+                    <ng-template pTemplate="content" let-files>
+                        <div *ngIf="files.length>=1" style="text-align:center;align-items:center"> <p-button label="Upload" icon="pi pi-upload" (click)="uploader1.upload()"> </p-button> </div>
+                      </ng-template>
                 </p-fileUpload>
 
 
