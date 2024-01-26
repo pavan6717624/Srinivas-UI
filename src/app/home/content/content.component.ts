@@ -3,11 +3,10 @@ import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/shared/auth.service';
 import { HomeService } from '../home.service';
-export class SendToFacebook
-{
-image: string = '';
-template: string = '';
-pages: string[]=[];
+export class SendToFacebook {
+  image: string = '';
+  template: string = '';
+  pages: string[] = [];
 }
 @Component({
   selector: 'app-content',
@@ -35,7 +34,7 @@ export class ContentComponent implements OnInit {
   email: string = '';
   website: string = '';
 
-  facebookPages: string[]=[];
+  facebookPages: string[] = [];
   uploadTemplateVisible = false;
   constructor(private confirmationService: ConfirmationService, public messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
@@ -189,43 +188,23 @@ export class ContentComponent implements OnInit {
 
   getFacebookPageNames() {
     this.service.getFacebookPageNames().subscribe(
-      (res: any) => { this.facebookPages=res;console.log("chekcing facebook pages :: " + res); },
+      (res: any) => { this.facebookPages = res; console.log("chekcing facebook pages :: " + res); },
       (err: any) => { console.log("chekcing facebook pages :: " + err); }
 
     );
   }
 
-  showPages=false;
+  showPages = false;
 
-  selectedPages: string[]=[];
+  selectedPages: string[] = [];
 
-  selectedTemplate: string ='';
+  selectedTemplate: string = '';
 
-  selectPages(i:number)
-  {
-    this.selectedPages=[];
-    this.showPages=true;
-    this.selectedTemplate='Template '+i;
-  }
-
-  postToFacebook(event: Event) {
-
+  selectPages(i: number,event: Event) {
     if (this.facebookToken) {
-
-      var send=new SendToFacebook();
-      send.image=this.templates[0];
-      send.template=this.selectedTemplate;
-      send.pages=this.selectedPages;
-
-
-      this.loading = true;
-      //this.imageId=i;
-
-      this.service.postToFacebookImage(send).subscribe(
-        (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.showPages=false; this.selectedPages=[];this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
-        (err: any) => { console.log(err); this.loading = false; }
-
-      );
+      this.selectedPages = [];
+      this.showPages = true;
+      this.selectedTemplate = 'Template ' + i;
     }
     else {
       console.log("reached here");
@@ -249,6 +228,28 @@ export class ContentComponent implements OnInit {
       });
       console.log("reached here too");
     }
+  }
+
+  postToFacebook() {
+
+
+
+    var send = new SendToFacebook();
+    send.image = this.templates[0];
+    send.template = this.selectedTemplate;
+    send.pages = this.selectedPages;
+
+
+    this.loading = true;
+    //this.imageId=i;
+
+    this.service.postToFacebookImage(send).subscribe(
+      (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
+      (err: any) => { console.log(err); this.loading = false; }
+
+    );
+
+
 
   }
   scroll(el: string) {

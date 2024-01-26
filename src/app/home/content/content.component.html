@@ -97,7 +97,7 @@
         <div>
 
           <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info"
-            (click)="selectPages(1)"></button>
+            (click)="selectPages(1,$event)"></button>
 
         </div>
 
@@ -127,7 +127,7 @@
         <div>
 
           <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info"
-            (click)="selectPages(2)"></button>
+            (click)="selectPages(2,$event)"></button>
 
         </div>
 
@@ -181,7 +181,7 @@
     <label for="{{page}}"><b>{{page}}</b></label>
 </div>
   <ng-template pTemplate="footer" >
-    <p-button icon="pi pi-check" *ngIf="selectedPages.length > 0" (click)="postToFacebook($event)"
+    <p-button icon="pi pi-check" *ngIf="selectedPages.length > 0" (click)="postToFacebook()"
       label="Post" styleClass="p-button-text"></p-button>
   </ng-template>
 </p-dialog>
