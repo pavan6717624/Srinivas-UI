@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'primeng/api/menuitem';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { AuthService } from 'src/app/shared/auth.service';
 import { HomeService } from '../home.service';
+export class SendToFacebook
+{
+image: string = '';
+template: string = '';
+pages: string[]=[];
+}
 @Component({
   selector: 'app-content',
   templateUrl: './content.component.html',
@@ -20,24 +25,6 @@ export class ContentComponent implements OnInit {
   subcategory: string = '';
   category: string = '';
 
-  positionOptions = [
-    {
-      label: 'Bottom',
-      value: 'bottom'
-    },
-    {
-      label: 'Top',
-      value: 'top'
-    },
-    {
-      label: 'Left',
-      value: 'left'
-    },
-    {
-      label: 'Right',
-      value: 'right'
-    }
-  ];
   line1: string = '';
   line2: string = '';
 
@@ -47,6 +34,8 @@ export class ContentComponent implements OnInit {
 
   email: string = '';
   website: string = '';
+
+  facebookPages: string[]=[];
   uploadTemplateVisible = false;
   constructor(private confirmationService: ConfirmationService, public messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
@@ -54,7 +43,7 @@ export class ContentComponent implements OnInit {
 
   role: string = '';
 
-  tooltipItems: any[] = [];
+
 
   images: any;
 
@@ -85,37 +74,7 @@ export class ContentComponent implements OnInit {
 
     this.checkFacebookToken();
 
-    this.tooltipItems = [
-      {
 
-        icon: 'pi pi-pencil',
-        command: () => {
-          this.messageService.add({ severity: 'info', summary: 'Add', detail: 'Data Added' });
-        }
-      },
-      {
-
-        icon: 'pi pi-refresh',
-        command: () => {
-          this.ngOnInit();
-        }
-      },
-      {
-
-        icon: 'pi pi-trash',
-        command: () => {
-          this.messageService.add({ severity: 'error', summary: 'Delete', detail: 'Data Deleted' });
-        }
-      },
-      {
-
-        icon: 'pi pi-upload',
-        command: () => {
-          this.uploadImageVisible = true
-        }
-      },
-
-    ];
 
     this.getImages();
 
@@ -146,29 +105,28 @@ export class ContentComponent implements OnInit {
         var image = localStorage.getItem("goto");
         console.log("image " + image);
 
-        if(image!=null)
-        {
-        this.confirmationService.confirm({
+        if (image != null) {
+          this.confirmationService.confirm({
 
-          message: 'Facebook Integration is Done. Do want to Post the Last Accessed Image?',
-          header: 'Post',
-          icon: 'pi pi-tags',
-          acceptIcon: "none",
-          rejectIcon: "none",
-          rejectButtonStyleClass: "p-button-text",
-          accept: () => {
-           
-            if (image != null) {
-              this.scroll(image);
-              this.showTemplate(-1, image);
+            message: 'Facebook Integration is Done. Do want to Post the Last Accessed Image?',
+            header: 'Post',
+            icon: 'pi pi-tags',
+            acceptIcon: "none",
+            rejectIcon: "none",
+            rejectButtonStyleClass: "p-button-text",
+            accept: () => {
+
+              if (image != null) {
+                this.scroll(image);
+                this.showTemplate(-1, image);
+                localStorage.removeItem("goto");
+              }
+            },
+            reject: () => {
               localStorage.removeItem("goto");
             }
-          },
-          reject: () => {
-            localStorage.removeItem("goto");
-          }
-        });
-      }
+          });
+        }
 
 
       },
@@ -218,23 +176,53 @@ export class ContentComponent implements OnInit {
 
   checkFacebookToken() {
     this.service.checkFacebookToken().subscribe(
-      (res: any) => { this.facebookToken = res; console.log("chekcing facebook token :: " + res); },
+      (res: any) => {
+        this.facebookToken = res;
+        if (this.facebookToken)
+          this.getFacebookPageNames();
+        console.log("chekcing facebook token :: " + res);
+      },
       (err: any) => { console.log("chekcing facebook token :: " + err); }
 
     );
   }
 
-  postToFacebook(image: any, i: number, event: Event) {
+  getFacebookPageNames() {
+    this.service.getFacebookPageNames().subscribe(
+      (res: any) => { this.facebookPages=res;console.log("chekcing facebook pages :: " + res); },
+      (err: any) => { console.log("chekcing facebook pages :: " + err); }
+
+    );
+  }
+
+  showPages=false;
+
+  selectedPages: string[]=[];
+
+  selectedTemplate: string ='';
+
+  selectPages(i:number)
+  {
+    this.selectedPages=[];
+    this.showPages=true;
+    this.selectedTemplate='Template '+i;
+  }
+
+  postToFacebook(event: Event) {
 
     if (this.facebookToken) {
-      var formData = new FormData();
-      formData.set("image", image);
-      formData.set("template", "Template " + i);
+
+      var send=new SendToFacebook();
+      send.image=this.templates[0];
+      send.template=this.selectedTemplate;
+      send.pages=this.selectedPages;
+
+
       this.loading = true;
       //this.imageId=i;
 
-      this.service.postToFacebookImage(formData).subscribe(
-        (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
+      this.service.postToFacebookImage(send).subscribe(
+        (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.showPages=false; this.selectedPages=[];this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
         (err: any) => { console.log(err); this.loading = false; }
 
       );
@@ -251,7 +239,7 @@ export class ContentComponent implements OnInit {
         rejectButtonStyleClass: "p-button-text",
         accept: () => {
           this.loading = true;
-          localStorage.setItem("goto", image);
+          localStorage.setItem("goto", this.templates[0]);
           // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
           window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
 
@@ -265,7 +253,7 @@ export class ContentComponent implements OnInit {
   }
   scroll(el: string) {
 
-    console.log(document.getElementById(el));
+
 
     document.getElementById(el)?.scrollIntoView();
   }
@@ -296,8 +284,7 @@ export class ContentComponent implements OnInit {
   }
 
 
-  checkUpload()
-  {
+  checkUpload() {
     return false;
   }
 

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { SendToFacebook } from './content/content.component';
 
 @Injectable({
   providedIn: 'root'
@@ -24,8 +25,8 @@ export class HomeService {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadImage',formData);
   }
 
-  postToFacebookImage(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookImage',formData);
+  postToFacebookImage(send:SendToFacebook) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookImage',send);
   }
 
   postToFacebookVideo(formData:FormData) {
@@ -43,6 +44,10 @@ export class HomeService {
 
   checkFacebookToken() {
     return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/facebookToken');
+  }
+
+  getFacebookPageNames() {
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getFacebookPageNames');
   }
 
   saveFacebookToken(formData:FormData) {
