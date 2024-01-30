@@ -64,7 +64,7 @@ export class HeaderComponent implements OnInit {
 
 
     this.getProfile();
-    this.getTemplate();
+    // this.getTemplate();
 
   }
 
@@ -101,7 +101,7 @@ export class HeaderComponent implements OnInit {
 
   templateChange() {
     this.templateImage = '';
-    this.getTemplate();
+    // this.getTemplate();
   }
   changeTemplate() {
     this.loading = true;
@@ -147,20 +147,20 @@ export class HeaderComponent implements OnInit {
   }
   templateImage: string = '';
   template: string = '';
-  getTemplate() {
-    var formData = new FormData();
-    formData.set("template", this.template);
-    this.hService.getTemplate(formData).subscribe(
+  // getTemplate() {
+  //   var formData = new FormData();
+  //   formData.set("template", this.template);
+  //   this.hService.getTemplate(formData).subscribe(
 
-      (res: any) => {
+  //     (res: any) => {
 
-        this.templateImage = res.img;
+  //       this.templateImage = res.img;
 
-      },
-      (err: any) => console.log(err)
+  //     },
+  //     (err: any) => console.log(err)
 
-    );
-  }
+  //   );
+  // }
 
 
   editLogoVisible = false;

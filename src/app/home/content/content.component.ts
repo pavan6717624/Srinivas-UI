@@ -151,11 +151,11 @@ export class ContentComponent implements OnInit {
 
 
 
-  downloadImage(i: number, image: any) {
+  downloadImage(i: number) {
     var formData = new FormData();
-    formData.set("image", image.publicId);
+    formData.set("template", "Template "+i)
+    formData.set("image",this.templates[0]);
     this.downloading = true;
-    this.imageId = i;
 
     this.service.downloadImage(formData).subscribe(
       (res: any) => {
@@ -165,9 +165,9 @@ export class ContentComponent implements OnInit {
         // console.log(Math.random() + " " + Math.random());
         a.download = "HeidigiImage_" + new Date().getTime() + ".jpg"; //File name Here
         a.click(); //Downloaded file},
-        a.remove(); this.downloading = false; this.imageId = -1;
+        a.remove(); this.downloading = false;
       },
-      (err: any) => { console.log(err); this.downloading = false; this.imageId = -1; }
+      (err: any) => { console.log(err); this.downloading = false; }
 
     );
   }
@@ -345,6 +345,7 @@ export class ContentComponent implements OnInit {
       this.service.showTemplate(formData).subscribe(
 
         (res: any) => {
+          console.log(res);
           this.showSkeleton = false;
           this.uploadTemplateVisible = true;
           this.downloading = false;
