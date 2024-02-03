@@ -340,7 +340,7 @@ export class ContentComponent implements OnInit {
   }
 
   refresh() {
-    this.ngOnInit();
+    this.ngOnInit();  
   }
 
   templates: any[] = [];

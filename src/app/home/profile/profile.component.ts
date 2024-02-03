@@ -12,12 +12,12 @@ import { HomeService } from '../home.service';
 export class ProfileComponent implements OnInit {
   logo: any;
   mobile: any;
-  line1: any;
-  line2: any;
-  line3: any;
-  line4: any;
-  email: any;
-  website: any;
+  line1: string='';
+  line2: string='';
+  line3: string='';
+  line4: string='';
+  email:string='';
+  website: string='';
   menuItems: any;
   template: any;
   photo: any;
@@ -61,37 +61,37 @@ loading=false;
     
 
 
-    if (this.line1.trim().length == 0) {
+    if (this.line1 == null || this.line1.trim().length == 0) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Line1 Provided.', detail: '' });
       return;
     }
 
-    if (this.line2.trim().length == 0) {
+    if (this.line2 == null ||this.line2.trim().length == 0) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Line2 Provided.', detail: '' });
       return;
     }
 
-    if (this.line3.trim().length == 0) {
+    if (this.line3 == null ||this.line3.trim().length == 0) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Line3 Provided.', detail: '' });
       return;
     }
 
-    if (this.line4.trim().length == 0) {
+    if (this.line4 == null ||this.line4.trim().length == 0) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Line4 Provided.', detail: '' });
       return;
     }
 
-    if (this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
+    if (this.email == null ||this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Email Provided.', detail: '' });
       return;
     }
 
-    if (this.address.trim().length == 0) {
+    if (this.address == null || this.address.trim().length == 0) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Address Provided.', detail: '' });
       return;
     }
 
-    if (this.website.trim().length == 0  || this.website.trim().indexOf(".") == -1) {
+    if (this.website == null || this.website.trim().length == 0  || this.website.trim().indexOf(".") == -1) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Website Provided.', detail: '' });
       return;
     }

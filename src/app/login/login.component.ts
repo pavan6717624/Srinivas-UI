@@ -95,7 +95,7 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    if (this.password.trim().length == 0) {
+    if (this.password==null || this.password.trim().length == 0) {
       this.messageService.add({ severity: 'error', summary: 'Invalid Password Provided.', detail: '' });
       return;
     }
@@ -149,24 +149,24 @@ export class LoginComponent implements OnInit {
     else {
 
 
-      if (this.name.trim().length == 0) {
+      if (this.name==null || this.name.trim().length == 0) {
         this.messageService.add({ severity: 'error', summary: 'Invalid Name Provided.', detail: '' });
         return;
       }
 
-      if (this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
+      if (this.email==null || this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
         this.messageService.add({ severity: 'error', summary: 'Invalid Email Provided.', detail: '' });
         return;
       }
 
 
 
-      if (this.cpassword.trim().length == 0) {
+      if (this.cpassword ==null || this.cpassword.trim().length == 0) {
         this.messageService.add({ severity: 'error', summary: 'Invalid Confirm Password Provided.', detail: '' });
         return;
       }
 
-      if (this.password != this.cpassword) {
+      if ( this.password != this.cpassword) {
         this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
         return;
       }
