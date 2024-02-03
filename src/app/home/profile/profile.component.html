@@ -1,10 +1,16 @@
 
-
+  
 <div style='margin:auto; padding: 0;display: flex;justify-content: center;align-items: center; width:100%; height:100%'>
 
    
 
-    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4" style="text-align:center">
+    <div class="surface-card p-4 shadow-2 border-round w-full lg:w-4">
+
+        <p-messages></p-messages>
+
+            <span *ngIf='back' class="text-900 text-xl mb-3 font-medium" style="align-items:left; text-align:left"><button pButton pRipple type="button" icon="pi pi-arrow-left" (click)='goBack()' class="p-button-rounded p-button-outlined"></button>&nbsp;</span> 
+           
+
         <span class="text-900 text-xl mb-3 font-medium" style="text-align:center"> <b>Profile </b></span>
         <p-tabView>
             <p-tabPanel header="Logo">
@@ -128,12 +134,12 @@
 </div>
 
 
-<p-dialog [modal]="true" [closable]="false" [header]="successString" [(visible)]="uploadSuccess">
+<p-dialog [modal]="true" [closable]="true" [header]="successString" [(visible)]="uploadSuccess">
     <p>
         <img src="assets/images/success.jpg" alt="Image" height="200">
     </p>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" label="Done" (click)="router.navigate(['home'])" styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" label="Done" (click)='uploadSuccess=false' styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
 

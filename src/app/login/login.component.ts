@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
   password: string = '';
   isLogin: boolean = true;
   ctype: string = 'Business';
-
+  cpassword: string = '';
   getLoginDetails() {
 
 
@@ -89,6 +89,21 @@ export class LoginComponent implements OnInit {
   }
   loginOrSingup() {
 
+
+    if ((this.mobile + "").trim().length != 10) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Mobile Number Provided.', detail: '' });
+      return;
+    }
+
+    if (this.password.trim().length == 0) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Password Provided.', detail: '' });
+      return;
+    }
+
+
+
+
+
     if (this.isLogin) {
       var login = new Login();
       login.mobile = this.mobile + "";
@@ -133,12 +148,39 @@ export class LoginComponent implements OnInit {
     }
     else {
 
+
+      if (this.name.trim().length == 0) {
+        this.messageService.add({ severity: 'error', summary: 'Invalid Name Provided.', detail: '' });
+        return;
+      }
+
+      if (this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
+        this.messageService.add({ severity: 'error', summary: 'Invalid Email Provided.', detail: '' });
+        return;
+      }
+
+
+
+      if (this.cpassword.trim().length == 0) {
+        this.messageService.add({ severity: 'error', summary: 'Invalid Confirm Password Provided.', detail: '' });
+        return;
+      }
+
+      if (this.password != this.cpassword) {
+        this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
+        return;
+      }
+
+
       var signup = new Signup();
       signup.name = this.name;
       signup.email = this.email;
       signup.mobile = this.mobile + "";
       signup.password = this.password;
       signup.role = this.ctype;
+
+
+
 
       console.log(signup);
 
@@ -149,13 +191,13 @@ export class LoginComponent implements OnInit {
             this.router.navigate(['success']);
           else if (res && !res.loginStatus) {
             this.loading = false;
-            console.log("SignUp faield");
+            console.log("SignUp failed");
             this.messageService.add({ severity: 'error', summary: res.message, detail: '' });
           }
           else {
             this.loading = false;
-            console.log("SignUp faield");
-            this.messageService.add({ severity: 'error', summary: "SignUp faield", detail: '' });
+            console.log("SignUp failed");
+            this.messageService.add({ severity: 'error', summary: "SignUp failed", detail: '' });
           }
         },
         (err) => { console.log(err + " Error"); this.loading = false; }

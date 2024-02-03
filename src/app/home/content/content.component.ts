@@ -107,7 +107,7 @@ export class ContentComponent implements OnInit {
         if (image != null) {
           this.confirmationService.confirm({
 
-            message: 'Facebook Integration is Done. Do want to Post the Last Accessed Image?',
+            message: 'Do want to Post the Last Accessed Image?',
             header: 'Post',
             icon: 'pi pi-tags',
             acceptIcon: "none",
@@ -230,6 +230,19 @@ export class ContentComponent implements OnInit {
     }
   }
 
+
+  maxView()
+  {
+    var w = window.open("", "_blank");
+        w?.document.write("<img src='"+this.templates[1]+"'/>");
+   
+  }
+
+  toProfile()
+  {
+    localStorage.setItem("goto",this.templates[0]);
+    this.route.navigate(['home/profile'])
+  }
   postToFacebook() {
 
 

@@ -83,7 +83,7 @@
                 <div class="col-12">
                     <div class="p-inputgroup">
     
-                        <input id="cpassword" [type]="type" placeholder="Confirm Password" pInputText>
+                        <input id="cpassword" [type]="type" placeholder="Confirm Password" pInputText [(ngModel)]="cpassword">
             
                         <span class="p-inputgroup-addon" (click)="changeType()" style="cursor:pointer"><i [class]="icon"></i></span>
                     </div>
@@ -114,10 +114,11 @@
             </ng-container>
 
             <div class="flex align-items-center justify-content-between mb-6">
-                <ng-container *ngIf="isLogin">
+                <!-- <ng-container *ngIf="isLogin">
                     <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot
                         password?</a>
-                </ng-container>
+                </ng-container> -->
+                &nbsp;
             </div>
 
             <button pButton pRipple [label]="isLogin?'Sign In':'Signup'" (click)='loginOrSingup()' icon="pi pi-user"

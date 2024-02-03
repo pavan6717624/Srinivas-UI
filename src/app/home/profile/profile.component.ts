@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { HomeService } from '../home.service';
 
 
@@ -20,11 +21,18 @@ export class ProfileComponent implements OnInit {
   menuItems: any;
   template: any;
   photo: any;
+  back: boolean=false;
 
-  constructor(private hService: HomeService, public router: Router) { }
+  constructor(private hService: HomeService, public router: Router, private messageService: MessageService) { }
 
   ngOnInit(): void {
+    if(localStorage.getItem("goto")!=null)
+    this.back=true;
     this.getProfile();
+  }
+  goBack()
+  {
+    this.router.navigate(['home/images']);
   }
 
   uploadedFiles: any[] = [];
@@ -50,8 +58,47 @@ export class ProfileComponent implements OnInit {
 loading=false;
 
    editContent() {
+    
+
+
+    if (this.line1.trim().length == 0) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Line1 Provided.', detail: '' });
+      return;
+    }
+
+    if (this.line2.trim().length == 0) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Line2 Provided.', detail: '' });
+      return;
+    }
+
+    if (this.line3.trim().length == 0) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Line3 Provided.', detail: '' });
+      return;
+    }
+
+    if (this.line4.trim().length == 0) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Line4 Provided.', detail: '' });
+      return;
+    }
+
+    if (this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Email Provided.', detail: '' });
+      return;
+    }
+
+    if (this.address.trim().length == 0) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Address Provided.', detail: '' });
+      return;
+    }
+
+    if (this.website.trim().length == 0  || this.website.trim().indexOf(".") == -1) {
+      this.messageService.add({ severity: 'error', summary: 'Invalid Website Provided.', detail: '' });
+      return;
+    }
+    
     this.loading = true;
     var formData = new FormData();
+    
 
     formData.set("line1", this.line1);
     formData.set("line2", this.line2);
