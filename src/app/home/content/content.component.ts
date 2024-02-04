@@ -170,13 +170,14 @@ export class ContentComponent implements OnInit {
   }
 
   downloading: boolean = false;
-
+  skeletonHeader: string = '';
   downloadImage(i: number) {
     var formData = new FormData();
     formData.set("template", "Template " + i)
     formData.set("image", this.templates[0]);
-    this.downloading = true;
-
+   // this.downloading = true;
+    this.showSkeleton=true;
+    this.skeletonHeader="Downloading....";
     this.service.downloadImage(formData).subscribe(
       (res: any) => {
         var a = document.createElement("a"); //Create <a>
@@ -185,9 +186,14 @@ export class ContentComponent implements OnInit {
         // console.log(Math.random() + " " + Math.random());
         a.download = "HeidigiImage_" + new Date().getTime() + ".jpg"; //File name Here
         a.click(); //Downloaded file},
-        a.remove(); this.downloading = false;
+        a.remove(); 
+        this.showSkeleton=false; 
+        this.skeletonHeader="";
+        this.downloading = false;
       },
-      (err: any) => { console.log(err); this.downloading = false; }
+      (err: any) => { console.log(err);   this.skeletonHeader="";this.showSkeleton=false; 
+        //this.downloading = false; 
+      }
 
     );
   }
@@ -390,6 +396,7 @@ export class ContentComponent implements OnInit {
   showTemplate(i: number, publicId: string) {
     if (this.role === 'Customer') {
       this.showSkeleton = true;
+      this.skeletonHeader="Getting Templates....";
       //this.downloading = true;
       this.imageId = i;
       this.templates[0]="";
@@ -402,6 +409,7 @@ export class ContentComponent implements OnInit {
 
         (res: any) => {
           console.log(res);
+          this.skeletonHeader="";
           this.showSkeleton = false;
           this.uploadTemplateVisible = true;
           this.downloading = false;
@@ -411,7 +419,8 @@ export class ContentComponent implements OnInit {
 
           console.log(this.templates);
         },
-        (err: any) => { console.log(err) }
+        (err: any) => { this.skeletonHeader="";
+        this.showSkeleton = false;console.log(err) }
 
       );
     }
