@@ -183,6 +183,7 @@
 </p-dialog>
 
 <p-dialog [modal]="true" header="Select Pages" [(visible)]="showPages">
+  <div>&nbsp;</div>
   <div class="field-checkbox" *ngFor="let page of facebookPages">
     <p-checkbox name="group1" value="{{page}}" [(ngModel)]="selectedPages" inputId="{{page}}"></p-checkbox>
     <label for="{{page}}"><b>{{page}}</b></label>
@@ -198,7 +199,7 @@
 
   <div style="padding:0px;padding-bottom:3px">
     <button pButton pRipple type="button" icon="pi pi-upload"
-      (click)="uploadImageVisible=true; category=''; subcategory='';uploadedFiles=[];"></button>
+      (click)="messageService.clear(); uploadImageVisible=true; category=''; subcategory='';uploadedFiles=[];"></button>
   </div>
 
 
