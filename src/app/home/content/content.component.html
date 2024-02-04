@@ -74,7 +74,7 @@
   <p-tabView>
     <p-tabPanel header="Template 1">
 
-      <img *ngIf="templates[1]" [src]="templates[1]" alt="Image" style=" overflow: hidden;
+      <img  onContextMenu="return false;" *ngIf="templates[1]" [src]="templates[1]" alt="Image" style=" overflow: hidden;
      width: 300px;
      height: 300px;
      border-radius: 8px;
@@ -113,7 +113,7 @@
 
     <p-tabPanel header="Template 2">
 
-      <img *ngIf="templates[2]" [src]="templates[2]" alt="Image" style=" overflow: hidden;
+      <img onContextMenu="return false;" *ngIf="templates[2]" [src]="templates[2]" alt="Image" style=" overflow: hidden;
       width: 300px;
       height: 300px;
       border-radius: 8px;

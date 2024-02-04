@@ -171,21 +171,6 @@ export class ContentComponent implements OnInit {
 
   downloading: boolean = false;
 
-  imageDownload(i: number) {
-    var a = document.createElement("a"); //Create <a>
-    a.href = this.templates[i]; //Image Base64 Goes here
-    console.log(Math.random() + " " + Math.random());
-    a.download = "HeidigiImage_" + new Date().getTime() + ".jpg"; //File name Here
-    a.click(); //Downloaded file},
-    a.remove(); this.downloading = false;
-  }
-
-  imageShare(i: number) {
-
-  }
-
-
-
   downloadImage(i: number) {
     var formData = new FormData();
     formData.set("template", "Template " + i)
@@ -407,7 +392,7 @@ export class ContentComponent implements OnInit {
       this.showSkeleton = true;
       //this.downloading = true;
       this.imageId = i;
-      this.templates=[];
+      this.templates[0]="";
       this.templates[1]="assets/images/loading.gif";
       this.templates[2]="assets/images/loading.gif";
       var formData = new FormData();
