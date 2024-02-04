@@ -15,7 +15,7 @@
         <p-tabView>
             <p-tabPanel header="Logo">
                 <div class="flex justify-content-center" *ngIf="logo">
-                    <p-image src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{logo}}" alt="Image" height="100"
+                    <p-image src="http://localhost:8081/image/{{logo}}" alt="Image" height="100"
                         ></p-image>
                 </div>
 
@@ -24,7 +24,7 @@
                     <span><i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
                     </span>
                 </div>
-                <p-fileUpload #uploader name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadLogo"
+                <p-fileUpload #uploader name="file" url="http://localhost:8081/uploadLogo"
                   (onBeforeUpload)="onBeforeUpload($event)" [showUploadButton]="false" (onUpload)="onUpload($event)" accept="image/*" [maxFileSize]="20000000">
                     <ng-template pTemplate="content">
                         <ul *ngIf="uploadedFiles.length">
@@ -41,7 +41,7 @@
             <p-tabPanel header="User Photo">
 
                 <div class="flex justify-content-center" *ngIf="photo">
-                    <p-image src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{photo}}" alt="Image" height="100"
+                    <p-image src="http://localhost:8081/image/{{photo}}" alt="Image" height="100"
                         ></p-image>
                 </div>
 
@@ -50,7 +50,7 @@
                     <span><i class="pi pi-spin pi-spinner" style="font-size: 2rem"></i>
                     </span>
                 </div>
-                <p-fileUpload name="file" #uploader1 url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadPhoto"
+                <p-fileUpload name="file" #uploader1 url="http://localhost:8081/uploadPhoto"
                 (onBeforeUpload)="onBeforeUpload($event)" [showUploadButton]="false"  (onUpload)="onUploadPhoto($event)" accept="image/*" [maxFileSize]="20000000">
                     <ng-template pTemplate="content">
                         <ul *ngIf="uploadedFiles.length">

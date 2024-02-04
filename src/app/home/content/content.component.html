@@ -8,7 +8,7 @@
       (click)="showTemplate(i,image.publicId)">
       <ng-template pTemplate="header">
 
-        <img onContextMenu="return false;" src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{image.publicId}}"
+        <img onContextMenu="return false;" src="http://localhost:8081/image/{{image.publicId}}"
           alt="Image" style=" overflow: hidden;
             width: 300px;
             height: 300px;
@@ -84,7 +84,7 @@
 
         <div>
           <button pButton pRipple title="Maximize" type="button" icon="pi pi-window-maximize" class="p-button-rounded p-button-success"
-            (click)="maxView()"></button>
+            (click)="maxView(1)"></button>
         </div>
         <div>&nbsp;</div>
 
@@ -120,15 +120,22 @@
       box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);" />
 
       <div class="flex justify-content-center">
+
+        <div>
+          <button pButton pRipple title="Maximize" type="button" icon="pi pi-window-maximize" class="p-button-rounded p-button-success"
+            (click)="maxView(2)"></button>
+        </div>
+        <div>&nbsp;</div>
+
         <div>
           <button pButton pRipple type="button" icon="pi pi-pencil" class="p-button-rounded p-button-warning"
-            (click)="route.navigate(['home/profile'])"></button>
+          (click)="toProfile()"></button>
 
         </div>
         <div>&nbsp;</div>
         <div>
           <button pButton pRipple type="button" icon="pi pi-download" class="p-button-rounded p-button-help"
-            (click)="downloadImage(2)"></button>
+          (click)="downloadImage(2)"></button>
         </div>
         <div>&nbsp;</div>
         <div>

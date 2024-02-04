@@ -106,7 +106,7 @@ export class ContentComponent implements OnInit {
         console.log(res);
         if (!res) {
           this.confirmationService.confirm({
-
+            rejectVisible: false,
             message: 'Please Complete Your Profile.',
             header: 'Profile',
             icon: 'pi pi-user',
@@ -269,7 +269,7 @@ export class ContentComponent implements OnInit {
     }
     else {
       this.confirmationService.confirm({
-
+        rejectVisible: false,
         message: 'Please Complete Your Profile.',
         header: 'Profile',
         icon: 'pi pi-user',
@@ -289,9 +289,9 @@ export class ContentComponent implements OnInit {
   }
 
 
-  maxView() {
+  maxView(id:number) {
     var w = window.open("", "_blank");
-    w?.document.write("<img src='" + this.templates[1] + "'/>");
+    w?.document.write("<img src='" + this.templates[id] + "'/>");
 
   }
 

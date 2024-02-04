@@ -11,7 +11,7 @@
         <div style="align-items:center; text-align:right;padding:0px;padding-right:10px;border-right: 1px solid;">Hi {{userName}} <br/> {{roleName}}</div>
 
         <div style="padding:0px;padding-left:10px">
-            <img style='cursor:pointer' *ngIf='logo' src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{logo}}" height="40">
+            <img style='cursor:pointer' *ngIf='logo' src="http://localhost:8081/image/{{logo}}" height="40">
             <span><i class="pi pi-spin pi-spinner"  *ngIf='!logo' style="font-size: 1rem"></i></span>
         </div>
         <div style="padding:0px">
@@ -98,7 +98,7 @@
 
 <p-dialog [modal]="true" header="Upload Logo" [(visible)]="editLogoVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Logo</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadLogo" (onUpload)="onUpload($event)" accept="image/*"
+    <p-fileUpload name="file" url="http://localhost:8081/uploadLogo" (onUpload)="onUpload($event)" accept="image/*"
         [maxFileSize]="5000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
@@ -115,7 +115,7 @@
 
 <p-dialog [modal]="true" header="Upload Image" [(visible)]="uploadImageVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Image</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadImage" (onUpload)="onUpload($event)" accept="image/*"
+    <p-fileUpload name="file" url="http://localhost:8081/uploadImage" (onUpload)="onUpload($event)" accept="image/*"
         [maxFileSize]="5000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
@@ -128,7 +128,7 @@
 
 <p-dialog [modal]="true" header="Upload Photo" [(visible)]="uploadPhotoVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Image</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadPhoto" (onUpload)="onUpload($event)" accept="image/*"
+    <p-fileUpload name="file" url="http://localhost:8081/uploadPhoto" (onUpload)="onUpload($event)" accept="image/*"
         [maxFileSize]="5000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
@@ -142,7 +142,7 @@
 
 <p-dialog [modal]="true" header="Upload Video" [(visible)]="uploadVideoVisible">
     <!-- <label for="logo" class="block text-900 font-medium mb-2">Upload Image</label> -->
-    <p-fileUpload name="file" url="https://heidigi-app-38b2318c83b0.herokuapp.com/uploadVideo" (onUpload)="onUpload($event)" accept=".mp4"
+    <p-fileUpload name="file" url="http://localhost:8081/uploadVideo" (onUpload)="onUpload($event)" accept=".mp4"
         [maxFileSize]="20000000">
         <ng-template pTemplate="content">
             <ul *ngIf="uploadedFiles.length">
