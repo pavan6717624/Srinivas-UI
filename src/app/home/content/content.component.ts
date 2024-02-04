@@ -405,9 +405,11 @@ export class ContentComponent implements OnInit {
   showTemplate(i: number, publicId: string) {
     if (this.role === 'Customer') {
       this.showSkeleton = true;
-      this.downloading = true;
+      //this.downloading = true;
       this.imageId = i;
-
+      this.templates=[];
+      this.templates[1]="assets/images/loading.gif";
+      this.templates[2]="assets/images/loading.gif";
       var formData = new FormData();
       formData.set("image", publicId);
 
