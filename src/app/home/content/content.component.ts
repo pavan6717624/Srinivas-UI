@@ -73,7 +73,7 @@ export class ContentComponent implements OnInit {
 
     this.checkFacebookToken();
 
-
+    this.checkProfile();
 
     this.getImages();
 
@@ -94,6 +94,41 @@ export class ContentComponent implements OnInit {
       }
 
     })();
+  }
+
+  profileCheck = false;
+  checkProfile() {
+    //this.loading = true;
+    this.service.checkProfile().subscribe(
+
+      (res: any) => {
+        this.profileCheck = res;
+        console.log(res);
+        if (!res) {
+          this.confirmationService.confirm({
+
+            message: 'Please Complete Your Profile.',
+            header: 'Profile',
+            icon: 'pi pi-user',
+            acceptIcon: "none",
+            rejectIcon: "none",
+            rejectButtonStyleClass: "p-button-text",
+            accept: () => {
+
+              this.route.navigate(['home/profile']);
+
+            },
+            reject: () => {
+              this.route.navigate(['home/profile']);
+            }
+          });
+        }
+        console.log(res);
+        // this.loading = false;
+      },
+      (err: any) => { console.log(err); }
+
+    );
   }
 
   getImages() {
@@ -153,8 +188,8 @@ export class ContentComponent implements OnInit {
 
   downloadImage(i: number) {
     var formData = new FormData();
-    formData.set("template", "Template "+i)
-    formData.set("image",this.templates[0]);
+    formData.set("template", "Template " + i)
+    formData.set("image", this.templates[0]);
     this.downloading = true;
 
     this.service.downloadImage(formData).subscribe(
@@ -200,47 +235,68 @@ export class ContentComponent implements OnInit {
 
   selectedTemplate: string = '';
 
-  selectPages(i: number,event: Event) {
-    if (this.facebookToken) {
-      this.selectedPages = [];
-      this.showPages = true;
-      this.selectedTemplate = 'Template ' + i;
+  selectPages(i: number, event: Event) {
+
+
+    if (this.profileCheck) {
+      if (this.facebookToken) {
+        this.selectedPages = [];
+        this.showPages = true;
+        this.selectedTemplate = 'Template ' + i;
+      }
+      else {
+        console.log("reached here");
+        this.confirmationService.confirm({
+          target: event.target as EventTarget,
+          message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
+          header: 'Integration',
+          icon: 'pi pi-tags',
+          acceptIcon: "none",
+          rejectIcon: "none",
+          rejectButtonStyleClass: "p-button-text",
+          accept: () => {
+            this.loading = true;
+            localStorage.setItem("goto", this.templates[0]);
+            // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+            window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
+
+          },
+          reject: () => {
+          }
+        });
+        console.log("reached here too");
+      }
     }
     else {
-      console.log("reached here");
       this.confirmationService.confirm({
-        target: event.target as EventTarget,
-        message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
-        header: 'Integration',
-        icon: 'pi pi-tags',
+
+        message: 'Please Complete Your Profile.',
+        header: 'Profile',
+        icon: 'pi pi-user',
         acceptIcon: "none",
         rejectIcon: "none",
         rejectButtonStyleClass: "p-button-text",
         accept: () => {
-          this.loading = true;
-          localStorage.setItem("goto", this.templates[0]);
-          // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
-          window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
+
+          this.route.navigate(['home/profile']);
 
         },
         reject: () => {
+          this.route.navigate(['home/profile']);
         }
       });
-      console.log("reached here too");
     }
   }
 
 
-  maxView()
-  {
+  maxView() {
     var w = window.open("", "_blank");
-        w?.document.write("<img src='"+this.templates[1]+"'/>");
-   
+    w?.document.write("<img src='" + this.templates[1] + "'/>");
+
   }
 
-  toProfile()
-  {
-    localStorage.setItem("goto",this.templates[0]);
+  toProfile() {
+    localStorage.setItem("goto", this.templates[0]);
     this.route.navigate(['home/profile'])
   }
   postToFacebook() {
@@ -340,7 +396,7 @@ export class ContentComponent implements OnInit {
   }
 
   refresh() {
-    this.ngOnInit();  
+    this.ngOnInit();
   }
 
   templates: any[] = [];

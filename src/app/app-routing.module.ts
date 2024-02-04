@@ -13,6 +13,8 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
   {path: 'success', component: SuccessComponent},
   {path: 'facebookIntegration', component: FacebookintegrationComponent},
+  { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate:[AuthguardGuard], data: { roles: ['Admin'] } },
+  
 
 
 ];

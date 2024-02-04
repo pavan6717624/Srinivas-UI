@@ -54,7 +54,10 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home/designer'], { state: { loginStatus: res } });
 
         }
+        else if(this.loginStatus.userType === 'Admin') {
+          this.router.navigate(['admin'], { state: { loginStatus: res } });
 
+        }
 
       },
       (err: any) => {
