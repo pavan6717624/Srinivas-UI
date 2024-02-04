@@ -10,16 +10,16 @@ export class ServiceService {
 
   login(login: Login)
   {
-    return this.http.post('http://localhost:8081/login',login);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/login',login);
   }
 
   signUp(signup: Signup)
   {
-    return this.http.post('http://localhost:8081/signup',signup);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/signup',signup);
   }
 
   getLoginDetails() {
-    return this.http.get('http://localhost:8081/getLoginDetails')
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getLoginDetails')
   }
 
 

@@ -7,87 +7,87 @@ import { SendToFacebook } from './content/content.component';
 })
 export class HomeService {
   showTemplate(formData: FormData) {
-    return this.http.post('http://localhost:8081/showTemplate',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/showTemplate',formData);
   }
 
   showTemplateVideo(formData: FormData) {
-    return this.http.post('http://localhost:8081/showTemplateVideo',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/showTemplateVideo',formData);
   }
   editContent(formData: FormData) {
-    return this.http.post('http://localhost:8081/editContent',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/editContent',formData);
   }
 
   changeTemplate(formData: FormData) {
-    return this.http.post('http://localhost:8081/changeTemplate',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/changeTemplate',formData);
   }
 
 
   downloadImage(formData:FormData) {
-    return this.http.post('http://localhost:8081/downloadImage',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadImage',formData);
   }
 
   postToFacebookImage(send:SendToFacebook) {
-    return this.http.post('http://localhost:8081/postToFacebookImage',send);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookImage',send);
   }
 
   postToFacebookVideo(formData:FormData) {
-    return this.http.post('http://localhost:8081/postToFacebookVideo',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookVideo',formData);
   }
 
   
   getTemplate(formData:FormData) {
-    return this.http.post('http://localhost:8081/getTemplate',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/getTemplate',formData);
   }
 
   checkProfile() {
-    return this.http.get('http://localhost:8081/checkProfile');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/checkProfile');
   }
 
   checkFacebookToken() {
-    return this.http.get('http://localhost:8081/facebookToken');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/facebookToken');
   }
 
   getFacebookPageNames() {
-    return this.http.get('http://localhost:8081/getFacebookPageNames');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getFacebookPageNames');
   }
 
   saveFacebookToken(formData:FormData) {
-    return this.http.post('http://localhost:8081/saveFacebookToken',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/saveFacebookToken',formData);
   }
 
   constructor(private http: HttpClient) { }
   getImages()
   {
-    return this.http.get('http://localhost:8081/getImages');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getImages');
   }
 
   getVideos()
   {
-    return this.http.get('http://localhost:8081/getVideos');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getVideos');
   }
 
   downloadVideo(formData:FormData) {
-    return this.http.post('http://localhost:8081/downloadVideo',formData,{responseType: 'blob'});
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/downloadVideo',formData,{responseType: 'blob'});
   }
 
   getProfile()
   {
-    return this.http.get('http://localhost:8081/getProfile');
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getProfile');
   }
   
   getSrc(formData: FormData)
   {
-    return this.http.post('http://localhost:8081/getSrc',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/getSrc',formData);
   }
 
   sendFile(formData: FormData) {
     // http is HttpClient. You can override it and add required authentication headers, etc.
-    return this.http.post('http://localhost:8081/uploadImage', formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/uploadImage', formData);
 }
 
 sendVideo(formData: FormData) {
   // http is HttpClient. You can override it and add required authentication headers, etc.
-  return this.http.post('http://localhost:8081/uploadVideo', formData);
+  return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/uploadVideo', formData);
 }
 
 }
