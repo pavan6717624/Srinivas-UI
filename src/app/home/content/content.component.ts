@@ -83,29 +83,28 @@ export class ContentComponent implements OnInit {
 
     this.getSubCategories();
 
-    
+
 
   }
 
-  cat: string ='';
-  tags: string ='';
-  getCategory()
-  {
-    this.loading=true;
+  cat: string = '';
+  tags: string = '';
+  getCategory() {
+    this.loading = true;
     console.log("in category");
     this.sservice.getCategory().subscribe(
       (res: any) => {
         this.cat = res.name;
-        if(this.role==='Customer')
-        this.category=this.categories.filter(o=>o.name=this.cat)[0];
+        if (this.role === 'Customer')
+          this.category = this.categories.filter(o => o.name = this.cat)[0];
         this.getSubCategories();
         //console.log("categotry:: "+this.category.name);
-        this.loading=false;
+        this.loading = false;
       },
       (err: any) => {
-        console.log("categotry e:: "+err);
+        console.log("categotry e:: " + err);
         this.category = new DropDown();
-        this.loading=false;
+        this.loading = false;
 
       }
     );
@@ -130,7 +129,7 @@ export class ContentComponent implements OnInit {
 
   profileCheck = false;
   checkProfile() {
-    //this.loading = true;
+    
     this.service.checkProfile().subscribe(
 
       (res: any) => {
@@ -156,7 +155,7 @@ export class ContentComponent implements OnInit {
           });
         }
         console.log(res);
-        // this.loading = false;
+      
       },
       (err: any) => { console.log(err); }
 
@@ -164,10 +163,12 @@ export class ContentComponent implements OnInit {
   }
 
   getImages() {
-    this.loading = true;
+    this.showSkeleton = true;
+    this.skeletonHeader = "Getting Images....";
     this.service.getImages().subscribe(
       (res: any) => {
-        this.images = res; console.log(this.images); this.loading = false;
+        this.images = res; console.log(this.images); this.showSkeleton = false;
+        this.skeletonHeader = "";
         var image = localStorage.getItem("goto");
         console.log("image " + image);
 
@@ -196,7 +197,8 @@ export class ContentComponent implements OnInit {
 
 
       },
-      (err: any) => { console.log(err); this.loading = false; }
+      (err: any) => { console.log(err); this.showSkeleton = false;
+        this.skeletonHeader = ""; }
 
     );
   }
@@ -266,7 +268,7 @@ export class ContentComponent implements OnInit {
       );
     }
     else
-    this.subcategories=[];
+      this.subcategories = [];
   }
 
   checkFacebookToken() {
@@ -417,7 +419,7 @@ export class ContentComponent implements OnInit {
   toUpload() {
     this.messageService.clear();
     this.uploadImageVisible = true;
-    if(this.role=='Designer')  
+    if (this.role == 'Designer')
       this.category = new DropDown();
     this.subcategory == new DropDown();
     this.uploadedFiles = [];
@@ -441,20 +443,27 @@ export class ContentComponent implements OnInit {
       formData.append('file', file, file.name);
       formData.set('category', this.category.name);
       formData.set('subCategory', this.subcategory.name);
-      formData.set('tags',this.tags);
+      formData.set('tags', this.tags);
     }
-    this.loading = true;
+
+    this.showSkeleton = true;
+    this.skeletonHeader = "Uploading....";
     this.service.sendFile(formData).subscribe((result: any) => {
 
       if (result.result === 'success') {
+
         this.uploadImageVisible = false;
         this.successString = "Upload Successful";
-        this.loading = false;
+
+        this.showSkeleton = false;
+        this.skeletonHeader = "";
         this.uploadSuccess = true;
         this.getImages();
       }
       else {
-        this.loading = false;
+
+        this.showSkeleton = false;
+        this.skeletonHeader = "";
         this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: '' });
       }
 
@@ -462,7 +471,10 @@ export class ContentComponent implements OnInit {
       this.uploadedFiles = [];
 
     },
-      (err: any) => { this.loading = false; this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: '' }); });
+      (err: any) => {
+        this.showSkeleton = false;
+        this.skeletonHeader = ""; this.messageService.add({ severity: 'error', summary: 'Upload Failed', detail: '' });
+      });
   }
 
   refresh() {
