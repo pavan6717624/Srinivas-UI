@@ -44,8 +44,10 @@ import { SelectButtonModule } from 'primeng/selectbutton';
 import { ScrollTopModule } from 'primeng/scrolltop';
 import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { SkeletonModule } from 'primeng/skeleton';
+import {DropdownModule} from 'primeng/dropdown';
 
 const SHARED_MODULES = [
+  DropdownModule,
   SkeletonModule,
   ScrollPanelModule,
   ScrollTopModule,

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import { DropDown } from 'src/app/login/login.component';
+import { ServiceService } from 'src/app/service.service';
 import { AuthService } from 'src/app/shared/auth.service';
 import { HomeService } from '../home.service';
 export class SendToFacebook {
@@ -21,8 +23,8 @@ export class ContentComponent implements OnInit {
 
   imageId: number = -1;
 
-  subcategory: string = '';
-  category: string = '';
+  subcategory: DropDown = new DropDown();
+  category: DropDown = new DropDown();
 
   line1: string = '';
   line2: string = '';
@@ -36,7 +38,7 @@ export class ContentComponent implements OnInit {
 
   facebookPages: string[] = [];
   uploadTemplateVisible = false;
-  constructor(private confirmationService: ConfirmationService, public messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
+  constructor(private sservice: ServiceService, private confirmationService: ConfirmationService, private messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
   }
 
@@ -77,6 +79,36 @@ export class ContentComponent implements OnInit {
 
     this.getImages();
 
+    this.getCategories();
+
+    this.getSubCategories();
+
+    
+
+  }
+
+  cat: string ='';
+  tags: string ='';
+  getCategory()
+  {
+    this.loading=true;
+    console.log("in category");
+    this.sservice.getCategory().subscribe(
+      (res: any) => {
+        this.cat = res.name;
+        if(this.role==='Customer')
+        this.category=this.categories.filter(o=>o.name=this.cat)[0];
+        this.getSubCategories();
+        //console.log("categotry:: "+this.category.name);
+        this.loading=false;
+      },
+      (err: any) => {
+        console.log("categotry e:: "+err);
+        this.category = new DropDown();
+        this.loading=false;
+
+      }
+    );
   }
 
   scrollToTop() {
@@ -175,9 +207,9 @@ export class ContentComponent implements OnInit {
     var formData = new FormData();
     formData.set("template", "Template " + i)
     formData.set("image", this.templates[0]);
-   // this.downloading = true;
-    this.showSkeleton=true;
-    this.skeletonHeader="Downloading....";
+    // this.downloading = true;
+    this.showSkeleton = true;
+    this.skeletonHeader = "Downloading....";
     this.service.downloadImage(formData).subscribe(
       (res: any) => {
         var a = document.createElement("a"); //Create <a>
@@ -186,18 +218,56 @@ export class ContentComponent implements OnInit {
         // console.log(Math.random() + " " + Math.random());
         a.download = "HeidigiImage_" + new Date().getTime() + ".jpg"; //File name Here
         a.click(); //Downloaded file},
-        a.remove(); 
-        this.showSkeleton=false; 
-        this.skeletonHeader="";
+        a.remove();
+        this.showSkeleton = false;
+        this.skeletonHeader = "";
         this.downloading = false;
       },
-      (err: any) => { console.log(err);   this.skeletonHeader="";this.showSkeleton=false; 
+      (err: any) => {
+        console.log(err); this.skeletonHeader = ""; this.showSkeleton = false;
         //this.downloading = false; 
       }
 
     );
   }
 
+  categories: DropDown[] = [];
+  subcategories: DropDown[] = [];
+  getCategories() {
+    this.sservice.getCategories().subscribe(
+      (res: any) => {
+        this.categories = res;
+        console.log(this.categories);
+        this.getCategory();
+      },
+      (err: any) => {
+        this.categories = [];
+
+      }
+    );
+  }
+
+  getSubCategories() {
+    if (!(this.category == null || this.category.name == null || this.category.name.trim().length == 0)) {
+      this.loading = true;
+      var formData = new FormData();
+      formData.set("category", this.category.name)
+      this.sservice.getSubCategories(formData).subscribe(
+        (res: any) => {
+          this.subcategories = res;
+          console.log(this.subcategories);
+          this.loading = false;
+        },
+        (err: any) => {
+          this.loading = false;
+          this.subcategories = [];
+
+        }
+      );
+    }
+    else
+    this.subcategories=[];
+  }
 
   checkFacebookToken() {
     this.service.checkFacebookToken().subscribe(
@@ -280,7 +350,7 @@ export class ContentComponent implements OnInit {
   }
 
 
-  maxView(id:number) {
+  maxView(id: number) {
     var w = window.open("", "_blank");
     w?.document.write("<img src='" + this.templates[id] + "'/>");
 
@@ -344,6 +414,14 @@ export class ContentComponent implements OnInit {
 
   }
 
+  toUpload() {
+    this.messageService.clear();
+    this.uploadImageVisible = true;
+    if(this.role=='Designer')  
+      this.category = new DropDown();
+    this.subcategory == new DropDown();
+    this.uploadedFiles = [];
+  }
 
   checkUpload() {
     return false;
@@ -352,8 +430,8 @@ export class ContentComponent implements OnInit {
   handleUpload(event: any) {
     let formData = new FormData();
 
-    if (!this.category || this.category === '' || this.category.trim().length == 0 ||
-      !this.subcategory || this.subcategory === '' || this.subcategory.trim().length == 0) {
+    if (this.category == null || this.category.name == null || this.category.name.trim().length == 0 ||
+      this.subcategory == null || this.subcategory.name == null || this.subcategory.name.trim().length == 0) {
 
       this.messageService.add({ severity: 'error', summary: 'Provide Category & Sub Category', detail: '' });
       return;
@@ -361,8 +439,9 @@ export class ContentComponent implements OnInit {
 
     for (let file of event.files) {
       formData.append('file', file, file.name);
-      formData.set('category', this.category);
-      formData.set('subCategory', this.subcategory);
+      formData.set('category', this.category.name);
+      formData.set('subCategory', this.subcategory.name);
+      formData.set('tags',this.tags);
     }
     this.loading = true;
     this.service.sendFile(formData).subscribe((result: any) => {
@@ -396,12 +475,12 @@ export class ContentComponent implements OnInit {
   showTemplate(i: number, publicId: string) {
     if (this.role === 'Customer') {
       this.showSkeleton = true;
-      this.skeletonHeader="Getting Templates....";
+      this.skeletonHeader = "Getting Templates....";
       //this.downloading = true;
       this.imageId = i;
-      this.templates[0]="";
-      this.templates[1]="assets/images/loading.gif";
-      this.templates[2]="assets/images/loading.gif";
+      this.templates[0] = "";
+      this.templates[1] = "assets/images/loading.gif";
+      this.templates[2] = "assets/images/loading.gif";
       var formData = new FormData();
       formData.set("image", publicId);
 
@@ -409,7 +488,7 @@ export class ContentComponent implements OnInit {
 
         (res: any) => {
           console.log(res);
-          this.skeletonHeader="";
+          this.skeletonHeader = "";
           this.showSkeleton = false;
           this.uploadTemplateVisible = true;
           this.downloading = false;
@@ -419,8 +498,10 @@ export class ContentComponent implements OnInit {
 
           console.log(this.templates);
         },
-        (err: any) => { this.skeletonHeader="";
-        this.showSkeleton = false;console.log(err) }
+        (err: any) => {
+          this.skeletonHeader = "";
+          this.showSkeleton = false; console.log(err)
+        }
 
       );
     }

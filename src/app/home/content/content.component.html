@@ -8,8 +8,7 @@
       [style]="{ width: '310px', height:'400px', padding:'5px',margin:'10px'}" (click)="showTemplate(i,image.publicId)">
       <ng-template pTemplate="header">
 
-        <img onContextMenu="return false;" src="https://heidigi-app-38b2318c83b0.herokuapp.com/image/{{image.publicId}}"
-          alt="Image" style=" overflow: hidden;
+        <img onContextMenu="return false;" src="https://heidigi-app-38b2318c83b0.herokuapp.comimage/{{image.publicId}}" alt="Image" style=" overflow: hidden;
             width: 300px;
             height: 300px;
             border-radius: 8px;
@@ -51,7 +50,7 @@
 <p-dialog [modal]="true" [closable]="false" [header]="skeletonHeader" [(visible)]="showSkeleton">
   <div class="grid justify-content-between">
     <div>
-      
+
       <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
       <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
 
@@ -150,11 +149,20 @@
   <p-messages></p-messages>
 
   <label for="name" class="block text-900 font-medium mb-2">Category</label>
-  <input id="name" type="text" placeholder="Category" [(ngModel)]="category" pInputText class="w-full mb-3">
 
+  <p-dropdown [options]="categories" [disabled]="role==='Customer'" [(ngModel)]="category" placeholder="Select Category"
+    optionLabel="name" [showClear]="true" (ngModelChange)="getSubCategories()"></p-dropdown>
+
+  <div> &nbsp; </div>
   <label for="name" class="block text-900 font-medium mb-2">SubCategory</label>
-  <input id="name" type="text" placeholder="SubCategory" [(ngModel)]="subcategory" pInputText class="w-full mb-3">
+  <p-dropdown [lazy]="true" [options]="subcategories" [(ngModel)]="subcategory" placeholder="Select SubCategory"
+    optionLabel="name" [showClear]="true"></p-dropdown>
+  <!-- <input id="name" type="text" placeholder="SubCategory" [(ngModel)]="subcategory" pInputText class="w-full mb-3"> -->
+  <div> &nbsp; </div>
+  <label for="tags" class="block text-900 font-medium mb-2">#Hash Tags</label>
 
+  <input id="tags" type="text" placeholder="#Hash #Tags" [(ngModel)]="tags" pInputText class="w-full mb-3">
+  <div> &nbsp; </div>
   <p-fileUpload name="file" #uploader [customUpload]="true" [files]="uploadedFiles"
     (uploadHandler)="handleUpload($event)" accept="image/*" [maxFileSize]="5000000" [showUploadButton]="false">
     <ng-template pTemplate="content">
@@ -198,8 +206,7 @@
 <div class="icon-bar">
 
   <div style="padding:0px;padding-bottom:3px">
-    <button pButton pRipple type="button" icon="pi pi-upload"
-      (click)="messageService.clear(); uploadImageVisible=true; category=''; subcategory='';uploadedFiles=[];"></button>
+    <button pButton pRipple type="button" icon="pi pi-upload" (click)="toUpload()"></button>
   </div>
 
 

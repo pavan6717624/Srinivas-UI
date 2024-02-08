@@ -6,6 +6,12 @@ export class Login {
   mobile: string = '';
   password: string = '';
 }
+
+export class DropDown
+{
+  code: string ='';
+  name: string ='';
+}
 export class LoginStatus {
   userId: string = "";
   userType: string = "";
@@ -20,6 +26,7 @@ export class Signup {
   name: string = '';
   email: string = '';
   role: string = '';
+  category: string ='';
 }
 
 @Component({
@@ -71,12 +78,31 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     console.log("liogin");
     this.getLoginDetails();
+    this.getCategories();
+  }
+  categories: DropDown[]=[];
+
+
+
+  getCategories()
+  {
+    this.service.getCategories().subscribe(
+      (res: any) => {
+        this.categories=res;
+        console.log(this.categories);
+      },
+      (err: any) => {
+        this.categories=[];
+
+      }
+    );
   }
 
   loading: boolean = false;
   type: string = 'password';
   icon: string = 'pi pi-eye-slash'
   loginStatus: LoginStatus = new LoginStatus();
+  category: DropDown = new DropDown();
 
   changeType() {
     console.log(this.type);
@@ -173,6 +199,11 @@ export class LoginComponent implements OnInit {
         this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
         return;
       }
+      
+      if (this.ctype=='Business' && ( this.category  == null || this.category.name   == null || this.category.name.trim().length  == 0)) {
+        this.messageService.add({ severity: 'error', summary: 'Select Category', detail: '' });
+        return;
+      }
 
 
       var signup = new Signup();
@@ -181,6 +212,7 @@ export class LoginComponent implements OnInit {
       signup.mobile = this.mobile + "";
       signup.password = this.password;
       signup.role = this.ctype;
+      signup.category=this.category.name;
 
 
 

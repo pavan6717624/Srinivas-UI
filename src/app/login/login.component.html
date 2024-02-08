@@ -93,6 +93,8 @@
 
             <ng-container *ngIf="!isLogin">
 
+                <div class="flex flex-wrap gap-3"> &nbsp;</div>
+
                 <div class="flex flex-wrap gap-3">
                     Role
                     <div class="flex align-items-center">
@@ -113,13 +115,32 @@
 
             </ng-container>
 
-            <div class="flex align-items-center justify-content-between mb-6">
-                <!-- <ng-container *ngIf="isLogin">
+            <ng-container *ngIf="!isLogin && ctype=='Business'">
+
+                <div class="flex flex-wrap gap-3"> &nbsp;</div>
+
+                <div class="flex flex-wrap gap-3">
+                    Category
+                    <div class="flex align-items-center">
+                        <p-dropdown [options]="categories" [(ngModel)]="category" placeholder="Select Category" optionLabel="name" [showClear]="true"></p-dropdown>
+                    </div>
+
+
+
+                </div>
+
+            </ng-container>
+
+            <!-- <div class="flex align-items-center justify-content-between mb-6">
+                <ng-container *ngIf="isLogin">
                     <a class="font-medium no-underline ml-2 text-blue-500 text-right cursor-pointer">Forgot
                         password?</a>
-                </ng-container> -->
-                &nbsp;
-            </div>
+                </ng-container>
+              
+            </div> -->
+
+            <div class="flex flex-wrap gap-3"> &nbsp;</div>
+
 
             <button pButton pRipple [label]="isLogin?'Sign In':'Signup'" (click)='loginOrSingup()' icon="pi pi-user"
                 class="w-full"></button>

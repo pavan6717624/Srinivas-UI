@@ -13,3 +13,8 @@ p-inputnumber, .p-inputnumber {
     display: inline-flex;
     width: 100% !important;
 }
+
+:host ::ng-deep .p-dropdown {
+    width: 100%;
+  }
+  
