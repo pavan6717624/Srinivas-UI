@@ -10,28 +10,28 @@ export class ServiceService {
 
   login(login: Login)
   {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.comlogin',login);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/login',login);
   }
 
   signUp(signup: Signup)
   {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.comsignup',signup);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/signup',signup);
   }
 
   getLoginDetails() {
-    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.comgetLoginDetails')
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getLoginDetails')
   }
 
   getCategories() {
-    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.comgetCategories')
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getCategories')
   }
 
   getCategory() {
-    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.comgetCategory')
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getCategory')
   }
 
   getSubCategories(formData: FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.comgetSubCategories',formData)
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/getSubCategories',formData)
   }
 
 
