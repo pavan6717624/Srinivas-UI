@@ -70,13 +70,15 @@ export class ContentComponent implements OnInit {
 
   facebookToken = false;
 
+  filterVisible=false;
 
   ngOnInit(): void {
 
-    this.checkFacebookToken();
+    if (this.role === 'Customer') {
+      this.checkFacebookToken();
 
-    this.checkProfile();
-
+      this.checkProfile();
+    }
     this.getImages();
 
     this.getCategories();
@@ -85,6 +87,14 @@ export class ContentComponent implements OnInit {
 
 
 
+  }
+
+  ssubcategories: DropDown[]=[];
+
+  filter()
+  {
+    console.log(this.ssubcategories)
+  // this.images=this.imagesBackup.filter((o:any)=>(this.ssubcategories== null || this.fsubcategory.name== null || this.fsubcategory.name.trim().length== 0 || o.subCategory==this.fsubcategory.name));
   }
 
   cat: string = '';
@@ -129,7 +139,7 @@ export class ContentComponent implements OnInit {
 
   profileCheck = false;
   checkProfile() {
-    
+
     this.service.checkProfile().subscribe(
 
       (res: any) => {
@@ -155,19 +165,24 @@ export class ContentComponent implements OnInit {
           });
         }
         console.log(res);
-      
+
       },
       (err: any) => { console.log(err); }
 
     );
   }
 
+
+  imagesBackup:any;
+
   getImages() {
     this.showSkeleton = true;
     this.skeletonHeader = "Getting Images....";
     this.service.getImages().subscribe(
       (res: any) => {
-        this.images = res; console.log(this.images); this.showSkeleton = false;
+        this.images = res;
+        this.imagesBackup=res;
+         console.log(this.images); this.showSkeleton = false;
         this.skeletonHeader = "";
         var image = localStorage.getItem("goto");
         console.log("image " + image);
@@ -197,8 +212,10 @@ export class ContentComponent implements OnInit {
 
 
       },
-      (err: any) => { console.log(err); this.showSkeleton = false;
-        this.skeletonHeader = ""; }
+      (err: any) => {
+        console.log(err); this.showSkeleton = false;
+        this.skeletonHeader = "";
+      }
 
     );
   }
