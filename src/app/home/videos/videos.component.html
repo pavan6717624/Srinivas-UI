@@ -33,10 +33,22 @@
 </div>
 
 
-<p-blockUI [blocked]="loading || downloading[0] ||  downloading[1]">
+<!-- <p-blockUI [blocked]="loading || downloading[0] ||  downloading[1]">
   <i class="pi pi-spin pi-spinner" style="font-size: 3rem; color:#B6FFFA"></i>
 </p-blockUI>
+ -->
 
+
+<p-dialog [modal]="true" [closable]="false" header="loading" [(visible)]="loading || downloading[0] ||  downloading[1]">
+  <div class="grid justify-content-between">
+    <div>
+
+      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+
+    </div>
+  </div>
+</p-dialog>
 
 <div class="icon-bar">
 
