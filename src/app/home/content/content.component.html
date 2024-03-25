@@ -60,6 +60,16 @@
   </div>
 </p-dialog>
 
+<p-dialog [modal]="true" [closable]="false" header="loading" [(visible)]="loading || downloading">
+  <div class="grid justify-content-between">
+    <div>
+
+      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+
+    </div>
+  </div>
+</p-dialog>
 
 <p-dialog [modal]="true" header="Select Template" [(visible)]="uploadTemplateVisible">
 
