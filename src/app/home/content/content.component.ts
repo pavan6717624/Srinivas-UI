@@ -447,6 +447,8 @@ export class ContentComponent implements OnInit {
     localStorage.setItem("goto", this.templates[0]);
     this.route.navigate(['home/profile'])
   }
+
+  headerValue="Loading Images...";
   postToFacebook() {
 
 
@@ -456,13 +458,14 @@ export class ContentComponent implements OnInit {
     send.template = this.selectedTemplate;
     send.pages = this.selectedPages;
 
-
+    this.headerValue='Posting to Facebook...';
+    alert(this.headerValue);
     this.loading = true;
     //this.imageId=i;
 
     this.service.postToFacebookImage(send).subscribe(
-      (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
-      (err: any) => { console.log(err); this.loading = false; }
+      (res: any) => { this.headerValue="Loading Images...";console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
+      (err: any) => { this.headerValue="Loading Images...";console.log(err); this.loading = false; }
 
     );
 
@@ -477,13 +480,16 @@ export class ContentComponent implements OnInit {
     send.template = this.selectedTemplate;
     send.pages = this.selectedPages;
 
-
+    this.headerValue='Posting to Instagram...';
+    alert(this.headerValue);
     this.loading = true;
     //this.imageId=i;
 
+   
+
     this.service.postToInstagramImage(send).subscribe(
-      (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Instagram', detail: '' }); this.loading = false; },
-      (err: any) => { console.log(err); this.loading = false; }
+      (res: any) => {this.headerValue="Loading Images...";  console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Instagram', detail: '' }); this.loading = false; },
+      (err: any) => {this.headerValue="Loading Images..."; console.log(err); this.loading = false; }
 
     );
   }
