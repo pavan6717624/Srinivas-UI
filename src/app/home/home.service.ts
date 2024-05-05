@@ -30,6 +30,10 @@ export class HomeService {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookImage',send);
   }
 
+  postToInstagramImage(send:SendToFacebook) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToInstagramImage',send);
+  }
+
   postToFacebookVideo(formData:FormData) {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookVideo',formData);
   }
@@ -49,6 +53,10 @@ export class HomeService {
 
   getFacebookPageNames() {
     return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getFacebookPageNames');
+  }
+
+  getInstagramPageNames() {
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/getInstagramPageNames');
   }
 
   saveFacebookToken(formData:FormData) {

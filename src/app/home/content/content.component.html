@@ -105,10 +105,19 @@
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple title="Share" type="button" icon="pi pi-share-alt"
+          <button pButton pRipple title="Share" type="button" icon="pi pi-facebook"
             class="p-button-rounded p-button-info" (click)="selectPages(1,$event)"></button>
 
         </div>
+
+        <div>&nbsp;</div>
+        <div>
+
+          <button pButton pRipple title="Share" type="button" icon="pi pi-instagram"
+            class="p-button-rounded p-button-danger" (click)="selectInstagramPages(1,$event)"></button>
+
+        </div>
+
 
       </div>
     </p-tabPanel>
@@ -142,8 +151,16 @@
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info"
+          <button pButton pRipple type="button" icon="pi pi-facebook" title="Share" class="p-button-rounded p-button-info"
             (click)="selectPages(2,$event)"></button>
+
+        </div>
+
+        <div>&nbsp;</div>
+        <div>
+
+          <button pButton pRipple title="Share" type="button" icon="pi pi-instagram"
+            class="p-button-rounded p-button-danger" (click)="selectInstagramPages(2,$event)"></button>
 
         </div>
 
@@ -231,7 +248,7 @@
   </ng-template>
 </p-dialog>
 
-<p-dialog [modal]="true" header="Select Pages" [(visible)]="showPages">
+<p-dialog [modal]="true" header="Select Facebook Pages" [(visible)]="showPages">
   <div>&nbsp;</div>
   <div class="field-checkbox" *ngFor="let page of facebookPages">
     <p-checkbox name="group1" value="{{page}}" [(ngModel)]="selectedPages" inputId="{{page}}"></p-checkbox>
@@ -239,6 +256,18 @@
   </div>
   <ng-template pTemplate="footer">
     <p-button icon="pi pi-check" *ngIf="selectedPages.length > 0" (click)="postToFacebook()" label="Post"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [modal]="true" header="Select Instagram Pages" [(visible)]="showInstagramPages">
+  <div>&nbsp;</div>
+  <div class="field-checkbox" *ngFor="let page of instagramPages">
+    <p-checkbox name="group1" value="{{page}}" [(ngModel)]="selectedPages" inputId="{{page}}"></p-checkbox>
+    <label for="{{page}}"><b>{{page}}</b></label>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" *ngIf="selectedPages.length > 0" (click)="postToInstagram()" label="Post"
       styleClass="p-button-text"></p-button>
   </ng-template>
 </p-dialog>

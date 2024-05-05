@@ -37,6 +37,9 @@ export class ContentComponent implements OnInit {
   website: string = '';
 
   facebookPages: string[] = [];
+
+  instagramPages: string[] = [];
+
   uploadTemplateVisible = false;
   constructor(private sservice: ServiceService, private confirmationService: ConfirmationService, private messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
@@ -293,7 +296,10 @@ export class ContentComponent implements OnInit {
       (res: any) => {
         this.facebookToken = res;
         if (this.facebookToken)
-          this.getFacebookPageNames();
+          {
+            this.getFacebookPageNames();
+            this.getInstagramPageNames();
+          }
         console.log("chekcing facebook token :: " + res);
       },
       (err: any) => { console.log("chekcing facebook token :: " + err); }
@@ -305,6 +311,15 @@ export class ContentComponent implements OnInit {
     this.service.getFacebookPageNames().subscribe(
       (res: any) => { this.facebookPages = res; console.log("chekcing facebook pages :: " + res); },
       (err: any) => { console.log("chekcing facebook pages :: " + err); }
+
+    );
+  }
+
+  getInstagramPageNames()
+  {
+    this.service.getInstagramPageNames().subscribe(
+      (res: any) => {this.instagramPages = res; console.log("chekcing instagram pages :: " + res); },
+      (err: any) => { console.log("chekcing instagram pages :: " + err); }
 
     );
   }
@@ -322,6 +337,59 @@ export class ContentComponent implements OnInit {
       if (this.facebookToken) {
         this.selectedPages = [];
         this.showPages = true;
+        this.selectedTemplate = 'Template ' + i;
+      }
+      else {
+        console.log("reached here");
+        this.confirmationService.confirm({
+          target: event.target as EventTarget,
+          message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
+          header: 'Integration',
+          icon: 'pi pi-tags',
+          acceptIcon: "none",
+          rejectIcon: "none",
+          rejectButtonStyleClass: "p-button-text",
+          accept: () => {
+            this.loading = true;
+            localStorage.setItem("goto", this.templates[0]);
+            // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+            window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
+
+          },
+          reject: () => {
+          }
+        });
+        console.log("reached here too");
+      }
+    }
+    else {
+      this.confirmationService.confirm({
+        rejectVisible: false,
+        message: 'Please Complete Your Profile.',
+        header: 'Profile',
+        icon: 'pi pi-user',
+        acceptIcon: "none",
+        rejectIcon: "none",
+        rejectButtonStyleClass: "p-button-text",
+        accept: () => {
+
+          this.route.navigate(['home/profile']);
+
+        },
+        reject: () => {
+          this.route.navigate(['home/profile']);
+        }
+      });
+    }
+  }
+  showInstagramPages=false;
+  selectInstagramPages(i: number, event: Event) {
+
+
+    if (this.profileCheck) {
+      if (this.facebookToken) {
+        this.selectedPages = [];
+        this.showInstagramPages = true;
         this.selectedTemplate = 'Template ' + i;
       }
       else {
@@ -400,6 +468,24 @@ export class ContentComponent implements OnInit {
 
 
 
+  }
+
+  postToInstagram()
+  {
+    var send = new SendToFacebook();
+    send.image = this.templates[0];
+    send.template = this.selectedTemplate;
+    send.pages = this.selectedPages;
+
+
+    this.loading = true;
+    //this.imageId=i;
+
+    this.service.postToInstagramImage(send).subscribe(
+      (res: any) => { console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Instagram', detail: '' }); this.loading = false; },
+      (err: any) => { console.log(err); this.loading = false; }
+
+    );
   }
   scroll(el: string) {
 
