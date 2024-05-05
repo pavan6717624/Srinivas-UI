@@ -448,7 +448,7 @@ export class ContentComponent implements OnInit {
     this.route.navigate(['home/profile'])
   }
 
-  headerValue="Loading Images...";
+  //headerValue="Loading Images...";
   postToFacebook() {
 
 
@@ -458,14 +458,14 @@ export class ContentComponent implements OnInit {
     send.template = this.selectedTemplate;
     send.pages = this.selectedPages;
 
-    this.headerValue="Posting to Facebook...";
+    this.skeletonHeader="Posting to Facebook...";
     // alert(this.headerValue);
     this.loading = true;
     //this.imageId=i;
 
     this.service.postToFacebookImage(send).subscribe(
-      (res: any) => { this.headerValue="Loading Images...";console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
-      (err: any) => { this.headerValue="Loading Images...";console.log(err); this.loading = false; }
+      (res: any) => { this.skeletonHeader="Loading Images...";console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Facebook', detail: '' }); this.loading = false; },
+      (err: any) => { this.skeletonHeader="Loading Images...";console.log(err); this.loading = false; }
 
     );
 
@@ -480,7 +480,7 @@ export class ContentComponent implements OnInit {
     send.template = this.selectedTemplate;
     send.pages = this.selectedPages;
 
-    this.headerValue="Posting to Instagram...";
+    this.skeletonHeader="Posting to Instagram...";
     // alert(this.headerValue);
     this.loading = true;
     //this.imageId=i;
@@ -488,8 +488,8 @@ export class ContentComponent implements OnInit {
    
 
     this.service.postToInstagramImage(send).subscribe(
-      (res: any) => {this.headerValue="Loading Images...";  console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Instagram', detail: '' }); this.loading = false; },
-      (err: any) => {this.headerValue="Loading Images..."; console.log(err); this.loading = false; }
+      (res: any) => {this.skeletonHeader="Loading Images...";  console.log(res); this.uploadTemplateVisible = false; this.showPages = false; this.selectedPages = []; this.messageService.add({ severity: 'info', summary: 'Posted to Instagram', detail: '' }); this.loading = false; },
+      (err: any) => {this.skeletonHeader="Loading Images..."; console.log(err); this.loading = false; }
 
     );
   }

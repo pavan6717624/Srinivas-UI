@@ -49,7 +49,7 @@
 </p-blockUI> -->
 
 
-<p-dialog [modal]="true" [closable]="false" [header]="skeletonHeader" [(visible)]="showSkeleton">
+<p-dialog [modal]="true" [closable]="false" [header]="skeletonHeader" [(visible)]="showSkeleton || loading || downloading">
   <div class="grid justify-content-between">
     <div>
 
@@ -60,7 +60,7 @@
   </div>
 </p-dialog>
 
-<p-dialog [modal]="true" [closable]="false" header="Loading Images..." [(visible)]="loading || downloading">
+<!-- <p-dialog [modal]="true" [closable]="false" [header]="headerValue" [(visible)]="loading || downloading">
   <div class="grid justify-content-between">
     <div>
 
@@ -69,7 +69,7 @@
 
     </div>
   </div>
-</p-dialog>
+</p-dialog> -->
 
 <p-dialog [modal]="true" header="Select Template" [(visible)]="uploadTemplateVisible">
 
