@@ -458,8 +458,8 @@ export class ContentComponent implements OnInit {
     send.template = this.selectedTemplate;
     send.pages = this.selectedPages;
 
-    this.headerValue='Posting to Facebook...';
-    alert(this.headerValue);
+    this.headerValue="Posting to Facebook...";
+    // alert(this.headerValue);
     this.loading = true;
     //this.imageId=i;
 
@@ -480,8 +480,8 @@ export class ContentComponent implements OnInit {
     send.template = this.selectedTemplate;
     send.pages = this.selectedPages;
 
-    this.headerValue='Posting to Instagram...';
-    alert(this.headerValue);
+    this.headerValue="Posting to Instagram...";
+    // alert(this.headerValue);
     this.loading = true;
     //this.imageId=i;
 
