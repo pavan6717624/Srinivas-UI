@@ -39,16 +39,7 @@
  -->
 
 
-<p-dialog [modal]="true" [closable]="false" header="Loading Videos.." [(visible)]="loading || downloading[0] ||  downloading[1]">
-  <div class="grid justify-content-between">
-    <div>
 
-      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
-      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
-
-    </div>
-  </div>
-</p-dialog>
 
 <div class="icon-bar">
 
@@ -78,6 +69,29 @@
 
 </div>
 
+<p-dialog [modal]="true" header="Select Facebook Pages" [(visible)]="showPages">
+  <div>&nbsp;</div>
+  <div class="field-checkbox" *ngFor="let page of facebookPages">
+    <p-checkbox name="group1" value="{{page}}" [(ngModel)]="selectedPages" inputId="{{page}}"></p-checkbox>
+    <label for="{{page}}"><b>{{page}}</b></label>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" *ngIf="selectedPages.length > 0" (click)="postToFacebook()" label="Post"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
+
+<p-dialog [modal]="true" header="Select Instagram Pages" [(visible)]="showInstagramPages">
+  <div>&nbsp;</div>
+  <div class="field-checkbox" *ngFor="let page of instagramPages">
+    <p-checkbox name="group1" value="{{page}}" [(ngModel)]="selectedPages" inputId="{{page}}"></p-checkbox>
+    <label for="{{page}}"><b>{{page}}</b></label>
+  </div>
+  <ng-template pTemplate="footer">
+    <p-button icon="pi pi-check" *ngIf="selectedPages.length > 0" (click)="postToInstagram()" label="Post"
+      styleClass="p-button-text"></p-button>
+  </ng-template>
+</p-dialog>
 
 
 <p-dialog [modal]="true" [closable]="false" [header]="successString" [(visible)]="uploadSuccess">
@@ -111,6 +125,8 @@
 
 
 
+
+
 <p-dialog [modal]="true" header="Select Template" [(visible)]="uploadTemplateVisible">
 
   <p-tabView>
@@ -135,8 +151,16 @@
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(1)"></button>
+          <button pButton pRipple type="button" icon="pi pi-facebook" class="p-button-rounded p-button-info" (click)="selectPages(1,$event)"></button>
        
+        </div>
+
+        <div>&nbsp;</div>
+        <div>
+
+          <button pButton pRipple title="Share" type="button" icon="pi pi-instagram"
+            class="p-button-rounded p-button-danger" (click)="selectInstagramPages(1,$event)"></button>
+
         </div>
 
       </div>
@@ -161,8 +185,16 @@
         <div>&nbsp;</div>
         <div>
 
-          <button pButton pRipple type="button" icon="pi pi-share-alt" class="p-button-rounded p-button-info" (click)="postToFacebook(2)"></button>
+          <button pButton pRipple type="button" icon="pi pi-facebook" class="p-button-rounded p-button-info" (click)="selectPages(2,$event)"></button>
        
+        </div>
+
+        <div>&nbsp;</div>
+        <div>
+
+          <button pButton pRipple title="Share" type="button" icon="pi pi-instagram"
+            class="p-button-rounded p-button-danger" (click)="selectInstagramPages(2,$event)"></button>
+
         </div>
 
       </div>
@@ -170,4 +202,16 @@
   </p-tabView>
 
 
+</p-dialog>
+
+
+<p-dialog [modal]="true" [closable]="false" header="{{loading?'Loading Videos..':'Getting Templates...'}}" [(visible)]="loading || downloading[0] ||  downloading[1]">
+  <div class="grid justify-content-between">
+    <div>
+
+      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+      <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+
+    </div>
+  </div>
 </p-dialog>

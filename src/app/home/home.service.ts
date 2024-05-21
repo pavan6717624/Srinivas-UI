@@ -34,9 +34,14 @@ export class HomeService {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToInstagramImage',send);
   }
 
-  postToFacebookVideo(formData:FormData) {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookVideo',formData);
+  postToFacebookVideo(send:SendToFacebook) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToFacebookVideo',send);
   }
+
+  postToInstagramVideo(send:SendToFacebook) {
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/postToInstagramVideo',send);
+  }
+
 
   
   getTemplate(formData:FormData) {
