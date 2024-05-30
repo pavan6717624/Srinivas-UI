@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { ConfirmationService } from 'primeng/api';
 import { LoginStatus } from 'src/app/login/login.component';
 import { AuthService } from 'src/app/shared/auth.service';
 import { HomeService } from '../home.service';
@@ -16,7 +17,7 @@ export class HeaderComponent implements OnInit {
   role = '';
   roleName = '';
   width: number = window.innerWidth;
-  constructor(private authSerivce: AuthService, private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) {
+  constructor(private confirmationService: ConfirmationService,private authSerivce: AuthService, private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) {
 
     this.userName = this.authSerivce.getUserName();
     this.role = this.authSerivce.getRole();
@@ -48,6 +49,28 @@ export class HeaderComponent implements OnInit {
       label: 'Profile', icon: 'pi pi-user', command: () => {
         this.sidebarVisible = false;
         this.route.navigate(['home/profile']);
+      }
+    },
+     {
+      label: '(Re) Integrate Facebook', icon: 'pi pi-facebook', command: () => {
+        this.confirmationService.confirm({
+         
+          message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
+          header: 'Integration',
+          icon: 'pi pi-tags',
+          acceptIcon: "none",
+          rejectIcon: "none",
+          rejectButtonStyleClass: "p-button-text",
+          accept: () => {
+            this.loading = true;
+            
+            // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+            window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
+
+          },
+          reject: () => {
+          }
+        });
       }
     },
     {

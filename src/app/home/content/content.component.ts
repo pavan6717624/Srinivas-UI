@@ -44,6 +44,7 @@ export class ContentComponent implements OnInit {
   constructor(private sservice: ServiceService, private confirmationService: ConfirmationService, private messageService: MessageService, private service: HomeService, public route: Router, private authSerivce: AuthService) {
     this.role = this.authSerivce.getRole();
   }
+  
 
   role: string = '';
 
