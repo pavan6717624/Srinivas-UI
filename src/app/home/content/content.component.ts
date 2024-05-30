@@ -342,24 +342,36 @@ export class ContentComponent implements OnInit {
       }
       else {
         console.log("reached here");
+        // this.confirmationService.confirm({
+        //   target: event.target as EventTarget,
+        //   message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
+        //   header: 'Integration',
+        //   icon: 'pi pi-tags',
+        //   acceptIcon: "none",
+        //   rejectIcon: "none",
+        //   rejectButtonStyleClass: "p-button-text",
+        //   accept: () => {
+        //     this.loading = true;
+        //     localStorage.setItem("goto", this.templates[0]);
+        //     // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        //     window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
+
+        //   },
+        //   reject: () => {
+        //   }
+        // });
         this.confirmationService.confirm({
-          target: event.target as EventTarget,
           message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
           header: 'Integration',
+          rejectVisible: true,
           icon: 'pi pi-tags',
-          acceptIcon: "none",
-          rejectIcon: "none",
-          rejectButtonStyleClass: "p-button-text",
           accept: () => {
             this.loading = true;
-            localStorage.setItem("goto", this.templates[0]);
-            // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
             window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
-
           },
-          reject: () => {
-          }
+          reject: () => {}
         });
+
         console.log("reached here too");
       }
     }
@@ -395,24 +407,37 @@ export class ContentComponent implements OnInit {
       }
       else {
         console.log("reached here");
+        // this.confirmationService.confirm({
+        //   target: event.target as EventTarget,
+        //   message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
+        //   header: 'Integration',
+        //   icon: 'pi pi-tags',
+        //   acceptIcon: "none",
+        //   rejectIcon: "none",
+        //   rejectButtonStyleClass: "p-button-text",
+        //   accept: () => {
+        //     this.loading = true;
+        //     localStorage.setItem("goto", this.templates[0]);
+        //     // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
+        //     window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
+
+        //   },
+        //   reject: () => {
+        //   }
+        // });
+
         this.confirmationService.confirm({
-          target: event.target as EventTarget,
           message: 'You have not Integrated your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
           header: 'Integration',
+          rejectVisible: true,
           icon: 'pi pi-tags',
-          acceptIcon: "none",
-          rejectIcon: "none",
-          rejectButtonStyleClass: "p-button-text",
           accept: () => {
             this.loading = true;
-            localStorage.setItem("goto", this.templates[0]);
-            // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
             window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts");
-
           },
-          reject: () => {
-          }
+          reject: () => {}
         });
+
         console.log("reached here too");
       }
     }

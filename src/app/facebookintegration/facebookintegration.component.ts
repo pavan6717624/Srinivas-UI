@@ -9,14 +9,14 @@ import { HomeService } from '../home/home.service';
 })
 export class FacebookintegrationComponent implements OnInit {
 
-  accessToken: string ="";
+  accessToken: string = "";
 
-  constructor( private service: HomeService) { 
+  constructor(private service: HomeService) {
 
-    var url=window.location.href;
-    var index1=url.indexOf("=")+1;
-    var index2=url.indexOf("&");
-    this.accessToken=url.substring(index1,index2);
+    var url = window.location.href;
+    var index1 = url.indexOf("=") + 1;
+    var index2 = url.indexOf("&");
+    this.accessToken = url.substring(index1, index2);
     console.log(this.accessToken);
 
     var formData = new FormData();
@@ -25,11 +25,10 @@ export class FacebookintegrationComponent implements OnInit {
     this.service.saveFacebookToken(formData).subscribe(
 
       (res: any) => {
-        
-       if(res)
-       {
-         window.location.replace("https://client.heidigi.com/home/images")
-       }
+
+        if (res) {
+          window.location.replace("https://client.heidigi.com/home")
+        }
       },
       (err: any) => { console.log(err) }
 
@@ -38,8 +37,8 @@ export class FacebookintegrationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   
-        
+
+
   }
 
 }
