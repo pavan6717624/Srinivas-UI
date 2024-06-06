@@ -71,28 +71,28 @@
                     <div style="padding-right:3px;">                    Line 1 
                     </div>
                     <div>
-                    <input type="text" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line1">
+                    <input type="text" maxlength="25" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line1">
                     </div>
                 </div>
                 <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
                     <div style="padding-right:3px;">                      Line 2 
                     </div>
                     <div>
-                    <input type="text" placeholder="Line 2" class="p-inputtext-sm" pInputText [(ngModel)]="line2">
+                    <input type="text" maxlength="25" placeholder="Line 2" class="p-inputtext-sm" pInputText [(ngModel)]="line2">
                     </div>
                 </div>
                 <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
                     <div style="padding-right:3px;">                       Line 3 
                     </div>
                     <div>
-                    <input type="text" placeholder="Line 3" class="p-inputtext-sm" pInputText [(ngModel)]="line3">
+                    <input type="text" maxlength="25" placeholder="Line 3" class="p-inputtext-sm" pInputText [(ngModel)]="line3">
                     </div>
                 </div>
                 <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
                     <div style="padding-right:3px;">                       Line 4 
                     </div>
                     <div>
-                    <input type="text" placeholder="Line 4" class="p-inputtext-sm" pInputText [(ngModel)]="line4">
+                    <input type="text" maxlength="25" placeholder="Line 4" class="p-inputtext-sm" pInputText [(ngModel)]="line4">
                     </div>
                 </div>
 
@@ -100,7 +100,7 @@
                     <div style="padding-right:3px;">                       Email
                     </div>
                     <div>
-                    <input type="text" placeholder="Email" class="p-inputtext-sm" pInputText [(ngModel)]="email">
+                    <input type="text" maxlength="25" placeholder="Email" class="p-inputtext-sm" pInputText [(ngModel)]="email">
                     </div>
                 </div>
 
@@ -108,14 +108,14 @@
                     <div style="padding-right:3px;">                        Website
                     </div>
                     <div>
-                    <input type="text" placeholder="Website" class="p-inputtext-sm" pInputText [(ngModel)]="website">
+                    <input type="text" maxlength="25" placeholder="Website" class="p-inputtext-sm" pInputText [(ngModel)]="website">
                     </div>
                 </div>
                 <div style="padding-bottom:3px;text-align:center;align-items: center;" class="flex justify-content-between">
                     <div style="padding-right:3px;">                        Address
                     </div>
                     <div>
-                    <input type="text" placeholder="Address" class="p-inputtext-sm" pInputText [(ngModel)]="address">
+                    <input type="text" maxlength="25" placeholder="Address" class="p-inputtext-sm" pInputText [(ngModel)]="address">
                     </div>
                 </div>
                 
@@ -139,7 +139,7 @@
         <img src="assets/images/success.jpg" alt="Image" height="200">
     </p>
     <ng-template pTemplate="footer">
-        <p-button icon="pi pi-check" label="Done" (click)='uploadSuccess=false' styleClass="p-button-text"></p-button>
+        <p-button icon="pi pi-check" label="Done" (click)='onSuccess()' styleClass="p-button-text"></p-button>
     </ng-template>
 </p-dialog>
 

@@ -51,6 +51,13 @@ export class ProfileComponent implements OnInit {
    window.location.reload();
   }
 
+  onSuccess()
+  {
+    this.uploadSuccess=false;
+    this.router.navigate(['/home'])
+
+  }
+
   onUploadPhoto(event: any) {
     this.loading=false;
     window.location.reload();
