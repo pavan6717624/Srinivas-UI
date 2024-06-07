@@ -70,8 +70,14 @@
 </div>
 
 <p-dialog [modal]="true" header="Select Facebook Pages" [(visible)]="showPages">
-  <div>&nbsp;</div>
+
+  <div *ngIf="facebookPages==null || facebookPages.length==0">
+    <label class="block text-900 font-medium mb-2">No Pages Found..</label>
+   </div>
+
+
   <div class="field-checkbox" *ngFor="let page of facebookPages">
+    <div>&nbsp;</div>
     <p-checkbox name="group1" value="{{page}}" [(ngModel)]="selectedPages" inputId="{{page}}"></p-checkbox>
     <label for="{{page}}"><b>{{page}}</b></label>
   </div>
@@ -82,8 +88,13 @@
 </p-dialog>
 
 <p-dialog [modal]="true" header="Select Instagram Pages" [(visible)]="showInstagramPages">
-  <div>&nbsp;</div>
+
+  <div *ngIf="instagramPages==null || instagramPages.length==0">
+    <label class="block text-900 font-medium mb-2">No Pages Found..</label>
+   </div>
+ 
   <div class="field-checkbox" *ngFor="let page of instagramPages">
+    <div>&nbsp;</div>
     <p-checkbox name="group1" value="{{page}}" [(ngModel)]="selectedPages" inputId="{{page}}"></p-checkbox>
     <label for="{{page}}"><b>{{page}}</b></label>
   </div>
