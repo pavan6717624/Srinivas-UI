@@ -10,6 +10,10 @@ export class HomeService {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/showTemplate',formData);
   }
 
+  reIntegrate() {
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/reIntegrateFacebook');
+  }
+
   showTemplateVideo(formData: FormData) {
     return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/showTemplateVideo',formData);
   }

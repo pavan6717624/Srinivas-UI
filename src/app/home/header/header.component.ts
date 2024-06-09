@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   role = '';
   roleName = '';
   width: number = window.innerWidth;
-  constructor(private confirmationService: ConfirmationService,private authSerivce: AuthService, private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) {
+  constructor(private confirmationService: ConfirmationService, private authSerivce: AuthService, private deviceService: DeviceDetectorService, private route: Router, private hService: HomeService) {
 
     this.userName = this.authSerivce.getUserName();
     this.role = this.authSerivce.getRole();
@@ -51,24 +51,25 @@ export class HeaderComponent implements OnInit {
         this.route.navigate(['home/profile']);
       }
     },
-     {
+    {
       label: '(Re) Integrate Facebook', icon: 'pi pi-facebook', command: () => {
         this.confirmationService.confirm({
-        message: 'Do you want to (Re) Integrate your Facebook Page(s) with Heidigi?',
-        header: 'Integration',
-        rejectVisible: true,
-        icon: 'pi pi-tags',
-        accept: () => {
-          this.loading = true;
-          window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish");
-        },
-        reject: () => {}
-      });
+          message: 'Do you want to (Re) Integrate your Facebook Page(s) with Heidigi?',
+          header: 'Integration',
+          rejectVisible: true,
+          icon: 'pi pi-tags',
+          accept: () => {
+            this.loading = true;
+            this.reIntegrate();
+            // window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish");
+          },
+          reject: () => { }
+        });
 
 
 
         // this.confirmationService.confirm({
-         
+
         //   message: 'Do you want to (Re) Integrate your Facebook Page(s) with Heidigi. Click on Yes to Integrate.',
         //   header: 'Integration',
         //   icon: 'pi pi-tags',
@@ -77,7 +78,7 @@ export class HeaderComponent implements OnInit {
         //   rejectButtonStyleClass: "p-button-text",
         //   accept: () => {
         //     this.loading = true;
-            
+
         //     // this.messageService.add({ severity: 'info', summary: 'Confirmed', detail: 'You have accepted' });
         //     window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=rerequest&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish");
 
@@ -95,6 +96,25 @@ export class HeaderComponent implements OnInit {
     }];
   isMobile = false;
   loginStatus: LoginStatus = new LoginStatus();
+
+
+
+  reIntegrate() {
+    this.hService.reIntegrate().subscribe(
+
+      (res: any) => {
+
+
+
+        window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookIntegration&auth_type=reauthenticate&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish");
+
+
+        this.loading = false;
+      },
+      (err: any) => { alert("Failed"); this.loading = false; console.log(err) }
+
+    );
+  }
   ngOnInit(): void {
 
     this.isMobile = this.deviceService.isMobile();
