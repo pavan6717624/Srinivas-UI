@@ -66,7 +66,7 @@
 
 
 
-            <label for="password" class="block text-900 font-medium mb-2">Password</label>
+            <!-- <label for="password" class="block text-900 font-medium mb-2">Password</label>
             <div class="col-12">
                 <div class="p-inputgroup">
 
@@ -75,8 +75,7 @@
                     <span class="p-inputgroup-addon" (click)="changeType()" style="cursor:pointer"><i [class]="icon"></i></span>
                 </div>
             </div>
-            <!-- <input id="password" type="password" placeholder="Password" [(ngModel)]="password" pInputText class="w-full mb-3"> -->
-            <ng-container *ngIf="!isLogin">
+              <ng-container *ngIf="!isLogin">
                 <label for="cpassword" class="block text-900 font-medium mb-2">Confirm Password</label>
                 
             
@@ -89,7 +88,7 @@
                     </div>
                 </div>
             
-            </ng-container>
+            </ng-container> -->
 
             <ng-container *ngIf="!isLogin">
 
@@ -142,8 +141,22 @@
             <div class="flex flex-wrap gap-3"> &nbsp;</div>
 
 
-            <button pButton pRipple [label]="isLogin?'Sign In':'Signup'" (click)='loginOrSingup()' icon="pi pi-user"
+            <button pButton pRipple [label]="isLogin?'Generate OTP':'Signup'" (click)='generateOTP()' [icon]="isLogin?'pi pi-key':'pi pi-user'"
                 class="w-full"></button>
+
+               
+
+                <div style="text-align:center;padding-top:5px"> 
+       
+                    <label class="block text-900 font-medium mb-2">(OR)</label>
+
+                    </div>
+
+
+                <button pButton pRipple [label]="isLogin?'Login with Facebook':'Signup with Facebook'" (click)='facebookLogin()' icon="pi pi-facebook"
+                class="w-full"></button>
+
+
         </div>
     </div>
 </div>
@@ -152,7 +165,7 @@
     <i class="pi pi-spin pi-spinner" style="font-size: 3rem; color:#B6FFFA"></i>
 </p-blockUI> -->
 
-<p-dialog [modal]="true" [closable]="false" header="Logging In..." [(visible)]="loading">
+<p-dialog [modal]="true" [closable]="false" [header]="header" [(visible)]="loading">
   <div class="grid justify-content-between">
     <div>
 
@@ -162,3 +175,26 @@
     </div>
   </div>
 </p-dialog>
+
+
+<p-dialog [modal]="true" [closable]="false" [(visible)]="otpView">
+    <div class="grid justify-content-between">
+      <div style="padding-top:5px"> 
+       
+        <label class="block text-900 font-medium mb-2">Provide OTP</label>
+  
+        <div class="col-12">
+            
+
+                <input type="text" placeholder="OTP" [(ngModel)]="password" pInputText>
+
+
+        </div>
+        <div class="flex flex-wrap gap-3"> &nbsp;</div>
+
+
+        <button pButton pRipple label="Sign In" (click)='loginOrSingup()' icon="pi pi-user"
+            class="w-full"></button>
+      </div>
+    </div>
+  </p-dialog>

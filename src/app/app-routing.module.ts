@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { SuccessComponent } from './success/success.component';
 import { AuthguardGuard } from './shared/authguard.guard';
 import { FacebookintegrationComponent } from './facebookintegration/facebookintegration.component';
+import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule), canActivate:[AuthguardGuard], data: { roles: ['Customer','Designer'] } },
   {path: 'success', component: SuccessComponent},
   {path: 'facebookIntegration', component: FacebookintegrationComponent},
+  {path: 'facebookLogin', component: FacebookLoginComponent},
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate:[AuthguardGuard], data: { roles: ['Admin'] } },
   
 
