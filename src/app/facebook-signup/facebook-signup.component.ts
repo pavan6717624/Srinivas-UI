@@ -48,7 +48,7 @@ export class FacebookSignupComponent implements OnInit {
         }
         else {
           this.messageService.clear();
-          this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
+          this.messageService.add({ severity: 'error', summary: 'Signup Failed' + res.message, detail: '' });
 
           this.router.navigate(['login']);
         }
@@ -56,6 +56,9 @@ export class FacebookSignupComponent implements OnInit {
       },
       (err) => {
         console.log(err + " Error");
+        this.messageService.clear();
+        this.messageService.add({ severity: 'error', summary: 'Signup Failed', detail: '' });
+        this.router.navigate(['login']);
 
       }
     );
