@@ -68,7 +68,7 @@
             <p-tabPanel header="Other Details" style="padding:0">
                 <div [style]="{ width: '100%', height: '400px','overflow': 'auto', 'padding':'0'  }" >
                 <div style="text-align:left;align-items: left;" class="flex justify-content-between">
-                    <div style="padding-right:3px;">                    Full Name * <br/> ({{(line1.length)+"/25"}})
+                    <div style="padding-right:3px;">                    Full Name * <br/> ({{(line1.length?line1.length:0)+"/25"}})
                     </div>
                     <div style="padding:0">
                     <input type="text" maxlength="25" placeholder="Line 1" class="p-inputtext-sm" pInputText [(ngModel)]="line1">
@@ -76,7 +76,7 @@
                 </div>
                 <div>&nbsp;</div>
                 <div style="text-align:left;align-items: left;" class="flex justify-content-between">
-                    <div style="padding-right:3px;">                      Designation *<br/> ({{(line2.length)+"/25"}})
+                    <div style="padding-right:3px;">                      Designation *<br/> ({{(line2.length?line2.length:0)+"/25"}})
                     </div>
                     <div style="padding:0">
                     <input type="text" maxlength="25" placeholder="Line 2" class="p-inputtext-sm" pInputText [(ngModel)]="line2">
@@ -84,7 +84,7 @@
                 </div>
                 <div>&nbsp;</div>
                 <div style="text-align:left;align-items: left;" class="flex justify-content-between">
-                    <div style="padding-right:3px;">                      Expertisze In <br/> ({{(line3.length)+"/25"}})
+                    <div style="padding-right:3px;">                      Expertisze In <br/> ({{(line3.length?line3.length:0)+"/25"}})
                     </div>
                     <div style="padding:0">
                     <input type="text" maxlength="25" placeholder="Line 3" class="p-inputtext-sm" pInputText [(ngModel)]="line3">
@@ -92,7 +92,7 @@
                 </div>
                 <div>&nbsp;</div>
                 <div style="text-align:left;align-items: left;" class="flex justify-content-between">
-                    <div style="padding-right:3px;">                      Other Info <br/> ({{(line4.length)+"/25"}})
+                    <div style="padding-right:3px;">                      Other Info <br/> ({{(line4.length?line4.length:0)+"/25"}})
                     </div>
                     <div style="padding:0">
                     <input type="text" maxlength="25" placeholder="Line 4" class="p-inputtext-sm" pInputText [(ngModel)]="line4">
@@ -100,7 +100,7 @@
                 </div>
                 <div>&nbsp;</div>
                 <div style="text-align:left;align-items: left;" class="flex justify-content-between">
-                    <div style="padding-right:3px;">                       Email<br/> ({{(email.length)+"/25"}})
+                    <div style="padding-right:3px;">                       Email<br/> ({{(email.length?email.length:0)+"/25"}})
                     </div>
                     <div style="padding:0">
                     <input type="text" maxlength="25" placeholder="Email" class="p-inputtext-sm" pInputText [(ngModel)]="email">
@@ -108,7 +108,7 @@
                 </div>
                 <div>&nbsp;</div>
                 <div style="text-align:left;align-items: left;" class="flex justify-content-between">
-                    <div style="padding-right:3px;">                        Website<br/> ({{(website.length)+"/25"}})
+                    <div style="padding-right:3px;">                        Website<br/> ({{(website.length?website.length:0)+"/25"}})
                     </div>
                     <div style="padding:0">
                     <input type="text" maxlength="25" placeholder="Website" class="p-inputtext-sm" pInputText [(ngModel)]="website">
@@ -116,7 +116,7 @@
                 </div>
                 <div>&nbsp;</div>
                 <div style="text-align:left;align-items: left;" class="flex justify-content-between">
-                    <div style="padding-right:3px;">                        Address *<br/> ({{(address.length)+"/25"}})
+                    <div style="padding-right:3px;">                        Address *<br/> ({{(address.length?address.length:0)+"/25"}})
                     </div>
                     <div style="padding:0">
                     <input type="text" maxlength="25" placeholder="Address" class="p-inputtext-sm" pInputText [(ngModel)]="address">
