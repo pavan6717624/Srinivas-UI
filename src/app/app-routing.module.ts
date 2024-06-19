@@ -6,6 +6,7 @@ import { SuccessComponent } from './success/success.component';
 import { AuthguardGuard } from './shared/authguard.guard';
 import { FacebookintegrationComponent } from './facebookintegration/facebookintegration.component';
 import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
+import { FacebookSignupComponent } from './facebook-signup/facebook-signup.component';
 
 
 const routes: Routes = [
@@ -15,6 +16,7 @@ const routes: Routes = [
   {path: 'success', component: SuccessComponent},
   {path: 'facebookIntegration', component: FacebookintegrationComponent},
   {path: 'facebookLogin', component: FacebookLoginComponent},
+  {path: 'facebookSignup', component: FacebookSignupComponent},
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule), canActivate:[AuthguardGuard], data: { roles: ['Admin'] } },
   
 
