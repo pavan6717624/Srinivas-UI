@@ -42,15 +42,16 @@ export class FacebookSignupComponent implements OnInit {
           let tokenStr = 'Bearer ' + res.jwt;
           localStorage.setItem('token', tokenStr);
 
+          alert("login successful");
 
-          this.router.navigate(['home'], { state: { loginStatus: res } });
+          //this.router.navigate(['home'], { state: { loginStatus: res } });
 
         }
         else {
           this.messageService.clear();
           this.messageService.add({ severity: 'error', summary: 'Signup Failed' + res.message, detail: '' });
 
-          this.router.navigate(['login']);
+         // this.router.navigate(['login']);
         }
 
       },
@@ -58,7 +59,7 @@ export class FacebookSignupComponent implements OnInit {
         console.log(err + " Error");
         this.messageService.clear();
         this.messageService.add({ severity: 'error', summary: 'Signup Failed', detail: '' });
-        this.router.navigate(['login']);
+       // this.router.navigate(['login']);
 
       }
     );
