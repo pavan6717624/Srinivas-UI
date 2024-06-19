@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { HomeService } from '../home/home.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class FacebookSignupComponent implements OnInit {
 
   accessToken: string = "";
   formData = new FormData();
-  constructor(private service: HomeService, private router: Router, private messageService: MessageService) {
+  constructor(private service: HomeService, private router: Router, private confirmationService: ConfirmationService) {
 
     var url = window.location.href;
     var index1 = url.indexOf("=") + 1;
@@ -29,37 +29,55 @@ export class FacebookSignupComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
-  facebookSignup()
-  {
-    this.formData.set("category", localStorage.getItem("category")+"");
-    this.formData.set("type", localStorage.getItem("type")+"");
+  loading = true;
+  facebookSignup() {
+    this.formData.set("category", localStorage.getItem("category") + "");
+    this.formData.set("role", localStorage.getItem("role") + "");
     this.service.facebookSignup(this.formData).subscribe(
       (res: any) => {
 
         if (res.loginStatus) {
 
-          let tokenStr = 'Bearer ' + res.jwt;
-          localStorage.setItem('token', tokenStr);
-
-          alert("login successful");
-
-          //this.router.navigate(['home'], { state: { loginStatus: res } });
+          this.router.navigate(['success']);
 
         }
         else {
-          this.messageService.clear();
-          this.messageService.add({ severity: 'error', summary: 'Signup Failed' + res.message, detail: '' });
+          this.loading = false;
+          this.confirmationService.confirm({
+            message: 'Signup Failed. ' + res.message,
+            header: 'Signup Failed',
+            acceptLabel: 'Login Page',
+            rejectVisible: false,
+            icon: 'pi pi-times',
+            acceptIcon: 'pi pi-user',
+            accept: () => {
+              this.loading = true;
+              this.router.navigate(['login']);
+            },
+            reject: () => { }
+          });
 
-         // this.router.navigate(['login']);
+
         }
 
       },
       (err) => {
-        console.log(err + " Error");
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Signup Failed', detail: '' });
-       // this.router.navigate(['login']);
+        console.log(err);
+        this.loading = false;
+        this.confirmationService.confirm({
+          message: 'Signup Failed. ',
+          header: 'Signup Failed',
+          acceptLabel: 'Login Page',
+          rejectVisible: false,
+          icon: 'pi pi-times',
+          acceptIcon: 'pi pi-user',
+          accept: () => {
+            this.loading = true;
+            this.router.navigate(['login']);
+          },
+          reject: () => { }
+        });
+
 
       }
     );
