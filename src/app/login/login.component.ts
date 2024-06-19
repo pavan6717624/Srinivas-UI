@@ -116,6 +116,76 @@ export class LoginComponent implements OnInit {
       );
     }
 
+    else
+    {
+      if (this.name==null || this.name.trim().length == 0) {
+        this.messageService.clear();
+        this.messageService.add({ severity: 'error', summary: 'Invalid Name Provided.', detail: '' });
+        return;
+      }
+
+      if (this.email==null || this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
+        this.messageService.clear();
+        this.messageService.add({ severity: 'error', summary: 'Invalid Email Provided.', detail: '' });
+        return;
+      }
+
+
+
+      // if (this.cpassword ==null || this.cpassword.trim().length == 0) {
+      //   this.messageService.clear();
+      //   this.messageService.add({ severity: 'error', summary: 'Invalid Confirm Password Provided.', detail: '' });
+      //   return;
+      // }
+
+      // if ( this.password != this.cpassword) {
+      //   this.messageService.clear();
+      //   this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
+      //   return;
+      // }
+      
+      if (this.ctype=='Business' && ( this.category  == null || this.category.name   == null || this.category.name.trim().length  == 0)) {
+        this.messageService.clear();
+        this.messageService.add({ severity: 'error', summary: 'Select Category', detail: '' });
+        return;
+      }
+
+
+      var signup = new Signup();
+      signup.name = this.name;
+      signup.email = this.email;
+      signup.mobile = this.mobile + "";
+      signup.password = this.password;
+      signup.role = this.ctype;
+      signup.category=this.category.name;
+
+
+
+
+      console.log(signup);
+
+      this.loading = true;
+      this.service.signUp(signup).subscribe(
+        (res: any) => {
+          if (res && res.loginStatus)
+            this.router.navigate(['success']);
+          else if (res && !res.loginStatus) {
+            this.loading = false;
+            console.log("SignUp failed1");
+            this.messageService.clear();
+            this.messageService.add({ severity: 'error', summary: "SignUp failed"+res.message, detail: '' });
+          }
+          else {
+            this.loading = false;
+            console.log("SignUp failed2");
+            this.messageService.clear();
+            this.messageService.add({ severity: 'error', summary: "SignUp failed", detail: '' });
+          }
+        },
+        (err) => { console.log(err + " Error"); this.loading = false; }
+      );
+    }
+
   }
 
 
@@ -169,17 +239,14 @@ export class LoginComponent implements OnInit {
       return;
     }
 
-    if (this.password==null || this.password.trim().length == 0) {
-      this.messageService.clear();
-      this.messageService.add({ severity: 'error', summary: 'Invalid Password Provided.', detail: '' });
-      return;
-    }
-
-
-
-
-
     if (this.isLogin) {
+
+      if (this.password==null || this.password.trim().length == 0) {
+        this.messageService.clear();
+        this.messageService.add({ severity: 'error', summary: 'Invalid Password Provided.', detail: '' });
+        return;
+      }
+
       var login = new Login();
       login.mobile = this.mobile + "";
       login.password = this.password;
@@ -239,17 +306,17 @@ export class LoginComponent implements OnInit {
 
 
 
-      if (this.cpassword ==null || this.cpassword.trim().length == 0) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Invalid Confirm Password Provided.', detail: '' });
-        return;
-      }
+      // if (this.cpassword ==null || this.cpassword.trim().length == 0) {
+      //   this.messageService.clear();
+      //   this.messageService.add({ severity: 'error', summary: 'Invalid Confirm Password Provided.', detail: '' });
+      //   return;
+      // }
 
-      if ( this.password != this.cpassword) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
-        return;
-      }
+      // if ( this.password != this.cpassword) {
+      //   this.messageService.clear();
+      //   this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
+      //   return;
+      // }
       
       if (this.ctype=='Business' && ( this.category  == null || this.category.name   == null || this.category.name.trim().length  == 0)) {
         this.messageService.clear();
@@ -298,7 +365,20 @@ export class LoginComponent implements OnInit {
 
   facebookLogin()
   {
-    window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookLogin&auth_type=reauthenticate&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish%2Cemail");
+    if(!this.isLogin)
+    {
+      if (this.ctype=='Business' && ( this.category  == null || this.category.name   == null || this.category.name.trim().length  == 0)) {
+        this.messageService.clear();
+        this.messageService.add({ severity: 'error', summary: 'Select Category', detail: '' });
+        return;
+      }
+
+      localStorage.setItem("ctype","Business");
+      localStorage.setItem("category",this.category.name)
+
+    }
+
+    window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookSignup&auth_type=reauthenticate&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish%2Cemail");
        
   }
 

@@ -20,6 +20,7 @@ import { SuccessComponent } from './success/success.component';
 import { FacebookintegrationComponent } from './facebookintegration/facebookintegration.component';
 import { ConfirmationService } from 'primeng/api';
 import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
+import { FacebookSignupComponent } from './facebook-signup/facebook-signup.component';
 
 
 
@@ -30,6 +31,7 @@ import { FacebookLoginComponent } from './facebook-login/facebook-login.componen
     SuccessComponent,
     FacebookintegrationComponent,
     FacebookLoginComponent,
+    FacebookSignupComponent,
 
   ],
   imports: [

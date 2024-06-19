@@ -4,11 +4,11 @@ import { MessageService } from 'primeng/api';
 import { HomeService } from '../home/home.service';
 
 @Component({
-  selector: 'app-facebook-login',
-  templateUrl: './facebook-login.component.html',
-  styleUrls: ['./facebook-login.component.css']
+  selector: 'app-facebook-signup',
+  templateUrl: './facebook-signup.component.html',
+  styleUrls: ['./facebook-signup.component.css']
 })
-export class FacebookLoginComponent implements OnInit {
+export class FacebookSignupComponent implements OnInit {
 
   accessToken: string = "";
   formData = new FormData();
@@ -23,21 +23,18 @@ export class FacebookLoginComponent implements OnInit {
 
     this.formData.set("accessToken", this.accessToken);
 
-    this.facebookLogin();
+    this.facebookSignup();
 
   }
 
   ngOnInit(): void {
-
-
   }
 
-  
-
-
-
-  facebookLogin() {
-    this.service.facebookLogin(this.formData).subscribe(
+  facebookSignup()
+  {
+    this.formData.set("category", localStorage.getItem("category")+"");
+    this.formData.set("type", localStorage.getItem("type")+"");
+    this.service.facebookSignup(this.formData).subscribe(
       (res: any) => {
 
         if (res.loginStatus) {
@@ -62,6 +59,6 @@ export class FacebookLoginComponent implements OnInit {
 
       }
     );
-
   }
+
 }
