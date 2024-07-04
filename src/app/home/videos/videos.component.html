@@ -126,7 +126,7 @@
   <input id="name" type="text" placeholder="SubCategory" [(ngModel)]="subcategory" pInputText class="w-full mb-3">
 
   <p-fileUpload name="file" [customUpload]="true" [files]="uploadedFiles" (uploadHandler)="handleUpload($event)"
-  accept=".mp4" [maxFileSize]="5000000">
+  accept=".mp4" [maxFileSize]="25000000">
     <ng-template pTemplate="content">
       <ul *ngIf="uploadedFiles.length">
         <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
