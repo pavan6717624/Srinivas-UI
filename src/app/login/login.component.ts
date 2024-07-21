@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
   constructor(private service: ServiceService, private router: Router, private messageService: MessageService) { }
   name: string = '';
   email: string = '';
-  mobile: number | undefined;
+  mobile: number | undefined = 9449840144;
   password: string = '';
   isLogin: boolean = true;
   ctype: string = 'Business';
@@ -53,15 +53,15 @@ export class LoginComponent implements OnInit {
         this.loginStatus = res;
         console.log(this.loginStatus);
 
-        if (this.loginStatus.userType === 'Customer') {
-          this.router.navigate(['home/start'], { state: { loginStatus: res } });
+        if (this.loginStatus.userType === 'User') {
+          this.router.navigate(['home/user'], { state: { loginStatus: res } });
         }
-        else if (this.loginStatus.userType === 'Designer') {
-          this.router.navigate(['home/designer'], { state: { loginStatus: res } });
+        else if (this.loginStatus.userType === 'Manager') {
+          this.router.navigate(['home/manager'], { state: { loginStatus: res } });
 
         }
         else if (this.loginStatus.userType === 'Admin') {
-          this.router.navigate(['admin'], { state: { loginStatus: res } });
+          this.router.navigate(['home/admin'], { state: { loginStatus: res } });
 
         }
 
@@ -133,7 +133,7 @@ export class LoginComponent implements OnInit {
   icon: string = 'pi pi-eye-slash'
   loginStatus: LoginStatus = new LoginStatus();
   category: DropDown = new DropDown();
-  otpView = false;
+  otpView = true;
 
   loginOrSingup() {
 
@@ -169,8 +169,17 @@ export class LoginComponent implements OnInit {
             let tokenStr = 'Bearer ' + this.loginStatus.jwt;
             localStorage.setItem('token', tokenStr);
 
-
-            this.router.navigate(['admin'], { state: { loginStatus: res } });
+            if (this.loginStatus.userType === 'User') {
+              this.router.navigate(['home/user'], { state: { loginStatus: res } });
+            }
+            else if (this.loginStatus.userType === 'Manager') {
+              this.router.navigate(['home/manager'], { state: { loginStatus: res } });
+    
+            }
+            else if (this.loginStatus.userType === 'Admin') {
+              this.router.navigate(['home/admin'], { state: { loginStatus: res } });
+    
+            }
 
           }
           else {

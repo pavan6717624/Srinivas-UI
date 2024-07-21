@@ -47,7 +47,11 @@ import { SkeletonModule } from 'primeng/skeleton';
 import {DropdownModule} from 'primeng/dropdown';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ListboxModule} from 'primeng/listbox';
+import {InputTextareaModule} from 'primeng/inputtextarea';
+import {StepsModule} from 'primeng/steps';
 const SHARED_MODULES = [
+  StepsModule,
+  InputTextareaModule,
   ListboxModule,
   MultiSelectModule,
   DropdownModule,

@@ -1,0 +1,167 @@
+<div class="stepsdemo-content" [style]="{ width: '100%', height: '520px','overflow': 'auto', 'padding':'0'  }">
+    <p-card>
+        <ng-template pTemplate="title">
+            Customer Information
+        </ng-template>
+        <!-- <ng-template pTemplate="subtitle">
+            Enter your personal information
+        </ng-template> -->
+        <ng-template pTemplate="content">
+            <div class="p-fluid formgrid grid">
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Company Name</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="lastname">Company Type</label>
+                    <p-dropdown inputId="class" [options]="classes" optionLabel="name" placeholder="Select a Class"></p-dropdown>
+                </div>
+                <div class="field col-12 md:col-4">
+                    <label for="age">Date of Incorporation</label>
+                    <p-calendar appendTo="body"></p-calendar>
+
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Authorized Person</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="lastname">Gender</label>
+                    <p-dropdown inputId="class" [options]="classes" optionLabel="name" placeholder="Select a Class"></p-dropdown>
+                </div>
+
+             
+                <div class="field col-12 md:col-4">
+                    <label for="age">Date of Birth (As per PAN)</label>
+                    <p-calendar appendTo="body"></p-calendar>
+
+                </div>
+
+
+                <div class="field col-12 md:col-4">
+                    <label >Contact 1</label>
+                    <p-inputNumber  mode="decimal" [useGrouping]="false">
+                    </p-inputNumber>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label >Contact 2</label>
+                    <p-inputNumber  mode="decimal" [useGrouping]="false">
+                    </p-inputNumber>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label >Contact for WhatsApp</label>
+                    <p-inputNumber  mode="decimal" [useGrouping]="false">
+                    </p-inputNumber>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Email Id</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="emailNotes">Email Notes</label>
+                    <textarea pInputTextarea></textarea>
+
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Website</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Door No. / House No.</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Building Name and Floor</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Street / Area</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Colony</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Taluk / Mandal / City</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">District</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">State</label>
+                    <p-dropdown inputId="class" [options]="classes" optionLabel="name" placeholder="Select a Class"></p-dropdown>
+              
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Country</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Pin Code</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Pan Number</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="age">Customer Arrival Date</label>
+                    <p-calendar appendTo="body"></p-calendar>
+
+                </div>
+
+                <div class="field col-12 md:col-4">
+                    <label for="firstname">Customer Review</label>
+                    <input id="firstname" type="text" required pInputText>
+                </div>
+
+                <div class="field col-12 md:col-12">
+                    <label for="firstname">Customer Photo</label>
+                    <p-fileUpload name="demo[]" url="./upload.php" 
+            accept="image/*" >
+            <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template>
+    </p-fileUpload>
+                </div>
+
+
+
+
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <div class="grid grid-nogutter justify-content-end">
+                <p-button label="Next" icon="pi pi-angle-right" iconPos="right"></p-button>
+            </div>
+        </ng-template>
+    </p-card>
+</div>
