@@ -17,7 +17,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { MessageService } from 'primeng/api';
 import { ConfirmationService } from 'primeng/api';
-import { DemoComponent } from './demo/demo.component';
+
 
 
 
@@ -25,7 +25,7 @@ import { DemoComponent } from './demo/demo.component';
   declarations: [
     AppComponent,
     LoginComponent,
-    DemoComponent,
+
 
   
   ],
