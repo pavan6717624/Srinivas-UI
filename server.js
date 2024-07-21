@@ -17,10 +17,10 @@ app.use(forceSsl);
 
 
 // Serve only the static files form the dist directory
-app.use(express.static('./dist/heidiginew'));
+app.use(express.static('./dist/srinivas'));
 
 app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/heidiginew/'}),
+    res.sendFile('index.html', {root: 'dist/srinivas/'}),
 );
 
 // Start the app by listening on the default Heroku port

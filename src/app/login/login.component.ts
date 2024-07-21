@@ -7,10 +7,9 @@ export class Login {
   password: string = '';
 }
 
-export class DropDown
-{
-  code: string ='';
-  name: string ='';
+export class DropDown {
+  code: string = '';
+  name: string = '';
 }
 export class LoginStatus {
   userId: string = "";
@@ -26,7 +25,7 @@ export class Signup {
   name: string = '';
   email: string = '';
   role: string = '';
-  category: string ='';
+  category: string = '';
 }
 
 @Component({
@@ -61,7 +60,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['home/designer'], { state: { loginStatus: res } });
 
         }
-        else if(this.loginStatus.userType === 'Admin') {
+        else if (this.loginStatus.userType === 'Admin') {
           this.router.navigate(['admin'], { state: { loginStatus: res } });
 
         }
@@ -73,9 +72,8 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  header='Logging In...';
-  generateOTP()
-  {
+  header = 'Logging In...';
+  generateOTP() {
     if ((this.mobile + "").trim().length != 10) {
       this.messageService.clear();
       this.messageService.add({ severity: 'error', summary: 'Invalid Mobile Number Provided.', detail: '' });
@@ -83,108 +81,39 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.isLogin) {
-       
-      var formData=new FormData();
-      formData.set("mobile", this.mobile+'');
 
-     
+      var formData = new FormData();
+      formData.set("mobile", this.mobile + '');
+
+
       this.loading = true;
-      this.header='Sending OTP to Your Email...';
+      this.header = 'Sending OTP to Your Email...';
       this.service.generateOTP(formData).subscribe(
         (res: any) => {
-         
-         if(res)
-         {
-          this.messageService.clear();
-          this.messageService.add({ severity: 'info', summary: 'OTP Sent to Your Registered Email.', detail: '' });
-          this.otpView=true;
-         }
-         else{
-          this.messageService.clear();
-          this.messageService.add({ severity: 'error', summary: 'Not Registered Mobile Number...', detail: '' });
-         }
+
+          if (res) {
+            this.messageService.clear();
+            this.messageService.add({ severity: 'info', summary: 'OTP Sent to Your Registered Email.', detail: '' });
+            this.otpView = true;
+          }
+          else {
+            this.messageService.clear();
+            this.messageService.add({ severity: 'error', summary: 'Not Registered Mobile Number...', detail: '' });
+          }
           this.loading = false;
-          this.header='Logging In...';
+          this.header = 'Logging In...';
         },
         (err) => {
           console.log(err + " Error");
           this.messageService.clear();
           this.messageService.add({ severity: 'error', summary: 'Not Registered Mobile Number...', detail: '' });
-          this.header='Logging In...';
+          this.header = 'Logging In...';
           this.loading = false;
         }
       );
     }
 
-    else
-    {
-      if (this.name==null || this.name.trim().length == 0) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Invalid Name Provided.', detail: '' });
-        return;
-      }
 
-      if (this.email==null || this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Invalid Email Provided.', detail: '' });
-        return;
-      }
-
-
-
-      // if (this.cpassword ==null || this.cpassword.trim().length == 0) {
-      //   this.messageService.clear();
-      //   this.messageService.add({ severity: 'error', summary: 'Invalid Confirm Password Provided.', detail: '' });
-      //   return;
-      // }
-
-      // if ( this.password != this.cpassword) {
-      //   this.messageService.clear();
-      //   this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
-      //   return;
-      // }
-      
-      if (this.ctype=='Business' && ( this.category  == null || this.category.name   == null || this.category.name.trim().length  == 0)) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Select Category', detail: '' });
-        return;
-      }
-
-
-      var signup = new Signup();
-      signup.name = this.name;
-      signup.email = this.email;
-      signup.mobile = this.mobile + "";
-      signup.password = this.password;
-      signup.role = this.ctype;
-      signup.category=this.category.name;
-
-
-
-
-      console.log(signup);
-
-      this.loading = true;
-      this.service.signUp(signup).subscribe(
-        (res: any) => {
-          if (res && res.loginStatus)
-            this.router.navigate(['success']);
-          else if (res && !res.loginStatus) {
-            this.loading = false;
-            console.log("SignUp failed1");
-            this.messageService.clear();
-            this.messageService.add({ severity: 'error', summary: "SignUp failed"+res.message, detail: '' });
-          }
-          else {
-            this.loading = false;
-            console.log("SignUp failed2");
-            this.messageService.clear();
-            this.messageService.add({ severity: 'error', summary: "SignUp failed", detail: '' });
-          }
-        },
-        (err) => { console.log(err + " Error"); this.loading = false; }
-      );
-    }
 
   }
 
@@ -192,25 +121,12 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
     console.log("liogin");
     this.getLoginDetails();
-    this.getCategories();
+
   }
-  categories: DropDown[]=[];
+  categories: DropDown[] = [];
 
 
 
-  getCategories()
-  {
-    this.service.getCategories().subscribe(
-      (res: any) => {
-        this.categories=res;
-        console.log(this.categories);
-      },
-      (err: any) => {
-        this.categories=[];
-
-      }
-    );
-  }
 
   loading: boolean = false;
   type: string = 'password';
@@ -218,18 +134,7 @@ export class LoginComponent implements OnInit {
   loginStatus: LoginStatus = new LoginStatus();
   category: DropDown = new DropDown();
   otpView = false;
-  changeType() {
-    console.log(this.type);
-    if (this.type == 'password') {
-      this.type = 'text';
-      this.icon = 'pi pi-eye';
-    }
-    else {
-      this.type = 'password';
-      this.icon = 'pi pi-eye-slash';
-    }
-    console.log(this.type);
-  }
+
   loginOrSingup() {
 
 
@@ -241,7 +146,7 @@ export class LoginComponent implements OnInit {
 
     if (this.isLogin) {
 
-      if (this.password==null || this.password.trim().length == 0) {
+      if (this.password == null || this.password.trim().length == 0) {
         this.messageService.clear();
         this.messageService.add({ severity: 'error', summary: 'Invalid Password Provided.', detail: '' });
         return;
@@ -255,14 +160,7 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.service.login(login).subscribe(
         (res: any) => {
-          // if (res)
-          //   this.router.navigate(['home']);
-          // else {
-          //   this.loading = false;
-          //   console.log("login faield");
-          //   this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
-          // }
-
+      
 
           this.loginStatus = res;
           console.log(res);
@@ -272,7 +170,7 @@ export class LoginComponent implements OnInit {
             localStorage.setItem('token', tokenStr);
 
 
-            this.router.navigate(['home'], { state: { loginStatus: res } });
+            this.router.navigate(['admin'], { state: { loginStatus: res } });
 
           }
           else {
@@ -289,99 +187,10 @@ export class LoginComponent implements OnInit {
         }
       );
     }
-    else {
 
-
-      if (this.name==null || this.name.trim().length == 0) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Invalid Name Provided.', detail: '' });
-        return;
-      }
-
-      if (this.email==null || this.email.trim().length == 0 || this.email.trim().indexOf("@") == -1 || this.email.trim().indexOf(".") == -1) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Invalid Email Provided.', detail: '' });
-        return;
-      }
-
-
-
-      // if (this.cpassword ==null || this.cpassword.trim().length == 0) {
-      //   this.messageService.clear();
-      //   this.messageService.add({ severity: 'error', summary: 'Invalid Confirm Password Provided.', detail: '' });
-      //   return;
-      // }
-
-      // if ( this.password != this.cpassword) {
-      //   this.messageService.clear();
-      //   this.messageService.add({ severity: 'error', summary: 'Password didnot Match', detail: '' });
-      //   return;
-      // }
-      
-      if (this.ctype=='Business' && ( this.category  == null || this.category.name   == null || this.category.name.trim().length  == 0)) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Select Category', detail: '' });
-        return;
-      }
-
-
-      var signup = new Signup();
-      signup.name = this.name;
-      signup.email = this.email;
-      signup.mobile = this.mobile + "";
-      signup.password = this.password;
-      signup.role = this.ctype;
-      signup.category=this.category.name;
-
-
-
-
-      console.log(signup);
-
-      this.loading = true;
-      this.service.signUp(signup).subscribe(
-        (res: any) => {
-          if (res && res.loginStatus)
-            this.router.navigate(['success']);
-          else if (res && !res.loginStatus) {
-            this.loading = false;
-            console.log("SignUp failed");
-            this.messageService.clear();
-            this.messageService.add({ severity: 'error', summary: res.message, detail: '' });
-          }
-          else {
-            this.loading = false;
-            console.log("SignUp failed");
-            this.messageService.clear();
-            this.messageService.add({ severity: 'error', summary: "SignUp failed", detail: '' });
-          }
-        },
-        (err) => { console.log(err + " Error"); this.loading = false; }
-      );
-
-    }
 
   }
 
-  facebookLogin()
-  {
-    if(!this.isLogin)
-    {
-      if (this.ctype=='Business' && ( this.category  == null || this.category.name   == null || this.category.name.trim().length  == 0)) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Select Category', detail: '' });
-        return;
-      }
-
-      localStorage.setItem("role","Business");
-      localStorage.setItem("category",this.category.name)
-window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookSignup&auth_type=reauthenticate&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish%2Cemail");
-    
-    }
-    else
-
-    window.location.replace("https://www.facebook.com/v18.0/dialog/oauth?response_type=token&display=popup&client_id=1877295529003407&redirect_uri=https://client.heidigi.com/facebookLogin&auth_type=reauthenticate&scope=pages_show_list%2Cpages_read_engagement%2Cpages_manage_posts%2Cbusiness_management%2Cinstagram_basic%2Cinstagram_content_publish%2Cemail");
-       
-  }
+  
 
 }

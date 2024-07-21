@@ -16,11 +16,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { environment } from '../environments/environment';
 import { MessageService } from 'primeng/api';
-import { SuccessComponent } from './success/success.component';
-import { FacebookintegrationComponent } from './facebookintegration/facebookintegration.component';
 import { ConfirmationService } from 'primeng/api';
-import { FacebookLoginComponent } from './facebook-login/facebook-login.component';
-import { FacebookSignupComponent } from './facebook-signup/facebook-signup.component';
+import { DemoComponent } from './demo/demo.component';
 
 
 
@@ -28,11 +25,9 @@ import { FacebookSignupComponent } from './facebook-signup/facebook-signup.compo
   declarations: [
     AppComponent,
     LoginComponent,
-    SuccessComponent,
-    FacebookintegrationComponent,
-    FacebookLoginComponent,
-    FacebookSignupComponent,
+    DemoComponent,
 
+  
   ],
   imports: [
     BrowserModule,
