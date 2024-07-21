@@ -10,16 +10,16 @@ export class ServiceService {
 
   login(login: Login)
   {
-    return this.http.post('http://localhost:8082/login',login);
+    return this.http.post('https://srinivas-app-23722fde5f1f.herokuapp.com/login',login);
   }
 
   generateOTP(formData: FormData)
   {
-    return this.http.post('http://localhost:8082/generateOTP',formData);
+    return this.http.post('https://srinivas-app-23722fde5f1f.herokuapp.com/generateOTP',formData);
   }
 
   getLoginDetails() {
-    return this.http.get('http://localhost:8082/getLoginDetails')
+    return this.http.get('https://srinivas-app-23722fde5f1f.herokuapp.com/getLoginDetails')
   }
 
   
