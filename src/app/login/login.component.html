@@ -1,12 +1,24 @@
-<div class="sticky flex justify-content-between" style="padding-left:5px; background-color: white;">
+<div class="p-2 sticky flex justify-content-between" style="padding-left:5px; background-color: white;">
 
     <div style="padding-top:0px;">
-        <img style='cursor:pointer' src="assets/images/jollylogo1.png" height="80" class="mr-2">
+        <img style='cursor:pointer' src="assets/images/jollylogo1.png" height="60" class="mr-2">
     </div>
 
 
 
 
+    <div class="grid"
+        style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:5px; padding:0px; cursor: pointer; text-align: center;align-items: center;"
+        (click)="sidebarVisible=true;">
+
+        <!-- <div style="padding:0px">
+            Home
+        </div> -->
+
+        <div style="padding:0px">
+            &nbsp;<i class="pi pi-bars" style="color: slateblue; text-align: center;align-items: center;">&nbsp;</i>
+        </div>
+    </div>
 
 
 
@@ -23,13 +35,43 @@
 
 </p-sidebar> -->
 
+<div class="hero-container p-d-flex p-jc-center p-ai-center"
+    style="height: 90vh;   background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/images/hero.jpg);background-size: cover;">
+    <div class="hero-content p-text-center">
+        <!-- <h1 class="p-text-bold p-text-white" style="font-size: 3rem;">Welcome to our website!</h1>
+      <p class="p-text-white" style="font-size: 1.5rem;">This is a sample hero section built with Angular and PrimeNG.</p>
+      <p-button label="Get Started" [routerLink]="['/']" pRipple styleClass="p-button-raised p-button-rounded" style="background-color: #ffffff; color: #667eea;"></p-button> -->
+        <section style=" padding:0">
+
+            <span class="text-4xl text-primary font-bold mb-3 ">Experience the Extraordinary</span>
+
+            <div class="block text-8xl font-bold mb-1 grey-qo-regular">Jolly Vacations</div>
+
+            <p class="mt-0 mb-4 text-700 line-height-3 text-blue-600">Let us guide you to unique and unforgettable
+                travel experiences.
+                <br />Your Journey starts now
+            </p>
+
+            <div class="grid p-3">
+                <div class="col-12">
+                    <div class="p-inputgroup">
+
+                        <input type="text" pInputText placeholder="Your Mobile Number">
+                        <button type="button" pButton pRipple label="Call Back"></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+</div>
 
 
 
 
-<div class="grid grid-nogutter surface-section text-800">
-    <div class="col-12 md:col-6 p-6 text-center md:text-left flex align-items-center ">
-        <section>
+<!-- <div class="grid grid-nogutter surface-section text-800" style="padding:0">
+    <div class="col-12 md:col-6 p-3 text-center md:text-left flex align-items-center " style="padding:1 !important">
+        <section style="padding:0">
 
             <span class="text-4xl text-primary font-bold mb-3">Experience the Extraordinary</span>
 
@@ -38,21 +80,26 @@
             <p class="mt-0 mb-4 text-700 line-height-3">Let us guide you to unique and unforgettable travel experiences.
                 Your Journey starts now</p>
 
-                <input type="text" placeholder="Your Mobile Number"  pInputText /> &nbsp;
-
-            <button pButton pRipple label="Call Back" type="button" class="mr-3 p-button-raised"></button>
-           
+                <div class="grid p-fluid">
+                    <div class="col-12 md:col-6">
+                        <div class="p-inputgroup">
+                            
+                            <input type="text" pInputText placeholder="Your Mobile Number">    
+                            <button type="button" pButton pRipple label="Call Back"></button>     
+                        </div>
+                    </div>
+                    </div>
         </section>
     </div>
     <div class="col-12 md:col-6 overflow-hidden">
         <img src="assets/images/hero.jpg" alt="Image" class="md:ml-auto block md:h-full"
             style="clip-path: polygon(8% 0, 100% 0%, 100% 100%, 0 100%)">
     </div>
-</div>
+</div> -->
 
 
 
-<div class="surface-section px-4 py-8 md:px-6 lg:px-8 text-center">
+<div class="surface-section text-center" style="padding-top:3rem">
     <div class="mb-3 font-bold text-3xl">
         <span class="text-900">One Membership, </span>
         <span class="text-blue-600">Many Experiences</span>
@@ -60,14 +107,17 @@
     <div class="text-700 mb-6">Unlocking a World of Opportunities</div>
     <div class="grid">
         <div class="col-12 lg:col-6">
-            <div class="p-3 h-full">
-                <div class="p-3 h-full flex flex-column surface-card">
+            <div class=" h-full">
+                <div class="h-full flex flex-column surface-card">
                     <!-- <div class="text-900 font-medium text-xl mb-2">Goa</div> -->
                     <!-- <div class="text-600">Plan description</div> -->
                     <!-- <hr class="my-3 mx-0 border-top-1 border-none surface-border" /> -->
-                    <p-carousel [showNavigators]="false" [showIndicators]="false" [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2000" [circular]="true" [responsiveOptions]="responsiveOptions">
+                    <p-carousel [showNavigators]="true" [showIndicators]="false"
+                        [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2000" [circular]="true"
+                        style="width:280">
                         <ng-template let-car pTemplate="item">
-                            <img src="assets/images/goa ({{car}}).jpg" alt="Image" width="350" height="500">
+                            <img src="assets/images/goa ({{car}}).jpg" alt="Image" [width]="isMobile?'240':'300'"
+                                height="isMobile?'400':'500'">
                         </ng-template>
                     </p-carousel>
 
@@ -77,14 +127,17 @@
 
 
         <div class="col-12 lg:col-6">
-            <div class="p-3 h-full">
-                <div class="p-3 h-full flex flex-column surface-card">
+            <div class="h-full">
+                <div class="h-full flex flex-column surface-card">
                     <!-- <div class="text-900 font-medium text-xl mb-2">Goa</div> -->
                     <!-- <div class="text-600">Plan description</div> -->
                     <!-- <hr class="my-3 mx-0 border-top-1 border-none surface-border" /> -->
-                    <p-carousel [showIndicators]="false" [showNavigators]="false" [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2100" [circular]="true" [responsiveOptions]="responsiveOptions">
-                        <ng-template let-car pTemplate="item" >
-                            <img src="assets/images/bangkok ({{car}}).jpg" alt="Image" width="350" height="500">
+                    <p-carousel [showIndicators]="false" [showNavigators]="true"
+                        [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2100" [circular]="true"
+                        [style]="{'width':280}">
+                        <ng-template let-car pTemplate="item">
+                            <img src="assets/images/bangkok ({{car}}).jpg" alt="Image" [width]="isMobile?'240':'300'"
+                                height="isMobile?'400':'500'">
                         </ng-template>
                     </p-carousel>
 
@@ -94,4 +147,3 @@
 
     </div>
 </div>
-

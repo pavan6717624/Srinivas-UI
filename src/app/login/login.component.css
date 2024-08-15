@@ -4,4 +4,43 @@
     font-family: "Grey Qo", cursive;
     font-weight: 400;
     font-style: normal;
+    color:bisque
   }
+
+  .hero-container {
+    position: relative;
+    height: 90vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .hero-content {
+    text-align: center;
+    z-index: 1;
+  }
+  
+  .hero-content h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-content p {
+    font-size: 1.5rem;
+    color: #ffffff;
+    margin-bottom: 2rem;
+  }
+  
+  .p-button-raised {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .p-button-rounded {
+    border-radius: 20px;
+  }
+  
+  
