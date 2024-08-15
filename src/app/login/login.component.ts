@@ -35,7 +35,31 @@ export class Signup {
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: ServiceService, private router: Router, private messageService: MessageService) { }
+
+
+	responsiveOptions;
+
+  constructor(private service: ServiceService, private router: Router, private messageService: MessageService) {
+
+    this.responsiveOptions = [
+      {
+          breakpoint: '1024px',
+          numVisible: 3,
+          numScroll: 3
+      },
+      {
+          breakpoint: '768px',
+          numVisible: 2,
+          numScroll: 2
+      },
+      {
+          breakpoint: '560px',
+          numVisible: 1,
+          numScroll: 1
+      }
+  ];
+
+   }
   name: string = '';
   email: string = '';
   mobile: number | undefined = 9449840144;

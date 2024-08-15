@@ -1,20 +1,5 @@
 body {
-    margin:0em;
     font-family: var(--font-family);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
-
-html, body {
-    font-family: "Trirong", sans-serif;
-}
-
-p-inputnumber, .p-inputnumber {
-    display: inline-flex;
-    width: 100% !important;
-}
-
-:host ::ng-deep .p-dropdown {
-    width: 100%;
-  }
-  
