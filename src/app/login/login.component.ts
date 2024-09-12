@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ServiceService } from '../service.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
+declare var Razorpay: any;
 export class Login {
   mobile: string = '';
   password: string = '';
@@ -36,15 +37,15 @@ export class Signup {
 })
 export class LoginComponent implements OnInit {
 
-  isMobile=false;
-  sidebarVisible=false;
+  isMobile = false;
+  sidebarVisible = false;
 
   constructor(private deviceService: DeviceDetectorService, private service: ServiceService, private router: Router, private messageService: MessageService) {
 
     this.isMobile = this.deviceService.isMobile();
-   
+    this.getOrderId();
 
-   }
+  }
   name: string = '';
   email: string = '';
   mobile: number | undefined = 9449840144;
@@ -169,7 +170,7 @@ export class LoginComponent implements OnInit {
       this.loading = true;
       this.service.login(login).subscribe(
         (res: any) => {
-      
+
 
           this.loginStatus = res;
           console.log(res);
@@ -183,11 +184,11 @@ export class LoginComponent implements OnInit {
             }
             else if (this.loginStatus.userType === 'Manager') {
               this.router.navigate(['home/manager'], { state: { loginStatus: res } });
-    
+
             }
             else if (this.loginStatus.userType === 'Admin') {
               this.router.navigate(['home/admin'], { state: { loginStatus: res } });
-    
+
             }
 
           }
@@ -209,6 +210,74 @@ export class LoginComponent implements OnInit {
 
   }
 
-  
+
+  paymentStart() {
+    //this.paying=true;
+    var options = {
+      // "key": "rzp_test_WJFhmfMmFRxETB", // Enter the Key ID generated from the Dashboard
+      "key": "rzp_live_nWA6UVrzTQFr9W",
+      // "amount": "100", 
+      // "amount" : 119900,
+      "amount": "100",
+      "currency": "INR",
+      "name": "Jolly Vacations",
+      "description": "Join Us",
+      "image": "https://jolly-20275.web.app/assets/images/jollylogo1.png",
+      "handler": function (response: any) {
+        var event = new CustomEvent("payment.success",
+          {
+            detail: response,
+            bubbles: true,
+            cancelable: true
+          }
+        );
+        window.dispatchEvent(event);
+      },
+
+      "order_id": this.orderid,
+      "prefill": {
+        "name": this.name,
+        "email": this.email,
+        // "contact": this.contact
+      },
+
+
+      "notes": {
+        "address": "Jolly Vacations Corporate Office"
+      },
+      "theme": {
+        "color": "#3399cc"
+      },
+      "modal": {
+        "ondismiss": function () {
+          var event = new CustomEvent("payment.closed",
+            {
+              detail: "closed",
+              bubbles: true,
+              cancelable: true
+            }
+          );
+          window.dispatchEvent(event);
+        }
+      }
+
+    };
+
+    const rzp = new Razorpay(options);
+
+    rzp.open();
+
+  }
+  orderid:any="";
+  getOrderId() {
+
+    this.service.getOrderId().subscribe(
+      (res:any) => { this.orderid = res.orderId; console.log(this.orderid); },
+      (err:any) => { console.log("ASdfasdf") ;}
+
+    );
+
+  }
+
 
 }

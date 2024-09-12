@@ -36,20 +36,20 @@
 </p-sidebar> -->
 
 <div class="hero-container p-d-flex p-jc-center p-ai-center"
-    style="height: 90vh;   background:linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(/assets/images/hero.jpg);background-size: cover;">
+    style="background:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(/assets/images/hero.jpg);background-size: cover;">
     <div class="hero-content p-text-center">
         <!-- <h1 class="p-text-bold p-text-white" style="font-size: 3rem;">Welcome to our website!</h1>
       <p class="p-text-white" style="font-size: 1.5rem;">This is a sample hero section built with Angular and PrimeNG.</p>
       <p-button label="Get Started" [routerLink]="['/']" pRipple styleClass="p-button-raised p-button-rounded" style="background-color: #ffffff; color: #667eea;"></p-button> -->
         <section style=" padding:0">
 
-            <span class="text-4xl text-primary font-bold mb-3 ">Experience the Extraordinary</span>
+            <!-- <span class="text-4xl text-white text-700 font-bold mb-3 ">Experience the Extraordinary</span> -->
 
             <div class="block text-8xl font-bold mb-1 grey-qo-regular">Jolly Vacations</div>
 
-            <p class="mt-0 mb-4 text-700 line-height-3 text-blue-600">Let us guide you to unique and unforgettable
-                travel experiences.
-                <br />Your Journey starts now
+            <p class="mt-0 mb-4 text-700 line-height-3 text-white">Let us guide you to Unique and Unforgettable
+                Travel Experiences
+                <br />Your Journey Starts Now
             </p>
 
             <div class="grid p-3">
@@ -99,20 +99,103 @@
 
 
 
-<div class="surface-section text-center" style="padding-top:3rem">
-    <div class="mb-3 font-bold text-3xl">
-        <span class="text-900">One Membership, </span>
-        <span class="text-blue-600">Many Experiences</span>
+<div class="surface-section text-center mb-6" style="padding-top:6rem">
+    <div class="mb-4 text-5xl">
+        <span class="text-900">Explore Hidden Gems</span>
+        <!-- <span class="text-blue-600">One Membership, Many Experiences</span> -->
     </div>
-    <div class="text-700 mb-6">Unlocking a World of Opportunities</div>
+    <div class="text-700 mb-4"><span class="font-bold text-blue-600">One Membership, Many Experiences</span> </div>
+
+    <div class="text-700 mb-6">Discover Unique Accommodations and Local Eateries for an Unforgettable Experience</div>
+
+    <div class="grid">
+        <div class="col-12 lg:col-6">
+
+            <div class="flex flex-column surface-card">
+                <img src="assets/images/goa_new (1).jpg" alt="Image" style="border-radius: 20px;">
+
+            </div>
+        </div>
+
+        <div class="col-12 lg:col-6">
+
+            <div class="flex flex-column surface-card">
+                <img src="assets/images/bangkok_new (1).jpg" alt="Image" style="border-radius: 20px;">
+
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- <div class="surface-section text-center">
+    <div class="mb-4 font-bold text-5xl">
+        <span class="text-900">Out-Of-The Way Places</span>
+
+    </div>
+
+    <div class="grid">
+        <div class="col-12 lg:col-6">
+
+            <div class="flex flex-column surface-card">
+                <p-carousel [showNavigators]="isMobile" [showIndicators]="false"
+                    [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2000" [circular]="true"
+                    style="width:280">
+                    <ng-template let-car pTemplate="item">
+                        <img src="assets/images/goa ({{car}}).jpg" alt="Image" [width]="isMobile?'240':'300'"
+                            height="isMobile?'400':'500'">
+                    </ng-template>
+                </p-carousel>
+            </div>
+        </div>
+
+        <div class="col-12 lg:col-6">
+
+            <div class="flex flex-column surface-card">
+                <p-carousel [showNavigators]="isMobile" [showIndicators]="false"
+                    [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2000" [circular]="true"
+                    style="width:280">
+                    <ng-template let-car pTemplate="item">
+                        <img src="assets/images/bangkok ({{car}}).jpg" alt="Image" [width]="isMobile?'240':'300'"
+                            height="isMobile?'400':'500'">
+                    </ng-template>
+                </p-carousel>
+
+            </div>
+        </div>
+
+    </div>
+</div> -->
+
+<div style="padding-top:3rem; padding-bottom:3rem; background-color: aliceblue;">
+    <div class="text-700 text-center">
+
+        <!-- <div class="text-900 font-bold text-5xl mb-3">Join us as we guide you to the best hidden treasures waiting
+            to be discovered!</div> -->
+        <div class="text-900 text-5xl mb-3">Uncover unique lodging options and authentic experiences that enhance
+            your journey</div>
+        <button pButton pRipple label="Join Now" icon="pi pi-discord" (click)="paymentStart();"
+            class="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"></button>
+    </div>
+</div>
+
+<div class="surface-section text-center" style="padding-top:3rem">
+    <div class="mb-4 text-5xl">
+        <span class="text-900">Explore Off-The-Beaten-Path</span>
+
+    </div>
     <div class="grid">
         <div class="col-12 lg:col-6">
             <div class=" h-full">
                 <div class="h-full flex flex-column surface-card">
-                    <!-- <div class="text-900 font-medium text-xl mb-2">Goa</div> -->
-                    <!-- <div class="text-600">Plan description</div> -->
-                    <!-- <hr class="my-3 mx-0 border-top-1 border-none surface-border" /> -->
-                    <p-carousel [showNavigators]="true" [showIndicators]="false"
+
+
+                    <p-carousel [showNavigators]="isMobile" [showIndicators]="false"
                         [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2000" [circular]="true"
                         style="width:280">
                         <ng-template let-car pTemplate="item">
@@ -129,10 +212,8 @@
         <div class="col-12 lg:col-6">
             <div class="h-full">
                 <div class="h-full flex flex-column surface-card">
-                    <!-- <div class="text-900 font-medium text-xl mb-2">Goa</div> -->
-                    <!-- <div class="text-600">Plan description</div> -->
-                    <!-- <hr class="my-3 mx-0 border-top-1 border-none surface-border" /> -->
-                    <p-carousel [showIndicators]="false" [showNavigators]="true"
+
+                    <p-carousel [showIndicators]="false" [showNavigators]="isMobile"
                         [value]="[1,2,3,4,5,6,7,8,9,10,11,12,13,14]" [autoplayInterval]="2100" [circular]="true"
                         [style]="{'width':280}">
                         <ng-template let-car pTemplate="item">
@@ -146,4 +227,53 @@
         </div>
 
     </div>
+
+    <div class="grid" style="padding-top:3rem">
+
+
+
+
+
+
+        <div class="p-4 w-full lg:w-6">
+            <div [class]="isMobile?'p-3 shadow-2 flex flex-column surface-card':'flex flex-column surface-card'" style="border-radius: 6px">
+            <div class="block text-5xl mb-3 text-left" style="padding-top:3rem">Contact
+                Jolly Vacations</div>
+
+
+            <div class="text-900 text-2xl mb-6 text-left"> Get in touch for Unique Travel Recommendations </div>
+       
+
+        <div class="text-900 font-bold text-left" style="padding-top:3rem"> Connect </div>
+        <div class="text-900 text-left"> 1234567890 </div>
+
+        <div class="text-900 font-bold text-left" style="padding-top:3rem"> Reach </div>
+        <div class="text-900 text-left"> info@jollyvacations.com </div>
+        </div>
+    </div>
+
+
+    <div class="p-3 w-full lg:w-6">
+
+        <div [class]="isMobile?'p-3 shadow-2 flex flex-column surface-card':'flex flex-column surface-card'" style="border-radius: 6px">
+            <label for="name" class="block text-900 font-medium mb-2 text-left">Your Name</label>
+            <input id="name" type="text" placeholder="Name" pInputText class="w-full mb-3">
+
+            <label for="email" class="block text-900 font-medium mb-2 text-left">Your Email</label>
+            <input id="email" type="text" placeholder="Email Address" pInputText class="w-full mb-3">
+
+            <label for="comments" class="block text-900 font-medium mb-2 text-left">Your Message</label>
+            <textarea id="comments" rows="7" cols="30" placeholder="Your Message" pInputTextArea
+                class="w-full mb-3"></textarea>
+
+            <button pButton pRipple label="Contact us" icon="pi pi-phone" class="w-full"></button>
+        </div>
+    </div>
+
+</div>
+
+<div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap"
+    style="text-align:center">
+    Copyright © 2024 Jolly Vacations | All rights reserved.
+
 </div>

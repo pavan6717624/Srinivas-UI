@@ -5,6 +5,9 @@ import { Login, Signup } from './login/login.component';
   providedIn: 'root'
 })
 export class ServiceService {
+  getOrderId() {
+    return this.http.get( 'https://take-app-4afe487d41cd.herokuapp.com/getOrderId' );
+  }
 
   constructor(private http: HttpClient) { }
 
