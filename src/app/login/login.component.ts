@@ -1,9 +1,28 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ServiceService } from '../service.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
 declare var Razorpay: any;
+
+export class SubscriptionDTO {
+  password: string = "";
+  refererid: string = "";
+  name: string = "";
+  contact: string = "";
+  email: string = "";
+  profession: string = "";
+  gender: string = "";
+  city: string = "";
+  razorpay_payment_id: string = "";
+  razorpay_order_id: string = "";
+  razorpay_signature: string = "";
+  message: string = "";
+  executiveId: string = '';
+  subscription: string = '';
+}
+
+
 export class Login {
   mobile: string = '';
   password: string = '';
@@ -210,8 +229,53 @@ export class LoginComponent implements OnInit {
 
   }
 
+  goaSelected = false;
+  bangkokSelected = false;
 
-  paymentStart() {
+  goaAmount=100000;
+  bangkokAmount=150000;
+
+  paymentAmountChange(id: number) {
+    if (id == 1) {
+      if (this.goaSelected)
+        this.paymentAmount += this.goaAmount;
+      else
+        this.paymentAmount -= this.goaAmount;
+    }
+
+    if (id == 2) {
+      if (this.bangkokSelected)
+        this.paymentAmount += this.bangkokAmount;
+      else
+        this.paymentAmount -= this.bangkokAmount;
+    }
+
+  }
+  paymentStart(id: number) {
+
+    if (id == 1) {
+      this.goaSelected = true;
+      this.bangkokSelected = false;
+
+    }
+    else if (id == 2) {
+      this.bangkokSelected = true;
+      this.goaSelected = false;
+
+
+    }
+    else {
+      this.goaSelected = false;
+      this.bangkokSelected = false;
+
+    }
+
+    this.joinUsVisible = true
+    this.paymentAmountChange(id);
+  }
+  joinUsVisible = false;
+  paymentAmount = 0;
+  openPayment() {
     //this.paying=true;
     var options = {
       // "key": "rzp_test_WJFhmfMmFRxETB", // Enter the Key ID generated from the Dashboard
@@ -268,12 +332,36 @@ export class LoginComponent implements OnInit {
     rzp.open();
 
   }
-  orderid:any="";
+
+
+  @HostListener('window:payment.success', ['$event'])
+  onPaymentSuccess(event: any): void {
+
+    var subscription = new SubscriptionDTO();
+    subscription.razorpay_payment_id = event.detail.razorpay_payment_id;
+    subscription.razorpay_order_id = event.detail.razorpay_order_id;
+    subscription.razorpay_signature = event.detail.razorpay_signature;
+    subscription.name = this.name;
+    subscription.password = this.password;
+
+    subscription.subscription = 'Pay';
+
+    console.log(subscription);
+
+  }
+
+
+  @HostListener('window:payment.closed', ['$event'])
+  onPaymentClosed(event: any): void {
+    console.log("failed");
+  }
+
+  orderid: any = "";
   getOrderId() {
 
     this.service.getOrderId().subscribe(
-      (res:any) => { this.orderid = res.orderId; console.log(this.orderid); },
-      (err:any) => { console.log("ASdfasdf") ;}
+      (res: any) => { this.orderid = res.orderId; console.log(this.orderid); },
+      (err: any) => { console.log("ASdfasdf"); }
 
     );
 

@@ -109,20 +109,37 @@
     <div class="text-700 mb-6">Discover Unique Accommodations and Local Eateries for an Unforgettable Experience</div>
 
     <div class="grid">
-        <div class="col-12 lg:col-6">
+
+        <div class="col-2" *ngIf="!isMobile"></div>
+        <div class="col-12 lg:col-4">
 
             <div class="flex flex-column surface-card">
-                <img src="assets/images/goa_new (1).jpg" alt="Image" style="border-radius: 20px;">
+                <img (click)="paymentStart(1);" src="assets/images/goa_new (1).jpg" alt="Image"
+                    style="border-radius: 20px;cursor: pointer;">
 
+                <p>
+                    <p-button styleClass="p-button-outlined" (click)="paymentStart(1);">
+                        <img alt="logo" src="assets/images/logo_goa.jpg" style="width: 1rem" />
+                        <span class="ml-2 font-bold">Book Now</span>
+                    </p-button>
+
+                </p>
             </div>
         </div>
 
-        <div class="col-12 lg:col-6">
+        <div class="col-12 lg:col-4">
 
             <div class="flex flex-column surface-card">
-                <img src="assets/images/bangkok_new (1).jpg" alt="Image" style="border-radius: 20px;">
+                <img (click)="paymentStart(2);" src="assets/images/bangkok_new (1).jpg" alt="Image"
+                    style="border-radius: 20px;cursor: pointer;">
 
+                <p>
+                    <p-button styleClass="p-button-outlined" (click)="paymentStart(2);">
+                        <img alt="logo" src="assets/images/logo_bangkok.jpg" style="width: 1rem" />
+                        <span class="ml-2 font-bold">Book Now</span>
+                    </p-button>
 
+                </p>
 
             </div>
         </div>
@@ -177,9 +194,9 @@
 
         <!-- <div class="text-900 font-bold text-5xl mb-3">Join us as we guide you to the best hidden treasures waiting
             to be discovered!</div> -->
-        <div class="text-900 text-5xl mb-3">Uncover unique lodging options and authentic experiences that enhance
+        <div class="text-900 text-5xl mb-3 p-1">Uncover unique lodging options and authentic experiences that enhance
             your journey</div>
-        <button pButton pRipple label="Join Now" icon="pi pi-discord" (click)="paymentStart();"
+        <button pButton pRipple label="Join Now" icon="pi pi-discord" (click)="paymentStart(0);"
             class="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"></button>
     </div>
 </div>
@@ -227,8 +244,7 @@
         </div>
 
     </div>
-
-    <div class="grid" style="padding-top:3rem">
+    <div class="grid p-6">
 
 
 
@@ -236,44 +252,96 @@
 
 
         <div class="p-4 w-full lg:w-6">
-            <div [class]="isMobile?'p-3 shadow-2 flex flex-column surface-card':'flex flex-column surface-card'" style="border-radius: 6px">
-            <div class="block text-5xl mb-3 text-left" style="padding-top:3rem">Contact
-                Jolly Vacations</div>
+            <div [class]="isMobile?'p-3 shadow-2 flex flex-column surface-card':'flex flex-column surface-card'"
+                style="border-radius: 6px">
+                <div class="block text-5xl mb-3 text-left" style="padding-top:3rem">Contact
+                    Jolly Vacations</div>
 
 
-            <div class="text-900 text-2xl mb-6 text-left"> Get in touch for Unique Travel Recommendations </div>
-       
+                <div class="text-900 text-2xl mb-6 text-left"> Get in touch for Unique Travel Recommendations </div>
 
-        <div class="text-900 font-bold text-left" style="padding-top:3rem"> Connect </div>
-        <div class="text-900 text-left"> 1234567890 </div>
 
-        <div class="text-900 font-bold text-left" style="padding-top:3rem"> Reach </div>
-        <div class="text-900 text-left"> info@jollyvacations.com </div>
+                <div class="text-900 font-bold text-left" style="padding-top:3rem"> Connect </div>
+                <div class="text-900 text-left"> 1234567890 </div>
+
+                <div class="text-900 font-bold text-left" style="padding-top:3rem"> Reach </div>
+                <div class="text-900 text-left"> info@jollyvacations.com </div>
+            </div>
         </div>
+
+
+        <div class="p-3 w-full lg:w-6">
+
+            <div [class]="isMobile?'p-3 shadow-2 flex flex-column surface-card':'flex flex-column surface-card'"
+                style="border-radius: 6px">
+                <label for="name" class="block text-900 font-medium mb-2 text-left">Your Name</label>
+                <input id="name" type="text" placeholder="Name" pInputText class="w-full mb-3">
+
+                <label for="email" class="block text-900 font-medium mb-2 text-left">Your Email</label>
+                <input id="email" type="text" placeholder="Email Address" pInputText class="w-full mb-3">
+
+                <label for="comments" class="block text-900 font-medium mb-2 text-left">Your Message</label>
+                <textarea id="comments" rows="7" cols="30" placeholder="Your Message" pInputTextArea
+                    class="w-full mb-3"></textarea>
+
+                <button pButton pRipple label="Contact us" icon="pi pi-phone" class="w-full"></button>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap"
+        style="text-align:center">
+        Copyright © 2024 Jolly Vacations | All rights reserved.
+
     </div>
 
 
-    <div class="p-3 w-full lg:w-6">
 
-        <div [class]="isMobile?'p-3 shadow-2 flex flex-column surface-card':'flex flex-column surface-card'" style="border-radius: 6px">
-            <label for="name" class="block text-900 font-medium mb-2 text-left">Your Name</label>
-            <input id="name" type="text" placeholder="Name" pInputText class="w-full mb-3">
+    <p-dialog [modal]="true" header="Become an Esteemed Member" [(visible)]="joinUsVisible" [style]="{'width':'500px'}">
 
-            <label for="email" class="block text-900 font-medium mb-2 text-left">Your Email</label>
-            <input id="email" type="text" placeholder="Email Address" pInputText class="w-full mb-3">
+        <!-- <p-messages></p-messages> -->
 
-            <label for="comments" class="block text-900 font-medium mb-2 text-left">Your Message</label>
-            <textarea id="comments" rows="7" cols="30" placeholder="Your Message" pInputTextArea
-                class="w-full mb-3"></textarea>
 
-            <button pButton pRipple label="Contact us" icon="pi pi-phone" class="w-full"></button>
+        <label for="tags" class="block text-left text-900 font-medium mb-2">Name</label>
+
+        <input id="tags" type="text" placeholder="Name" pInputText class="w-full mb-3">
+
+
+
+        <label for="tags" class="block text-left text-900 font-medium mb-2">Email</label>
+
+        <input id="tags" type="text" placeholder="Email" pInputText class="w-full mb-3">
+
+
+
+        <label for="tags" class="block text-left text-900 font-medium mb-2">Mobile</label>
+
+        <input id="tags" type="text" placeholder="Mobile" pInputText class="w-full mb-3">
+
+
+
+        <label for="tags" class="block text-left text-900 font-medium mb-2">Location</label>
+
+        <div class="grid">
+            <div class="col-6">
+                <div class="image-container">
+                    <img src="assets/images/goa_new (1).jpg" alt="Image" class="image"
+                        style="width:150px; height:150px;border-radius: 20px;" />
+                    <p-checkbox [binary]="true" [(ngModel)]="goaSelected" (ngModelChange)="paymentAmountChange(1)"></p-checkbox>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="image-container">
+                    <img src="assets/images/bangkok_new (1).jpg" alt="Image" class="image"
+                        style="width:150px;height:150px;border-radius: 20px;" />
+                    <p-checkbox [binary]="true" [(ngModel)]="bangkokSelected" (ngModelChange)="paymentAmountChange(2)"></p-checkbox>
+                </div>
+            </div>
         </div>
-    </div>
 
-</div>
+        <button pButton pRipple (click)="openPayment()" label="Pay {{paymentAmount | currency:'INR':'symbol':'1.0-0'}}"
+            class="w-full"></button>
 
-<div class="bg-bluegray-900 text-gray-100 p-3 flex justify-content-between lg:justify-content-center align-items-center flex-wrap"
-    style="text-align:center">
-    Copyright © 2024 Jolly Vacations | All rights reserved.
-
-</div>
+    </p-dialog>
