@@ -9,6 +9,10 @@ export class ServiceService {
     return this.http.get( 'https://take-app-4afe487d41cd.herokuapp.com/getOrderId' );
   }
 
+  sendOTP(formData: FormData) {
+    return this.http.post( 'http://localhost:8082/sendOTP',formData );
+  }
+
   constructor(private http: HttpClient) { }
 
   login(login: Login)

@@ -58,11 +58,27 @@ export class LoginComponent implements OnInit {
 
   isMobile = false;
   sidebarVisible = false;
-
+  items: any;
   constructor(private deviceService: DeviceDetectorService, private service: ServiceService, private router: Router, private messageService: MessageService) {
 
     this.isMobile = this.deviceService.isMobile();
     this.getOrderId();
+
+    this.items = [
+      {
+        label: 'Update', icon: 'pi pi-refresh', command: () => {
+          // this.update();
+        }
+      },
+      {
+        label: 'Delete', icon: 'pi pi-times', command: () => {
+          // this.delete();
+        }
+      },
+      { label: 'Angular.io', icon: 'pi pi-info', url: 'http://angular.io' },
+      { separator: true },
+      { label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup'] }
+    ];
 
   }
   name: string = '';
@@ -72,6 +88,30 @@ export class LoginComponent implements OnInit {
   isLogin: boolean = true;
   ctype: string = 'Business';
   cpassword: string = '';
+  loginVisible=false;
+  activeIndex1=0;
+login(id: number)
+{
+  this.loginVisible=true;
+  this.activeIndex1=id;
+}
+otpVisible=false;
+sendOTP()
+{
+  var formData=new FormData();
+  formData.set("mail", this.email);
+  this.service.sendOTP(formData).subscribe(
+
+    (res: any) => {
+      console.log(res);
+      this.otpVisible=true;
+    },
+    (err: any) => {
+      console.log(err);
+    }
+  );
+}
+
   getLoginDetails() {
 
 
@@ -232,8 +272,8 @@ export class LoginComponent implements OnInit {
   goaSelected = false;
   bangkokSelected = false;
 
-  goaAmount=100000;
-  bangkokAmount=150000;
+  goaAmount = 100000;
+  bangkokAmount = 150000;
 
   paymentAmountChange(id: number) {
     if (id == 1) {

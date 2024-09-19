@@ -49,9 +49,10 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import {ListboxModule} from 'primeng/listbox';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {StepsModule} from 'primeng/steps';
-
+import {SplitButtonModule} from 'primeng/splitbutton';
 
 const SHARED_MODULES = [
+  SplitButtonModule,
   StepsModule,
   InputTextareaModule,
   ListboxModule,
