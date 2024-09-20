@@ -10,15 +10,15 @@ export class ServiceService {
   }
 
   sendOTP(formData: FormData) {
-    return this.http.post( 'http://localhost:8082/sendOTP',formData );
+    return this.http.post( 'https://srinivas-app-23722fde5f1f.herokuapp.com/sendOTP',formData );
   }
 
   verifyOTP(formData: FormData) {
-    return this.http.post( 'http://localhost:8082/verifyOTP',formData );
+    return this.http.post( 'https://srinivas-app-23722fde5f1f.herokuapp.com/verifyOTP',formData );
   }
 
   signin(signUp: Signup) {
-    return this.http.post( 'http://localhost:8082/signup',signUp );
+    return this.http.post( 'https://srinivas-app-23722fde5f1f.herokuapp.com/signup',signUp );
   }
 
   constructor(private http: HttpClient) { }
@@ -34,7 +34,7 @@ export class ServiceService {
   }
 
   getLoginDetails() {
-    return this.http.get('http://localhost:8082/getLoginDetails')
+    return this.http.get('https://srinivas-app-23722fde5f1f.herokuapp.com/getLoginDetails')
   }
 
   
