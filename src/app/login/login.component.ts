@@ -39,14 +39,13 @@ export class LoginStatus {
   loginId: string = "";
   jwt: string = '';
   subscriptionType: string = '';
+
 }
 export class Signup {
   mobile: string = '';
   password: string = '';
   name: string = '';
   email: string = '';
-  role: string = '';
-  category: string = '';
 }
 
 @Component({
@@ -58,59 +57,141 @@ export class LoginComponent implements OnInit {
 
   isMobile = false;
   sidebarVisible = false;
-  items: any;
   constructor(private deviceService: DeviceDetectorService, private service: ServiceService, private router: Router, private messageService: MessageService) {
 
     this.isMobile = this.deviceService.isMobile();
     this.getOrderId();
 
-    this.items = [
-      {
-        label: 'Update', icon: 'pi pi-refresh', command: () => {
-          // this.update();
-        }
-      },
-      {
-        label: 'Delete', icon: 'pi pi-times', command: () => {
-          // this.delete();
-        }
-      },
-      { label: 'Angular.io', icon: 'pi pi-info', url: 'http://angular.io' },
-      { separator: true },
-      { label: 'Setup', icon: 'pi pi-cog', routerLink: ['/setup'] }
-    ];
+
 
   }
   name: string = '';
   email: string = '';
-  mobile: number | undefined = 9449840144;
+  mobile: string = '';
   password: string = '';
   isLogin: boolean = true;
   ctype: string = 'Business';
   cpassword: string = '';
-  loginVisible=false;
-  activeIndex1=0;
-login(id: number)
-{
-  this.loginVisible=true;
-  this.activeIndex1=id;
-}
-otpVisible=false;
-sendOTP()
-{
-  var formData=new FormData();
-  formData.set("mail", this.email);
-  this.service.sendOTP(formData).subscribe(
+  loginVisible = false;
+  activeIndex1 = 0;
 
-    (res: any) => {
-      console.log(res);
-      this.otpVisible=true;
-    },
-    (err: any) => {
-      console.log(err);
+  login(id: number) {
+    this.loginVisible = true;
+    this.activeIndex1 = id;
+  }
+  signOtpVisible = false;
+
+  sendOTP() {
+    this.clear();
+    this.loading = true;
+    var formData = new FormData();
+
+    formData.set("mobile", this.mobile + "")
+
+    this.service.sendOTP(formData).subscribe(
+
+      (res: any) => {
+        console.log(res);
+        this.clear();
+        // this.loginVisible=false;
+        this.signOtpVisible = true;
+        if (res)
+          this.messageService.add({ severity: 'info', summary: 'Password Sent to your Email', detail: '' });
+        else
+          this.messageService.add({ severity: 'error', summary: "Error Occured...", detail: '' });
+
+
+        this.loading = false;
+      },
+      (err: any) => {
+        this.clear();
+        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Error Occured...', detail: '' });
+        this.loading = false;
+      });
+  }
+
+  verifyOTP() {
+    this.clear();
+    if (!(this.mobile.trim().length == 10)) {
+
+      this.messageService.add({ severity: 'error', summary: 'Invalid Mobile Number', detail: '' });
+      return;
     }
-  );
-}
+
+    this.loading = true;
+    var formData = new FormData();
+    formData.set("mail", this.email + "");
+    formData.set("mobile", this.mobile + "")
+    formData.set("password", this.password + "");
+    this.service.verifyOTP(formData).subscribe(
+
+      (res: any) => {
+        console.log(res);
+        this.clear();
+        if (res.loginStatus) {
+
+          this.messageService.add({ severity: 'info', summary: 'Successful', detail: '' });
+          this.signOtpVisible = false;
+          this.loginVisible = false;
+          let tokenStr = 'Bearer ' + res.jwt;
+          localStorage.setItem('token', tokenStr);
+          this.ngOnInit();
+        }
+        else
+          this.messageService.add({ severity: 'error', summary: 'Wrong OTP Provided', detail: '' });
+
+
+
+        this.loading = false;
+      },
+      (err: any) => {
+        this.clear();
+        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Error Occured...', detail: '' });
+        this.signOtpVisible = false;
+        this.loginVisible = false;
+        this.loading = false;
+      }
+    );
+  }
+
+  signin() {
+    this.clear();
+    if (!(this.name.trim().length > 0 && this.mobile.trim().length == 10 && this.email.trim().length > 3)) {
+
+      this.messageService.add({ severity: 'error', summary: 'Insufficient Details Provided.', detail: '' });
+      return;
+    }
+    this.loading = true;
+
+    var signUp = new Signup();
+    signUp.email = this.email;
+    signUp.name = this.name;
+    // signUp.password=this.password;
+    signUp.mobile = this.mobile;
+    this.service.signin(signUp).subscribe(
+
+      (res: any) => {
+        console.log(res);
+        this.clear();
+        // this.loginVisible=false;
+        this.signOtpVisible = true;
+        if (res.loginStatus)
+          this.messageService.add({ severity: 'info', summary: 'Password Sent to your Email', detail: '' });
+        else
+          this.messageService.add({ severity: 'error', summary: res.message, detail: '' });
+
+
+        this.loading = false;
+      },
+      (err: any) => {
+        this.clear();
+        console.log(err);
+        this.messageService.add({ severity: 'error', summary: 'Error occured while Signing up...', detail: '' });
+        this.loading = false;
+      });
+  }
 
   getLoginDetails() {
 
@@ -118,21 +199,19 @@ sendOTP()
     this.loading = true;
     this.service.getLoginDetails().subscribe(
       (res: any) => {
-        this.loading = false;
+        
         this.loginStatus = res;
         console.log(this.loginStatus);
 
         if (this.loginStatus.userType === 'User') {
           this.router.navigate(['home/user'], { state: { loginStatus: res } });
         }
-        else if (this.loginStatus.userType === 'Manager') {
-          this.router.navigate(['home/manager'], { state: { loginStatus: res } });
-
-        }
+        
         else if (this.loginStatus.userType === 'Admin') {
           this.router.navigate(['home/admin'], { state: { loginStatus: res } });
 
         }
+// this.loading = false;
 
       },
       (err: any) => {
@@ -141,55 +220,16 @@ sendOTP()
       }
     );
   }
-  header = 'Logging In...';
-  generateOTP() {
-    if ((this.mobile + "").trim().length != 10) {
-      this.messageService.clear();
-      this.messageService.add({ severity: 'error', summary: 'Invalid Mobile Number Provided.', detail: '' });
-      return;
-    }
+  header = 'Please Wait...';
 
-    if (this.isLogin) {
-
-      var formData = new FormData();
-      formData.set("mobile", this.mobile + '');
-
-
-      this.loading = true;
-      this.header = 'Sending OTP to Your Email...';
-      this.service.generateOTP(formData).subscribe(
-        (res: any) => {
-
-          if (res) {
-            this.messageService.clear();
-            this.messageService.add({ severity: 'info', summary: 'OTP Sent to Your Registered Email.', detail: '' });
-            this.otpView = true;
-          }
-          else {
-            this.messageService.clear();
-            this.messageService.add({ severity: 'error', summary: 'Not Registered Mobile Number...', detail: '' });
-          }
-          this.loading = false;
-          this.header = 'Logging In...';
-        },
-        (err) => {
-          console.log(err + " Error");
-          this.messageService.clear();
-          this.messageService.add({ severity: 'error', summary: 'Not Registered Mobile Number...', detail: '' });
-          this.header = 'Logging In...';
-          this.loading = false;
-        }
-      );
-    }
-
-
-
+  clear() {
+    this.messageService.clear();
   }
-
 
   ngOnInit(): void {
     console.log("liogin");
     this.getLoginDetails();
+
 
   }
   categories: DropDown[] = [];
@@ -204,70 +244,6 @@ sendOTP()
   category: DropDown = new DropDown();
   otpView = true;
 
-  loginOrSingup() {
-
-
-    if ((this.mobile + "").trim().length != 10) {
-      this.messageService.clear();
-      this.messageService.add({ severity: 'error', summary: 'Invalid Mobile Number Provided.', detail: '' });
-      return;
-    }
-
-    if (this.isLogin) {
-
-      if (this.password == null || this.password.trim().length == 0) {
-        this.messageService.clear();
-        this.messageService.add({ severity: 'error', summary: 'Invalid Password Provided.', detail: '' });
-        return;
-      }
-
-      var login = new Login();
-      login.mobile = this.mobile + "";
-      login.password = this.password;
-
-      console.log(login);
-      this.loading = true;
-      this.service.login(login).subscribe(
-        (res: any) => {
-
-
-          this.loginStatus = res;
-          console.log(res);
-          if (this.loginStatus.loginStatus) {
-
-            let tokenStr = 'Bearer ' + this.loginStatus.jwt;
-            localStorage.setItem('token', tokenStr);
-
-            if (this.loginStatus.userType === 'User') {
-              this.router.navigate(['home/user'], { state: { loginStatus: res } });
-            }
-            else if (this.loginStatus.userType === 'Manager') {
-              this.router.navigate(['home/manager'], { state: { loginStatus: res } });
-
-            }
-            else if (this.loginStatus.userType === 'Admin') {
-              this.router.navigate(['home/admin'], { state: { loginStatus: res } });
-
-            }
-
-          }
-          else {
-            this.messageService.clear();
-            this.messageService.add({ severity: 'error', summary: 'Login Failed', detail: '' });
-            this.password = "";
-            this.loading = false;
-          }
-
-        },
-        (err) => {
-          console.log(err + " Error");
-          this.loading = false;
-        }
-      );
-    }
-
-
-  }
 
   goaSelected = false;
   bangkokSelected = false;

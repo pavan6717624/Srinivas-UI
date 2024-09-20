@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="p-2 sticky flex justify-content-between" style="padding-left:5px; background-color: white;">
 
     <div style="padding-top:0px;">
@@ -9,17 +10,24 @@
 
     <div class="grid"
         style="margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:5px; padding:0px; cursor: pointer; text-align: center;align-items: center;"
-        (click)="sidebarVisible=true;">
+        >
 
         <!-- <div style="padding:0px">
             Home
         </div> -->
 
-        <div style="padding:0px" class="text-bold">
+        <div style="padding:0px" *ngIf="!loginStatus.loginStatus" class="text-bold">
             <u (click)="login(0)">Login</u> &nbsp;&nbsp;
             <u (click)="login(1)">Sign Up</u>
             <!-- <i class="pi pi-bars" style="color: slateblue; text-align: center;align-items: center;">&nbsp;</i> -->
         </div>
+
+        <div style="padding:0px" *ngIf="loginStatus.loginStatus" (click)="sidebarVisible=true;" class="text-bold">
+
+            Hi {{loginStatus.userId}}! &nbsp; <i class="pi pi-bars"
+                style="color: slateblue; text-align: center;align-items: center;">&nbsp;</i>
+        </div>
+
     </div>
 
 
@@ -297,37 +305,47 @@
         Copyright © 2024 Jolly Vacations | All rights reserved.
 
     </div>
+    <!-- 
+    <p-dialog [modal]="true" header="Provide OTP" [(visible)]="loginOtpVisible" [style]="{'width':'500px'}">
 
-    <p-dialog [modal]="true" header="Provide OTP" [(visible)]="otpVisible" [style]="{'width':'500px'}">
+        
+        <input id="OTP" type="text" [(ngModel)]="password" placeholder="OTP" pInputText class="w-full mb-3">
+        <button pButton pRipple label="Login" (click)="login()" class="w-full"></button>
+    </p-dialog> -->
 
-        <label for="OTP" class="block text-900 font-medium mb-2 text-left">OTP</label>
-        <input id="OTP" type="text" placeholder="OTP" pInputText class="w-full mb-3">
+    <p-dialog [modal]="true" header="Provide OTP" [(visible)]="signOtpVisible" [style]="{'width':'500px'}">
+
+        <!-- <label for="OTP" class="block text-900 font-medium mb-2 text-left">OTP</label> -->
+        <input id="OTP" type="text" [(ngModel)]="password" placeholder="OTP" pInputText class="w-full mb-3">
+        <button pButton pRipple label="Verify OTP" (click)="verifyOTP()" class="w-full"></button>
     </p-dialog>
 
     <p-dialog [modal]="true" header="Login / Signup" [(visible)]="loginVisible" [style]="{'width':'500px'}">
+
+        <p-messages></p-messages>
 
         <p-tabView [(activeIndex)]="activeIndex1" class="text-center">
             <p-tabPanel header="Login">
 
                 <label for="mobile" class="block text-900 font-medium mb-2 text-left">Mobile</label>
-                <input id="mobile" type="text" placeholder="Mobile" pInputText class="w-full mb-3">
+                <input id="mobile" type="text" [(ngModel)]="mobile" placeholder="Mobile" pInputText class="w-full mb-3">
 
 
-                <button pButton pRipple label="Send OTP" class="w-full"></button>
+                <button pButton pRipple label="Send OTP" (click)="sendOTP" class="w-full"></button>
 
             </p-tabPanel>
             <p-tabPanel header="Signup">
                 <label for="name" class="block text-900 font-medium mb-2 text-left">Name</label>
-                <input id="name" type="text" placeholder="Name" pInputText class="w-full mb-3">
+                <input id="name" type="text" placeholder="Name" [(ngModel)]="name" pInputText class="w-full mb-3">
 
                 <label for="mobile" class="block text-900 font-medium mb-2 text-left">Mobile</label>
-                <input id="mobile" type="text" placeholder="Mobile" pInputText class="w-full mb-3">
+                <input id="mobile" type="text" placeholder="Mobile" [(ngModel)]="mobile" pInputText class="w-full mb-3">
 
                 <label for="email" class="block text-900 font-medium mb-2 text-left">Email</label>
-                <input id="email" type="text" [(ngModel)]="email" placeholder="Email Address" pInputText
-                    class="w-full mb-3">
+                <input id="email" type="text" [(ngModel)]="email" [(ngModel)]="email" placeholder="Email Address"
+                    pInputText class="w-full mb-3">
 
-                <button pButton pRipple label="Send OTP" (click)="sendOTP()" class="w-full"></button>
+                <button pButton pRipple label="Sign Up" (click)="signin()" class="w-full"></button>
 
             </p-tabPanel>
 
@@ -340,7 +358,7 @@
 
     <p-dialog [modal]="true" header="Become an Esteemed Member" [(visible)]="joinUsVisible" [style]="{'width':'500px'}">
 
-        <!-- <p-messages></p-messages> -->
+        <p-messages></p-messages>
 
 
         <label for="tags" class="block text-left text-900 font-medium mb-2">Name</label>
@@ -386,4 +404,15 @@
         <button pButton pRipple (click)="openPayment()" label="Pay {{paymentAmount | currency:'INR':'symbol':'1.0-0'}}"
             class="w-full"></button>
 
+    </p-dialog>
+
+    <p-dialog [modal]="true" [closable]="false" [header]="header" [(visible)]="loading">
+        <div class="grid justify-content-between">
+            <div>
+
+                <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+
+            </div>
+        </div>
     </p-dialog>

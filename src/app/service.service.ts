@@ -13,6 +13,14 @@ export class ServiceService {
     return this.http.post( 'http://localhost:8082/sendOTP',formData );
   }
 
+  verifyOTP(formData: FormData) {
+    return this.http.post( 'http://localhost:8082/verifyOTP',formData );
+  }
+
+  signin(signUp: Signup) {
+    return this.http.post( 'http://localhost:8082/signup',signUp );
+  }
+
   constructor(private http: HttpClient) { }
 
   login(login: Login)
@@ -26,7 +34,7 @@ export class ServiceService {
   }
 
   getLoginDetails() {
-    return this.http.get('https://srinivas-app-23722fde5f1f.herokuapp.com/getLoginDetails')
+    return this.http.get('http://localhost:8082/getLoginDetails')
   }
 
   

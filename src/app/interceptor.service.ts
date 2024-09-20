@@ -7,19 +7,21 @@ import { Observable } from 'rxjs';
 })
 export class InterceptorService {
 
-  constructor() {}
+  constructor() { }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = localStorage.getItem("token");
     if (token) {
-      request = request.clone({
-        setHeaders: {
-          Authorization: token,
-        },
-      });
+      if (!(request.url.endsWith("verifyOTP") || request.url.endsWith("signup") || request.url.endsWith("getOrderId"))) {
+        request = request.clone({
+          setHeaders: {
+            Authorization: token,
+          },
+        });
+      }
     }
 
-   // alert(request.url+" "+request.headers.get("Authorization"));
+    // alert(request.url+" "+request.headers.get("Authorization"));
 
     return next.handle(request);
   }
