@@ -176,9 +176,12 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.clear();
         // this.loginVisible=false;
-        this.signOtpVisible = true;
+       
         if (res.loginStatus)
-          this.messageService.add({ severity: 'info', summary: 'Password Sent to your Email', detail: '' });
+         {
+          this.signOtpVisible = true;
+         this.messageService.add({ severity: 'info', summary: 'Password Sent to your Email', detail: '' });
+         }
         else
           this.messageService.add({ severity: 'error', summary: res.message, detail: '' });
 
