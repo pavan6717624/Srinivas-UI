@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/api';
+import { MenuItem, MessageService } from 'primeng/api';
 import { ServiceService } from 'src/app/service.service';
 import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { DeviceDetectorService } from 'ngx-device-detector';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -25,7 +26,15 @@ export class HomeComponent implements OnInit {
     return newDate < this.today ;
   }
 
-  constructor(private eventService: ServiceService) { }
+  isMobile = false;
+  sidebarVisible = false;
+  constructor(private deviceService: DeviceDetectorService, private service: ServiceService, private messageService: MessageService) {
+
+    this.isMobile = this.deviceService.isMobile(); 
+
+
+
+  }
 
 
 }
