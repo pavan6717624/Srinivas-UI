@@ -124,11 +124,11 @@
         <div class="col-12 lg:col-4">
 
             <div class="flex flex-column surface-card">
-                <img (click)="paymentStart(1);" src="assets/images/goa_new (1).jpg" alt="Image"
+                <img  src="assets/images/goa_new (1).jpg" alt="Image"
                     style="border-radius: 20px;cursor: pointer;">
 
                 <p>
-                    <p-button styleClass="p-button-outlined" (click)="paymentStart(1);">
+                    <p-button styleClass="p-button-outlined" >
                         <img alt="logo" src="assets/images/logo_goa.jpg" style="width: 1rem" />
                         <span class="ml-2 font-bold">Book Now</span>
                     </p-button>
@@ -140,11 +140,11 @@
         <div class="col-12 lg:col-4">
 
             <div class="flex flex-column surface-card">
-                <img (click)="paymentStart(2);" src="assets/images/bangkok_new (1).jpg" alt="Image"
+                <img src="assets/images/bangkok_new (1).jpg" alt="Image"
                     style="border-radius: 20px;cursor: pointer;">
 
                 <p>
-                    <p-button styleClass="p-button-outlined" (click)="paymentStart(2);">
+                    <p-button styleClass="p-button-outlined" >
                         <img alt="logo" src="assets/images/logo_bangkok.jpg" style="width: 1rem" />
                         <span class="ml-2 font-bold">Book Now</span>
                     </p-button>
@@ -206,7 +206,7 @@
             to be discovered!</div> -->
         <div class="text-900 text-5xl mb-3 p-1">Uncover unique lodging options and authentic experiences that enhance
             your journey</div>
-        <button pButton pRipple label="Join Now" icon="pi pi-discord" (click)="paymentStart(0);"
+        <button pButton pRipple label="Join Now" icon="pi pi-discord" 
             class="font-bold px-5 py-3 p-button-raised p-button-rounded white-space-nowrap"></button>
     </div>
 </div>
@@ -356,55 +356,7 @@
 
 
 
-    <p-dialog [modal]="true" header="Become an Esteemed Member" [(visible)]="joinUsVisible" [style]="{'width':'500px'}">
-
-        <p-messages></p-messages>
-
-
-        <label for="tags" class="block text-left text-900 font-medium mb-2">Name</label>
-
-        <input id="tags" type="text" placeholder="Name" pInputText class="w-full mb-3">
-
-
-
-        <label for="tags" class="block text-left text-900 font-medium mb-2">Email</label>
-
-        <input id="tags" type="text" placeholder="Email" pInputText class="w-full mb-3">
-
-
-
-        <label for="tags" class="block text-left text-900 font-medium mb-2">Mobile</label>
-
-        <input id="tags" type="text" placeholder="Mobile" pInputText class="w-full mb-3">
-
-
-
-        <label for="tags" class="block text-left text-900 font-medium mb-2">Location</label>
-
-        <div class="grid">
-            <div class="col-6">
-                <div class="image-container">
-                    <img src="assets/images/goa_new (1).jpg" alt="Image" class="image"
-                        style="width:150px; height:150px;border-radius: 20px;" />
-                    <p-checkbox [binary]="true" [(ngModel)]="goaSelected"
-                        (ngModelChange)="paymentAmountChange(1)"></p-checkbox>
-                </div>
-            </div>
-
-            <div class="col-6">
-                <div class="image-container">
-                    <img src="assets/images/bangkok_new (1).jpg" alt="Image" class="image"
-                        style="width:150px;height:150px;border-radius: 20px;" />
-                    <p-checkbox [binary]="true" [(ngModel)]="bangkokSelected"
-                        (ngModelChange)="paymentAmountChange(2)"></p-checkbox>
-                </div>
-            </div>
-        </div>
-
-        <button pButton pRipple (click)="openPayment()" label="Pay {{paymentAmount | currency:'INR':'symbol':'1.0-0'}}"
-            class="w-full"></button>
-
-    </p-dialog>
+    
 
     <p-dialog [modal]="true" [closable]="false" [header]="header" [(visible)]="loading">
         <div class="grid justify-content-between">
