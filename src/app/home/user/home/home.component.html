@@ -46,15 +46,16 @@
             </div> -->
 
     <div class="grid justify-content-center">
-        <div class="col-12 md:col-6 lg:col-3" *ngIf="goaSelected" (click)="payCall()">
-            <div class="surface-card shadow-2 p-3 border-round" >
+        <div class="col-12 md:col-6 lg:col-3" *ngIf="goaSelected"
+            (click)="payCall('Goa', '26-Sept-2024 To 30-Sept-2024')">
+            <div class="surface-card shadow-2 p-3 border-round">
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3">Goa</span>
-                        <div class="text-900 font-medium text-l">26-Sept-2024 To 31-Sept-2024 </div>
+                        <div class="text-900 font-medium text-l">26-Sept-2024 To 30-Sept-2024 </div>
                     </div>
-                   
-                    
+
+
                     <!-- <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
                         style="width:2rem;height:2rem">
                         <i class="pi pi-calendar-plus text-purple-500 text-l"></i>
@@ -63,23 +64,24 @@
                     <div>&nbsp;</div> -->
 
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
-                    style="width:2rem;height:2rem">
-                    <i class="pi pi-angle-right text-blue-500 text-l"></i>
-                </div>
+                        style="width:2rem;height:2rem">
+                        <i class="pi pi-angle-right text-blue-500 text-l"></i>
+                    </div>
 
                 </div>
                 <span class="text-green-500 font-medium">6 Days and 5 Nights</span>
-               
+
             </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-3" *ngIf="bangkokSelected" (click)="payCall()">
+        <div class="col-12 md:col-6 lg:col-3" *ngIf="bangkokSelected"
+            (click)="payCall('Bangkok', '26-Sept-2024 To 30-Sept-2024')">
             <div class="surface-card shadow-2 p-3 border-round">
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3">Bangkok</span>
-                        <div class="text-900 font-medium text-l">26-Sept-2024 To 31-Sept-2024</div>
+                        <div class="text-900 font-medium text-l">26-Sept-2024 To 30-Sept-2024</div>
                     </div>
-<!-- 
+                    <!-- 
                     <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
                     style="width:2rem;height:2rem">
                     <i class="pi pi-calendar-plus text-purple-500 text-l"></i>
@@ -96,12 +98,13 @@
                 <!-- <span class="text-500">since last week</span> -->
             </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-3" *ngIf="goaSelected" (click)="payCall()">
+        <div class="col-12 md:col-6 lg:col-3" *ngIf="goaSelected"
+            (click)="payCall('Goa', '26-Sept-2024 To 30-Sept-2024')">
             <div class="surface-card shadow-2 p-3 border-round">
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3">Goa</span>
-                        <div class="text-900 font-medium text-l">26-Sept-2024 To 31-Sept-2024 </div>
+                        <div class="text-900 font-medium text-l">26-Sept-2024 To 30-Sept-2024 </div>
                     </div>
 
                     <!-- <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
@@ -117,17 +120,18 @@
                     </div>
                 </div>
                 <span class="text-green-500 font-medium">6 Days and 5 Nights</span>
-               
+
             </div>
         </div>
-        <div class="col-12 md:col-6 lg:col-3" *ngIf="bangkokSelected" (click)="payCall()">
+        <div class="col-12 md:col-6 lg:col-3" *ngIf="bangkokSelected"
+            (click)="payCall('Bangkok', '26-Sept-2024 To 30-Sept-2024')">
             <div class="surface-card shadow-2 p-3 border-round">
                 <div class="flex justify-content-between mb-3">
                     <div>
                         <span class="block text-500 font-medium mb-3">Bangkok</span>
-                        <div class="text-900 font-medium text-l">26-Sept-2024 To 31-Sept-2024</div>
+                        <div class="text-900 font-medium text-l">26-Sept-2024 To 30-Sept-2024</div>
                     </div>
-<!-- 
+                    <!-- 
                     <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
                     style="width:2rem;height:2rem">
                     <i class="pi pi-calendar-plus text-purple-500 text-l"></i>
@@ -166,7 +170,7 @@
 
 <p-dialog [modal]="true" header="Book Now" [(visible)]="payVisible" [style]="{'width':'500px'}">
 
-    <p-messages></p-messages>
+
 
 
     <label for="tags" class="block text-left text-900 font-medium mb-2">Name</label>
@@ -177,27 +181,86 @@
 
     <label for="tags" class="block text-left text-900 font-medium mb-2">Email</label>
 
-    <input id="tags" type="text" placeholder="Email"  [(ngModel)]="email" [disabled]="true" pInputText class="w-full mb-3">
+    <input id="tags" type="text" placeholder="Email" [(ngModel)]="email" [disabled]="true" pInputText
+        class="w-full mb-3">
 
 
 
     <label for="tags" class="block text-left text-900 font-medium mb-2">Mobile</label>
 
-    <input id="tags" type="text" placeholder="Mobile"  [(ngModel)]="mobile" [disabled]="true" pInputText class="w-full mb-3">
+    <input id="tags" type="text" placeholder="Mobile" [(ngModel)]="mobile" [disabled]="true" pInputText
+        class="w-full mb-3">
 
 
 
     <label for="tags" class="block text-left text-900 font-medium mb-2">Location</label>
 
-    <input id="tags" type="text" placeholder="Mobile"  [(ngModel)]="location" [disabled]="true" pInputText class="w-full mb-3">
+    <input id="tags" type="text" placeholder="Mobile" [(ngModel)]="location" [disabled]="true" pInputText
+        class="w-full mb-3">
 
     <label for="tags" class="block text-left text-900 font-medium mb-2">Dates</label>
 
-    <input id="tags" type="text" placeholder="Mobile" [(ngModel)]="dates" [disabled]="true" pInputText class="w-full mb-3">
+    <input id="tags" type="text" placeholder="Mobile" [(ngModel)]="dates" [disabled]="true" pInputText
+        class="w-full mb-3">
 
-   
+
 
     <button pButton pRipple (click)="openPayment()" label="Pay {{paymentAmount | currency:'INR':'symbol':'1.0-0'}}"
         class="w-full"></button>
 
 </p-dialog>
+
+<p-dialog [modal]="true" header="Status" [(visible)]="successVisible" [style]="{'width':'500px'}">
+
+<div
+    style='margin:auto; padding: 0; display: flex;justify-content: center;align-items: center; width:100%; height:100%'>
+    <div class="surface-card  border-round w-full lg:w-4">
+
+<div class="surface-section ">
+
+    <div class="flex align-items-center justify-content-center">
+    <i class="pi pi-check-circle text-green-500 text-8xl"></i>
+</div>
+
+    <div class="font-medium text-3xl text-900 mb-3">Booking Successful</div>
+    <div class="text-500 mb-5">Discover Unique Accommodations and Local Eateries for an Unforgettable Experience</div>
+    <ul class="list-none p-0 m-0">
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Name</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{name}}</div>
+
+        </li>
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+        <div class="text-500 w-6 md:w-2 font-medium">Email</div>
+        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{email}}</div>
+
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+        <div class="text-500 w-6 md:w-2 font-medium">Mobile</div>
+        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{mobile}}</div>
+
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+        <div class="text-500 w-6 md:w-2 font-medium">Location</div>
+        <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{location}}</div>
+
+        </li>
+
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap">
+            <div class="text-500 w-6 md:w-2 font-medium">Dates</div>
+            <div class="text-900 w-full md:w-8 md:flex-order-0 flex-order-1">{{dates}}</div>
+    
+            </li>
+    
+
+
+
+    </ul>
+</div>
+</div>
+</div>
+</p-dialog>
+
+

@@ -13,23 +13,26 @@ declare var Razorpay: any;
 })
 export class HomeComponent implements OnInit {
 
-  today= new Date();
-  goaSelected=true;
-  bangkokSelected=true;
+  today = new Date();
+  goaSelected = true;
+  bangkokSelected = true;
   location: string = '';
   dates: string = '';
 
-  payVisible=false;
+  payVisible = false;
+
+  goaPay = 50000;
+  bangkokPay = 100000;
 
   ngOnInit() {
-   
+
     this.getOrderId();
     this.getLoginDetails();
-    
+
   }
   loginStatus: LoginStatus = new LoginStatus();
-  loading=false;
-  mobile: string ='';
+  loading = false;
+  mobile: string = '';
 
   getLoginDetails() {
 
@@ -37,14 +40,14 @@ export class HomeComponent implements OnInit {
     this.loading = true;
     this.service.getLoginDetails().subscribe(
       (res: any) => {
-        
+
         this.loginStatus = res;
         console.log(this.loginStatus);
-        this.loading=false;
-        this.name=res.name;
-        this.email=res.email;
-        this.mobile=res.mobile;
-       
+        this.loading = false;
+        this.name = res.name;
+        this.email = res.email;
+        this.mobile = res.mobile;
+
 
       },
       (err: any) => {
@@ -56,49 +59,37 @@ export class HomeComponent implements OnInit {
 
 
 
-  payCall()
-  {
-    this.payVisible=true;
+  payCall(location: string, dates: string) {
+    if (location === 'Goa')
+      this.paymentAmount = this.goaPay;
+    else if (location === 'Bangkok')
+      this.paymentAmount = this.bangkokPay;
+    this.location = location;
+    this.dates = dates;
+    this.payVisible = true;
   }
 
-  checkDate(date: any)
-  {
-    var newDate=new Date();
+  checkDate(date: any) {
+    var newDate = new Date();
     newDate.setDate(date.day);
     newDate.setMonth(date.month);
     newDate.setFullYear(date.year);
-    return newDate < this.today ;
+    return newDate < this.today;
   }
 
   isMobile = false;
   sidebarVisible = false;
   constructor(private deviceService: DeviceDetectorService, private service: ServiceService, private messageService: MessageService) {
 
-    this.isMobile = this.deviceService.isMobile(); 
+    this.isMobile = this.deviceService.isMobile();
 
 
 
   }
 
-  goaAmount = 100000;
-  bangkokAmount = 150000;
 
-  paymentAmountChange(id: number) {
-    if (id == 1) {
-      if (this.goaSelected)
-        this.paymentAmount += this.goaAmount;
-      else
-        this.paymentAmount -= this.goaAmount;
-    }
 
-    if (id == 2) {
-      if (this.bangkokSelected)
-        this.paymentAmount += this.bangkokAmount;
-      else
-        this.paymentAmount -= this.bangkokAmount;
-    }
 
-  }
   paymentStart(id: number) {
 
     if (id == 1) {
@@ -119,7 +110,7 @@ export class HomeComponent implements OnInit {
     }
 
     this.joinUsVisible = true
-    this.paymentAmountChange(id);
+
   }
   joinUsVisible = false;
   paymentAmount = 0;
@@ -181,10 +172,10 @@ export class HomeComponent implements OnInit {
 
   }
 
-  name:string='';
-  email: string='';
+  name: string = '';
+  email: string = '';
 
-
+  successVisible = false;
 
 
   @HostListener('window:payment.success', ['$event'])
@@ -195,9 +186,10 @@ export class HomeComponent implements OnInit {
     subscription.razorpay_order_id = event.detail.razorpay_order_id;
     subscription.razorpay_signature = event.detail.razorpay_signature;
     subscription.name = this.name;
-    
-    subscription.subscription = 'Pay';
 
+    subscription.subscription = 'Pay';
+    this.successVisible = true;
+    this.payVisible=false;
     console.log(subscription);
 
   }
@@ -206,6 +198,9 @@ export class HomeComponent implements OnInit {
   @HostListener('window:payment.closed', ['$event'])
   onPaymentClosed(event: any): void {
     console.log("failed");
+    this.getOrderId();
+    this.messageService.clear();
+    this.messageService.add({ severity: 'error', summary: "Payment Failed..", detail: '' });
   }
 
   orderid: any = "";
