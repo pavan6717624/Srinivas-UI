@@ -10,31 +10,31 @@ export class ServiceService {
   }
 
   sendOTP(formData: FormData) {
-    return this.http.post( 'https://srinivas-app-23722fde5f1f.herokuapp.com/sendOTP',formData );
+    return this.http.post( 'https://take-app-4afe487d41cd.herokuapp.com/sendOTP',formData );
   }
 
   verifyOTP(formData: FormData) {
-    return this.http.post( 'https://srinivas-app-23722fde5f1f.herokuapp.com/verifyOTP',formData );
+    return this.http.post( 'https://take-app-4afe487d41cd.herokuapp.com/verifyOTP',formData );
   }
 
   signin(signUp: Signup) {
-    return this.http.post( 'https://srinivas-app-23722fde5f1f.herokuapp.com/signup',signUp );
+    return this.http.post( 'https://take-app-4afe487d41cd.herokuapp.com/signup',signUp );
   }
 
   constructor(private http: HttpClient) { }
 
   login(login: Login)
   {
-    return this.http.post('https://srinivas-app-23722fde5f1f.herokuapp.com/login',login);
+    return this.http.post('https://take-app-4afe487d41cd.herokuapp.com/login',login);
   }
 
   generateOTP(formData: FormData)
   {
-    return this.http.post('https://srinivas-app-23722fde5f1f.herokuapp.com/generateOTP',formData);
+    return this.http.post('https://take-app-4afe487d41cd.herokuapp.com/generateOTP',formData);
   }
 
   getLoginDetails() {
-    return this.http.get('https://srinivas-app-23722fde5f1f.herokuapp.com/getLoginDetails')
+    return this.http.get('https://take-app-4afe487d41cd.herokuapp.com/getLoginDetails')
   }
 
   
