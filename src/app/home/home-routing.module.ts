@@ -14,7 +14,7 @@ const routes: Routes = [
 
   children: [
     { path:'',component: StartComponent},
-    { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule), canActivate:[AuthguardGuard], data: { roles: ['Admin','User', 'Manager'] } },
+    { path: 'user', loadChildren: () => import('./user/user.module').then(m => m.UserModule), canActivate:[AuthguardGuard], data: { roles: ['Admin','Customer', 'Manager'] } },
   ]
 
 

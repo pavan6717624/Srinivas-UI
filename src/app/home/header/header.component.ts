@@ -36,14 +36,14 @@ export class HeaderComponent implements OnInit {
     {
       label: 'My Bookings', icon: 'pi pi-youtube', command: () => {
         this.sidebarVisible = false;
-        alert("in progress")
+        //alert("in progress")
         // this.route.navigate(['home/videos']);
       }
     },
     {
       label: 'Account', icon: 'pi pi-user', command: () => {
         this.sidebarVisible = false;
-        alert("in progress")
+        //alert("in progress")
         // this.route.navigate(['home/profile']);
       }
     },

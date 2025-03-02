@@ -210,7 +210,10 @@ export class LoginComponent implements OnInit {
         this.loginStatus = res;
         console.log(this.loginStatus);
 
-        if (this.loginStatus.userType === 'User') {
+        //alert(this.loginStatus.userType);
+
+        if (this.loginStatus.userType === 'Customer') {
+          //alert("came here")
           this.router.navigate(['home/user'], { state: { loginStatus: res } });
         }
         

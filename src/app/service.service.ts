@@ -6,35 +6,35 @@ import { Login, Signup } from './login/login.component';
 })
 export class ServiceService {
   getOrderId() {
-    return this.http.get( 'https://take-app-4afe487d41cd.herokuapp.com/getOrderId' );
+    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getOrderId' );
   }
 
   sendOTP(formData: FormData) {
-    return this.http.post( 'https://take-app-4afe487d41cd.herokuapp.com/sendOTP',formData );
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/sendOTP',formData );
   }
 
   verifyOTP(formData: FormData) {
-    return this.http.post( 'https://take-app-4afe487d41cd.herokuapp.com/verifyOTP',formData );
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/verifyOTP',formData );
   }
 
   signin(signUp: Signup) {
-    return this.http.post( 'https://take-app-4afe487d41cd.herokuapp.com/signup',signUp );
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/signup',signUp );
   }
 
   constructor(private http: HttpClient) { }
 
   login(login: Login)
   {
-    return this.http.post('https://take-app-4afe487d41cd.herokuapp.com/login',login);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/login',login);
   }
 
   generateOTP(formData: FormData)
   {
-    return this.http.post('https://take-app-4afe487d41cd.herokuapp.com/generateOTP',formData);
+    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/generateOTP',formData);
   }
 
   getLoginDetails() {
-    return this.http.get('https://take-app-4afe487d41cd.herokuapp.com/getLoginDetails')
+    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLoginDetails')
   }
 
   

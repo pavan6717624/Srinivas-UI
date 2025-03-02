@@ -21,6 +21,7 @@ export class AuthguardGuard implements CanActivate {
 
       
     if (this.auth.isLogggedIn()) {
+      //alert(allowedRoles.includes(this.auth.getRole()))
        return allowedRoles.includes(this.auth.getRole());
     }
     else {
