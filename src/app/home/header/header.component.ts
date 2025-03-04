@@ -15,7 +15,10 @@ export class HeaderComponent implements OnInit {
 
   sidebarVisible=false;
 
+  username: string = 'User';
+
   ngOnInit(): void {
+    this.username=this.authSerivce.getUserName();
   }
 
   menuItems = [
