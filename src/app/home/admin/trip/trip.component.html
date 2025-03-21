@@ -1,11 +1,15 @@
-<p-tabView class="text-center">
-    <p-tabPanel header="Location">
+<p-confirmDialog></p-confirmDialog>
+
+ <p-messages></p-messages>
+
+<!--<p-tabView class="text-center">
+    <p-tabPanel header="Add Location">
 
         <label for="lname" class="block text-900 font-medium mb-2 text-left">Location</label>
         <input id="lname" type="text" [(ngModel)]="locationName" placeholder="Location Name" pInputText class="w-full mb-3">
 
         <label for="lname" class="block text-900 font-medium mb-2 text-left">Price</label>
-        <!-- <input id="lname" type="text"  placeholder="Location Name" pInputText class="w-full mb-3"> -->
+       
         <p-inputNumber  mode="decimal" [(ngModel)]="price" placeholder="Price" class="w-full mb-3">
         </p-inputNumber>
            
@@ -14,16 +18,12 @@
         <button pButton pRipple label="Add Location"  (click)="addLocation()" class="w-full"></button>
 
     </p-tabPanel>
-    <p-tabPanel header="Schedule">
+    <p-tabPanel header="Location List">
 
-        <label for="mobile" class="block text-900 font-medium mb-2 text-left">Mobile</label>
-        <input id="mobile" type="text"  placeholder="Mobile" pInputText class="w-full mb-3">
-
-
-        <button pButton pRipple label="Schedule"  class="w-full"></button>
+       
 
     </p-tabPanel>
-</p-tabView>
+</p-tabView>-->
 
 
 
@@ -36,11 +36,34 @@
 
         </div>
     </div>
-</p-dialog>
+</p-dialog> 
 
-<p-dialog [modal]="false" [closable]="true" header="LocationList" [(visible)]="listVisible" [style]="{'width':'500px'}">
+<p-table [value]="locations">
+    <ng-template pTemplate="header">
+        <tr>
+          
+            <th>Name</th>
+            <th>Price</th>
+            <th>Action</th>
+          
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-location>
+        <tr>
+            <td>{{ location.locationName }}</td>
+            <td>{{ location.price }}</td>
+            <td> <i class="pi pi-pencil" style='cursor:pointer' ></i> &nbsp;  
+                <i class="pi pi-trash" style='cursor:pointer' (click)="deleteLocation(location.locationName)"></i>
+            </td>
+            <!-- <td>{{ product.category }}</td>
+            <td>{{ product.quantity }}</td> -->
+        </tr>
+    </ng-template>
+</p-table>
+
+<!-- <p-dialog [modal]="false" [closable]="true" header="Location List" [(visible)]="listVisible" [style]="{'width':'500px'}">
 <div class="surface-section">
-    <div class="bg-green-900 text-gray-100 p-2 text-500 mb-5">Location Added Successfully</div>
+    <div class="bg-green-900 text-gray-100 p-2 text-500 mb-5">{{message}}</div>
     <ul class="list-none p-0 m-0">
         <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap" *ngFor="let location of locations">
             <div class="text-500 w-6  font-medium">{{location.locationName}}</div>
@@ -50,5 +73,5 @@
         
     </ul>
 </div>
-</p-dialog>
+</p-dialog> -->
 

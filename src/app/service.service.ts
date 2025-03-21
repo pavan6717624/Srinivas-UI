@@ -25,6 +25,14 @@ export class ServiceService {
   addLocation(locationDTO: LocationDTO) {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addLocation',locationDTO );
   }
+
+ deleteLocation(formData: FormData) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/deleteLocation',formData );
+  }
+
+  getLocations() {
+    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocations');
+  }
   constructor(private http: HttpClient) { }
 
 
