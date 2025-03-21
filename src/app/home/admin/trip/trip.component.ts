@@ -69,7 +69,7 @@ export class TripComponent implements OnInit {
 
 
   loading = false;
-  listVisible = false;
+  addVisible = false;
   addLocation() {
 
 
@@ -81,6 +81,8 @@ export class TripComponent implements OnInit {
     this.service.addLocation(locationDTO).subscribe(
       (res: any) => {
         this.location = res;
+        this.getLocations();
+        this.addVisible=false;
 
         // console.log(res.message);
 
@@ -95,7 +97,7 @@ export class TripComponent implements OnInit {
       },
       (err: any) => {
         this.loading = false;
-
+        this.addVisible=false;
       }
     );
   }
