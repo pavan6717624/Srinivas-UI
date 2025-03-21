@@ -52,6 +52,7 @@ import {StepsModule} from 'primeng/steps';
 import {SplitButtonModule} from 'primeng/splitbutton';
 
 const SHARED_MODULES = [
+  InputNumberModule,
   SplitButtonModule,
   StepsModule,
   InputTextareaModule,

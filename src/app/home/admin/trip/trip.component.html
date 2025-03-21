@@ -1,0 +1,54 @@
+<p-tabView class="text-center">
+    <p-tabPanel header="Location">
+
+        <label for="lname" class="block text-900 font-medium mb-2 text-left">Location</label>
+        <input id="lname" type="text" [(ngModel)]="locationName" placeholder="Location Name" pInputText class="w-full mb-3">
+
+        <label for="lname" class="block text-900 font-medium mb-2 text-left">Price</label>
+        <!-- <input id="lname" type="text"  placeholder="Location Name" pInputText class="w-full mb-3"> -->
+        <p-inputNumber  mode="decimal" [(ngModel)]="price" placeholder="Price" class="w-full mb-3">
+        </p-inputNumber>
+           
+
+
+        <button pButton pRipple label="Add Location"  (click)="addLocation()" class="w-full"></button>
+
+    </p-tabPanel>
+    <p-tabPanel header="Schedule">
+
+        <label for="mobile" class="block text-900 font-medium mb-2 text-left">Mobile</label>
+        <input id="mobile" type="text"  placeholder="Mobile" pInputText class="w-full mb-3">
+
+
+        <button pButton pRipple label="Schedule"  class="w-full"></button>
+
+    </p-tabPanel>
+</p-tabView>
+
+
+
+<p-dialog [modal]="true" [closable]="false" header="Please wait.." [(visible)]="loading">
+    <div class="grid justify-content-between">
+        <div>
+
+            <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+
+        </div>
+    </div>
+</p-dialog>
+
+<p-dialog [modal]="false" [closable]="true" header="LocationList" [(visible)]="listVisible" [style]="{'width':'500px'}">
+<div class="surface-section">
+    <div class="bg-green-900 text-gray-100 p-2 text-500 mb-5">Location Added Successfully</div>
+    <ul class="list-none p-0 m-0">
+        <li class="flex align-items-center py-3 px-2 border-top-1 surface-border flex-wrap" *ngFor="let location of locations">
+            <div class="text-500 w-6  font-medium">{{location.locationName}}</div>
+            <div class="text-900 w-6 md:flex-order-0 flex-order-1">{{location.price}}</div>
+          
+        </li>
+        
+    </ul>
+</div>
+</p-dialog>
+
