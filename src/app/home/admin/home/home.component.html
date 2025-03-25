@@ -4,7 +4,7 @@
 
         <div class="flex align-items-start lg:justify-content-between">
             <div>
-                <div class="font-medium text-3xl text-900">Trips</div>
+                <div class="font-medium text-3xl text-900">Locations</div>
                 <div class="flex align-items-center text-700 flex-wrap">
                     <div class="mr-5 flex align-items-center mt-3">
                         <i class="pi pi-users mr-2"></i>
@@ -22,12 +22,49 @@
             </div>
             <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
                 <div>
-                    <button pButton pRipple label="" (click)="tripVisible=true" class="p-button-outlined" icon="pi pi-plus"></button>
+                    <button pButton pRipple label="" (click)="locationVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
                 </div>
-                <div>&nbsp;</div>
+                <!-- <div>&nbsp;</div>
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                </div> -->
+            </div>
+        </div>
+
+
+
+
+    </div>
+    <div>&nbsp;</div>
+
+    <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+
+        <div class="flex align-items-start lg:justify-content-between">
+            <div>
+                <div class="font-medium text-3xl text-900">Trip</div>
+                <div class="flex align-items-center text-700 flex-wrap">
+                    <div class="mr-5 flex align-items-center mt-3">
+                        <i class="pi pi-users mr-2"></i>
+                        <span>332 Active Users</span>
+                    </div>
+                    <div class="mr-5 flex align-items-center mt-3">
+                        <i class="pi pi-users mr-2"></i>
+                        <span>332 Active Users</span>
+                    </div>
+                    <div class="mr-5 flex align-items-center mt-3">
+                        <i class="pi pi-users mr-2"></i>
+                        <span>332 Active Users</span>
+                    </div>
                 </div>
+            </div>
+            <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
+                <div>
+                    <button pButton pRipple label="" (click)="tripVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                </div>
+                <!-- <div>&nbsp;</div>
+                <div>
+                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                </div> -->
             </div>
         </div>
 
@@ -61,10 +98,10 @@
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-plus"></button>
                 </div>
-                <div>&nbsp;</div>
+                <!-- <div>&nbsp;</div>
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -101,10 +138,10 @@
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-plus"></button>
                 </div>
-                <div>&nbsp;</div>
+                <!-- <div>&nbsp;</div>
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -141,10 +178,10 @@
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-plus"></button>
                 </div>
-                <div>&nbsp;</div>
+                <!-- <div>&nbsp;</div>
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
+                </div> -->
             </div>
         </div>
 
@@ -158,6 +195,10 @@
 </div>
 
 
-<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" [style]="{'width':'500px'}">
+<p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" [style]="{'width':'500px'}">
     <app-trip></app-trip>
+</p-dialog>
+
+<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" [style]="{'width':'500px'}">
+    <app-schedule></app-schedule>
 </p-dialog>

@@ -26,7 +26,63 @@ export class TripComponent implements OnInit {
     this.getLocations();
   }
 
+  refresh()
+  {
+    this.ngOnInit();
+  }
 
+
+  checkParams()
+  {
+    if (this.locationName === '' || this.locationName.trim().length == 0 || this.price == 0) {
+      this.messageService.clear();
+  
+      this.messageService.add({ severity: 'error', summary: 'Invalid Parameters.', detail: '' });
+      this.addVisible = false;
+      return true;
+  
+    }
+    return false;
+  }
+editLocation()
+{
+  if(this.checkParams())
+  {
+    return;
+  }
+  
+  this.loading = true;
+  var locationDTO = new LocationDTO();
+  locationDTO.locationName = this.locationName;
+  locationDTO.price = this.price;
+
+
+
+  this.service.editLocation(locationDTO).subscribe(
+    (res: any) => {
+      this.location = res;
+      this.getLocations();
+      this.editVisible = false;
+
+      // console.log(res.message);
+
+      this.messageService.clear();
+
+      //this.listVisible=true;
+      this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
+
+      console.log(res);
+      this.loading = false;
+
+    },
+    (err: any) => {
+      this.loading = false;
+      this.editVisible = false;
+    }
+  );
+}
+
+  editVisible=false;
 
   deleteLocation(locationName: string) {
     this.messageService.clear();
@@ -73,16 +129,22 @@ export class TripComponent implements OnInit {
   addLocation() {
 
 
+    if(this.checkParams())
+      {
+        return;
+      }
     this.loading = true;
     var locationDTO = new LocationDTO();
     locationDTO.locationName = this.locationName;
     locationDTO.price = this.price;
 
+
+
     this.service.addLocation(locationDTO).subscribe(
       (res: any) => {
         this.location = res;
         this.getLocations();
-        this.addVisible=false;
+        this.addVisible = false;
 
         // console.log(res.message);
 
@@ -97,7 +159,7 @@ export class TripComponent implements OnInit {
       },
       (err: any) => {
         this.loading = false;
-        this.addVisible=false;
+        this.addVisible = false;
       }
     );
   }

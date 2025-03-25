@@ -15,7 +15,10 @@
     </p-tabPanel>
 </p-tabView>-->
 
-<button pButton pRipple label="+Add Location"  (click)="addVisible=true"></button>
+<button pButton pRipple label="+Add Location"  (click)="addVisible=true; locationName=''; price=0;"></button>
+&nbsp;
+<button pButton pRipple icon="pi pi-refresh" (click)="refresh()"></button>
+
 <div>&nbsp;</div>
 
 <p-dialog [modal]="true" [closable]="false" header="Please wait.." [(visible)]="loading">
@@ -43,8 +46,9 @@
         <tr>
             <td>{{ location.locationName }}</td>
             <td>{{ location.price }}</td>
-            <td> <i class="pi pi-pencil" style='cursor:pointer' ></i> &nbsp;  
+            <td> <i class="pi pi-pencil" style='cursor:pointer' (click)="editVisible=true; locationName=location.locationName; price=location.price;"></i> &nbsp;  
                 <i class="pi pi-trash" style='cursor:pointer' (click)="deleteLocation(location.locationName)"></i>
+                
             </td>
             <!-- <td>{{ product.category }}</td>
             <td>{{ product.quantity }}</td> -->
@@ -52,7 +56,7 @@
     </ng-template>
 </p-table>
 
-<p-dialog [modal]="false" [closable]="true" header="Location List" [(visible)]="addVisible" [style]="{'width':'500px'}">
+<p-dialog [modal]="true" [closable]="true" header="Add Location" [(visible)]="addVisible" [style]="{'width':'500px'}">
 <div class="surface-section">
     <label for="lname" class="block text-900 font-medium mb-2 text-left">Location</label>
         <input id="lname" type="text" [(ngModel)]="locationName" placeholder="Location Name" pInputText class="w-full mb-3">
@@ -68,3 +72,20 @@
 </div>
 </p-dialog>
 
+
+<p-dialog [modal]="true" [closable]="true" header="Edit Location" [(visible)]="editVisible" [style]="{'width':'500px'}">
+    <div class="surface-section">
+        <label for="lname" class="block text-900 font-medium mb-2 text-left">Location</label>
+            <input id="lname" type="text" [(ngModel)]="locationName" placeholder="Location Name" pInputText class="w-full mb-3">
+    
+            <label for="lname" class="block text-900 font-medium mb-2 text-left">Price</label>
+           
+            <p-inputNumber  mode="decimal" [(ngModel)]="price" placeholder="Price" class="w-full mb-3">
+            </p-inputNumber>
+               
+    
+    
+            <button pButton pRipple label="Edit Location"  (click)="editLocation()" class="w-full"></button>
+    </div>
+    </p-dialog>
+    

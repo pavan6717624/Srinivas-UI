@@ -11,6 +11,8 @@ export class HomeComponent implements OnInit {
 
   tripVisible=false;
 
+  locationVisible=false;
+
   ngOnInit(): void {
   }
 

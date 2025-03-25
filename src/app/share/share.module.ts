@@ -50,8 +50,10 @@ import {ListboxModule} from 'primeng/listbox';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {StepsModule} from 'primeng/steps';
 import {SplitButtonModule} from 'primeng/splitbutton';
+import { ChipModule } from 'primeng/chip';
 
 const SHARED_MODULES = [
+  ChipModule,
   InputNumberModule,
   SplitButtonModule,
   StepsModule,

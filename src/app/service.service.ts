@@ -26,12 +26,20 @@ export class ServiceService {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addLocation',locationDTO );
   }
 
+ editLocation(locationDTO: LocationDTO) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/editLocation',locationDTO );
+  }
+
  deleteLocation(formData: FormData) {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/deleteLocation',formData );
   }
 
   getLocations() {
     return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocations');
+  }
+
+  getLocationDropDown() {
+    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocationDropDown');
   }
   constructor(private http: HttpClient) { }
 
