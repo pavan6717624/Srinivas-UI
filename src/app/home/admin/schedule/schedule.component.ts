@@ -68,7 +68,7 @@ export class ScheduleComponent implements OnInit {
     this.service.addTrip(tripDTO).subscribe(
       (res: any) => {
         console.log(res);
-
+this.getTrips();
 
         this.loading = false;
 
