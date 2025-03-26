@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Login, Signup } from './login/login.component';
 import { LocationDTO } from './home/admin/trip/trip.component';
+import { TripDTO } from './home/admin/schedule/schedule.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -26,6 +27,10 @@ export class ServiceService {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addLocation',locationDTO );
   }
 
+  addTrip(tripDTO: TripDTO) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addTrip',tripDTO );
+  }
+
  editLocation(locationDTO: LocationDTO) {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/editLocation',locationDTO );
   }
@@ -36,6 +41,10 @@ export class ServiceService {
 
   getLocations() {
     return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocations');
+  }
+
+  getTrips() {
+    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getTrips');
   }
 
   getLocationDropDown() {

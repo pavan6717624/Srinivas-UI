@@ -1,40 +1,51 @@
-<p-panel header="Filters" [toggleable]="true" [collapsed]="true" class="p-3">
-    <p class="m-0">
-    <div>
+<p-panel header="Filter / Add" [toggleable]="true" [collapsed]="true" class="p-3">
+
+    <div style="padding:0">
         <div class="flex justify-content-between mb-3">
-            <p-dropdown [options]="locations" placeholder="Select Location" optionLabel="name"
-                [showClear]="true"></p-dropdown>
+            <p-dropdown size="small" [(ngModel)]="selectedLocation" [options]="locations" placeholder="Select Location"
+                optionLabel="name" [showClear]="true" class="w-full" style="max-width: 10px"></p-dropdown>
         </div>
         <div class="flex justify-content-between mb-3" #div>
-            <div>
-                <p-calendar [baseZIndex]="100" appendTo="div" placeholder="From Date - To Date" selectionMode="range"
-                    [readonlyInput]="true"></p-calendar>
+
+            <p-calendar [minDate]="minDate" [(ngModel)]="rangeDates" size="small" style='z-index: 100;'
+                [baseZIndex]="100" appendTo="div" placeholder="From Date - To Date" selectionMode="range"
+                [readonlyInput]="true" class="w-full"></p-calendar>
+
+
+
+
+
+        </div>
+
+        <div class="flex justify-content-center mb-3" #div>
+            <div class="p-2">
+
+                <button pButton pRipple label="Filter" class="p-button-rounded p-button-outlined"
+                    icon="pi pi-filter"></button>
             </div>
-            <div>
 
-                <button pButton pRipple icon="pi pi-check"></button>
-            </div>
+            <div class="p-2">
 
-            <div>
-
-                <button pButton pRipple icon="pi pi-plus"></button>
+                <button pButton (click)="addTrip()" pRipple label="Add" class="p-button-rounded p-button-outlined"
+                    icon="pi pi-plus"></button>
             </div>
 
         </div>
     </div>
-  
+
+
 </p-panel>
 
 
 
 <div>
     <div class="grid">
-        <div class="col-12">
-            <div class="surface-card shadow-2 p-3 border-round">
+        <div class="col-12" *ngFor="let trip of trips">
+            <div class="surface-card shadow-2 p-3 border-round" >
                 <div class="flex justify-content-between mb-3">
                     <div>
-                        <span class="block text-500 font-medium mb-3">Orders</span>
-                        <div class="text-900 font-medium text-xl">152</div>
+                        <span class="block text-900 font-medium mb-3">{{trip.locationName}}</span>
+                        <div class="text-900 font-medium text-l"> {{ trip.fromDate | date}} - {{trip.toDate | date}}</div>
                     </div>
                     <div class="flex align-items-center justify-content-center bg-blue-100 border-round"
                         style="width:2.5rem;height:2.5rem">
@@ -45,53 +56,18 @@
                 <span class="text-500">since last visit</span>
             </div>
         </div>
-        <div class="col-12">
-            <div class="surface-card shadow-2 p-3 border-round">
-                <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">Revenue</span>
-                        <div class="text-900 font-medium text-xl">$2.100</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center bg-orange-100 border-round"
-                        style="width:2.5rem;height:2.5rem">
-                        <i class="pi pi-map-marker text-orange-500 text-xl"></i>
-                    </div>
-                </div>
-                <span class="text-green-500 font-medium">%52+ </span>
-                <span class="text-500">since last week</span>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="surface-card shadow-2 p-3 border-round">
-                <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">Customers</span>
-                        <div class="text-900 font-medium text-xl">28441</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center bg-cyan-100 border-round"
-                        style="width:2.5rem;height:2.5rem">
-                        <i class="pi pi-inbox text-cyan-500 text-xl"></i>
-                    </div>
-                </div>
-                <span class="text-green-500 font-medium">520 </span>
-                <span class="text-500">newly registered</span>
-            </div>
-        </div>
-        <div class="col-12">
-            <div class="surface-card shadow-2 p-3 border-round">
-                <div class="flex justify-content-between mb-3">
-                    <div>
-                        <span class="block text-500 font-medium mb-3">Comments</span>
-                        <div class="text-900 font-medium text-xl">152 Unread</div>
-                    </div>
-                    <div class="flex align-items-center justify-content-center bg-purple-100 border-round"
-                        style="width:2.5rem;height:2.5rem">
-                        <i class="pi pi-comment text-purple-500 text-xl"></i>
-                    </div>
-                </div>
-                <span class="text-green-500 font-medium">85 </span>
-                <span class="text-500">responded</span>
-            </div>
-        </div>
+
     </div>
 </div>
+
+
+<p-dialog [modal]="true" [closable]="false" header="Please wait.." [(visible)]="loading">
+    <div class="grid justify-content-between">
+        <div>
+
+            <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+            <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+
+        </div>
+    </div>
+</p-dialog> 
