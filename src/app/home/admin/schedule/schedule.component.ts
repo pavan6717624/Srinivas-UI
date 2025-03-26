@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ServiceService } from 'src/app/service.service';
 import { LocationDTO } from '../trip/trip.component';
+import { DatePipe } from '@angular/common';
 
 export class TripDTO {
   locationName: string = "";
@@ -38,6 +39,7 @@ export class ScheduleComponent implements OnInit {
 
   locations: LocationDTO[] = [];
   trips: TripDTO[] = [];
+  originaltrips: TripDTO[] = [];
 
   ngOnInit(): void {
     this.getLocations();
@@ -57,18 +59,51 @@ export class ScheduleComponent implements OnInit {
     console.log(this.maxDate);
   }
   selectedLocation: DropDown = new DropDown();
+
+  add() {
+    this.messageService.clear();
+    this.confirmationService.confirm({
+      message: 'Do you want to Add the Trip',
+      header: 'Trip Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+
+        this.addTrip();
+
+      },
+      reject: () => {
+
+      }
+    });
+  }
   addTrip() {
+
+    if (this.rangeDates[0] < new Date()) {
+      this.messageService.clear();
+      this.messageService.add({ severity: 'error', summary: 'Trip cannot be with old dates', detail: '' });
+      return;
+    }
+
     var tripDTO = new TripDTO();
     tripDTO.locationName = this.selectedLocation.name;
     tripDTO.fromDate = this.rangeDates[0];
-    tripDTO.fromDate.setDate( tripDTO.fromDate.getDate() + 1 );
+    tripDTO.fromDate.setDate(tripDTO.fromDate.getDate() + 1);
     tripDTO.toDate = this.rangeDates[1];
-    tripDTO.toDate.setDate( tripDTO.toDate.getDate() + 1 );
+    tripDTO.toDate.setDate(tripDTO.toDate.getDate() + 1);
     this.loading = true;
     this.service.addTrip(tripDTO).subscribe(
       (res: any) => {
         console.log(res);
-this.getTrips();
+
+        this.messageService.clear();
+
+        //this.listVisible=true;
+        this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
+
+        this.getTrips();
 
         this.loading = false;
 
@@ -79,7 +114,26 @@ this.getTrips();
       }
     );
   }
+  filter() {
+    this.trips = this.originaltrips.filter(o => this.checkFilter(o));
+  }
 
+  checkFilter(t: TripDTO) {
+    var fromDate = new DatePipe('en-US').transform(this.rangeDates[0], 'yyyy-MM-dd') + "";
+    var toDate = new DatePipe('en-US').transform(this.rangeDates[1], 'yyyy-MM-dd') + "";
+
+    return (t.locationName === this.selectedLocation.name || this.selectedLocation.name == null || this.selectedLocation.name == '') &&
+      ((fromDate >= t.fromDate + "" && fromDate <= t.toDate + "")
+        || (toDate >= t.fromDate + "" && toDate <= t.toDate + ""));
+
+
+  }
+
+  removeFilter() {
+    this.selectedLocation = new DropDown();
+    this.rangeDates = [];
+    this.trips = this.originaltrips;
+  }
   getLocations() {
 
 
@@ -111,6 +165,7 @@ this.getTrips();
     this.service.getTrips().subscribe(
       (res: any) => {
         this.trips = res;
+        this.originaltrips = res;
 
 
         this.loading = false;
