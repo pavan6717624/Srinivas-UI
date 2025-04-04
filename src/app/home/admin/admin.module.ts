@@ -6,13 +6,15 @@ import { HomeComponent } from './home/home.component';
 import { SharedModule } from 'src/app/share/share.module';
 import { TripComponent } from './trip/trip.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { CustomerComponent } from './customer/customer.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     TripComponent,
-    ScheduleComponent
+    ScheduleComponent,
+    CustomerComponent
   ],
   imports: [
     CommonModule,

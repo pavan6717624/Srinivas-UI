@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Login, Signup } from './login/login.component';
 import { LocationDTO } from './home/admin/trip/trip.component';
 import { TripDTO } from './home/admin/schedule/schedule.component';
+import { CustomerDTO } from './home/admin/customer/customer.component';
 @Injectable({
   providedIn: 'root'
 })
@@ -31,6 +32,19 @@ export class ServiceService {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addTrip',tripDTO );
   }
 
+  addCustomer(cdto: CustomerDTO) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addCustomer',cdto );
+  }
+
+  editCustomer(cdto: CustomerDTO) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/editCustomer',cdto );
+  }
+
+  deleteCustomer(cdto: CustomerDTO) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/deleteCustomer',cdto );
+  }
+
+
  editLocation(locationDTO: LocationDTO) {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/editLocation',locationDTO );
   }
@@ -46,6 +60,11 @@ export class ServiceService {
   getTrips() {
     return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getTrips');
   }
+
+  getCustomers() {
+    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getCustomers');
+  }
+
 
   getLocationDropDown() {
     return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocationDropDown');

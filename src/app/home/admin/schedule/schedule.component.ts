@@ -12,6 +12,7 @@ export class TripDTO {
   message: string = '';
 }
 
+
 export class DropDown {
   code: string = '';
   name: string = '';
@@ -35,13 +36,31 @@ export class ScheduleComponent implements OnInit {
   minDate: Date = new Date();
 
   maxDate: Date = new Date();
-
+  customerVisible=false;
 
   locations: LocationDTO[] = [];
   trips: TripDTO[] = [];
   originaltrips: TripDTO[] = [];
 
+  locationNameSelected: string = '';
+
+  tripSelected: string = '';
+
+  name: string ='';
+
+  mobile: string = '';
+
+  emailId: string ='';
+
+  showCustomerAdd(name: string, fromDate: Date, toDate: Date)
+  {
+    this.locationNameSelected=name;
+    this.tripSelected=fromDate+" to "+toDate;
+    this.customerVisible=true;
+  }
+
   ngOnInit(): void {
+    
     this.getLocations();
 
 
@@ -61,25 +80,34 @@ export class ScheduleComponent implements OnInit {
   selectedLocation: DropDown = new DropDown();
 
   add() {
-    this.messageService.clear();
-    this.confirmationService.confirm({
-      message: 'Do you want to Add the Trip',
-      header: 'Trip Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      acceptIcon: "none",
-      rejectIcon: "none",
-      rejectButtonStyleClass: "p-button-text",
-      accept: () => {
+    if (this.selectedLocation != null && this.selectedLocation.name.trim().length > 0 && this.rangeDates != null && this.rangeDates[0] != null && this.rangeDates[1] != null) {
+      this.messageService.clear();
+      this.confirmationService.close();
+      this.confirmationService.confirm({
+        message: 'Do you want to Add the Trip',
+        header: 'Trip Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        acceptIcon: "none",
+        rejectIcon: "none",
+        rejectButtonStyleClass: "p-button-text",
+        accept: () => {
 
-        this.addTrip();
+          this.addTrip();
 
-      },
-      reject: () => {
+        },
+        reject: () => {
 
-      }
-    });
+        }
+      });
+    }
+    else {
+      this.messageService.clear();
+      this.messageService.add({ severity: 'error', summary: 'Invalid Parameters..', detail: '' });
+
+    }
   }
   addTrip() {
+
 
     if (this.rangeDates[0] < new Date()) {
       this.messageService.clear();
@@ -113,16 +141,23 @@ export class ScheduleComponent implements OnInit {
 
       }
     );
+
   }
   filter() {
+
     this.trips = this.originaltrips.filter(o => this.checkFilter(o));
+
   }
 
   checkFilter(t: TripDTO) {
+
+
+
+
     var fromDate = new DatePipe('en-US').transform(this.rangeDates[0], 'yyyy-MM-dd') + "";
     var toDate = new DatePipe('en-US').transform(this.rangeDates[1], 'yyyy-MM-dd') + "";
 
-    return (t.locationName === this.selectedLocation.name || this.selectedLocation.name == null || this.selectedLocation.name == '') &&
+    return (this.selectedLocation != null && (t.locationName === this.selectedLocation.name || this.selectedLocation.name == null || this.selectedLocation.name == '')) ||
       ((fromDate >= t.fromDate + "" && fromDate <= t.toDate + "")
         || (toDate >= t.fromDate + "" && toDate <= t.toDate + ""));
 
@@ -177,6 +212,8 @@ export class ScheduleComponent implements OnInit {
       }
     );
   }
+
+  
 
 
 }

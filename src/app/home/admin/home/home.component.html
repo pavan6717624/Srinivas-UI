@@ -22,7 +22,7 @@
             </div>
             <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
                 <div>
-                    <button pButton pRipple label="" (click)="locationVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                    <button pButton pRipple label="" (click)="messageService.clear();confirmationService.close();locationVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
                 </div>
                 <!-- <div>&nbsp;</div>
                 <div>
@@ -59,7 +59,7 @@
             </div>
             <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
                 <div>
-                    <button pButton pRipple label="" (click)="tripVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                    <button pButton pRipple label="" (click)="messageService.clear();confirmationService.close();tripVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
                 </div>
                 <!-- <div>&nbsp;</div>
                 <div>
@@ -96,7 +96,7 @@
             </div>
             <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
                 <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-plus"></button>
+                    <button pButton pRipple label="" (click)="messageService.clear();confirmationService.close();customerVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
                 </div>
                 <!-- <div>&nbsp;</div>
                 <div>
@@ -201,4 +201,8 @@
 
 <p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" [style]="{'width':'500px'}">
     <app-schedule></app-schedule>
+</p-dialog>
+
+<p-dialog [modal]="true" header="Customer Details" [(visible)]="customerVisible" [style]="{'width':'500px'}">
+    <app-customer></app-customer>
 </p-dialog>

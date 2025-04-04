@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationService, MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(public messageService: MessageService, public confirmationService: ConfirmationService) { }
 
   tripVisible=false;
 
   locationVisible=false;
 
+  customerVisible=false;
   ngOnInit(): void {
   }
 
