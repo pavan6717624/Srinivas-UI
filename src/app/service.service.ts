@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Login, Signup } from './login/login.component';
 import { LocationDTO } from './home/admin/trip/trip.component';
-import { TripDTO } from './home/admin/schedule/schedule.component';
+import { ScheduleDTO, TripDTO } from './home/admin/schedule/schedule.component';
 import { CustomerDTO } from './home/admin/customer/customer.component';
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,11 @@ export class ServiceService {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addCustomer',cdto );
   }
 
+  addSchedule(sdto: ScheduleDTO) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addSchedule',sdto );
+  }
+
+
   editCustomer(cdto: CustomerDTO) {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/editCustomer',cdto );
   }
@@ -68,6 +73,11 @@ export class ServiceService {
 
   getLocationDropDown() {
     return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocationDropDown');
+  }
+
+  
+  getCustomersDropDown() {
+    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getCustomersDropDown');
   }
   constructor(private http: HttpClient) { }
 

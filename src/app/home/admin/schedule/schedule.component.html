@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="grid align-items-center justify-content-center">
-                       
+
                         <div class="p-2">
                             <i class="pi pi-trash text-blue-500 text-xl"></i>
 
@@ -72,7 +72,7 @@
                             <i class="pi pi-plus text-blue-500 text-xl"></i>
 
                         </div>
-                        
+
                     </div>
                 </div>
                 <span class="text-green-500 font-medium">24 new </span>
@@ -95,33 +95,28 @@
     </div>
 </p-dialog>
 
-<!-- <p-dialog [modal]="true" [closable]="true" header="Add Customer" [(visible)]="customerVisible" [style]="{'width':'500px'}">
-    
+<p-dialog [modal]="true" [closable]="true" header="Add Customer to Trip" [(visible)]="customerVisible"
+    [style]="{'width':'500px'}">
+
     <label for="location" class="block text-900 font-medium mb-2">Location</label>
 
-    <input id="location" type="text"  [disabled]="true" [(ngModel)]="locationNameSelected" pInputText class="w-full mb-3">
+    <input id="location" type="text" [disabled]="true" [(ngModel)]="locationNameSelected" pInputText
+        class="w-full mb-3">
 
 
     <label for="Trip" class="block text-900 font-medium mb-2">Trip</label>
 
-    <input id="Trip" type="text"  [disabled]="true" [(ngModel)]="tripSelected" pInputText class="w-full mb-3">
+    <input id="Trip" type="text" [disabled]="true" [(ngModel)]="tripSelected" pInputText class="w-full mb-3">
 
-        
-    <label for="name" class="block text-900 font-medium mb-2">Name</label>
+    <label for="Customer" class="block text-900 font-medium mb-2">Select Customer</label>
+    <p-dropdown appendTo="body" [options]="customers" [(ngModel)]="selectedCustomer" optionLabel="name"
+        [showClear]="true" [filter]="true" filterBy="name" placeholder="Select Customer">
 
-    <input id="name" type="text" placeholder="Name" [(ngModel)]="name" pInputText class="w-full mb-3">
 
-    <label for="email" class="block text-900 font-medium mb-2">Email Id</label>
+    </p-dropdown>
 
-    <input id="email" type="text" placeholder="Email Id" [(ngModel)]="emailId" pInputText class="w-full mb-3">
+    <div>&nbsp;</div>
 
-    <label for="mobile" class="block text-900 font-medium mb-2">Mobile</label>
+    <button pButton pRipple label="Add Customer To Trip" (click) = "addCustomer()" class="w-full"></button>
 
-    <p-inputNumber placeholder="Mobile" class="w-full mb-3" [(ngModel)]="mobile" mode="decimal" 
-   
-    [useGrouping]="false">
-    </p-inputNumber>
-
-    <button pButton pRipple label="Add customer" (click)="addCustomer()" class="w-full"></button>
-
-</p-dialog> -->
+</p-dialog>

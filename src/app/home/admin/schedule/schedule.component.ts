@@ -12,6 +12,20 @@ export class TripDTO {
   message: string = '';
 }
 
+export class ScheduleDTO {
+  locationName: string = "";
+  toDate: Date = new Date();
+  fromDate: Date = new Date();
+  tripDates: string = '';
+  name: string = '';
+  mobile: string = '';
+  email: string = '';
+  udetails: string = '';
+
+  status: boolean = false;
+  message: string = '';
+}
+
 
 export class DropDown {
   code: string = '';
@@ -36,7 +50,7 @@ export class ScheduleComponent implements OnInit {
   minDate: Date = new Date();
 
   maxDate: Date = new Date();
-  customerVisible=false;
+  customerVisible = false;
 
   locations: LocationDTO[] = [];
   trips: TripDTO[] = [];
@@ -46,22 +60,85 @@ export class ScheduleComponent implements OnInit {
 
   tripSelected: string = '';
 
-  name: string ='';
+  name: string = '';
 
   mobile: string = '';
 
-  emailId: string ='';
+  emailId: string = '';
 
-  showCustomerAdd(name: string, fromDate: Date, toDate: Date)
-  {
-    this.locationNameSelected=name;
-    this.tripSelected=fromDate+" to "+toDate;
-    this.customerVisible=true;
+  showCustomerAdd(name: string, fromDate: Date, toDate: Date) {
+    this.locationNameSelected = name;
+    this.tripSelected = fromDate + " to " + toDate;
+    this.customerVisible = true;
   }
+  addCustomer() {
 
+    if(this.selectedCustomer!=null)
+    {
+
+    this.messageService.clear();
+    this.confirmationService.close();
+    this.confirmationService.confirm({
+      message: 'Do you want to Add Customer to Trip <br/> Name : ' + 
+      this.selectedCustomer.name.split("-")[0].trim() + '<br/> Mobile : ' + 
+      this.selectedCustomer.name.split("-")[1].trim() + '<br/> Location: ' + 
+      this.locationNameSelected +'<br/> Schedule : '+
+      this.tripSelected,
+      header: 'Trip Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+
+         this.addCustomerToTrip();
+
+      },
+      reject: () => {
+
+      }
+    });
+  }
+  else
+  {
+    this.messageService.clear();
+    this.confirmationService.close();
+    this.messageService.add({ severity: 'error', summary: 'Please select valid Customer', detail: '' });
+    this.customerVisible=false;
+  }
+  }
+  addCustomerToTrip() {
+
+    var scheduleDTO= new ScheduleDTO();
+    scheduleDTO.locationName=this.locationNameSelected;
+    scheduleDTO.tripDates=this.tripSelected;
+    scheduleDTO.mobile=this.selectedCustomer.name.split("-")[1].trim();
+
+    this.service.addSchedule(scheduleDTO).subscribe(
+      (res: any) => {
+        console.log(res);
+
+        this.messageService.clear();
+
+        //this.listVisible=true;
+        this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
+
+        // this.getTrips();
+
+        this.loading = false;
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
+
+  }
   ngOnInit(): void {
-    
+
     this.getLocations();
+
 
 
     let today = new Date();
@@ -190,6 +267,27 @@ export class ScheduleComponent implements OnInit {
     );
   }
 
+  customers: DropDown[] = [];
+  selectedCustomer: DropDown = new DropDown();
+  getCustomersDropDown() {
+
+
+    this.loading = true;
+
+
+    this.service.getCustomersDropDown().subscribe(
+      (res: any) => {
+        this.customers = res;
+        this.loading = false;
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
+  }
+
 
   getTrips() {
 
@@ -201,7 +299,7 @@ export class ScheduleComponent implements OnInit {
       (res: any) => {
         this.trips = res;
         this.originaltrips = res;
-
+        this.getCustomersDropDown();
 
         this.loading = false;
 
@@ -213,7 +311,7 @@ export class ScheduleComponent implements OnInit {
     );
   }
 
-  
+
 
 
 }
