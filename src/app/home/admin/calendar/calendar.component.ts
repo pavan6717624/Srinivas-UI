@@ -21,8 +21,7 @@ export class CalendarDTO {
   customerDetails: string = '';
 }
 
-export class EventDTO
-{
+export class EventDTO {
   title: string = '';
   id: string = '';
   start: string = '';
@@ -40,15 +39,15 @@ export class CalendarComponent implements OnInit {
     this.router.navigate(['home/admin/']);
 
   }
-  scheduleVisible=false;
+  scheduleVisible = false;
 
   loading = false;
 
-  calendarData: CalendarDTO[]=[];
+  calendarData: CalendarDTO[] = [];
 
-  eventDTO: EventDTO[]=[];
+  eventDTO: EventDTO[] = [];
 
-  customers: string []=[];
+  customers: string[] = [];
 
   getSchedules() {
     this.loading = true;
@@ -57,31 +56,30 @@ export class CalendarComponent implements OnInit {
     this.service.getSchedules().subscribe(
       (res: any) => {
         console.log(res);
-        this.calendarData=res;
+        this.calendarData = res;
 
         const users$ = from(this.calendarData);
-        var lnames: string[]=[];
+        var lnames: string[] = [];
 
         users$.pipe(distinct(user => user.locationName)).subscribe(user => lnames.push(user.locationName));;
 
         console.log(lnames);
 
-        var colors=["orange","blue","purple","brown","grey"];
+        var colors = ["orange", "blue", "purple", "brown", "grey"];
 
-        for(var i=0;i<this.calendarData.length;i++)
-        {
-          var event=new EventDTO();
-          event.start=this.calendarData[i].fromDate;
-          event.id=i+"";
-          event.end=this.calendarData[i].toDate;
-          event.title=this.calendarData[i].locationName+ " - "+ this.calendarData[i].customers+" Customers ";
-          event.backgroundColor=colors[lnames.findIndex(name=>this.calendarData[i].locationName == name)];
+        for (var i = 0; i < this.calendarData.length; i++) {
+          var event = new EventDTO();
+          event.start = this.calendarData[i].fromDate;
+          event.id = i + "";
+          event.end = this.calendarData[i].toDate;
+          event.title = this.calendarData[i].locationName + " - " + this.calendarData[i].customers + " Customers ";
+          event.backgroundColor = colors[lnames.findIndex(name => this.calendarData[i].locationName == name)];
           this.eventDTO.push(event);
-        
+
         }
 
-      
-this.calendarUpdate();
+
+        this.calendarUpdate();
         this.loading = false;
 
       },
@@ -93,13 +91,12 @@ this.calendarUpdate();
   }
   items: MenuItem[] = [];
 
-  constructor(private router: Router, private service: ServiceService, private messageService: MessageService, private confirmationService: ConfirmationService) { 
+  constructor(private router: Router, private service: ServiceService, private messageService: MessageService, private confirmationService: ConfirmationService) {
 
     this.getSchedules();
   }
 
-  calendarUpdate()
-  {
+  calendarUpdate() {
     const calendarEl = document.getElementById('calendar');
 
     console.log(this.eventDTO);
@@ -112,26 +109,28 @@ this.calendarUpdate();
       },
       events: this.eventDTO,
       eventClick: (info: any) => {
-       this.calendarClick(info);
+        this.calendarClick(info);
       }
-       
 
-    
+
+
     });
 
     calendar.render();
   }
 
-  calendarClick(info: any)
-  {
-    this.scheduleVisible=true;
+  calendarClick(info: any) {
+    this.scheduleVisible = true;
     console.log(info.event.id);
     console.log(this.calendarData);
-this.customers=this.calendarData[6].customerDetails.split(",");
+    if (this.calendarData[Number(info.event.id)].customerDetails)
+      this.customers = this.calendarData[Number(info.event.id)].customerDetails.split(",");
+    else
+      this.customers = [];
   }
 
   ngAfterViewInit(): void {
-   
+
   }
 
   tripVisible = false;
