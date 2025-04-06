@@ -4,7 +4,7 @@
 
 
 
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8" (click)="goRouter('calendar')">
 
             <div class="flex justify-content-between">
                 <div>
@@ -13,7 +13,7 @@
                 </div>
 
                 <div>
-                    <button pButton pRipple label="" (click)="goRouter('calendar')" class="p-button-outlined"
+                    <button pButton pRipple class="p-button-outlined"
                         icon="pi pi-chevron-right"></button>
                 </div>
 
@@ -25,7 +25,7 @@
         </div>
         <div>&nbsp;</div>
 
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8"  (click)="messageService.clear();confirmationService.close();locationVisible=true">
 
             <div class="flex justify-content-between">
                 <div>
@@ -35,7 +35,7 @@
 
                 <div>
                     <button pButton pRipple label=""
-                        (click)="messageService.clear();confirmationService.close();locationVisible=true"
+                       
                         class="p-button-outlined" icon="pi pi-chevron-right"></button>
                 </div>
 
@@ -47,7 +47,7 @@
         </div>
         <div>&nbsp;</div>
 
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8" (click)="messageService.clear();confirmationService.close();tripVisible=true">
 
             <div class="flex justify-content-between">
                 <div>
@@ -57,7 +57,7 @@
 
                 <div>
                     <button pButton pRipple label=""
-                        (click)="messageService.clear();confirmationService.close();tripVisible=true"
+                        
                         class="p-button-outlined" icon="pi pi-chevron-right"></button>
                 </div>
 
@@ -69,7 +69,7 @@
         </div>
         <div>&nbsp;</div>
 
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8"   (click)="messageService.clear();confirmationService.close();customerVisible=true">
 
             <div class="flex justify-content-between">
                 <div>
@@ -79,7 +79,7 @@
 
                 <div>
                     <button pButton pRipple label=""
-                        (click)="messageService.clear();confirmationService.close();customerVisible=true"
+                      
                         class="p-button-outlined" icon="pi pi-chevron-right"></button>
                 </div>
 
