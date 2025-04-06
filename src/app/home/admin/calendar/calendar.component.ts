@@ -14,10 +14,17 @@ export class CalendarComponent implements OnInit {
 
     const calendar = new FullCalendar.Calendar(calendarEl, {
       initialView: 'dayGridMonth',
+      titleFormat: { // 🔥 This changes the month name format
+        year: 'numeric',
+        month: 'short' // short = "Jan", "Feb", etc.
+      },
       events: [
         { title: 'Event 1', start: '2025-04-10',
           end: '2025-04-13', id: '1',  backgroundColor: '#2ecc71' },
-        { title: 'Event 2', date: '2025-04-09', id:'2',  backgroundColor: 'blue' }
+        { title: 'Event 2',start: '2025-04-10',
+          end: '2025-04-13', id:'2',  backgroundColor: 'blue' },
+          { title: 'Event 3',start: '2025-04-10',
+            end: '2025-04-13', id:'3',  backgroundColor: 'purple' }
       ],
       eventClick: function(info: any) {
         alert(`Event clicked: ${info.event.title}`);
