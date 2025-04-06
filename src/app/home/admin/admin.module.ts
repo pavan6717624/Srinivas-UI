@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/share/share.module';
 import { TripComponent } from './trip/trip.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { CustomerComponent } from './customer/customer.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { CustomerComponent } from './customer/customer.component';
     HomeComponent,
     TripComponent,
     ScheduleComponent,
-    CustomerComponent
+    CustomerComponent,
+    CalendarComponent
   ],
   imports: [
     CommonModule,
