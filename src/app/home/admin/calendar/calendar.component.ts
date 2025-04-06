@@ -4,6 +4,7 @@ import { ConfirmationService, MenuItem, MessageService } from 'primeng/api';
 import { ServiceService } from 'src/app/service.service';
 import { distinct } from 'rxjs/operators';
 import { from } from 'rxjs';
+import { DropDown, ScheduleDTO } from '../schedule/schedule.component';
 declare var FullCalendar: any;
 
 export class CalendarDTO {
@@ -50,6 +51,13 @@ export class CalendarComponent implements OnInit {
   customers: string[] = [];
 
   getSchedules() {
+
+    this.calendarData = [];
+
+    this.eventDTO = [];
+
+
+
     this.loading = true;
 
 
@@ -57,6 +65,8 @@ export class CalendarComponent implements OnInit {
       (res: any) => {
         console.log(res);
         this.calendarData = res;
+
+        console.log("thjis si " + this.calendarData);
 
         const users$ = from(this.calendarData);
         var lnames: string[] = [];
@@ -82,6 +92,10 @@ export class CalendarComponent implements OnInit {
         this.calendarUpdate();
         this.loading = false;
 
+        
+        if(this.selectedInfo)
+        this.calendarClick(this.selectedInfo);
+
       },
       (err: any) => {
         this.loading = false;
@@ -93,7 +107,7 @@ export class CalendarComponent implements OnInit {
 
   constructor(private router: Router, private service: ServiceService, private messageService: MessageService, private confirmationService: ConfirmationService) {
 
-    this.getSchedules();
+
   }
 
   calendarUpdate() {
@@ -109,6 +123,7 @@ export class CalendarComponent implements OnInit {
       },
       events: this.eventDTO,
       eventClick: (info: any) => {
+        this.selectedInfo = info;
         this.calendarClick(info);
       }
 
@@ -119,10 +134,162 @@ export class CalendarComponent implements OnInit {
     calendar.render();
   }
 
+  selectedInfo: any;
+
+  locationNameSelected: string = '';
+
+  tripSelected: string = '';
+
+   getUpdate() {
+     this.getSchedules();
+
+  
+  }
+
+  removeFromTrip(customer: string) {
+    this.loading = true;
+    var formData = new FormData();
+    formData.set("locationName", this.locationNameSelected);
+    formData.set("trip", this.tripSelected);
+    formData.set("customer", customer);
+
+    this.service.removeFromTrip(formData).subscribe(
+      (res: any) => {
+        console.log(res);
+
+        if (res) {
+          this.messageService.clear();
+          this.confirmationService.close();
+          this.messageService.add({ severity: 'info', summary: 'Removed Customer from Trip', detail: '' });
+          this.getUpdate();
+        }
+        else {
+          this.messageService.clear();
+          this.confirmationService.close();
+          this.messageService.add({ severity: 'error', summary: 'Cannot Remove Customer from Trip', detail: '' });
+        }
+
+
+
+        this.loading = false;
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
+
+
+  }
+  customerAddVisible = false;
+  getCustomersDropDown() {
+
+
+    this.loading = true;
+
+
+    this.service.getCustomersDropDown().subscribe(
+      (res: any) => {
+        this.dcustomers = res;
+        this.loading = false;
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
+  }
+
+  addCustomer() {
+
+    console.log(this.selectedCustomer);
+
+    if (this.selectedCustomer != null) {
+
+      this.messageService.clear();
+      this.confirmationService.close();
+      this.confirmationService.confirm({
+        message: 'Do you want to Add Customer to Trip <br/> Name : ' +
+          this.selectedCustomer.name.split("-")[0].trim() + '<br/> Mobile : ' +
+          this.selectedCustomer.name.split("-")[1].trim() + '<br/> Location: ' +
+          this.locationNameSelected + '<br/> Schedule : ' +
+          this.tripSelected,
+        header: 'Trip Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        acceptIcon: "none",
+        rejectIcon: "none",
+        rejectButtonStyleClass: "p-button-text",
+        accept: () => {
+
+          this.addCustomerToTrip();
+
+        },
+        reject: () => {
+
+        }
+      });
+    }
+    else {
+      this.messageService.clear();
+      this.confirmationService.close();
+      this.messageService.add({ severity: 'error', summary: 'Please select valid Customer', detail: '' });
+      this.customerVisible = false;
+    }
+  }
+  addCustomerToTrip() {
+
+    this.loading = true;
+
+    var scheduleDTO = new ScheduleDTO();
+    scheduleDTO.locationName = this.locationNameSelected;
+    scheduleDTO.tripDates = this.tripSelected;
+    scheduleDTO.mobile = this.selectedCustomer.name.split("-")[1].trim();
+
+    this.service.addSchedule(scheduleDTO).subscribe(
+      (res: any) => {
+        console.log(res);
+
+        this.messageService.clear();
+
+        //this.listVisible=true;
+        this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
+
+        // this.getTrips();
+
+        this.customerAddVisible = false;
+
+        this.getUpdate();
+
+        this.loading = false;
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
+
+  }
+
+
+  selectedCustomer: DropDown = new DropDown();
+
+  dcustomers: DropDown[] = [];
+
+  // refresh() {
+  //   this.getSchedules();
+  //   this.calendarClick(this.selectedInfo);
+  // }
+
   calendarClick(info: any) {
     this.scheduleVisible = true;
-    console.log(info.event.id);
-    console.log(this.calendarData);
+
+
+    this.locationNameSelected = this.calendarData[Number(info.event.id)].locationName;
+    this.tripSelected = this.calendarData[Number(info.event.id)].fromDate + " to " + this.calendarData[Number(info.event.id)].toDate;
+
     if (this.calendarData[Number(info.event.id)].customerDetails)
       this.customers = this.calendarData[Number(info.event.id)].customerDetails.split(",");
     else
@@ -140,6 +307,10 @@ export class CalendarComponent implements OnInit {
   customerVisible = false;
 
   ngOnInit(): void {
+
+    this.getSchedules();
+
+    this.getCustomersDropDown();
 
     this.items = [
       {

@@ -20,6 +20,10 @@ export class ServiceService {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/verifyOTP',formData );
   }
 
+  removeFromTrip(formData: FormData) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/removeFromTrip',formData );
+  }
+
   signin(signUp: Signup) {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/signup',signUp );
   }

@@ -1,3 +1,4 @@
+<p-confirmDialog></p-confirmDialog>
 <div style="padding-right:5px" class="flex">
 
     <div>&nbsp;</div>
@@ -42,38 +43,117 @@
 
 
 <p-dialog [modal]="true" header="Schedule Details" [(visible)]="scheduleVisible" [style]="{'width':'500px'}">
-<div class="grid">
-    <div class="col-12" *ngFor="let customer1 of customers">
-        <div class="surface-card shadow-2 p-3 border-round">
-
-            <p-table [value]=[customer1] styleClass="p-datatable-sm">
-
-                <ng-template pTemplate="body" let-customer>
-                    <tr style="text-align:left">
-
-                        <th> Name </th>
-                        <td style="width:80%">{{customer.split("-")[0]}}</td>
-                    </tr>
-                    <tr style="text-align:left">
-                        <th>Email</th>
-                        <td style="width:80%">{{customer.split("-")[1]}}</td>
-                    </tr>
-                    <tr style="text-align:left">
-                        <th>Mobile</th>
-                        <td style="width:80%">{{customer.split("-")[2]}}</td>
-                    </tr>
 
 
-                </ng-template>
-            </p-table>
-           
-          
+    <p-messages></p-messages>
+
+    <div class="grid" style="padding-top:2px">
+
+
+        <label for="location" class="block text-900 font-medium mb-2">Location</label>
+
+        <input id="location" type="text" [disabled]="true" [(ngModel)]="locationNameSelected" pInputText
+            class="w-full mb-3">
+
+
+        <label for="Trip" class="block text-900 font-medium mb-2">Trip</label>
+
+        <input id="Trip" type="text" [disabled]="true" [(ngModel)]="tripSelected" pInputText class="w-full mb-3">
+
+
+        <div *ngIf="customerAddVisible" class="w-full">
+
+            <label for="Customer" class="block text-900 font-medium mb-2">Select Customer</label>
+            <p-dropdown appendTo="body" [options]="dcustomers" [(ngModel)]="selectedCustomer" optionLabel="name"
+                [showClear]="true" [filter]="true" filterBy="name" placeholder="Select Customer">
+
+
+            </p-dropdown>
+            <div>&nbsp;</div>
+            <div class="flex justify-content-center w-full">
+
+                <div>
+                    <button pButton pRipple label="Add Customer To Trip" class="p-button-outlined"
+                        (click)="addCustomer()"></button>
+                </div>
+                <div>&nbsp;</div>
+                <div>
+
+                    <button pButton pRipple label="Cancel" class="p-button-outlined"
+                        (click)="customerAddVisible=false"></button>
+                </div>
+            </div>
 
 
         </div>
+
+
+        <div *ngIf="!customerAddVisible" class="w-full">
+            <label for="customers" class="block text-900 w-full font-medium mb-2">Customers</label>
+            <div class="flex align-items-center">
+
+
+                <div style="padding-right:5px">
+                    <button pButton pRipple icon="pi pi-plus" (click)="customerAddVisible=true"
+                        class="p-button-outlined"></button>
+                </div>
+                <div style="padding-right:5px">
+                    <button pButton pRipple icon="pi pi-refresh" (click)="getUpdate()" class="p-button-outlined"></button>
+                </div>
+
+
+
+                <div class="p-inputgroup">
+
+                    <input id="name" type="text" placeholder="Search" pInputText>
+
+                    <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                </div>
+
+            </div>
+
+
+
+            <div class="col-12" *ngFor="let customer1 of customers">
+                <div class="surface-card shadow-2 p-3 border-round">
+
+                    <div class="flex justify-content-between">
+                        <div>&nbsp; </div>
+                        <div> <i class="pi pi-times" style='cursor:pointer' (click)="removeFromTrip(customer1)"> Remove
+                                from
+                                Trip</i>
+                        </div>
+                    </div>
+
+                    <p-table [value]=[customer1] styleClass="p-datatable-sm">
+
+                        <ng-template pTemplate="body" let-customer>
+                            <tr style="text-align:left">
+
+                                <th> Name </th>
+                                <td style="width:80%">{{customer.split("-")[1]}}</td>
+                            </tr>
+                            <tr style="text-align:left">
+                                <th>Email</th>
+                                <td style="width:80%">{{customer.split("-")[2]}}</td>
+                            </tr>
+                            <tr style="text-align:left">
+                                <th>Mobile</th>
+                                <td style="width:80%">{{customer.split("-")[3]}}</td>
+                            </tr>
+
+
+                        </ng-template>
+                    </p-table>
+
+
+
+
+                </div>
+            </div>
+            <div *ngIf="customers.length == 0">
+                No Records Found
+            </div>
+        </div>
     </div>
-    <div *ngIf="customers.length == 0">
-        No Records Found
-    </div>
-</div>
 </p-dialog>
