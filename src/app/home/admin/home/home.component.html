@@ -1,218 +1,143 @@
-<div class="surface-card p-4 border-round">
+<div style='margin:auto; padding: 0;display: flex;justify-content: center;align-items: center; width:100%; height:100%'>
+    <div class="surface-card p-2 border-round w-full lg:w-6">
 
 
 
-    <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
 
-        <div class="flex justify-content-between">
-            <div>
-                <div class="font-medium text-3xl text-900">Calendar</div>
-                
-            </div>
-            
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+
+            <div class="flex justify-content-between">
                 <div>
-                    <button pButton pRipple label="" (click)="goRouter('calendar')" class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                    <div class="font-medium text-3xl text-900">Calendar</div>
+
                 </div>
-             
+
+                <div>
+                    <button pButton pRipple label="" (click)="goRouter('calendar')" class="p-button-outlined"
+                        icon="pi pi-chevron-right"></button>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div>&nbsp;</div>
+
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+
+            <div class="flex justify-content-between">
+                <div>
+                    <div class="font-medium text-3xl text-900">Locations</div>
+
+                </div>
+
+                <div>
+                    <button pButton pRipple label=""
+                        (click)="messageService.clear();confirmationService.close();locationVisible=true"
+                        class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div>&nbsp;</div>
+
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+
+            <div class="flex justify-content-between">
+                <div>
+                    <div class="font-medium text-3xl text-900">Trip</div>
+
+                </div>
+
+                <div>
+                    <button pButton pRipple label=""
+                        (click)="messageService.clear();confirmationService.close();tripVisible=true"
+                        class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+        <div>&nbsp;</div>
+
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
+
+            <div class="flex justify-content-between">
+                <div>
+                    <div class="font-medium text-3xl text-900">Customers</div>
+
+                </div>
+
+                <div>
+                    <button pButton pRipple label=""
+                        (click)="messageService.clear();confirmationService.close();customerVisible=true"
+                        class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                </div>
+
+            </div>
+
+
+
+
+
+
+
         </div>
 
+        <div>&nbsp;</div>
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
 
-
-
-    </div>
-    <div>&nbsp;</div>
-
-    <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
-
-        <div class="flex align-items-start lg:justify-content-between">
-            <div>
-                <div class="font-medium text-3xl text-900">Locations</div>
-                <div class="flex align-items-center text-700 flex-wrap">
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
+            <div class="flex justify-content-between">
                 <div>
-                    <button pButton pRipple label="" (click)="messageService.clear();confirmationService.close();locationVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
+                    <div class="font-medium text-3xl text-900">Uploads</div>
+
                 </div>
-                <!-- <div>&nbsp;</div>
-                <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div> -->
-            </div>
-        </div>
 
-
-
-
-    </div>
-    <div>&nbsp;</div>
-
-    <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
-
-        <div class="flex align-items-start lg:justify-content-between">
-            <div>
-                <div class="font-medium text-3xl text-900">Trip</div>
-                <div class="flex align-items-center text-700 flex-wrap">
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
-                <div>
-                    <button pButton pRipple label="" (click)="messageService.clear();confirmationService.close();tripVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
-                <!-- <div>&nbsp;</div>
-                <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div> -->
-            </div>
-        </div>
-
-
-
-
-    </div>
-    <div>&nbsp;</div>
-
-    <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
-
-        <div class="flex align-items-start lg:justify-content-between">
-            <div>
-                <div class="font-medium text-3xl text-900">Customers</div>
-                <div class="flex align-items-center text-700 flex-wrap">
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
-                <div>
-                    <button pButton pRipple label="" (click)="messageService.clear();confirmationService.close();customerVisible=true" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
-                <!-- <div>&nbsp;</div>
-                <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div> -->
-            </div>
-        </div>
-
-
-
-
-
-
-
-    </div>
-
-    <div>&nbsp;</div>
-    <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
-
-        <div class="flex align-items-start lg:justify-content-between">
-            <div>
-                <div class="font-medium text-3xl text-900">Uploads</div>
-                <div class="flex align-items-center text-700 flex-wrap">
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                </div>
-            </div>
-            <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-plus"></button>
                 </div>
-                <!-- <div>&nbsp;</div>
-                <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div> -->
+
             </div>
+
+
+
+
+
+
+
         </div>
 
+        <div>&nbsp;</div>
+        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
 
+            <div class="flex justify-content-between">
+                <div>
+                    <div class="font-medium text-3xl text-900">Rewards</div>
 
-
-
-
-
-    </div>
-
-    <div>&nbsp;</div>
-    <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
-
-        <div class="flex align-items-start lg:justify-content-between">
-            <div>
-                <div class="font-medium text-3xl text-900">Rewards</div>
-                <div class="flex align-items-center text-700 flex-wrap">
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
-                    <div class="mr-5 flex align-items-center mt-3">
-                        <i class="pi pi-users mr-2"></i>
-                        <span>332 Active Users</span>
-                    </div>
                 </div>
-            </div>
-            <div class="flex align-items-center text-700 flex-wrap mt-3 lg:mt-0">
+
                 <div>
                     <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-plus"></button>
                 </div>
-                <!-- <div>&nbsp;</div>
-                <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div> -->
+
             </div>
+
+
+
+
+
+
+
         </div>
-
-
-
-
-
-
-
     </div>
 </div>
 

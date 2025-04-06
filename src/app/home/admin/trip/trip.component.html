@@ -15,9 +15,9 @@
     </p-tabPanel>
 </p-tabView>-->
 
-<button pButton pRipple label="+Add Location"  (click)="addVisible=true; locationName=''; price=0;"></button>
+<button pButton pRipple label="+Add" class="p-button-outlined" (click)="addVisible=true; locationName=''; price=0;"></button>
 &nbsp;
-<button pButton pRipple icon="pi pi-refresh" (click)="refresh()"></button>
+<button pButton pRipple icon="pi pi-refresh" class="p-button-outlined" (click)="refresh()"></button>
 
 <div>&nbsp;</div>
 
@@ -68,7 +68,7 @@
            
 
 
-        <button pButton pRipple label="Add Location"  (click)="addLocation()" class="w-full"></button>
+        <button pButton pRipple label="Add Location"  class="w-full p-button-outlined" (click)="addLocation()"></button>
 </div>
 </p-dialog>
 
@@ -85,7 +85,7 @@
                
     
     
-            <button pButton pRipple label="Edit Location"  (click)="editLocation()" class="w-full"></button>
+            <button pButton pRipple label="Edit Location" class="w-full p-button-outlined" (click)="editLocation()"></button>
     </div>
     </p-dialog>
     

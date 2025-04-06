@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 declare var FullCalendar: any;
 @Component({
   selector: 'app-calendar',
@@ -7,7 +8,13 @@ declare var FullCalendar: any;
 })
 export class CalendarComponent implements OnInit {
 
-  constructor() { }
+  toHome()
+  {
+    this.router.navigate(['home/admin/']);
+    
+  }
+
+  constructor(private router: Router) { }
 
   ngAfterViewInit(): void {
     const calendarEl = document.getElementById('calendar');
@@ -20,7 +27,7 @@ export class CalendarComponent implements OnInit {
       },
       events: [
         { title: 'Event 1', start: '2025-04-10',
-          end: '2025-04-13', id: '1',  backgroundColor: '#2ecc71' },
+          end: '2025-04-13', id: '1',  backgroundColor: 'orange' },
         { title: 'Event 2',start: '2025-04-10',
           end: '2025-04-13', id:'2',  backgroundColor: 'blue' },
           { title: 'Event 3',start: '2025-04-10',
