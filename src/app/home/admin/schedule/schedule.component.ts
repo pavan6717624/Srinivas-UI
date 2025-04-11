@@ -114,11 +114,14 @@ export class ScheduleComponent implements OnInit {
     scheduleDTO.tripDates=this.tripSelected;
     scheduleDTO.mobile=this.selectedCustomer.name.split("-")[1].trim();
 
+    this.loading=true;
+
     this.service.addSchedule(scheduleDTO).subscribe(
       (res: any) => {
         console.log(res);
 
         this.messageService.clear();
+        this.customerVisible=false;
 
         //this.listVisible=true;
         this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
@@ -129,6 +132,7 @@ export class ScheduleComponent implements OnInit {
 
       },
       (err: any) => {
+        this.customerVisible=false;
         this.loading = false;
 
       }
