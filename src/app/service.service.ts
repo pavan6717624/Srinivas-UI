@@ -36,6 +36,10 @@ export class ServiceService {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addTrip',tripDTO );
   }
 
+  deleteTrip(tripDTO: TripDTO) {
+    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/deleteTrip',tripDTO );
+  }
+
   addCustomer(cdto: CustomerDTO) {
     return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addCustomer',cdto );
   }

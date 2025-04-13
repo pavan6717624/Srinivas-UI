@@ -46,7 +46,7 @@
         <tr>
             <td>{{ location.locationName }}</td>
             <td>{{ location.price }}</td>
-            <td> <i class="pi pi-pencil" style='cursor:pointer' (click)="editVisible=true; locationName=location.locationName; price=location.price;"></i> &nbsp;  
+            <td> <i class="pi pi-pencil" style='cursor:pointer' (click)="editVisible=true; oldLocationName=location.locationName;locationName=location.locationName; price=location.price;"></i> &nbsp;  
                 <i class="pi pi-trash" style='cursor:pointer' (click)="deleteLocation(location.locationName)"></i>
                 
             </td>

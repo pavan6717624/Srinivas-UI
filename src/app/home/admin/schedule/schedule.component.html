@@ -2,7 +2,7 @@
 
 <p-messages></p-messages>
 
-<p-panel header="Filter {{trips!=originaltrips?'*':''}} / Add" [toggleable]="true" [collapsed]="true" class="p-3">
+<!-- <p-panel header="Filter {{trips!=originaltrips?'*':''}} / Add" [toggleable]="true" [collapsed]="true" class="p-3">
 
     <div style="padding:0">
         <div class="flex justify-content-between mb-3">
@@ -47,8 +47,31 @@
     </div>
 
 
-</p-panel>
+</p-panel> -->
 
+
+<div class="flex justify-content-between" style="padding-top:3px; padding-bottom:10px">
+    <div style="padding-right:5px">
+        <button pButton pRipple icon="pi pi-plus" class="p-button-outlined"></button>
+    </div>
+
+    <div style="padding-right:5px">
+        <button pButton pRipple icon="pi pi-filter" (click)="filterVisible=true;" class="p-button-outlined"></button>
+    </div>
+    <div style="padding-right:5px">
+        <button pButton pRipple icon="pi pi-refresh" (click)="refresh()" class="p-button-outlined"></button>
+    </div>
+
+
+
+    <div class="p-inputgroup">
+
+        <input id="name" type="text" placeholder="Search" pInputText>
+
+        <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+    </div>
+
+</div>
 
 
 <div>
@@ -64,24 +87,71 @@
                     <div class="grid align-items-center justify-content-center">
 
                         <div class="p-2">
-                            <i class="pi pi-trash text-blue-500 text-xl"></i>
+                            <i class="pi pi-trash text-blue-500 text-xl" (click)="delete(trip)"></i>
 
                         </div>
 
-                        <div (click)="showCustomerAdd(trip.locationName, trip.fromDate , trip.toDate)">
+                        <!-- <div (click)="showCustomerAdd(trip.locationName, trip.fromDate , trip.toDate)">
                             <i class="pi pi-plus text-blue-500 text-xl"></i>
 
-                        </div>
+                        </div> -->
 
                     </div>
                 </div>
-                <span class="text-green-500 font-medium">24 new </span>
-                <span class="text-500">since last visit</span>
+                <!--span class="text-green-500 font-medium">24 new </span>
+                <span class="text-500">since last visit</span-->
             </div>
         </div>
 
     </div>
 </div>
+
+<p-dialog [modal]="true" [closable]="true" header="Filter" [(visible)]="filterVisible"
+    [style]="{'width':'500px'}">
+
+    <div style="padding:0" class="w-full">
+        <div class="flex justify-content-between mb-3 w-full">
+            <p-dropdown size="small" [(ngModel)]="selectedLocation" [options]="locations" placeholder="Select Location"
+                optionLabel="name" [showClear]="true" class="w-full" style="max-width: 10px"></p-dropdown>
+        </div>
+        <div class="flex justify-content-between mb-3 w-full">
+
+            <p-calendar [(ngModel)]="rangeDates" size="small" style='z-index: 100;' [baseZIndex]="100" appendTo="body"
+                placeholder="From Date - To Date" selectionMode="range" [readonlyInput]="true"
+                class="w-full"></p-calendar>
+
+
+
+
+
+        </div>
+
+        <div class="flex justify-content-center mb-3 w-full">
+            <div class="p-2 w-full">
+
+                <button pButton pRipple class="p-button-rounded p-button-outlined" icon="pi pi-filter"
+                    (click)="filter()" label="Filter" class="w-full" ></button>
+            </div>
+
+
+
+
+            <div class="p-2">
+
+                <button pButton pRipple class="p-button-rounded p-button-outlined" icon="pi pi-times"
+                label="Clear"   (click)="removeFilter()"></button>
+            </div>
+
+            <!-- <div class="p-2">
+
+                <button pButton (click)="add()" pRipple class="p-button-rounded p-button-outlined"
+                    icon="pi pi-plus"></button>
+            </div> -->
+
+        </div>
+    </div>
+
+</p-dialog>
 
 
 <p-dialog [modal]="true" [closable]="false" header="Please wait.." [(visible)]="loading">

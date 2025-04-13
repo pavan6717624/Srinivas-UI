@@ -66,24 +66,40 @@ export class ScheduleComponent implements OnInit {
 
   emailId: string = '';
 
-  showCustomerAdd(name: string, fromDate: Date, toDate: Date) {
-    this.locationNameSelected = name;
-    this.tripSelected = fromDate + " to " + toDate;
-    this.customerVisible = true;
+  refresh()
+  {
+    this.ngOnInit();
   }
-  addCustomer() {
 
-    if(this.selectedCustomer!=null)
-    {
+  deleteTrip(trip: TripDTO) {
+    this.loading = true;
+    this.service.deleteTrip(trip).subscribe(
+      (res: any) => {
+      
+        console.log(res);
 
+        this.messageService.clear();
+
+        //this.listVisible=true;
+        this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
+
+        this.getTrips();
+
+        this.loading = false;
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
+  }
+
+  delete(trip: TripDTO) {
     this.messageService.clear();
     this.confirmationService.close();
     this.confirmationService.confirm({
-      message: 'Do you want to Add Customer to Trip <br/> Name : ' + 
-      this.selectedCustomer.name.split("-")[0].trim() + '<br/> Mobile : ' + 
-      this.selectedCustomer.name.split("-")[1].trim() + '<br/> Location: ' + 
-      this.locationNameSelected +'<br/> Schedule : '+
-      this.tripSelected,
+      message: 'Do you want to Delete Trip',
       header: 'Trip Confirmation',
       icon: 'pi pi-exclamation-triangle',
       acceptIcon: "none",
@@ -91,37 +107,70 @@ export class ScheduleComponent implements OnInit {
       rejectButtonStyleClass: "p-button-text",
       accept: () => {
 
-         this.addCustomerToTrip();
+        this.deleteTrip(trip);
 
       },
       reject: () => {
 
       }
     });
+
   }
-  else
-  {
-    this.messageService.clear();
-    this.confirmationService.close();
-    this.messageService.add({ severity: 'error', summary: 'Please select valid Customer', detail: '' });
-    this.customerVisible=false;
+
+  showCustomerAdd(name: string, fromDate: Date, toDate: Date) {
+    this.locationNameSelected = name;
+    this.tripSelected = fromDate + " to " + toDate;
+    this.customerVisible = true;
   }
+  addCustomer() {
+
+    if (this.selectedCustomer != null) {
+
+      this.messageService.clear();
+      this.confirmationService.close();
+      this.confirmationService.confirm({
+        message: 'Do you want to Add Customer to Trip <br/> Name : ' +
+          this.selectedCustomer.name.split("-")[0].trim() + '<br/> Mobile : ' +
+          this.selectedCustomer.name.split("-")[1].trim() + '<br/> Location: ' +
+          this.locationNameSelected + '<br/> Schedule : ' +
+          this.tripSelected,
+        header: 'Trip Confirmation',
+        icon: 'pi pi-exclamation-triangle',
+        acceptIcon: "none",
+        rejectIcon: "none",
+        rejectButtonStyleClass: "p-button-text",
+        accept: () => {
+
+          this.addCustomerToTrip();
+
+        },
+        reject: () => {
+
+        }
+      });
+    }
+    else {
+      this.messageService.clear();
+      this.confirmationService.close();
+      this.messageService.add({ severity: 'error', summary: 'Please select valid Customer', detail: '' });
+      this.customerVisible = false;
+    }
   }
   addCustomerToTrip() {
 
-    var scheduleDTO= new ScheduleDTO();
-    scheduleDTO.locationName=this.locationNameSelected;
-    scheduleDTO.tripDates=this.tripSelected;
-    scheduleDTO.mobile=this.selectedCustomer.name.split("-")[1].trim();
+    var scheduleDTO = new ScheduleDTO();
+    scheduleDTO.locationName = this.locationNameSelected;
+    scheduleDTO.tripDates = this.tripSelected;
+    scheduleDTO.mobile = this.selectedCustomer.name.split("-")[1].trim();
 
-    this.loading=true;
+    this.loading = true;
 
     this.service.addSchedule(scheduleDTO).subscribe(
       (res: any) => {
         console.log(res);
 
         this.messageService.clear();
-        this.customerVisible=false;
+        this.customerVisible = false;
 
         //this.listVisible=true;
         this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
@@ -132,7 +181,7 @@ export class ScheduleComponent implements OnInit {
 
       },
       (err: any) => {
-        this.customerVisible=false;
+        this.customerVisible = false;
         this.loading = false;
 
       }
@@ -229,6 +278,8 @@ export class ScheduleComponent implements OnInit {
     this.trips = this.originaltrips.filter(o => this.checkFilter(o));
 
   }
+
+  filterVisible=false;
 
   checkFilter(t: TripDTO) {
 

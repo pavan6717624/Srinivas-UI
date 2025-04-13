@@ -3,6 +3,7 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ServiceService } from 'src/app/service.service';
 export class LocationDTO {
   locationName: string = "";
+  oldLocationName: string = "";
   price: number = 0;
   status: boolean = false;
   message: string = '';
@@ -54,6 +55,7 @@ editLocation()
   this.loading = true;
   var locationDTO = new LocationDTO();
   locationDTO.locationName = this.locationName;
+  locationDTO.oldLocationName=this.oldLocationName;
   locationDTO.price = this.price;
 
 
@@ -126,7 +128,9 @@ editLocation()
 
   loading = false;
   addVisible = false;
+  oldLocationName: string = '';
   addLocation() {
+
 
 
     if(this.checkParams())
