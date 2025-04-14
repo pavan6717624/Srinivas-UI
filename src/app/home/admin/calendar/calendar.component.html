@@ -105,9 +105,10 @@
 
                 <div class="p-inputgroup">
 
-                    <input id="name" type="text" placeholder="Search" pInputText>
+                    <input id="name" type="text" placeholder="Search" pInputText [(ngModel)]='searchWord' (ngModelChange)="onSearch()"> 
 
-                    <span class="p-inputgroup-addon"><i class="pi pi-search"></i></span>
+                    <span class="p-inputgroup-addon"  (click)="clear()"><i class="pi pi-{{iconSearch}}"></i></span>
+                   
                 </div>
 
             </div>

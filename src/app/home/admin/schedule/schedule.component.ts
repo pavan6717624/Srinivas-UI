@@ -66,8 +66,7 @@ export class ScheduleComponent implements OnInit {
 
   emailId: string = '';
 
-  refresh()
-  {
+  refresh() {
     this.ngOnInit();
   }
 
@@ -75,7 +74,7 @@ export class ScheduleComponent implements OnInit {
     this.loading = true;
     this.service.deleteTrip(trip).subscribe(
       (res: any) => {
-      
+
         console.log(res);
 
         this.messageService.clear();
@@ -257,6 +256,7 @@ export class ScheduleComponent implements OnInit {
         console.log(res);
 
         this.messageService.clear();
+        this.addVisible = false;
 
         //this.listVisible=true;
         this.messageService.add({ severity: 'info', summary: res.message, detail: '' });
@@ -276,10 +276,12 @@ export class ScheduleComponent implements OnInit {
   filter() {
 
     this.trips = this.originaltrips.filter(o => this.checkFilter(o));
-
+    this.filterVisible = false;
   }
 
-  filterVisible=false;
+  filterVisible = false;
+
+  addVisible = false;
 
   checkFilter(t: TripDTO) {
 

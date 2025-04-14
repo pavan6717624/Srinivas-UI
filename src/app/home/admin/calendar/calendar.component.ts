@@ -50,6 +50,8 @@ export class CalendarComponent implements OnInit {
 
   customers: string[] = [];
 
+  originalCustomers: string[]=[];
+
   getSchedules() {
 
     this.calendarData = [];
@@ -282,6 +284,20 @@ export class CalendarComponent implements OnInit {
   //   this.getSchedules();
   //   this.calendarClick(this.selectedInfo);
   // }
+searchWord: string = '';
+clear()
+{
+ // alert('asdfasdf');
+  this.customers=this.originalCustomers;
+  this.searchWord='';
+  this.iconSearch='search';
+}
+
+  onSearch() {
+    this.customers = this.originalCustomers.filter(o => o.toLowerCase().indexOf(this.searchWord.toLowerCase()) != -1)
+    this.iconSearch='times';
+  }
+
 
   calendarClick(info: any) {
     this.scheduleVisible = true;
@@ -291,10 +307,19 @@ export class CalendarComponent implements OnInit {
     this.tripSelected = this.calendarData[Number(info.event.id)].fromDate + " to " + this.calendarData[Number(info.event.id)].toDate;
 
     if (this.calendarData[Number(info.event.id)].customerDetails)
-      this.customers = this.calendarData[Number(info.event.id)].customerDetails.split(",");
+      {
+        this.customers = this.calendarData[Number(info.event.id)].customerDetails.split(",");
+        this.originalCustomers = this.calendarData[Number(info.event.id)].customerDetails.split(",");
+      }
     else
-      this.customers = [];
+      {
+        this.customers = [];
+        this.originalCustomers=[];
+      }
+      this.iconSearch='search';
   }
+
+  iconSearch='search';
 
   ngAfterViewInit(): void {
 
