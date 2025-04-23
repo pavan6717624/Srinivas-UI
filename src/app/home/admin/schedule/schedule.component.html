@@ -52,7 +52,7 @@
 
 <div class="flex justify-content-between" style="padding-top:3px; padding-bottom:10px">
     <div style="padding-right:5px">
-        <button pButton pRipple icon="pi pi-plus" (click)="addVisible=true;"  class="p-button-outlined"></button>
+        <button pButton pRipple icon="pi pi-plus" (click)="addVisible=true;" class="p-button-outlined"></button>
     </div>
 
     <div style="padding-right:5px">
@@ -106,84 +106,86 @@
     </div>
 </div>
 
-<p-dialog [modal]="true" [closable]="true" header="Filter" [(visible)]="filterVisible"
-    [style]="{'width':'500px'}">
+<p-dialog [modal]="true" [closable]="true" header="Filter" [(visible)]="filterVisible" [style]="{'width':'500px'}"
+(onShow)="showTrip()" (onHide)="showTrip()">
     <div class="surface-card shadow-2 p-3 border-round justify-content-between">
-    <div style="padding:0" class="w-full">
-        <div class="flex justify-content-between mb-3 w-full">
-            <p-dropdown size="small" [(ngModel)]="selectedLocation" [options]="locations" placeholder="Select Location"
-                optionLabel="name" [showClear]="true" class="w-full" style="max-width: 10px"></p-dropdown>
-        </div>
-        <div class="flex justify-content-between mb-3 w-full">
+        <div style="padding:0" class="w-full">
+            <div class="flex justify-content-between mb-3 w-full">
+                <p-dropdown size="small" [(ngModel)]="selectedLocation" [options]="locations"
+                    placeholder="Select Location" optionLabel="name" [showClear]="true" class="w-full"
+                    style="max-width: 10px"></p-dropdown>
+            </div>
+            <div class="flex justify-content-between mb-3 w-full">
 
-            <p-calendar [(ngModel)]="rangeDates" size="small" style='z-index: 100;' [baseZIndex]="100" appendTo="body"
-                placeholder="From Date - To Date" selectionMode="range" [readonlyInput]="true"
-                class="w-full"></p-calendar>
-
-
-
+                <p-calendar [(ngModel)]="rangeDates" size="small" style='z-index: 100;' [baseZIndex]="100"
+                    appendTo="body" placeholder="From Date - To Date" selectionMode="range" [readonlyInput]="true"
+                    class="w-full"></p-calendar>
 
 
-        </div>
 
-        <div class="flex justify-content-center mb-3 w-full">
-            <div class="p-2 w-full">
 
-                <button pButton pRipple class="p-button-rounded p-button-outlined" icon="pi pi-filter"
-                    (click)="filter()" label="Filter" class="w-full" ></button>
+
             </div>
 
+            <div class="flex justify-content-center mb-3 w-full">
+                <div class="p-2 w-full">
+
+                    <button pButton pRipple class="p-button-rounded p-button-outlined" icon="pi pi-filter"
+                        (click)="filter()" label="Filter" class="w-full"></button>
+                </div>
 
 
 
-            <div class="p-2">
 
-                <button pButton pRipple class="p-button-rounded p-button-outlined" icon="pi pi-times"
-                label="Clear"   (click)="removeFilter()"></button>
-            </div>
+                <div class="p-2">
 
-            <div class="p-2">
+                    <button pButton pRipple class="p-button-rounded p-button-outlined" icon="pi pi-times" label="Clear"
+                        (click)="removeFilter()"></button>
+                </div>
 
-                <button pButton (click)="filterVisible=false" pRipple class="p-button-rounded p-button-outlined"
-                label="Cancel"     icon="pi pi-times"></button>
-            </div>
-            <!-- <div class="p-2">
+                <div class="p-2">
+
+                    <button pButton (click)="filterVisible=false" pRipple class="p-button-rounded p-button-outlined"
+                        label="Cancel" icon="pi pi-times"></button>
+                </div>
+                <!-- <div class="p-2">
 
                 <button pButton (click)="add()" pRipple class="p-button-rounded p-button-outlined"
                 label="Add"     icon="pi pi-plus"></button>
             </div> -->
 
+            </div>
         </div>
     </div>
-</div>
 </p-dialog>
 
 
-<p-dialog [modal]="true" [closable]="true" header="Add Trip" [(visible)]="addVisible"
-    [style]="{'width':'500px'}">
+<p-dialog [modal]="true" [closable]="true" header="Add Trip" [(visible)]="addVisible" [style]="{'width':'500px'}"
+    (onShow)="showTrip()" (onHide)="hideTrip()">
     <div class="surface-card shadow-2 p-3 border-round justify-content-between">
-    <div style="padding:0" class="w-full">
-        <div class="flex justify-content-between mb-3 w-full">
-            <p-dropdown size="small" [(ngModel)]="selectedLocation" [options]="locations" placeholder="Select Location"
-                optionLabel="name" [showClear]="true" class="w-full" style="max-width: 10px"></p-dropdown>
-        </div>
-        <div class="flex justify-content-between mb-3 w-full">
+        <div style="padding:0" class="w-full">
+            <div class="flex justify-content-between mb-3 w-full">
+                <p-dropdown size="small" [(ngModel)]="selectedLocation" [options]="locations"
+                    placeholder="Select Location" optionLabel="name" [showClear]="true" class="w-full"
+                    style="max-width: 10px"></p-dropdown>
+            </div>
+            <div class="flex justify-content-between mb-3 w-full">
 
-            <p-calendar [(ngModel)]="rangeDates" size="small" style='z-index: 100;' [baseZIndex]="100" appendTo="body"
-            [minDate]="minDate"  placeholder="From Date - To Date" selectionMode="range" [readonlyInput]="true"
-                class="w-full">
-        
-
-            </p-calendar>
+                <p-calendar [(ngModel)]="rangeDates" size="small" style='z-index: 100;' [baseZIndex]="100"
+                    appendTo="body" [minDate]="minDate" placeholder="From Date - To Date" selectionMode="range"
+                    [readonlyInput]="true" class="w-full">
 
 
+                </p-calendar>
 
 
 
-        </div>
 
-        <div class="flex justify-content-center mb-3 w-full">
-            <!-- <div class="p-2 w-full">
+
+            </div>
+
+            <div class="flex justify-content-center mb-3 w-full">
+                <!-- <div class="p-2 w-full">
 
                 <button pButton pRipple class="p-button-rounded p-button-outlined" icon="pi pi-filter"
                     (click)="filter()" label="Filter" class="w-full" ></button>
@@ -198,22 +200,22 @@
                 label="Clear"   (click)="removeFilter()"></button>
             </div> -->
 
-             <div class="p-2">
+                <div class="p-2">
 
-                <button pButton (click)="addTrip()" pRipple class="p-button-rounded p-button-outlined"
-                label="Add"     icon="pi pi-plus"></button>
+                    <button pButton (click)="addTrip()" pRipple class="p-button-rounded p-button-outlined" label="Add"
+                        icon="pi pi-plus"></button>
+                </div>
+
+                <div class="p-2">
+
+                    <button pButton (click)="addVisible=false" pRipple class="p-button-rounded p-button-outlined"
+                        label="Cancel" icon="pi pi-times"></button>
+                </div>
+
+
             </div>
-
-            <div class="p-2">
-
-                <button pButton (click)="filterVisible=false" pRipple class="p-button-rounded p-button-outlined"
-                label="Cancel"     icon="pi pi-times"></button>
-            </div>
-           
-
         </div>
     </div>
-</div>
 </p-dialog>
 
 
@@ -230,7 +232,7 @@
 </p-dialog>
 
 <p-dialog [modal]="true" [closable]="true" header="Add Customer to Trip" [(visible)]="customerVisible"
-    [style]="{'width':'500px'}">
+    [style]="{'width':'500px'}" (onShow)="showAddCustomer()" (onHide)="hideAddCustomer()">
 
     <label for="location" class="block text-900 font-medium mb-2">Location</label>
 
@@ -251,6 +253,7 @@
 
     <div>&nbsp;</div>
 
-    <button pButton pRipple label="Add Customer To Trip" class="w-full p-button-outlined" (click) = "addCustomer()"></button>
+    <button pButton pRipple label="Add Customer To Trip" class="w-full p-button-outlined"
+        (click)="addCustomer()"></button>
 
 </p-dialog>

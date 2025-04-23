@@ -84,7 +84,7 @@ export class ScheduleComponent implements OnInit {
 
         this.getTrips();
 
-        this.loading = false;
+        //this.loading = false;
 
       },
       (err: any) => {
@@ -155,6 +155,27 @@ export class ScheduleComponent implements OnInit {
       this.customerVisible = false;
     }
   }
+
+  showTrip() {
+    this.selectedLocation=new DropDown();
+    this.rangeDates=[];
+
+  }
+  hideTrip() {
+    this.selectedLocation=new DropDown();
+    this.rangeDates=[];
+  }
+
+  showAddCustomer()
+  {
+
+  }
+  hideAddCustomer()
+  {
+    
+  }
+
+
   addCustomerToTrip() {
 
     var scheduleDTO = new ScheduleDTO();
@@ -189,7 +210,7 @@ export class ScheduleComponent implements OnInit {
   }
   ngOnInit(): void {
 
-    this.getLocations();
+    this.getTrips();
 
 
 
@@ -263,7 +284,7 @@ export class ScheduleComponent implements OnInit {
 
         this.getTrips();
 
-        this.loading = false;
+        // this.loading = false;
 
       },
       (err: any) => {
@@ -313,8 +334,8 @@ export class ScheduleComponent implements OnInit {
       (res: any) => {
         this.locations = res;
 
-        this.getTrips();
-        this.loading = false;
+        this.getCustomersDropDown();
+        //this.loading = false;
 
       },
       (err: any) => {
@@ -356,9 +377,10 @@ export class ScheduleComponent implements OnInit {
       (res: any) => {
         this.trips = res;
         this.originaltrips = res;
-        this.getCustomersDropDown();
+        this.getLocations();
 
-        this.loading = false;
+
+        //this.loading = false;
 
       },
       (err: any) => {

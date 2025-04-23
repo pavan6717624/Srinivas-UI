@@ -92,8 +92,8 @@ export class CalendarComponent implements OnInit {
 
 
         this.calendarUpdate();
-        this.loading = false;
-
+        //this.loading = false;
+        this.getCustomersDropDown();
         
         if(this.selectedInfo)
         this.calendarClick(this.selectedInfo);
@@ -185,6 +185,7 @@ export class CalendarComponent implements OnInit {
 
   }
   customerAddVisible = false;
+ 
   getCustomersDropDown() {
 
 
@@ -335,7 +336,7 @@ clear()
 
     this.getSchedules();
 
-    this.getCustomersDropDown();
+
 
     this.items = [
       {
