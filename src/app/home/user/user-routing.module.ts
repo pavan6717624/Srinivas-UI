@@ -11,7 +11,7 @@ const routes: Routes = [
 
     children: [
       { path:'',component: CustomerComponent},
-      { path:'customer',component: CustomerComponent},
+      // { path:'customer',component: CustomerComponent},
       ]
   
   

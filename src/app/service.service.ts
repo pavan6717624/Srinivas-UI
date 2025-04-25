@@ -78,6 +78,10 @@ export class ServiceService {
     return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getTrips');
   }
 
+  getCustomerTrips() {
+    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getCustomerTrips');
+  }
+
   getCustomers() {
     return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getCustomers');
   }

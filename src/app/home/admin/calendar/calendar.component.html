@@ -11,21 +11,23 @@
         <p-splitButton styleClass="p-button-outlined" style="padding:0;margin:0" label="Add" icon="pi pi-plus"
             [model]="items"></p-splitButton>
     </div>
-
+    <div style="padding-right:5px">
+        <button pButton pRipple icon="pi pi-refresh" class="p-button-outlined" (click)="refresh()"></button>
+    </div>
 </div>
 
 <div id="calendar" class="p-2"></div>
 
 
-<p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" [style]="{'width':'500px'}">
+<p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" [style]="{'width':'500px'}" (onHide)="refresh()">
     <app-trip></app-trip>
 </p-dialog>
 
-<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" [style]="{'width':'500px',height:'500px'}">
+<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" [style]="{'width':'500px',height:'500px'}" (onHide)="refresh()">
     <app-schedule></app-schedule>
 </p-dialog>
 
-<p-dialog [modal]="true" header="Customer Details" [(visible)]="customerVisible" [style]="{'width':'500px'}">
+<p-dialog [modal]="true" header="Customer Details" [(visible)]="customerVisible" [style]="{'width':'500px'}" (onHide)="refresh()">
     <app-customer></app-customer>
 </p-dialog>
 

@@ -5,6 +5,7 @@ import { CalendarOptions } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { LoginStatus, SubscriptionDTO } from 'src/app/login/login.component';
+import { TripDTO } from '../../admin/schedule/schedule.component';
 declare var Razorpay: any;
 @Component({
   selector: 'app-home',
@@ -26,9 +27,37 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
-    this.getOrderId();
+    // this.getOrderId();
     this.getLoginDetails();
+    this.getTrips();
 
+  }
+    trips: TripDTO[] = [];
+    originaltrips: TripDTO[] = [];
+
+  getTrips() {
+
+
+    this.loading = true;
+
+
+
+
+    this.service.getCustomerTrips().subscribe(
+      (res: any) => {
+        this.trips = res;
+        this.originaltrips = res;
+  
+
+
+        //this.loading = false;
+
+      },
+      (err: any) => {
+        this.loading = false;
+
+      }
+    );
   }
   loginStatus: LoginStatus = new LoginStatus();
   loading = false;

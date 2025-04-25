@@ -185,6 +185,11 @@ export class CalendarComponent implements OnInit {
 
   }
   customerAddVisible = false;
+
+  refresh()
+  {
+    this.ngOnInit();
+  }
  
   getCustomersDropDown() {
 
