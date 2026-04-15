@@ -9,107 +9,107 @@ import { CustomerDTO } from './home/admin/customer/customer.component';
 })
 export class ServiceService {
   getOrderId() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getOrderId' );
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getOrderId' );
   }
 
   sendOTP(formData: FormData) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/sendOTP',formData );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/sendOTP',formData );
   }
 
   verifyOTP(formData: FormData) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/verifyOTP',formData );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/verifyOTP',formData );
   }
 
   removeFromTrip(formData: FormData) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/removeFromTrip',formData );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/removeFromTrip',formData );
   }
 
   signin(signUp: Signup) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/signup',signUp );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/signup',signUp );
   }
 
   addLocation(locationDTO: LocationDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addLocation',locationDTO );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/addLocation',locationDTO );
   }
 
   addTrip(tripDTO: TripDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addTrip',tripDTO );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/addTrip',tripDTO );
   }
 
   deleteTrip(tripDTO: TripDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/deleteTrip',tripDTO );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/deleteTrip',tripDTO );
   }
 
   addCustomer(cdto: CustomerDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addCustomer',cdto );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/addCustomer',cdto );
   }
 
   addSchedule(sdto: ScheduleDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/addSchedule',sdto );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/addSchedule',sdto );
   }
 
 
   editCustomer(cdto: CustomerDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/editCustomer',cdto );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/editCustomer',cdto );
   }
 
   deleteCustomer(cdto: CustomerDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/deleteCustomer',cdto );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/deleteCustomer',cdto );
   }
 
 
  editLocation(locationDTO: LocationDTO) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/editLocation',locationDTO );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/editLocation',locationDTO );
   }
 
  deleteLocation(formData: FormData) {
-    return this.http.post( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/deleteLocation',formData );
+    return this.http.post( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/deleteLocation',formData );
   }
 
   getLocations() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocations');
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getLocations');
   }
 
   getSchedules() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getSchedules');
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getSchedules');
   }
 
   getTrips() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getTrips');
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getTrips');
   }
 
   getCustomerTrips() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getCustomerTrips');
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getCustomerTrips');
   }
 
   getCustomers() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getCustomers');
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getCustomers');
   }
 
 
   getLocationDropDown() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLocationDropDown');
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getLocationDropDown');
   }
 
   
   getCustomersDropDown() {
-    return this.http.get( 'https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getCustomersDropDown');
+    return this.http.get( 'https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getCustomersDropDown');
   }
   constructor(private http: HttpClient) { }
 
 
   login(login: Login)
   {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/login',login);
+    return this.http.post('https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/login',login);
   }
 
   generateOTP(formData: FormData)
   {
-    return this.http.post('https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/generateOTP',formData);
+    return this.http.post('https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/generateOTP',formData);
   }
 
   getLoginDetails() {
-    return this.http.get('https://heidigi-app-38b2318c83b0.herokuapp.com/JOLLY/getLoginDetails')
+    return this.http.get('https://pavan-jolly-418fae2030c9.herokuapp.com/JOLLY/getLoginDetails')
   }
 
   
