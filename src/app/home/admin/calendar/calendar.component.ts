@@ -105,7 +105,7 @@ export class CalendarComponent implements OnInit {
       }
     );
   }
-  items: MenuItem[] = [];
+  
 
   constructor(private router: Router, private service: ServiceService, private messageService: MessageService, private confirmationService: ConfirmationService) {
 
@@ -337,13 +337,7 @@ clear()
 
   customerVisible = false;
 
-  ngOnInit(): void {
-
-    this.getSchedules();
-
-
-
-    this.items = [
+  items: MenuItem[] = [
       {
         label: 'Location',
         command: () => {
@@ -369,6 +363,14 @@ clear()
 
 
     ];
+
+  ngOnInit(): void {
+
+    this.getSchedules();
+
+
+
+    
 
 
   }

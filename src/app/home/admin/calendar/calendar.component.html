@@ -1,4 +1,4 @@
-<p-confirmDialog></p-confirmDialog>
+
 <div style="padding-right:5px" class="flex">
 
     <div>&nbsp;</div>
@@ -19,15 +19,16 @@
 <div id="calendar" class="p-2"></div>
 
 
-<p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" [style]="{'width':'500px'}" (onHide)="refresh()">
+<p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" (onHide)="refresh()">
     <app-trip></app-trip>
+
 </p-dialog>
 
-<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" [style]="{'width':'500px',height:'500px'}" (onHide)="refresh()">
+<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" (onHide)="refresh()">
     <app-schedule></app-schedule>
 </p-dialog>
 
-<p-dialog [modal]="true" header="Customer Details" [(visible)]="customerVisible" [style]="{'width':'500px'}" (onHide)="refresh()">
+<p-dialog [modal]="true" header="Customer Details" [(visible)]="customerVisible" (onHide)="refresh()">
     <app-customer></app-customer>
 </p-dialog>
 
