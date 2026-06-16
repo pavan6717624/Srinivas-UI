@@ -62,6 +62,7 @@ export class HomeComponent implements OnInit {
   loginStatus: LoginStatus = new LoginStatus();
   loading = false;
   mobile: string = '';
+  walletAmount: number = 0;
 
   getLoginDetails() {
 
@@ -76,6 +77,7 @@ export class HomeComponent implements OnInit {
         this.name = res.name;
         this.email = res.email;
         this.mobile = res.mobile;
+        this.walletAmount = res.amount ?? 0;
 
 
       },

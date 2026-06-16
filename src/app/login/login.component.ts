@@ -142,16 +142,19 @@ export class LoginComponent implements OnInit {
           this.messageService.add({ severity: 'info', summary: 'Successful', detail: '' });
           this.signOtpVisible = false;
           this.loginVisible = false;
+          this.loading = true;
           let tokenStr = 'Bearer ' + res.jwt;
           localStorage.setItem('token', tokenStr);
           this.ngOnInit();
         }
         else
-          this.messageService.add({ severity: 'error', summary: 'Wrong OTP Provided', detail: '' });
+         {
+ this.messageService.add({ severity: 'error', summary: 'Wrong OTP Provided', detail: '' });
 
 
 
         this.loading = false;
+         }
       },
       (err: any) => {
         this.clear();

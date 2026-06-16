@@ -1,3 +1,4 @@
+<p-toast></p-toast>
 <div class="text-center mb-3">
             <img src="assets/images/logo1.jpg" alt="Logo" height="150" />
         </div> 
@@ -42,4 +43,15 @@
         </p-tabView>
 
 
+    </p-dialog>
+
+     <p-dialog [modal]="true" [closable]="false" [header]="header" [(visible)]="loading">
+        <div class="grid justify-content-between">
+            <div>
+
+                <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+                <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
+
+            </div>
+        </div>
     </p-dialog>
