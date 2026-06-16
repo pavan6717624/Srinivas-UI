@@ -76,7 +76,7 @@ export class LoginComponent implements OnInit {
   isLogin: boolean = true;
   ctype: string = 'Business';
   cpassword: string = '';
-  loginVisible = false;
+  loginVisible = true;
   activeIndex1 = 0;
 
   login(id: number) {
@@ -98,9 +98,12 @@ export class LoginComponent implements OnInit {
         console.log(res);
         this.clear();
         // this.loginVisible=false;
-        this.signOtpVisible = true;
+       
         if (res)
+        {
+           this.signOtpVisible = true;
           this.messageService.add({ severity: 'info', summary: 'Password Sent to your Email', detail: '' });
+        }
         else
           this.messageService.add({ severity: 'error', summary: "Error Occured...", detail: '' });
 
@@ -110,6 +113,7 @@ export class LoginComponent implements OnInit {
       (err: any) => {
         this.clear();
         console.log(err);
+        
         this.messageService.add({ severity: 'error', summary: 'Error Occured...', detail: '' });
         this.loading = false;
       });
