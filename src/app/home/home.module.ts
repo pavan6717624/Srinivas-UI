@@ -9,12 +9,16 @@ import { StartComponent } from './start/start.component';
 import { SharedModule } from '../share/share.module';
 
 
+
+
 @NgModule({
   declarations: [
     HomeComponent,
     HeaderComponent,
     FooterComponent,
-    StartComponent
+    StartComponent,
+  
+
   ],
   imports: [
     CommonModule,

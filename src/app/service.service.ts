@@ -112,6 +112,8 @@ export class ServiceService {
     return this.http.get('https://pavan-jolly-418fae2030c9.herokuapp.com/getLoginDetails')
   }
 
-  
+  distributeRewards(rewardDistribution: any) {
+    return this.http.post('http://localhost:8082/distributeRewards', rewardDistribution);
+  }
 
 }

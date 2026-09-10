@@ -5,6 +5,7 @@ import { CalendarComponent } from './calendar/calendar.component';
 import { CustomerComponent } from './customer/customer.component';
 import { TripComponent } from './trip/trip.component';
 import { ScheduleComponent } from './schedule/schedule.component';
+import { RewardsComponent } from './rewards/rewards.component';
 
 const routes: Routes = [
 
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
 
   { path:'schedule',component: ScheduleComponent
+  },
+
+  { path:'rewards',component: RewardsComponent
   },
 
 ];

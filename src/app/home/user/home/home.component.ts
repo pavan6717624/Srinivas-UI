@@ -156,7 +156,7 @@ export class HomeComponent implements OnInit {
       "currency": "INR",
       "name": "Jolly Vacations",
       "description": "Join Us",
-      "image": "https://jolly-20275.web.app/assets/images/jollylogo1.png",
+      "image": "https://jolly-20275.web.app/assets/images/jollylogo.jpg",
       "handler": function (response: any) {
         var event = new CustomEvent("payment.success",
           {

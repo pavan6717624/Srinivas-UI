@@ -8,6 +8,7 @@ import { TripComponent } from './trip/trip.component';
 import { ScheduleComponent } from './schedule/schedule.component';
 import { CustomerComponent } from './customer/customer.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { RewardsComponent } from './rewards/rewards.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { CalendarComponent } from './calendar/calendar.component';
     TripComponent,
     ScheduleComponent,
     CustomerComponent,
-    CalendarComponent
+    CalendarComponent,
+    RewardsComponent
   ],
   imports: [
     CommonModule,

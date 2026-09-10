@@ -1,0 +1,65 @@
+<p-toast></p-toast>
+<p-confirmDialog></p-confirmDialog>
+
+<div class="rewards-root">
+	<div class="card">
+		<h2 class="title">Distribute Rewards</h2>
+
+		<div class="inputs compact">
+			<div class="input-col amount inline-row">
+				<div style="flex:1">
+					<label>Total Reward Amount</label>
+					<p-inputNumber [(ngModel)]="rewardAmount" (ngModelChange)="onAmountChange()" [mode]="'decimal'" [useGrouping]="false" class="w-full"></p-inputNumber>
+				</div>
+
+				<div style="margin-left:0.6rem; display:flex; align-items:flex-end">
+					<button pButton pRipple icon="pi pi-calculator" label="Distribute" class="p-button-outlined" (click)="distribute()"></button>
+				</div>
+			</div>
+		</div>
+
+		<div class="distribution-summary" *ngIf="isDistributed">
+			<div class="summary-item">
+				<span class="summary-label">Customers</span>
+				<span class="summary-value">{{customers.length}}</span>
+			</div>
+			<div class="summary-item">
+				<span class="summary-label">Per Customer</span>
+				<span class="summary-value highlight">{{perCustomer}}</span>
+			</div>
+			<div class="summary-item">
+				<span class="summary-label">Total Distributed</span>
+				<span class="summary-value">{{distributedTotal}}</span>
+			</div>
+		</div>
+
+		<div class="actions">
+			<button pButton pRipple icon="pi pi-credit-card" label="Pay Now" class="p-button-success" (click)="pay()" [disabled]="!isDistributed"></button>
+		</div>
+	</div>
+
+	<div class="table-card card">
+		<h3 class="section-title">Customers <span class="badge" [ngClass]="{'distributed': isDistributed}">{{ isDistributed ? 'Ready to Pay' : 'Not Distributed' }}</span></h3>
+
+		<div *ngIf="customers.length === 0 && !loading" class="empty">No customers found</div>
+
+		<div class="customers-grid" *ngIf="customers.length > 0">
+			<div class="customer-card" *ngFor="let c of customers">
+				<div class="card-top">
+					<div class="avatar">{{c.name ? c.name.charAt(0) : '?'}}</div>
+					<div class="info">
+						<div class="name">{{c.name}}</div>
+						<div class="email">{{c.emailId}}</div>
+						<div class="mobile">{{c.mobile}}</div>
+					</div>
+				</div>
+
+				<div class="card-bottom">
+					<div class="wallet">Wallet: <strong>{{c.wallet || 0}}</strong></div>
+					<div class="assigned">Assigned: <strong>{{ perCustomer }}</strong></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
