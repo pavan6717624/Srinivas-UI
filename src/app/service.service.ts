@@ -113,7 +113,7 @@ export class ServiceService {
   }
 
   distributeRewards(rewardDistribution: any) {
-    return this.http.post('http://localhost:8082/distributeRewards', rewardDistribution);
+    return this.http.post('https://pavan-jolly-418fae2030c9.herokuapp.com/distributeRewards', rewardDistribution);
   }
 
 }

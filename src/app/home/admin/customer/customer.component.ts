@@ -9,7 +9,7 @@ export class CustomerDTO {
   oldMobile: string = '';
   status: boolean = false;
   message: string = '';
-  wallet: number = 0;
+  amount: number = 0;
 }
 
 @Component({
