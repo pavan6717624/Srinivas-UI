@@ -12,16 +12,52 @@
 			</div>
 		</div>
 
-		<div class="inputs compact">
+		<div class="mode-switch" role="tablist" aria-label="Reward allocation mode">
+			<button type="button" class="mode-option" [class.active]="allocationMode === 'pool'" (click)="allocationMode = 'pool'">
+				<i class="pi pi-chart-pie"></i><span>Pool allocation</span><small>Reward everyone evenly</small>
+			</button>
+			<button type="button" class="mode-option" [class.active]="allocationMode === 'individual'" (click)="allocationMode = 'individual'">
+				<i class="pi pi-user-edit"></i><span>Individual rewards</span><small>Choose a customer and amount</small>
+			</button>
+		</div>
+
+		<div class="inputs compact" *ngIf="allocationMode === 'pool'">
 			<div class="input-col amount inline-row">
 				<div style="flex:1">
 					<label for="reward-amount">Total reward amount</label>
-					<p-inputNumber [(ngModel)]="rewardAmount" (ngModelChange)="onAmountChange()" [mode]="'decimal'" [useGrouping]="false" class="w-full"></p-inputNumber>
+					<p-inputNumber [(ngModel)]="rewardAmount" (ngModelChange)="onAmountChange()" [mode]="'decimal'" [useGrouping]="false" [minFractionDigits]="2" [maxFractionDigits]="2" class="w-full"></p-inputNumber>
 				</div>
 
 				<div class="distribute-action">
 					<button pButton pRipple icon="pi pi-calculator" label="Distribute" class="p-button-outlined" (click)="distribute()"></button>
 				</div>
+			</div>
+		</div>
+
+		<div class="individual-workspace" *ngIf="allocationMode === 'individual'">
+			<div class="individual-intro">
+				<div class="intro-icon"><i class="pi pi-user-plus"></i></div>
+				<div><strong>Manage one customer at a time</strong><span>Allocate a reward or review the balance available for redemption.</span></div>
+			</div>
+			<div class="individual-grid">
+				<div class="customer-picker">
+					<label>Choose customer</label>
+					<div class="picker-list">
+						<button type="button" class="picker-item" *ngFor="let customer of customers" [class.selected]="selectedCustomer === customer" (click)="selectCustomer(customer)">
+							<span class="avatar small">{{customer.name ? customer.name.charAt(0) : '?'}}</span>
+							<span class="picker-copy"><strong>{{customer.name}}</strong><small>{{customer.emailId}}</small></span>
+							<i class="pi pi-check" *ngIf="selectedCustomer === customer"></i>
+						</button>
+					</div>
+				</div>
+
+				<div class="individual-detail" *ngIf="selectedCustomer; else selectPrompt">
+					<div class="detail-heading"><div class="avatar large">{{selectedCustomer.name ? selectedCustomer.name.charAt(0) : '?'}}</div><div><span class="eyebrow">SELECTED CUSTOMER</span><h3>{{selectedCustomer.name}}</h3><span>{{selectedCustomer.emailId}}</span></div></div>
+					<div class="wallet-balance"><span>Available wallet balance</span><strong>{{(selectedCustomer.amount || 0) | number:'1.2-2'}}</strong></div>
+					<div class="individual-form"><label for="individual-reward">Reward amount</label><p-inputNumber inputId="individual-reward" [(ngModel)]="individualAmount" [mode]="'decimal'" [useGrouping]="false" [minFractionDigits]="2" [maxFractionDigits]="2"></p-inputNumber><button pButton pRipple type="button" icon="pi pi-send" label="Allocate reward" (click)="allocateIndividual()"></button></div>
+					<div class="redemption-box"><div><i class="pi pi-wallet"></i><span><strong>Redeem from wallet</strong><small>Send a negative reward amount to deduct from this customer.</small></span></div><button pButton pRipple type="button" icon="pi pi-minus-circle" label="Redeem reward" class="p-button-outlined p-button-secondary" (click)="redeemIndividual()"></button></div>
+				</div>
+				<ng-template #selectPrompt><div class="select-prompt"><i class="pi pi-arrow-left"></i><strong>Select a customer to begin</strong><span>Their balance and individual actions will appear here.</span></div></ng-template>
 			</div>
 		</div>
 
@@ -37,14 +73,14 @@
 				<div class="summary-icon customer-value-icon"><i class="pi pi-user"></i></div>
 				<div>
 				<span class="summary-label">Per Customer</span>
-				<span class="summary-value highlight">{{perCustomer}}</span>
+				<span class="summary-value highlight">{{perCustomer | number:'1.2-2'}}</span>
 				</div>
 			</div>
 			<div class="summary-item">
 				<div class="summary-icon total-icon"><i class="pi pi-wallet"></i></div>
 				<div>
 				<span class="summary-label">Total Distributed</span>
-				<span class="summary-value">{{distributedTotal}}</span>
+				<span class="summary-value">{{distributedTotal | number:'1.2-2'}}</span>
 				</div>
 			</div>
 		</div>
@@ -77,8 +113,8 @@
 				</div>
 
 				<div class="card-bottom">
-					<div class="wallet"><span>Current amount</span><strong>{{c.amount || 0}}</strong></div>
-					<div class="assigned"><span>Reward</span><strong>{{ perCustomer }}</strong></div>
+					<div class="wallet"><span>Current amount</span><strong>{{(c.amount || 0) | number:'1.2-2'}}</strong></div>
+					<div class="assigned"><span>{{ allocationMode === 'individual' ? 'Wallet balance' : 'Pool reward' }}</span><strong>{{(allocationMode === 'individual' ? (c.amount || 0) : perCustomer) | number:'1.2-2'}}</strong></div>
 				</div>
 			</div>
 		</div>
