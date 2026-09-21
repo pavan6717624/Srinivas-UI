@@ -1,163 +1,75 @@
+<main class="calendar-workspace">
+    <section class="calendar-header">
+        <div>
+            <span class="eyebrow">OPERATIONS / SCHEDULES</span>
+            <h1>Calendar</h1>
+            <p>Keep every trip and customer commitment visible at a glance.</p>
+        </div>
+        <div class="header-actions">
+            <button pButton pRipple type="button" icon="pi pi-home" label="Home" class="p-button-outlined" (click)="toHome()"></button>
+            <p-splitButton styleClass="p-button-primary" label="Add" icon="pi pi-plus" [model]="items"></p-splitButton>
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-outlined" pTooltip="Refresh calendar" tooltipPosition="bottom" (click)="refresh()"></button>
+        </div>
+    </section>
 
-<div style="padding-right:5px" class="flex">
+    <section class="calendar-card">
+        <div class="calendar-card-heading">
+            <div><span class="eyebrow">PLANNING VIEW</span><h2>Upcoming schedule</h2></div>
+            <span class="calendar-hint"><i class="pi pi-info-circle"></i> Select a trip to manage customers</span>
+        </div>
+        <div id="calendar" class="calendar-surface"></div>
+    </section>
+</main>
 
-    <div>&nbsp;</div>
-    <div>
-
-        <button pButton pRipple label="" (click)="toHome()" class="p-button-outlined" icon="pi pi-home"></button>
-    </div>
-    <div>&nbsp;</div>
-    <div>
-        <p-splitButton styleClass="p-button-outlined" style="padding:0;margin:0" label="Add" icon="pi pi-plus"
-            [model]="items"></p-splitButton>
-    </div>
-    <div style="padding-right:5px">
-        <button pButton pRipple icon="pi pi-refresh" class="p-button-outlined" (click)="refresh()"></button>
-    </div>
-</div>
-
-<div id="calendar" class="p-2"></div>
-
-
-<p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" (onHide)="refresh()">
+<p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" (onHide)="refresh()" [style]="{'width':'500px'}">
     <app-trip></app-trip>
-
 </p-dialog>
 
-<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" (onHide)="refresh()">
+<p-dialog [modal]="true" header="Trip Details" [(visible)]="tripVisible" (onHide)="refresh()" [style]="{'width':'500px'}">
     <app-schedule></app-schedule>
 </p-dialog>
 
-<p-dialog [modal]="true" header="Customer Details" [(visible)]="customerVisible" (onHide)="refresh()">
+<p-dialog [modal]="true" header="Customer Details" [(visible)]="customerVisible" (onHide)="refresh()" [style]="{'width':'500px'}">
     <app-customer></app-customer>
 </p-dialog>
 
+<p-dialog [modal]="true" header="Schedule Details" [(visible)]="scheduleVisible" [style]="{'width':'620px'}" styleClass="schedule-dialog">
+    <p-messages></p-messages>
 
-<p-dialog [modal]="true" [closable]="false" header="Please wait.." [(visible)]="loading">
-    <div class="grid justify-content-between">
-        <div>
+    <div class="schedule-summary">
+        <div class="summary-icon"><i class="pi pi-map-marker"></i></div>
+        <div><span class="eyebrow">SELECTED TRIP</span><strong>{{locationNameSelected}}</strong><small>{{tripSelected}}</small></div>
+    </div>
 
-            <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
-            <p-skeleton width="20rem" styleClass="mb-2"></p-skeleton>
-
+    <div *ngIf="customerAddVisible" class="customer-add-panel">
+        <label for="Customer">Select customer</label>
+        <p-dropdown appendTo="body" [options]="dcustomers" [(ngModel)]="selectedCustomer" optionLabel="name" [showClear]="true" [filter]="true" filterBy="name" placeholder="Search and select a customer"></p-dropdown>
+        <div class="dialog-actions">
+            <button pButton pRipple type="button" label="Add to trip" icon="pi pi-user-plus" (click)="addCustomer()"></button>
+            <button pButton pRipple type="button" label="Cancel" class="p-button-text" (click)="customerAddVisible=false"></button>
         </div>
+    </div>
+
+    <div *ngIf="!customerAddVisible" class="customer-list-panel">
+        <div class="customer-list-heading">
+            <div><span class="eyebrow">PASSENGERS</span><h3>Customers on this trip</h3></div>
+            <button pButton pRipple type="button" icon="pi pi-user-plus" label="Add customer" class="p-button-outlined" (click)="customerAddVisible=true"></button>
+        </div>
+        <div class="customer-tools">
+            <div class="p-inputgroup"><input id="name" type="text" placeholder="Search customers" pInputText [(ngModel)]="searchWord" (ngModelChange)="onSearch"><span class="p-inputgroup-addon" (click)="clear()"><i class="pi pi-{{iconSearch}}"></i></span></div>
+            <button pButton pRipple type="button" icon="pi pi-refresh" class="p-button-text" pTooltip="Refresh customers" tooltipPosition="bottom" (click)="getUpdate()"></button>
+        </div>
+        <div class="customer-list" *ngIf="customers.length > 0">
+            <div class="trip-customer" *ngFor="let customer1 of customers">
+                <span class="customer-avatar">{{customer1.split('-')[1] ? customer1.split('-')[1].charAt(0) : '?'}}</span>
+                <div class="customer-copy"><strong>{{customer1.split('-')[1]}}</strong><small>{{customer1.split('-')[2]}} · {{customer1.split('-')[3]}}</small></div>
+                <button type="button" class="remove-customer" (click)="removeFromTrip(customer1)" pTooltip="Remove from trip" tooltipPosition="left"><i class="pi pi-times"></i></button>
+            </div>
+        </div>
+        <div *ngIf="customers.length == 0" class="empty-customers"><i class="pi pi-users"></i><strong>No customers assigned</strong><span>Add a customer to this trip to get started.</span></div>
     </div>
 </p-dialog>
 
-
-<p-dialog [modal]="true" header="Schedule Details" [(visible)]="scheduleVisible" [style]="{'width':'500px'}">
-
-
-    <p-messages></p-messages>
-
-    <div class="grid" style="padding-top:2px">
-
-
-        <label for="location" class="block text-900 font-medium mb-2">Location</label>
-
-        <input id="location" type="text" [disabled]="true" [(ngModel)]="locationNameSelected" pInputText
-            class="w-full mb-3">
-
-
-        <label for="Trip" class="block text-900 font-medium mb-2">Trip</label>
-
-        <input id="Trip" type="text" [disabled]="true" [(ngModel)]="tripSelected" pInputText class="w-full mb-3">
-
-
-        <div *ngIf="customerAddVisible" class="w-full">
-
-            <label for="Customer" class="block text-900 font-medium mb-2">Select Customer</label>
-            <p-dropdown appendTo="body" [options]="dcustomers" [(ngModel)]="selectedCustomer" optionLabel="name"
-                [showClear]="true" [filter]="true" filterBy="name" placeholder="Select Customer">
-
-
-            </p-dropdown>
-            <div>&nbsp;</div>
-            <div class="flex justify-content-center w-full">
-
-                <div>
-                    <button pButton pRipple label="Add Customer To Trip" class="p-button-outlined"
-                        (click)="addCustomer()"></button>
-                </div>
-                <div>&nbsp;</div>
-                <div>
-
-                    <button pButton pRipple label="Cancel" class="p-button-outlined"
-                        (click)="customerAddVisible=false"></button>
-                </div>
-            </div>
-
-
-        </div>
-
-
-        <div *ngIf="!customerAddVisible" class="w-full">
-            <label for="customers" class="block text-900 w-full font-medium mb-2">Customers</label>
-            <div class="flex align-items-center">
-
-
-                <div style="padding-right:5px">
-                    <button pButton pRipple icon="pi pi-plus" (click)="customerAddVisible=true"
-                        class="p-button-outlined"></button>
-                </div>
-                <div style="padding-right:5px">
-                    <button pButton pRipple icon="pi pi-refresh" (click)="getUpdate()" class="p-button-outlined"></button>
-                </div>
-
-
-
-                <div class="p-inputgroup">
-
-                    <input id="name" type="text" placeholder="Search" pInputText [(ngModel)]='searchWord' (ngModelChange)="onSearch()"> 
-
-                    <span class="p-inputgroup-addon"  (click)="clear()"><i class="pi pi-{{iconSearch}}"></i></span>
-                   
-                </div>
-
-            </div>
-
-
-
-            <div class="col-12" *ngFor="let customer1 of customers">
-                <div class="surface-card shadow-2 p-3 border-round">
-
-                    <div class="flex justify-content-between">
-                        <div>&nbsp; </div>
-                        <div> <i class="pi pi-times" style='cursor:pointer' (click)="removeFromTrip(customer1)"> Remove
-                                from
-                                Trip</i>
-                        </div>
-                    </div>
-
-                    <p-table [value]=[customer1] styleClass="p-datatable-sm">
-
-                        <ng-template pTemplate="body" let-customer>
-                            <tr style="text-align:left">
-
-                                <th> Name </th>
-                                <td style="width:80%">{{customer.split("-")[1]}}</td>
-                            </tr>
-                            <tr style="text-align:left">
-                                <th>Email</th>
-                                <td style="width:80%">{{customer.split("-")[2]}}</td>
-                            </tr>
-                            <tr style="text-align:left">
-                                <th>Mobile</th>
-                                <td style="width:80%">{{customer.split("-")[3]}}</td>
-                            </tr>
-
-
-                        </ng-template>
-                    </p-table>
-
-
-
-
-                </div>
-            </div>
-            <div *ngIf="customers.length == 0">
-                No Records Found
-            </div>
-        </div>
-    </div>
+<p-dialog [modal]="true" [closable]="false" header="Please wait.." [(visible)]="loading">
+    <div class="grid justify-content-between"><div><p-skeleton width="20rem" styleClass="mb-2"></p-skeleton><p-skeleton width="20rem" styleClass="mb-2"></p-skeleton></div></div>
 </p-dialog>
