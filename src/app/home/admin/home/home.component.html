@@ -1,146 +1,55 @@
-<div style='margin:auto; padding: 0;display: flex;justify-content: center;align-items: center; width:100%; height:100%'>
-    <div class="surface-card p-2 border-round w-full lg:w-6">
+<main class="admin-dashboard">
+    <section class="dashboard-header">
+        <div class="header-copy">
+            <span class="eyebrow">OPERATIONS HUB</span>
+            <h1>Hi, Admin.</h1>
+           </div>
+        <!-- <div class="header-mark"><i class="pi pi-compass"></i><span>Admin workspace</span></div> -->
+    </section>
 
-
-
-
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8" (click)="goRouter('calendar')">
-
-            <div class="flex justify-content-between">
-                <div>
-                    <div class="font-medium text-3xl text-900">Calendar</div>
-
-                </div>
-
-                <div>
-                    <button pButton pRipple class="p-button-outlined"
-                        icon="pi pi-chevron-right"></button>
-                </div>
-
+    <section class="quick-panel" aria-label="Quick actions">
+        <div class="section-intro">
+            <div><span class="eyebrow">QUICK ACTIONS</span>
+                <!-- <h2>What would you like to manage?</h2> -->
             </div>
-
-
-
-
-        </div>
-        <div>&nbsp;</div>
-
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8"  (click)="messageService.clear();confirmationService.close();locationVisible=true">
-
-            <div class="flex justify-content-between">
-                <div>
-                    <div class="font-medium text-3xl text-900">Locations</div>
-
-                </div>
-
-                <div>
-                    <button pButton pRipple label=""
-                       
-                        class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
-
-            </div>
-
-
-
-
-        </div>
-        <div>&nbsp;</div>
-
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8" (click)="messageService.clear();confirmationService.close();tripVisible=true">
-
-            <div class="flex justify-content-between">
-                <div>
-                    <div class="font-medium text-3xl text-900">Trip</div>
-
-                </div>
-
-                <div>
-                    <button pButton pRipple label=""
-                        
-                        class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
-
-            </div>
-
-
-
-
-        </div>
-        <div>&nbsp;</div>
-
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8"   (click)="messageService.clear();confirmationService.close();customerVisible=true">
-
-            <div class="flex justify-content-between">
-                <div>
-                    <div class="font-medium text-3xl text-900">Customers</div>
-
-                </div>
-
-                <div>
-                    <button pButton pRipple label=""
-                      
-                        class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
-
-            </div>
-
-
-
-
-
-
-
+            <!-- <span class="section-note"><i class="pi pi-shield"></i> Secure workspace</span> -->
         </div>
 
-        <!-- <div>&nbsp;</div>
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8">
-
-            <div class="flex justify-content-between">
-                <div>
-                    <div class="font-medium text-3xl text-900">Uploads</div>
-
-                </div>
-
-                <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-plus"></button>
-                </div>
-
-            </div>
-
-
-
-
-
-
-
-        </div> -->
-
-        <div>&nbsp;</div>
-        <div class="surface-ground border-round px-3 py-3 md:px-6 lg:px-8" (click)="goRouter('rewards')">
-
-            <div class="flex justify-content-between">
-                <div>
-                    <div class="font-medium text-3xl text-900">Rewards</div>
-
-                </div>
-
-                <div>
-                    <button pButton pRipple label="" class="p-button-outlined" icon="pi pi-chevron-right"></button>
-                </div>
-
-            </div>
-
-
-
-
-
-
-
+        <div class="action-grid">
+            <button type="button" class="action-card calendar-card" (click)="goRouter('calendar')">
+                <span class="action-icon"><i class="pi pi-calendar"></i></span>
+                <span class="action-content"><strong>Calendar</strong><small>Review schedules and upcoming activity</small></span>
+                <i class="pi pi-arrow-up-right action-arrow"></i>
+            </button>
+            <button type="button" class="action-card location-card" (click)="messageService.clear();confirmationService.close();locationVisible=true">
+                <span class="action-icon"><i class="pi pi-map-marker"></i></span>
+                <span class="action-content"><strong>Locations</strong><small>Maintain pickup and destination points</small></span>
+                <i class="pi pi-arrow-up-right action-arrow"></i>
+            </button>
+            <button type="button" class="action-card trip-card" (click)="messageService.clear();confirmationService.close();tripVisible=true">
+                <span class="action-icon"><i class="pi pi-directions"></i></span>
+                <span class="action-content"><strong>Trips</strong><small>Plan and coordinate the journey flow</small></span>
+                <i class="pi pi-arrow-up-right action-arrow"></i>
+            </button>
+            <button type="button" class="action-card customer-card" (click)="messageService.clear();confirmationService.close();customerVisible=true">
+                <span class="action-icon"><i class="pi pi-users"></i></span>
+                <span class="action-content"><strong>Customers</strong><small>Manage profiles and contact details</small></span>
+                <i class="pi pi-arrow-up-right action-arrow"></i>
+            </button>
+            <button type="button" class="action-card reward-card" [routerLink]="['/home/admin/rewards']">
+                <span class="action-icon"><i class="pi pi-sparkles"></i></span>
+                <span class="action-content"><strong>Rewards</strong><small>Allocate or redeem customer rewards</small></span>
+                <i class="pi pi-arrow-up-right action-arrow"></i>
+            </button>
         </div>
-    </div>
-</div>
+    </section>
 
+    <!-- <section class="workflow-strip">
+        <div class="workflow-icon"><i class="pi pi-compass"></i></div>
+        <div><span class="eyebrow">YOUR WORKFLOW</span><strong>Plan <i class="pi pi-angle-right"></i> Schedule <i class="pi pi-angle-right"></i> Support</strong></div>
+        <span class="workflow-copy">Use the tools above to keep every part of the operation connected.</span>
+    </section> -->
+</main>
 
 <p-dialog [modal]="true" header="Location Details" [(visible)]="locationVisible" [style]="{'width':'500px'}">
     <app-trip></app-trip>
